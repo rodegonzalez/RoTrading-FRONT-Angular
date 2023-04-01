@@ -12,6 +12,7 @@ import { OpOperationsComponent } from './op-operations/op-operations.component';
 import { OpAnalysisComponent } from './op-analysis/op-analysis.component';
 import { OpConfigurationComponent } from './op-configuration/op-configuration.component';
 import { HelpComponent } from './help/help.component';
+import { TestComponent } from './test/test.component';
 
 
 /* Routing */
@@ -21,15 +22,17 @@ const appRoutes: Routes = [
   {path: 'analisis', component: OpAnalysisComponent},
   {path: 'configuracion', component: OpConfigurationComponent},
   {path: 'ayuda', component: HelpComponent},
+  {path: 'test', component: TestComponent},
   {path: '**', redirectTo: ''}
 ]
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     NavBarComponent,
     FooterComponent,
-      HomeComponent
+    HomeComponent,
+      TestComponent
    ],
   imports: [
     BrowserModule,
