@@ -13,6 +13,13 @@ import { OpAnalysisComponent } from './op-analysis/op-analysis.component';
 import { OpConfigurationComponent } from './op-configuration/op-configuration.component';
 import { HelpComponent } from './help/help.component';
 import { TestComponent } from './test/test.component';
+import { OpClosedOperationComponent } from './op-components/op-closed-operation/op-closed-operation.component';
+import { OpOpenOperationComponent } from './op-components/op-open-operation/op-open-operation.component';
+import { OpCalendarComponent } from './op-components/op-calendar/op-calendar.component';
+import { OpAccountComponent } from './op-components/op-account/op-account.component';
+import { OpPanelAccountsComponent } from './op-components/op-panel-accounts/op-panel-accounts.component';
+import { OpPanelClosedOperationsComponent } from './op-components/op-panel-closed-operations/op-panel-closed-operations.component';
+import { OpPanelOpenOperationsComponent } from './op-components/op-panel-open-operations/op-panel-open-operations.component';
 
 
 /* Routing */
@@ -32,7 +39,15 @@ const appRoutes: Routes = [
     NavBarComponent,
     FooterComponent,
     HomeComponent,
-      TestComponent
+      TestComponent,
+      OpOperationsComponent,
+      OpOpenOperationComponent,
+      OpClosedOperationComponent,
+      OpCalendarComponent,
+      OpAccountComponent,
+      OpPanelAccountsComponent,
+      OpPanelClosedOperationsComponent,
+      OpPanelOpenOperationsComponent
    ],
   imports: [
     BrowserModule,
