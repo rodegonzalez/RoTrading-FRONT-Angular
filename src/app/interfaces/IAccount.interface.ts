@@ -7,4 +7,5 @@ export interface IAccount{
 	Amount_current: number;
 	Idbroker:       number;
 	Iddivisa:       number;
+	Status:			string;
   }

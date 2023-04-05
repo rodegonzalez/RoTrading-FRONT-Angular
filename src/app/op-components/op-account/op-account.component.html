@@ -1,41 +1,54 @@
-<div class="card mb-2">
+<div *ngFor="let account of accounts">
 
-  <div class="card-body">
 
-    <div class="row">
-      <div class="col-6">Nombre</div>
-      <div class="col-6"><span class="fw-bold">iBroker</span></div>
-  </div>
-    <div class="row">
-      <div class="col-6">Descripción</div>
-      <div class="col-6">4432365</div>
-  </div>
-  <div class="row">
-    <div class="col-6">Estado</div>
-    <div class="col-6"><span class="text-info">Activa</span></div>
-  </div>
-    <div class="row">
-        <div class="col-6">Apertura</div>
-        <div class="col-6">10.000€</div>
+  <div class="card mb-2">
+
+    <div class="card-body">
+  
+      <div class="row">
+        <div class="col-6">Nombre</div>
+        <div class="col-6"><span class="fw-bold">{{account.Name}}</span></div>
+    </div>
+      <div class="row">
+        <div class="col-6">Descripción</div>
+        <div class="col-6">{{account.Description}}</div>
     </div>
     <div class="row">
-      <div class="col-6">Actual</div>
-      <div class="col-6">15.650€</div>
+      <div class="col-6">Estado</div>
+      <div class="col-6"><span class="text-info">{{account.Status}}</span></div>
+    </div>
+      <div class="row">
+          <div class="col-6">Apertura</div>
+          <div class="col-6">{{account.Amount_initial}}</div>
+      </div>
+      <div class="row">
+        <div class="col-6">Actual</div>
+        <div class="col-6">{{account.Amount_current}}</div>
+      </div>
+      <div class="row">
+        <div class="col-6">Resultado</div>
+        <div class="col-6">$$PENDING$$</div>
+      </div>
+      <div class="row">
+        <div class="col-6">IdBroker</div>
+        <div class="col-6"><span class="fw-bold">{{account.Idbroker}}</span></div>
     </div>
     <div class="row">
-      <div class="col-6">Resultado</div>
-      <div class="col-6">5.650€</div>
+      <div class="col-6">Iddivisa</div>
+      <div class="col-6"><span class="fw-bold">{{account.Iddivisa}}</span></div>
+  </div>
+
+  
     </div>
-
-
+  
+    <div class="card-footer text-muted">
+      <a href="#">Ver esta cuenta [ID: {{account.Idaccount}}]</a>
+      | 
+      <a href="#">Ocultar</a>
+    </div>
   </div>
 
 
-
-
-  <div class="card-footer text-muted">
-    <a href="#">Ver esta cuenta</a>
-    | 
-    <a href="#">Ocultar</a>
-  </div>
+<!-- ngFor -->
 </div>
+
