@@ -28,6 +28,9 @@ import { AnPanelReportsComponent } from './an-components/an-panel-reports/an-pan
 import { AnReportOperationsComponent } from './an-components/an-report-operations/an-report-operations.component';
 import { AnReportBlocksComponent } from './an-components/an-report-blocks/an-report-blocks.component';
 
+import { AccountsService } from './services/accounts.service';
+import { PositionsService } from './services/positions.service';
+
 /* Routing */
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -69,7 +72,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     //RouterModule.forChild(appRoutesChild)
   ],
-  providers: [],
+  providers: [
+    AccountsService,
+    PositionsService
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

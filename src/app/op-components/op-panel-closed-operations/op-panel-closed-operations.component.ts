@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PositionsService } from '../../services/positions.service';
+import { IPosition } from '../../interfaces/IPosition.interface';
 
 @Component({
   selector: 'app-op-panel-closed-operations',
@@ -6,5 +8,29 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class OpPanelClosedOperationsComponent {
+
+  positions: Array<IPosition>;
+
+  constructor(private positionsService: PositionsService) {
+    this.positions = new Array<IPosition> ;
+   }
+
+  ngOnInit(): void{
+
+    this.positionsService.getAll().subscribe({
+      complete: () => {
+        console.log("positionsService.getAll() vía http - Terminado.");
+      },
+      next : (data: Array<IPosition>) => {
+        console.log("positionsService.getAll() vía http - data:");
+        console.log(data);
+        this.positions = data;        
+      },
+      error : (e: any) => {
+        console.log("positionsService.getAll() vía http - http error.");
+        console.log(e);
+      }
+    });
+  }
 
 }
