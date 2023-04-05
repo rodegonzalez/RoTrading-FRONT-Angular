@@ -8,4 +8,5 @@ export interface IAccount{
 	Idbroker:       number;
 	Iddivisa:       number;
 	Status:			string;
+	Acctype:		string;
   }

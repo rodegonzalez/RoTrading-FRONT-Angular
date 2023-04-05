@@ -30,6 +30,7 @@ export class AccountsService {
                         Idbroker:       Object.values(data)[id]["idbroker"],
                         Iddivisa:       Object.values(data)[id]["iddivisa"],
                         Status:         Object.values(data)[id]["status"],
+                        Acctype:         Object.values(data)[id]["acctype"],
                     }
                     accounts.push(_account);
                 }
