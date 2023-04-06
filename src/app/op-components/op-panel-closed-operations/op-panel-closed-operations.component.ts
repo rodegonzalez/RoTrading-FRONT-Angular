@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { PositionsService } from '../../services/positions.service';
 import { IPosition } from '../../interfaces/IPosition.interface';
 
@@ -8,7 +8,6 @@ import { IPosition } from '../../interfaces/IPosition.interface';
   styles: []
 })
 export class OpPanelClosedOperationsComponent {
-
   positions: Array<IPosition>;
 
   constructor(private positionsService: PositionsService) {
@@ -33,5 +32,4 @@ export class OpPanelClosedOperationsComponent {
       }
     });
   }
-
 }
