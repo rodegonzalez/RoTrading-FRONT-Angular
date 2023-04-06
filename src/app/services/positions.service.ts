@@ -28,4 +28,70 @@ export class PositionsService {
         );
     }
 
+    getAllOpened(): Observable<IPosition[]>{
+
+        return this.http
+        .get('http://localhost:8080/api/positions/opened')
+        .pipe(
+            map(data => {
+                let positions: Array<IPosition> = [];
+                for (const id in Object.keys(data)){
+                    const _position: IPosition = {                        
+                        Idposition: Object.values(data)[id]["idposition"],
+                        Creation: Object.values(data)[id]["creation"],
+                        Datetimein: Object.values(data)[id]["datetimein"],
+                        Datetimeout: Object.values(data)[id]["datetimeout"],
+                        Buysell: Object.values(data)[id]["buysell"],
+                        Pricein: Object.values(data)[id]["pricein"],
+                        Priceout: Object.values(data)[id]["priceout"],
+                        Ticks: Object.values(data)[id]["ticks"],
+                        Contracts: Object.values(data)[id]["contracts"],
+                        Commision: Object.values(data)[id]["commision"],
+                        Euros: Object.values(data)[id]["euros"],
+                        Dollareuro: Object.values(data)[id]["dollareuro"],
+                        Imagepath: Object.values(data)[id]["imagepath"],
+                        Iddivisa: Object.values(data)[id]["iddivisa"],
+                        Idaccount: Object.values(data)[id]["idaccount"],
+                        Status: Object.values(data)[id]["status"],
+                    }
+                    positions.push(_position);
+                }
+                return positions;
+            })
+        );
+    }
+
+    getAllNotOpened(): Observable<IPosition[]>{
+
+        return this.http
+        .get('http://localhost:8080/api/positions/notopened')
+        .pipe(
+            map(data => {
+                let positions: Array<IPosition> = [];
+                for (const id in Object.keys(data)){
+                    const _position: IPosition = {                        
+                        Idposition: Object.values(data)[id]["idposition"],
+                        Creation: Object.values(data)[id]["creation"],
+                        Datetimein: Object.values(data)[id]["datetimein"],
+                        Datetimeout: Object.values(data)[id]["datetimeout"],
+                        Buysell: Object.values(data)[id]["buysell"],
+                        Pricein: Object.values(data)[id]["pricein"],
+                        Priceout: Object.values(data)[id]["priceout"],
+                        Ticks: Object.values(data)[id]["ticks"],
+                        Contracts: Object.values(data)[id]["contracts"],
+                        Commision: Object.values(data)[id]["commision"],
+                        Euros: Object.values(data)[id]["euros"],
+                        Dollareuro: Object.values(data)[id]["dollareuro"],
+                        Imagepath: Object.values(data)[id]["imagepath"],
+                        Iddivisa: Object.values(data)[id]["iddivisa"],
+                        Idaccount: Object.values(data)[id]["idaccount"],
+                        Status: Object.values(data)[id]["status"],
+                    }
+                    positions.push(_position);
+                }
+                return positions;
+            })
+        );
+    }
+
 }

@@ -3,8 +3,11 @@
     Últimas operationes
   </div>
   <div class="card-body">
-    <app-op-closed-operation></app-op-closed-operation>
-    <app-op-closed-operation></app-op-closed-operation>
+
+    <div *ngFor="let position of positions">
+      <app-op-closed-operation [position]="position"></app-op-closed-operation>
+    </div>
+
   </div>
   <div class="card-footer text-muted">
     <small>Mostrando 3 operaciones en esta semana.</small>

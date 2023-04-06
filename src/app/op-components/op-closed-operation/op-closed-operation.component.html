@@ -1,22 +1,41 @@
 <div class="card-deck">
     <div class="card mb-2">
         <div class="card-body">
-            <h6 class="card-title">[iBroker] [MCL]</h6>
-
-            <small class="card-text">Acción: <span class="text-warning">VENDER</span></small>
+            <h4 class="card-title">
+                [Cuenta-broker: {{position.Idaccount}}] [ticker: MCL]
+                <br>
+                Acción: <span class="text-warning">{{position.Buysell}}</span>
+                <br>
+                Estado: <span class="text-danger fs-bold">{{position.Status}}</span>
+            </h4>            
+            <small class="card-text">Divisa: {{position.Iddivisa}}</small>
+            <br>            
+            <small class="card-text">
+                Price: {{position.Pricein}} to {{position.Priceout}}
+                |
+                Contratos: {{position.Contracts}}
+                |
+                Ticks: <span class="text-green">{{position.Ticks}}</span>
+            </small>
             <br>
-            <small class="card-text">Price: 88,82 to 88,01 - Ticks: <span class="text-green">+81</span></small>
+            <small class="card-text">
+                Comisión: <span class="text-green">{{position.Commision}}</span>
+                |
+                Euros: {{position.Euros}}
+                |
+                DollarEuro: {{position.Dollareuro}}
+            </small>
             <br>
-            <small class="card-text">Time: 15:25 to 16:01 - 36 minutes</small>
-            <br>
-            <small class="text-danger">CLOSED</small>
+            <small class="card-text">Time: {{position.Datetimein}} to {{position.Datetimeout}}</small>
+            
+            
         </div>
         <div class="card-footer">
             <div class="row">
-                <div class="col-6">
-                    <a href="#">Revisar operación</a>
+                <div class="col-8">
+                    <a href="#">Revisar operación [Id: {{position.Idposition}}]</a>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <a href="#">Ocultar</a>
                 </div>
             </div>                

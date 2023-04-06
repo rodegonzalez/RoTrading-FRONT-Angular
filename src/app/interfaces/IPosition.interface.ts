@@ -14,6 +14,6 @@ export interface IPosition{
 	Imagepath:      string;
 	Iddivisa:       number;
 	Idaccount:      number;
-	status:			string;
+	Status:			string;
   }
   
