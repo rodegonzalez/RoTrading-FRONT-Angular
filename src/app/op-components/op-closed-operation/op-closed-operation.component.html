@@ -2,11 +2,13 @@
     <div class="card mb-2">
         <div class="card-body">
             <h4 class="card-title">
-                [Cuenta-broker: {{position.Idaccount}}] [ticker: MCL]
+                [Cuenta-broker: {{position.Idaccount}}] [ticker: {{position.Ticker}}]
                 <br>
                 Acción: <span class="text-warning">{{position.Buysell}}</span>
                 <br>
                 Estado: <span class="text-danger fs-bold">{{position.Status}}</span>
+                <br>
+                Patrón-Setup: <span class="text-warning">{{position.Pattern}} / {{position.Setup}}</span>
             </h4>            
             <small class="card-text">Divisa: {{position.Iddivisa}}</small>
             <br>            

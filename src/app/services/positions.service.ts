@@ -53,6 +53,9 @@ export class PositionsService {
                         Iddivisa: Object.values(data)[id]["iddivisa"],
                         Idaccount: Object.values(data)[id]["idaccount"],
                         Status: Object.values(data)[id]["status"],
+                        Pattern: Object.values(data)[id]["pattern"],
+                        Setup: Object.values(data)[id]["setup"],
+                        Ticker: Object.values(data)[id]["ticker"],
                     }
                     positions.push(_position);
                 }
@@ -86,6 +89,9 @@ export class PositionsService {
                         Iddivisa: Object.values(data)[id]["iddivisa"],
                         Idaccount: Object.values(data)[id]["idaccount"],
                         Status: Object.values(data)[id]["status"],
+                        Pattern: Object.values(data)[id]["pattern"],
+                        Setup: Object.values(data)[id]["setup"],
+                        Ticker: Object.values(data)[id]["ticker"],
                     }
                     positions.push(_position);
                 }

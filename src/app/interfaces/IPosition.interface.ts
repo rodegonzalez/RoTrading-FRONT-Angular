@@ -15,5 +15,8 @@ export interface IPosition{
 	Iddivisa:       number;
 	Idaccount:      number;
 	Status:			string;
+	Pattern:		string;
+	Setup:			string;
+	Ticker:			string;
   }
   
