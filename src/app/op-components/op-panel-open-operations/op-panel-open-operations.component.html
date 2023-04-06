@@ -1,13 +1,15 @@
 <div class="card mb-2">
   <div class="card-header">
     <div class="row">
-    <div class="col-6 text-left">Operaciones abiertas</div>
-    <div class="col-6 text-right">Martes 04/04/2023</div>
+      <div class="col-6 text-left">Operaciones abiertas</div>
+      <div class="col-6 text-right">Martes 04/04/2023</div>
+    </div>
   </div>
+
+  <div *ngFor="let position of positions" class="card-body">
+    <app-op-open-operation [position]="position"></app-op-open-operation>
   </div>
-  <div class="card-body">
-    <app-op-open-operation></app-op-open-operation>
-  </div>
+
   <div class="card-footer text-muted">
     <button class="btn btn-success w-100">Nueva operación</button>
   </div>

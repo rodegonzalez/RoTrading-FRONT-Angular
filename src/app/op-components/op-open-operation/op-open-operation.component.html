@@ -8,7 +8,10 @@
                     
                     <div class="row">
                         <div class="col-12">
-                            <h4>[iBroker] [MCL]</h4>
+                            <h4>
+                                <span class="text-danger">[ {{position.ticker}} ]</span> - 
+                                <span class="text-warning">[ {{position.pattern}} / {{position.setup}} ]</span>
+                            </h4>
                         </div>
                     </div>
                     <div class="row">
@@ -16,7 +19,7 @@
                             Acción: 
                         </div>
                         <div class="col-4 text-warning">
-                            COMPRAR
+                            {{position.buysell}}
                         </div>
                     </div>
                     <div class="row">
@@ -24,15 +27,15 @@
                             Estado: 
                         </div>
                         <div class="col-4">
-                            <span class="text-success">OPEN</span>
+                            <span class="text-success">{{position.status}}</span>
                         </div>                        
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            Cuenta: 
+                            Cuenta (idaccount): 
                         </div>
                         <div class="col-4">
-                            <span class="text-info">iBroker</span>
+                            <span class="text-info">{{position.idaccount}}</span>
                         </div>                        
                     </div>
                 </div>
@@ -53,31 +56,28 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-6">
-                                            IN
-                                        </div>
-                                        <div class="col-6">
-                                            15:10
+                                        <div class="col-12">
+                                            IN:
+                                            <br>
+                                            {{position.datetimein}}
                                         </div>
                                     </div>
                     
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-12">
                                             OUT
-                                        </div>
-                                        <div class="col-6">
-                                            15:15
+                                            <br>
+                                            {{position.datetimeout}}
                                         </div>
                                     </div>
                                 </div>
                     
                                 <div class="card-footer">
                                     <div class="row">
-                                        <div class="col-8">
-                                            Minutes
-                                        </div>
-                                        <div class="col-4">
-                                            5
+                                        <div class="col-12">
+                                            Minutes: 
+                                            <br>
+                                            $$PENDING$$                                        
                                         </div>
                                     </div>                
                                 </div>
@@ -96,7 +96,7 @@
                                             IN
                                         </div>
                                         <div class="col-6">
-                                            88,01
+                                            {{position.pricein}}
                                         </div>
                                     </div>
                     
@@ -105,7 +105,7 @@
                                             OUT
                                         </div>
                                         <div class="col-6">
-                                            88,82
+                                            {{position.priceout}}
                                         </div>
                                     </div>
                     
@@ -117,7 +117,7 @@
                                             Ticks
                                         </div>
                                         <div class="col-6">
-                                            +81
+                                            {{position.ticks}}
                                         </div>
                                     </div>                
                                 </div>
@@ -137,7 +137,7 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-6">
-                            <button class="btn btn-primary w-100">Cerrar operación</button>
+                            <button class="btn btn-primary w-100">Cerrar operación [Id: {{position.idposition}}]</button>
                         </div>
                         <div class="col-6">
                             <button class="btn btn-danger w-100">Cancelar</button>

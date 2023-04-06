@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { PositionsService } from '../../services/positions.service';
 import { IPosition } from '../../interfaces/IPosition.interface';
 
@@ -18,7 +18,7 @@ export class OpPanelClosedOperationsComponent {
 
     this.positionsService.getAllNotOpened().subscribe({
       complete: () => {
-          console.log("positionsService.getAllNotOpened() vía http - Terminado.");
+          console.log("positionsService.getAllNotOpened() vía http - Ended.");
 
       },
       next: (data: Array<IPosition>) => {
