@@ -1,26 +1,4 @@
-export interface IPosition{
-	Idposition:     number;
-	Creation:       string;
-	Datetimein:     string;
-	Datetimeout:    string;
-	Buysell:        string;
-	Pricein:        number;
-	Priceout:       number;
-	Ticks:          number;
-	Contracts:      number;
-	Commision:      number;
-	Euros:          number;
-	Dollareuro:     number;
-	Imagepath:      string;
-	Iddivisa:       number;
-	Idaccount:      number;
-	Status:			string;
-	Pattern:		string;
-	Setup:			string;
-	Ticker:			string;
-  }
-  
-  export interface IPositionLower{
+  export interface IPosition{
 	idposition:     number;
 	creation:       string;
 	datetimein:     string;

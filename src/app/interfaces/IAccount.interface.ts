@@ -1,3 +1,4 @@
+/*
 export interface IAccount{
 	Idaccount:      number;
 	Creation:       string;
@@ -9,4 +10,18 @@ export interface IAccount{
 	Iddivisa:       number;
 	Status:			string;
 	Acctype:		string;
+  }
+*/
+
+  export interface IAccount{
+	idaccount:      number;
+	creation:       string;
+	name:           string;
+	description:    string;
+	amount_initial: number;
+	amount_current: number;
+	idbroker:       number;
+	iddivisa:       number;
+	status:			string;
+	acctype:		string;
   }

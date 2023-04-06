@@ -16,18 +16,18 @@ export class OpPanelClosedOperationsComponent {
 
   ngOnInit(): void{
 
-    this.positionsService.getAllNotOpened().subscribe({
+    this.positionsService.getAllByStatus('notopened').subscribe({
       complete: () => {
-          console.log("positionsService.getAllNotOpened() vía http - Ended.");
+          console.log("positionsService.getAllByStatus(notopened) vía http - Ended.");
 
       },
       next: (data: Array<IPosition>) => {
-        console.log("positionsService.getAllNotOpened() vía http - data:");
+        console.log("positionsService.getAllByStatus(notopened) vía http - data:");
         console.log(data);
         this.positions = data;        
       },
       error: (e: any) => {
-        console.log("positionsService.getAllNotOpened() vía http - http error.");
+        console.log("positionsService.getAllByStatus(notopened) vía http - http error.");
         console.log(e);
       }
     });

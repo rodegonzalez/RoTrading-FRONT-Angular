@@ -1,156 +1,130 @@
 <div class="card border-primary">  
    
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card w-100">
-                <div class="card-header">
-                    
-                    <div class="row">
-                        <div class="col-12">
-                            <h4>
-                                <span class="text-danger">[ {{position.ticker}} ]</span> - 
-                                <span class="text-warning">[ {{position.pattern}} / {{position.setup}} ]</span>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            Acción: 
-                        </div>
-                        <div class="col-4 text-warning">
-                            {{position.buysell}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            Estado: 
-                        </div>
-                        <div class="col-4">
-                            <span class="text-success">{{position.status}}</span>
-                        </div>                        
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            Cuenta (idaccount): 
-                        </div>
-                        <div class="col-4">
-                            <span class="text-info">{{position.idaccount}}</span>
-                        </div>                        
-                    </div>
-                </div>
-
-
-
-
-
-                <div class="card-body">
-
-    
-                    <div class="row mb-2">
-    
-                        <div class="col-6">
-                            <div class="card w-100">
-                                <div class="card-header">
-                                    Time
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            IN:
-                                            <br>
-                                            {{position.datetimein}}
-                                        </div>
-                                    </div>
-                    
-                                    <div class="row">
-                                        <div class="col-12">
-                                            OUT
-                                            <br>
-                                            {{position.datetimeout}}
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            Minutes: 
-                                            <br>
-                                            $$PENDING$$                                        
-                                        </div>
-                                    </div>                
-                                </div>
-                                
-                            </div>
-                        </div>
-                    
-                        <div class="col-6">
-                            <div class="card w-100">
-                                <div class="card-header">
-                                    Price
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            IN
-                                        </div>
-                                        <div class="col-6">
-                                            {{position.pricein}}
-                                        </div>
-                                    </div>
-                    
-                                    <div class="row">
-                                        <div class="col-6">
-                                            OUT
-                                        </div>
-                                        <div class="col-6">
-                                            {{position.priceout}}
-                                        </div>
-                                    </div>
-                    
-                                </div>
-                    
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            Ticks
-                                        </div>
-                                        <div class="col-6">
-                                            {{position.ticks}}
-                                        </div>
-                                    </div>                
-                                </div>
-                    
-                            </div>
-                        </div>
-                    
-                    </div>
-
-
-
-                </div>
-
-
-
-
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-6">
-                            <button class="btn btn-primary w-100">Cerrar operación [Id: {{position.idposition}}]</button>
-                        </div>
-                        <div class="col-6">
-                            <button class="btn btn-danger w-100">Cancelar</button>
-                        </div>
-                    </div>                
-                </div>
-
-
+    <div class="card-header">        
+        <div class="row">
+            <div class="col-12">
+                <h4>
+                    <span class="text-danger">[ {{position.ticker}} ]</span> - 
+                    <span class="text-warning">[ {{position.pattern}} / {{position.setup}} ]</span>
+                </h4>
             </div>
         </div>
+        <div class="row">
+            <div class="col-8">
+                Acción: 
+            </div>
+            <div class="col-4 text-warning">
+                {{position.buysell}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                Estado: 
+            </div>
+            <div class="col-4">
+                <span class="text-success">{{position.status}}</span>
+            </div>                        
+        </div>
+        <div class="row">
+            <div class="col-8">
+                Cuenta (idaccount): 
+            </div>
+            <div class="col-4">
+                <span class="text-info">{{position.idaccount}}</span>
+            </div>                        
+        </div>
     </div>
-    
 
+    <div class="card-body">
+        <div class="row mb-1">
+            <div class="col-6">
+                <div class="card w-100">
+                    <div class="card-header">
+                        Time
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                IN:
+                                <br>
+                                {{position.datetimein}}
+                            </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col-12">
+                                OUT
+                                <br>
+                                {{position.datetimeout}}
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                Minutes: 
+                                <br>
+                                $$PENDING$$                                        
+                            </div>
+                        </div>                
+                    </div>                    
+                </div>
+            </div>
+        
+            <div class="col-6">
+                <div class="card w-100">
+                    <div class="card-header">
+                        Price
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                IN
+                            </div>
+                            <div class="col-6">
+                                {{position.pricein}}
+                            </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col-6">
+                                OUT
+                            </div>
+                            <div class="col-6">
+                                {{position.priceout}}
+                            </div>
+                        </div>
+        
+                    </div>
+        
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-6">
+                                Ticks
+                            </div>
+                            <div class="col-6">
+                                {{position.ticks}}
+                            </div>
+                        </div>                
+                    </div>
+        
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-6">
+                <button class="btn btn-primary w-100">Cerrar operación [Id: {{position.idposition}}]</button>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-danger w-100">Cancelar</button>
+            </div>
+        </div>                
+    </div>
 
 </div>
 
