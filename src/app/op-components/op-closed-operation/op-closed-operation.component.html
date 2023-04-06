@@ -1,39 +1,39 @@
 <div class="card mb-2">
     <div class="card-body">
         <h4 class="card-title">
-            [Cuenta-broker: {{position.Idaccount}}] [ticker: {{position.Ticker}}]
+            [Cuenta-broker: {{position.idaccount}}] [ticker: {{position.ticker}}]
             <br>
-            Acción: <span class="text-warning">{{position.Buysell}}</span>
+            Acción: <span class="text-warning">{{position.buysell}}</span>
             <br>
-            Estado: <span class="text-danger fs-bold">{{position.Status}}</span>
+            Estado: <span class="text-danger fs-bold">{{position.status}}</span>
             <br>
-            Patrón-Setup: <span class="text-warning">{{position.Pattern}} / {{position.Setup}}</span>
+            Patrón-Setup: <span class="text-warning">{{position.pattern}} / {{position.setup}}</span>
         </h4>            
-        <small class="card-text">Divisa: {{position.Iddivisa}}</small>
+        <small class="card-text">Divisa: {{position.iddivisa}}</small>
         <br>            
         <small class="card-text">
-            Price: {{position.Pricein}} to {{position.Priceout}}
+            Price: {{position.pricein}} to {{position.priceout}}
             |
-            Contratos: {{position.Contracts}}
+            Contratos: {{position.contracts}}
             |
-            Ticks: <span class="text-green">{{position.Ticks}}</span>
+            Ticks: <span class="text-green">{{position.ticks}}</span>
         </small>
         <br>
         <small class="card-text">
-            Comisión: <span class="text-green">{{position.Commision}}</span>
+            Comisión: <span class="text-green">{{position.commision}}</span>
             |
-            Euros: {{position.Euros}}
+            Euros: {{position.euros}}
             |
-            DollarEuro: {{position.Dollareuro}}
+            DollarEuro: {{position.dollareuro}}
         </small>
         <br>
-        <small class="card-text">Time: {{position.Datetimein}} to {{position.Datetimeout}}</small>                
+        <small class="card-text">Time: {{position.datetimein}} to {{position.datetimeout}}</small>                
     </div>
 
     <div class="card-footer">
         <div class="row">
             <div class="col-8">
-                <a href="#">Revisar operación [Id: {{position.Idposition}}]</a>
+                <a href="#">Revisar operación [Id: {{position.idposition}}]</a>
             </div>
             <div class="col-4">
                 <a href="#">Ocultar</a>
