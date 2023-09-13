@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IPosition } from 'src/app/interfaces/IPosition.interface';
 
 @Component({
   selector: 'app-op-open-operation',
@@ -8,4 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class OpOpenOperationComponent {
   @Input() position: any;
+
 }

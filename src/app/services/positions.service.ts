@@ -42,6 +42,15 @@ export class PositionsService {
                 let positions: Array<IPosition> = [];
                 for (const id in Object.keys(data)){
                     const _position: IPosition = Object.values(data)[id];
+                    // fix Pricein
+                    _position.pricein = _position.pricein * 100/100;
+
+                    // Fix datetimein
+                    const _datetime: string = _position.datetimein.split(" ")[1];
+                    const _datetime_time = _datetime.split(":");
+                    _position.datetimein = _datetime_time[0] + ":" + _datetime_time[1];
+                    
+                    // prepare position for html
                     positions.push(_position);
                 }
                 return positions;

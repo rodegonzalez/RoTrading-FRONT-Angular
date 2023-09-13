@@ -1,133 +1,97 @@
-<div class="card border-primary">  
-   
-    <div class="card-header">        
-        <div class="row">
-            <div class="col-12">
-                <h4>
-                    <span class="text-danger">[ {{position.ticker}} ]</span> - 
-                    <span class="text-warning">[ {{position.pattern}} / {{position.setup}} ]</span>
-                </h4>
+<div class="card text-center">
+    <div class="card-header bg-dark text-white ">
+        
+    <div class="row  ">
+
+        <div class="col-3 ">
+            <div class="row">
+                <div class="col-4">Id</div>
+                <div class="col-4">Block</div>
+                <div class="col-4">ticker</div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-8">
-                Acción: 
-            </div>
-            <div class="col-4 text-warning">
-                {{position.buysell}}
+        
+        <div class="col-3 ">
+            <div class="row">
+                <div class="col-6">date</div>
+                <div class="col-6">timein</div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-8">
-                Estado: 
+        
+        <div class="col-5 ">
+            <div class="row">
+                <div class="col-2" title="BuySell"> 
+                    B/S
+                </div>
+                <div class="col-4"> 
+                    Pricein
+                </div>
+                <div class="col-3">
+                    Setup
+                </div>
+                <div class="col-3">
+                    Status
+                </div>
             </div>
-            <div class="col-4">
-                <span class="text-success">{{position.status}}</span>
-            </div>                        
         </div>
-        <div class="row">
-            <div class="col-8">
-                Cuenta (idaccount): 
+        
+        <div class="col-1 ">
+            <div class="row">    
+                &nbsp;
             </div>
-            <div class="col-4">
-                <span class="text-info">{{position.idaccount}}</span>
-            </div>                        
+        </div>
+        
         </div>
     </div>
+
+
+
+
 
     <div class="card-body">
-        <div class="row mb-1">
-            <div class="col-6">
-                <div class="card w-100">
-                    <div class="card-header">
-                        Time
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                IN:
-                                <br>
-                                {{position.datetimein}}
-                            </div>
-                        </div>
-        
-                        <div class="row">
-                            <div class="col-12">
-                                OUT
-                                <br>
-                                {{position.datetimeout}}
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-12">
-                                Minutes: 
-                                <br>
-                                $$PENDING$$                                        
-                            </div>
-                        </div>                
-                    </div>                    
+        <div class="row bg-light small">
+
+            <div class="col-3 ">
+                <div class="row">
+                    <div class="col-4">02-001</div>
+                    <div class="col-4">B005</div>
+                    <div class="col-4">{{position.ticker}}</div>
                 </div>
             </div>
-        
-            <div class="col-6">
-                <div class="card w-100">
-                    <div class="card-header">
-                        Price
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                IN
-                            </div>
-                            <div class="col-6">
-                                {{position.pricein}}
-                            </div>
-                        </div>
-        
-                        <div class="row">
-                            <div class="col-6">
-                                OUT
-                            </div>
-                            <div class="col-6">
-                                {{position.priceout}}
-                            </div>
-                        </div>
-        
-                    </div>
-        
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-6">
-                                Ticks
-                            </div>
-                            <div class="col-6">
-                                {{position.ticks}}
-                            </div>
-                        </div>                
-                    </div>
-        
+            
+            <div class="col-3 ">
+                <div class="row">
+                    <div class="col-6">2023/0407</div>
+                    <div class="col-6">{{position.datetimein}}</div>
                 </div>
             </div>
-        
-        </div>
-    </div>
-
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-6">
-                <button class="btn btn-primary w-100">Cerrar operación [Id: {{position.idposition}}]</button>
+            
+            <div class="col-5 ">
+                <div class="row">
+                    <div class="col-3"> 
+                        <span class="text-primary font-weight-bold">
+                             <span *ngIf="position.buysell == 'buy'">Vender</span>
+                             <span *ngIf="position.buysell != 'buy'">Comprar</span>
+                        </span>
+                    </div>
+                    <div class="col-3"> 
+                        <span class="text-primary">{{position.pricein}}</span>
+                    </div>
+                    <div class="col-3 text-danger">
+                        {{position.pattern}} / {{position.setup}} 
+                    </div>
+                    <div class="col-3 text-success">
+                        {{position.status}}
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-                <button class="btn btn-danger w-100">Cancelar</button>
-            </div>
-        </div>                
+            
+            <div class="col-1 ">
+                <div class="row">    
+                    <div class="col-6"><button type="button" name="" id="" class="btn btn-success btn-sm btn-block">S</button></div>
+                    <div class="col-6"> <button type="button" name="" id="" class="btn btn-secondary btn-sm btn-block">C</button></div>    
+                </div>
+            </div>            
+        </div>                        
     </div>
-
 </div>
-
-
-
-
