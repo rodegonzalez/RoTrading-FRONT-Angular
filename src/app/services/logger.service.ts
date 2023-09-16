@@ -19,13 +19,25 @@ export class LoggerService {
             if (typeof(msg) == "string"){
                 switch (tlog){
                     case Tlog.info: 
-                        msg = "/INFO/ " + msg;
+                        msg = "/INFO/: " + msg;
                         break;
                     case Tlog.warn: 
-                        msg = "/WARNING/ " + msg;
+                        msg = "/WARNING/: " + msg;
                         break;
                     case Tlog.error: 
-                        msg = "/ERROR/ " + msg;
+                        msg = "/ERROR/: " + msg;
+                        break;
+                }
+            }else{
+                switch (tlog){
+                    case Tlog.info: 
+                        console.log("/INFO/: ");
+                        break;
+                    case Tlog.warn: 
+                        console.log("/WARNING/: ");
+                        break;
+                    case Tlog.error: 
+                        console.log("/ERROR/: ");
                         break;
                 }
             }            
