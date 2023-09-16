@@ -15,19 +15,20 @@ export class LoggerService {
 
             //var currdate: string = Date.toLocaleString();
             //msg = currdate + " - " + msg;
-    
-            switch (tlog){
-                case Tlog.info: 
-                    msg = "/INFO/ " + msg;
-                    break;
-                case Tlog.warn: 
-                    msg = "/WARNING/ " + msg;
-                    break;
-                case Tlog.error: 
-                    msg = "/ERROR/ " + msg;
-                    break;
-            }
-
+            
+            if (typeof(msg) == "string"){
+                switch (tlog){
+                    case Tlog.info: 
+                        msg = "/INFO/ " + msg;
+                        break;
+                    case Tlog.warn: 
+                        msg = "/WARNING/ " + msg;
+                        break;
+                    case Tlog.error: 
+                        msg = "/ERROR/ " + msg;
+                        break;
+                }
+            }            
             console.log(msg);
         }
     }
