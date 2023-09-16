@@ -30,6 +30,7 @@ import { AnReportBlocksComponent } from './an-components/an-report-blocks/an-rep
 
 import { AccountsService } from './services/accounts.service';
 import { PositionsService } from './services/positions.service';
+import { LoggerService } from './services/logger.service';
 
 /* Routing */
 const appRoutes: Routes = [
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     AccountsService,
-    PositionsService
+    PositionsService,
+    LoggerService,
   ],
 
   bootstrap: [AppComponent]
