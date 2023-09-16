@@ -19,20 +19,15 @@ export class OpPanelClosedOperationsComponent {
 
     this.positionsService.getAllByStatus('notopened').subscribe({
       complete: () => {
-          //console.log("positionsService.getAllByStatus(notopened) vía http - Ended.");
           this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(notopened) vía http - Ended.");
 
       },
       next: (data: Array<IPosition>) => {
-        //console.log("positionsService.getAllByStatus(notopened) vía http - data:");
-        //console.log(data);
         this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(notopened) vía http - data:");
         this.loggerService.log(Tlog.info, data);
         this.positions = data;        
       },
       error: (e: any) => {
-        //console.log("positionsService.getAllByStatus(notopened) vía http - http error.");
-        //console.log(e);
         this.loggerService.log(Tlog.error, "positionsService.getAllByStatus(notopened) vía http - http error.");
         this.loggerService.log(Tlog.error, e);
       }
