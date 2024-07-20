@@ -1,5 +1,5 @@
 <div class="pt-2 mb-2">
-<form action="">
+<form method="POST" #newpositions = "ngForm" (ngSubmit) = "onClickSubmit(formdata)">
 
   <div class="card">
 
@@ -14,35 +14,35 @@
       <div class="row">
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" id="account" value="1" disabled /> 
+            <input type="text" id="idaccount" name="idaccount" class="form-control" [(ngModel)]="formdata.idaccount" disabled /> 
             <small>Cuenta</small>            
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" id="block" value="B001" disabled />             
+            <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />             
             <small>Bloque</small>  
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" id="posID" value="001" disabled />             
+            <input type="text" class="form-control" name="idposition" [(ngModel)]="formdata.idposition" disabled />             
             <small>ID</small>  
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" id="market" value="NYMEX" disabled />             
+            <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
             <small>Mercado</small>  
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" id="ticker" value="MCL" disabled />             
+            <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
             <small>Ticker</small>  
           </div>
         </div>
@@ -64,7 +64,7 @@
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" id="timeIN" value="12:52" disabled />             
+            <input type="text" class="form-control" name="timeIN" [(ngModel)]="formdata.timeIN" />             
             <small>Hora ENTRADA</small>
           </div>
         </div>
@@ -151,42 +151,42 @@
 
         <div class="col-2">                    
           <div class="form-group">
-            <input type="number" class="form-control" id="priceIN" value="80.01" />
+            <input type="number" class="form-control" name="priceIN" [(ngModel)]="formdata.priceIN" />
             <small>Precio ENTRADA</small>
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="number" class="form-control" id="priceIN" value="1"  />
+            <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
             <small>Nº de contratos</small>
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="number" class="form-control" id="profit" value="80"  />
+            <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
             <small>Profit</small>
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="number" class="form-control" id="stoploss" value="-20"  />
+            <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
             <small>Stoploss</small>
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="number" class="form-control" id="profit" value="4.5" disabled />
+            <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commisions" disabled />
             <small>Comisiones</small>
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <button type="button" id="execute" class="btn btn-primary btn-block">Ejecutar</button>            
+            <button type="submit" name="execute" class="btn btn-primary btn-block">Ejecutar</button>            
           </div>
         </div>
 
@@ -197,7 +197,7 @@
     <!-- ----------------------------------------------------------------------------------------------------- -->  
 
     <div class="card-footer">
-      <button class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button>
+      <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button>
     </div>
 
   </div>

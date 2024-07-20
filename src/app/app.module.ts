@@ -31,6 +31,7 @@ import { AnReportBlocksComponent } from './an-components/an-report-blocks/an-rep
 import { AccountsService } from './services/accounts.service';
 import { PositionsService } from './services/positions.service';
 import { LoggerService } from './services/logger.service';
+
 import { OpPanelNewOperationComponent } from './op-components/op-panel-new-operation/op-panel-new-operation.component';
 
 /* Routing */

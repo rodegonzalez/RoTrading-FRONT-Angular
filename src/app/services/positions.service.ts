@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoggerService, Tlog } from '../services/logger.service';
 import { map, Observable } from 'rxjs';
 import { IPosition } from '../interfaces/IPosition.interface';
+import {IPositionResponseInterface} from '../interfaces/iposition-response.interface';
 import { environment } from '../environment/global.environment';
 
 @Injectable({
@@ -11,7 +13,7 @@ export class PositionsService {
 
     //positions: IPosition[] = []
 
-    constructor(private http:HttpClient) {}
+    constructor(private http:HttpClient, private loggerService: LoggerService) {}
 
     getAll(): Observable<IPosition[]>{
         return this.http
@@ -58,4 +60,55 @@ export class PositionsService {
         );
     }
 
+
+    // POST
+
+    savePosition(): any{
+        let response: IPositionResponseInterface;
+
+        const headers = {'Content-Type': 'multipart/json charset=utf-8'};
+        const body = { title: 'title post var', msg: "mensaje" };
+        let uri = environment.APIUri +"/positions/saveposition";
+
+        this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
+
+        return this.http
+        //.post(uri,body, {headers}).subscribe({
+            .post(uri,body).subscribe({
+            next: data => {
+            this.loggerService.log(Tlog.info, "http post response. data:");
+            this.loggerService.log(Tlog.info, data);
+            return null;
+            },
+            error: error => {
+                this.loggerService.log(Tlog.error, error);
+            }
+        });
+    }
+    
+    savePositionForm(formdata: any): any{
+        let response: IPositionResponseInterface;
+
+        const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
+        //const body = { title: 'title post var' };
+        let uri = environment.APIUri +"/positions/savepositionform";
+
+        this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
+        this.loggerService.log(Tlog.info, "SERVICE formdata: ");
+        this.loggerService.log(Tlog.info, formdata);
+
+        return this.http
+        .post<any>(uri,formdata).subscribe({
+            next: data => {
+            //response.msg = data.msg;
+            //response.status = data.status;
+            this.loggerService.log(Tlog.info, "http post response. data:");
+            this.loggerService.log(Tlog.info, data);
+            return null;
+            },
+            error: error => {
+                this.loggerService.log(Tlog.error, error);
+            }
+        });
+    }
 }
