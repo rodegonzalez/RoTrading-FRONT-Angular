@@ -48,9 +48,9 @@ export class PositionsService {
                     _position.pricein = _position.pricein * 100/100;
 
                     // Fix datetimein
-                    const _datetime: string = _position.datetimein.split(" ")[1];
-                    const _datetime_time = _datetime.split(":");
-                    _position.datetimein = _datetime_time[0] + ":" + _datetime_time[1];
+                    //const _datetime: string = _position.datetimein.split(" ")[1];
+                    //const _datetime_time = _datetime.split(":");
+                    //_position.datetimein = _datetime_time[0] + ":" + _datetime_time[1];
                     
                     // prepare position for html
                     positions.push(_position);

@@ -20,8 +20,8 @@ export interface IAccount{
 	description:    string;
 	amount_initial: number;
 	amount_current: number;
-	idbroker:       number;
-	iddivisa:       number;
+	brokerid:       number;
+	divisaid:       number;
 	status:			string;
 	acctype:		string;
   }

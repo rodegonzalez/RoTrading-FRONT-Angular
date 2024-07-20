@@ -1,5 +1,5 @@
   export interface IPosition{
-	idposition:     number;
+	id:     number;
 	creation:       string;
 	datetimein:     string;
 	datetimeout:    string;
@@ -12,10 +12,10 @@
 	euros:          number;
 	dollareuro:     number;
 	imagepath:      string;
-	iddivisa:       number;
-	idaccount:      number;
+	divisaid:       number;
+	accountid:      number;
 	status:			string;
-	pattern:		string;
-	setup:			string;
-	ticker:			string;
+	patternid:		number;
+	setupid:			number;
+	tickerid:			number;
   }
