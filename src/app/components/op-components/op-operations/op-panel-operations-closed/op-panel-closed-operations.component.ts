@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LoggerService, Tlog } from '../../../services/logger.service';
-import { PositionsService } from '../../../services/positions.service';
-import { IPosition } from '../../../interfaces/IPosition.interface';
+import { LoggerService, Tlog } from '../../../../services/logger.service';
+import { PositionsService } from '../../../../services/positions.service';
+import { IPosition } from '../../../../interfaces/IPosition.interface';
 
 @Component({
   selector: 'app-op-panel-closed-operations',

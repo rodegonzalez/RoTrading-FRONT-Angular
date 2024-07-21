@@ -24,16 +24,16 @@ import { AnReportBlocksComponent } from './components/an-components/an-report-bl
 import { AnPanelGraphsComponent } from './components/an-components/an-panel-graphs/an-panel-graphs.component';
 import { AnPanelReportsComponent } from './components/an-components/an-panel-reports/an-panel-reports.component';
 
-import { OpOperationsComponent } from './components/op-components/op-operations/op-operations.component';
-import { OpClosedOperationComponent } from './components/op-components/op-closed-operation/op-closed-operation.component';
-import { OpOpenOperationComponent } from './components/op-components/op-open-operation/op-open-operation.component';
-import { OpPanelNewOperationComponent } from './components/op-components/op-panel-new-operation/op-panel-new-operation.component';
+import { OpOperationsComponent } from './components/op-components/op-operations/op-panel-operations/op-operations.component';
+import { OpClosedOperationComponent } from './components/op-components/op-operations/op-operation-closed/op-closed-operation.component';
+import { OpOpenOperationComponent } from './components/op-components/op-operations/op-operation-opened/op-open-operation.component';
+import { OpPanelNewOperationComponent } from './components/op-components/op-operations/op-panel-operations-new/op-panel-new-operation.component';
 import { OpCalendarComponent } from './components/op-components/op-calendar/op-calendar.component';
 import { OpAccountComponent } from './components/op-components/op-account/op-account.component';
 import { OpPanelAccountsComponent } from './components/op-components/op-panel-accounts/op-panel-accounts.component';
-import { OpPanelClosedOperationsComponent } from './components/op-components/op-panel-closed-operations/op-panel-closed-operations.component';
-import { OpPanelOpenOperationsComponent } from './components/op-components/op-panel-open-operations/op-panel-open-operations.component';
-import { OpPositionsComponent } from './components/op-components/op-positions/op-positions.component';
+import { OpPanelClosedOperationsComponent } from './components/op-components/op-operations/op-panel-operations-closed/op-panel-closed-operations.component';
+import { OpPanelOpenOperationsComponent } from './components/op-components/op-operations/op-panel-operations-opened/op-panel-open-operations.component';
+import { OpPositionsComponent } from './components/op-components/op-panel-positions/op-panel-positions.component';
 import { OpConfigurationComponent } from './components/op-components/op-configuration/op-configuration.component';
 
 /* Routing */
