@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LoggerService, Tlog } from '../../services/logger.service';
-import { PositionsService } from '../../services/positions.service';
+import { LoggerService, Tlog } from '../../../services/logger.service';
+import { PositionsService } from '../../../services/positions.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { IPosition } from 'src/app/interfaces/IPosition.interface';
 
