@@ -14,7 +14,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { HelpComponent } from './components/help/help.component';
-import { TestComponent } from './components/test/test.component';
+import { TestComponent } from './test/test.component';
 
 import { AnAnalysisComponent } from './components/an-analysis/an-analysis.component';
 import { AnGraphMonthComponent } from './components/an-components/an-graph-month/an-graph-month.component';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Database } from 'sqlite3';
+//import { Database } from 'sqlite3';
 
 @Component({
   selector: 'app-test',
