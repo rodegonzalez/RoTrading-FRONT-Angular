@@ -28,13 +28,13 @@ import { OpOperationsComponent } from './components/op-components/op-operations/
 import { OpClosedOperationComponent } from './components/op-components/op-operations/op-operation-closed/op-closed-operation.component';
 import { OpOpenOperationComponent } from './components/op-components/op-operations/op-operation-opened/op-open-operation.component';
 import { OpPanelNewOperationComponent } from './components/op-components/op-operations/op-panel-operations-new/op-panel-new-operation.component';
-import { OpCalendarComponent } from './components/op-components/op-calendar/op-calendar.component';
-import { OpAccountComponent } from './components/op-components/op-account/op-account.component';
-import { OpPanelAccountsComponent } from './components/op-components/op-panel-accounts/op-panel-accounts.component';
 import { OpPanelClosedOperationsComponent } from './components/op-components/op-operations/op-panel-operations-closed/op-panel-closed-operations.component';
 import { OpPanelOpenOperationsComponent } from './components/op-components/op-operations/op-panel-operations-opened/op-panel-open-operations.component';
 import { OpPositionsComponent } from './components/op-components/op-panel-positions/op-panel-positions.component';
 import { OpConfigurationComponent } from './components/op-components/op-configuration/op-configuration.component';
+import { OpCalendarComponent } from './components/op-components/op-calendar/op-calendar.component';
+import { OpAccountComponent } from './components/op-components/op-account/op-account.component';
+import { OpPanelAccountsComponent } from './components/op-components/op-panel-accounts/op-panel-accounts.component';
 
 /* Routing */
 const appRoutes: Routes = [

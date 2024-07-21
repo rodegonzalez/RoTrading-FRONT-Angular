@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 import { PositionsService } from '../../../../services/positions.service';
-import { IPosition } from '../../../../interfaces/IPosition.interface';
+import { IPositionView } from '../../../../interfaces/IPosition.interface';
 
 @Component({
   selector: 'app-op-panel-open-operations',
@@ -10,10 +10,11 @@ import { IPosition } from '../../../../interfaces/IPosition.interface';
   ]
 })
 export class OpPanelOpenOperationsComponent {
-  positions: Array<IPosition>;
+  positions: Array<IPositionView>;
   currentDateTime: string;
   constructor(private positionsService: PositionsService, private loggerService: LoggerService) {
-    this.positions = new Array<IPosition> ;
+    this.positions = new Array<IPositionView>;
+
     this.currentDateTime = new Date().toString();
    }
 
@@ -26,7 +27,7 @@ export class OpPanelOpenOperationsComponent {
       complete: () => {
           this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(opened) vía http - Ended.");
       },
-      next: (data: Array<IPosition>) => {
+      next: (data: Array<IPositionView>) => {
         this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(opened) vía http - data:");
         this.loggerService.log(Tlog.info, data);
         this.positions = data;        

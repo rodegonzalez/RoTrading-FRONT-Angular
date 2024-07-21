@@ -1,53 +1,43 @@
-<div class="card text-center">
-    <div class="card-header bg-light text-white ">        
-    </div>
+<div class="container-fluid p-0">
 
-    <div class="card-body">
         <div class="row bg-light small">
 
-            <div class="col-3 ">
+            <div class="col-6 col-lg-4 col-md-4 col-sm-2 ">
                 <div class="row">
-                    <div class="col-4">Block:<br/>{{position.block}}</div>
-                    <div class="col-4">Id:<br/>{{position.id}}</div>                    
-                    <div class="col-4">Ticker:<br/>{{position.tickerid}}</div>
+                    <div class="col-4 col-md-4 col-sm-6 text-start" title="Ticker">Ticker: {{position.ticker}}</div>                    
+                    <div class="col-8 col-md-8 col-sm-6 text-end" title="Id">Id: {{position.id}}</div>                    
+                    <div class="col-4 col-md-4 col-sm-6 text-start" title="Block">Block: {{position.block}}</div>
+                    <div class="col-8 col-md-8 col-sm-6 text-end" title="datetimeIN"><input type="text" disabled value="{{position.datetimein}}" /></div>
                 </div>
             </div>
             
-            <div class="col-3 ">
+            
+            <div class="col-5 col-lg-5 col-md-6 col-sm-9">
                 <div class="row">
-                    
-                    <div class="col-6">2023/0407</div>
-                    <div class="col-6">datetimein:<br/>{{position.datetimein}}</div>
+                    <div class="col-4 col-md-4 col-sm-3 text-start" title="Pattern and setup">Pattern/Setup:  </div>                    
+                    <div class="col-8 col-md-8 col-sm-9 text-end" title="Price IN">
+                        &euro; IN: <input type="text" disabled value=" {{position.pricein}}" /></div>                    
+                    <div class="col-4 col-md-4 col-sm-3 text-start" title="Buy or sell"> 
+                        {{position.pattern}}/{{position.setup}}
+                    </div>
+                    <div class="col-8 col-md-8 col-sm-9 text-end" title="datetimeOUT">&euro; OUT: <input type="text" /></div>
                 </div>
             </div>
             
-            <div class="col-5 ">
-                <div class="row">
-                    <div class="col-3"> 
-                        Buysell:<br/>
-                        <span class="text-primary font-weight-bold">
-                             <span *ngIf="position.buysell == 'buy'">Vender</span>
-                             <span *ngIf="position.buysell != 'buy'">Comprar</span>
-                        </span>
-                    </div>
-                    <div class="col-3"> 
-                        <span class="text-primary">Pricein:<br/>{{position.pricein}}</span>
-                    </div>
-                    <div class="col-3 text-danger">
-                        Pattern / Setup :<br/>{{position.patternid}}/{{position.setupid}} 
-                    </div>
-                    <div class="col-3 text-success">
-                        Status:<br/> {{position.status}}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-1 ">
-                <div class="row">    
-                    <div class="col-6"><button type="button" name="" id="" class="btn btn-success btn-sm btn-block">S</button></div>
-                    <div class="col-6"> <button type="button" name="" id="" class="btn btn-secondary btn-sm btn-block" title="Close">C</button></div>    
+            <div class="col-1 col-lg-3 col-md-2 col-sm-1">
+                <div class="row"> 
+                    <div class="col-6 col-sm-6 text-success text-center" title="Status and Buysell">
+                        {{position.status}}
+                        <br/>
+                        ( <span class="text-primary font-weight-bold">
+                            <span *ngIf="position.buysell == 'buy'">Buy</span>
+                            <span *ngIf="position.buysell != 'buy'">Sell</span>
+                            </span> 
+                        )
+                    </div>   
+                    <div class="col-3 col-sm-3"><button type="button" name="" id="" class="btn btn-success btn-sm btn-block">S</button></div>
+                    <div class="col-3 col-sm-3"> <button type="button" name="" id="" class="btn btn-secondary btn-sm btn-block" title="Close">C</button></div>    
                 </div>
             </div>            
         </div>                        
-    </div>
 </div>

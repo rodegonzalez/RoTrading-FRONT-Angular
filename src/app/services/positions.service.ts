@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoggerService, Tlog } from '../services/logger.service';
 import { map, Observable } from 'rxjs';
-import { IPosition } from '../interfaces/IPosition.interface';
+import { IPositionView } from '../interfaces/IPosition.interface';
 import {IPositionResponseInterface} from '../interfaces/iposition-response.interface';
 import { environment } from '../environment/global.environment';
 
@@ -15,14 +15,14 @@ export class PositionsService {
 
     constructor(private http:HttpClient, private loggerService: LoggerService) {}
 
-    getAll(): Observable<IPosition[]>{
+    getAll(): Observable<IPositionView[]>{
         return this.http
         .get(environment.APIUri + '/positions')
         .pipe(
             map(data => {
-                let positions: Array<IPosition> = [];
+                let positions: Array<IPositionView> = [];
                 for (const id in Object.keys(data)){
-                    const _position: IPosition = Object.values(data)[id];
+                    const _position: IPositionView = Object.values(data)[id];
                     positions.push(_position);
                 }
                 return positions;
@@ -30,7 +30,7 @@ export class PositionsService {
         );
     }
 
-    getAllByStatus(status: string): Observable<IPosition[]>{
+    getAllByStatus(status: string): Observable<IPositionView[]>{
         let uri: string;
         if (status == "opened"){
             uri = environment.APIUri + "/positions/opened";
@@ -41,9 +41,9 @@ export class PositionsService {
         .get(uri)
         .pipe(
             map(data => {
-                let positions: Array<IPosition> = [];
+                let positions: Array<IPositionView> = [];
                 for (const id in Object.keys(data)){
-                    const _position: IPosition = Object.values(data)[id];
+                    const _position: IPositionView = Object.values(data)[id];
                     // fix Pricein
                     _position.pricein = _position.pricein * 100/100;
 
