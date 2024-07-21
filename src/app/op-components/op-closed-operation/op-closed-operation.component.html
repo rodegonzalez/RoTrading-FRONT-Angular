@@ -1,44 +1,41 @@
 <div class="card mb-2">
     <div class="card-body">
-        <h4 class="card-title">
-            [Cuenta-broker: {{position.idaccount}}] [ticker: {{position.ticker}}]
-            <br>
-            Acción: <span class="text-warning">{{position.buysell}}</span>
-            <br>
-            Estado: <span class="text-danger fs-bold">{{position.status}}</span>
-            <br>
-            Patrón-Setup: <span class="text-warning">{{position.pattern}} / {{position.setup}}</span>
-        </h4>            
-        <small class="card-text">Divisa: {{position.iddivisa}}</small>
-        <br>            
-        <small class="card-text">
-            Price: {{position.pricein}} to {{position.priceout}}
-            |
-            Contratos: {{position.contracts}}
-            |
-            Ticks: <span class="text-green">{{position.ticks}}</span>
-        </small>
-        <br>
-        <small class="card-text">
-            Comisión: <span class="text-green">{{position.commision}}</span>
-            |
-            Euros: {{position.euros}}
-            |
-            DollarEuro: {{position.dollareuro}}
-        </small>
-        <br>
-        <small class="card-text">Time: {{position.datetimein}} to {{position.datetimeout}}</small>                
-    </div>
-\examples\en\index.html
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-8">
-                <a href="#">Revisar operación [Id: {{position.idposition}}]</a>
-            </div>
-            <div class="col-4">
-                <a href="#">Ocultar</a>
-            </div>
-        </div>                
-    </div>
+        <div class="row bg-light small">
 
+            <div class="col-5 col-md-5 col-sm-5">
+                <div class="row">
+                    <div class="col-3 col-md-6  col-sm-12">Block: {{position.block}}</div>
+                                     
+                    <div class="col-3 col-md-6 col-sm-12">Ticker: {{position.tickerid}}</div>
+                    <div class="col-3 col-md-6 col-sm-12">Id: {{position.id}}</div>  
+                    <div class="col-3 col-md-6 col-sm-12">Duration: 20 min</div>
+                </div>
+            </div>
+ 
+
+            <div class="col-5 col-md-5 col-sm-5">
+                <div class="row">
+                    <div class="col-4"> 
+                        Buysell:<br/>
+                        <span class="text-primary font-weight-bold">
+                             <span *ngIf="position.buysell == 'buy'">Cortos</span>
+                             <span *ngIf="position.buysell != 'buy'">Largos</span>
+                        </span>
+                    </div>
+                    <div class="col-3"> 
+                        <span class="text-primary">Ticks:<br/>{{position.ticks}}</span>
+                    </div>
+                    <div class="col-5 text-danger">
+                        Profit / Stoploss :<br/>{{position.profit}}/{{position.stoploss}} 
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="col-2 col-md-2 col-sm-2">
+                Status :<br/>{{position.status}}
+            </div> 
+          
+        </div>                        
+    </div>
 </div>

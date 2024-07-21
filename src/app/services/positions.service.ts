@@ -68,7 +68,7 @@ export class PositionsService {
 
         const headers = {'Content-Type': 'multipart/json charset=utf-8'};
         const body = { title: 'title post var', msg: "mensaje" };
-        let uri = environment.APIUri +"/positions/saveposition";
+        let uri = environment.APIUri +"/position";
 
         this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
 
@@ -91,7 +91,8 @@ export class PositionsService {
 
         const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
         //const body = { title: 'title post var' };
-        let uri = environment.APIUri +"/positions/savepositionform";
+        //let uri = environment.APIUri +"/positions/savepositionform";
+        let uri = environment.APIUri +"/position";
 
         this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
         this.loggerService.log(Tlog.info, "SERVICE formdata: ");

@@ -1,5 +1,6 @@
   export interface IPosition{
 	id:     number;
+	block:  string;
 	creation:       string;
 	datetimein:     string;
 	datetimeout:    string;
@@ -7,6 +8,8 @@
 	pricein:        number;
 	priceout:       number;
 	ticks:          number;
+	profit:         number;
+	stoploss:	   number;	
 	contracts:      number;
 	commision:      number;
 	euros:          number;
@@ -14,8 +17,11 @@
 	imagepath:      string;
 	divisaid:       number;
 	accountid:      number;
+	marketid:       number;
+	tickerid:		number;
+	
 	status:			string;
 	patternid:		number;
 	setupid:			number;
-	tickerid:			number;
+	
   }

@@ -9,6 +9,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { OpOperationsComponent } from './op-operations/op-operations.component';
+import { OpPositionsComponent } from './op-positions/op-positions.component';
 import { AnAnalysisComponent } from './an-analysis/an-analysis.component';
 import { OpConfigurationComponent } from './op-configuration/op-configuration.component';
 import { HelpComponent } from './help/help.component';
@@ -38,6 +39,7 @@ import { OpPanelNewOperationComponent } from './op-components/op-panel-new-opera
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'operativa', component: OpOperationsComponent},
+  {path: 'posiciones', component: OpPositionsComponent},
   {path: 'analisis', component: AnAnalysisComponent},
   {path: 'configuracion', component: OpConfigurationComponent},
   {path: 'ayuda', component: HelpComponent},
@@ -55,6 +57,7 @@ const appRoutes: Routes = [
       OpOperationsComponent,
       OpOpenOperationComponent,
       OpClosedOperationComponent,
+      OpPositionsComponent,
       OpCalendarComponent,
       OpAccountComponent,
       OpPanelAccountsComponent,

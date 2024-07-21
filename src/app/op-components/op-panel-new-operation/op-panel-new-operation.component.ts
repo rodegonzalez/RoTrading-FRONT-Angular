@@ -13,17 +13,18 @@ import { IPosition } from 'src/app/interfaces/IPosition.interface';
 export class OpPanelNewOperationComponent {
   
   formdata = {
-    idaccount:  '99',
+    id: 1,
+    accountid:  '1',
     block:      'B001',
-    idposition: '001',
-    market:     'NYMEX',
-    ticker:     'MCL',
-    timeIN:     '00:00',
+    creation:   '2021-01-01',
+    marketid:     '1',
+    tickerid:     '1',
+    datetimein:     '00:00',
     priceIN:    '0.0',
     contracts:  '1',
     profit:     '80',
     stoploss:   '-20',
-    commisions: '4.5',
+    commision: '4.5',
 
   };
 

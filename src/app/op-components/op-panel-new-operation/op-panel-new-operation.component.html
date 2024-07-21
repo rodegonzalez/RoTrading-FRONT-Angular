@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-2">
           <div class="form-group">
-            <input type="text" id="idaccount" name="idaccount" class="form-control" [(ngModel)]="formdata.idaccount" disabled /> 
+            <input type="text" id="idaccount" name="idaccount" class="form-control" [(ngModel)]="formdata.accountid" disabled /> 
             <small>Cuenta</small>            
           </div>
         </div>
@@ -28,21 +28,21 @@
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" name="idposition" [(ngModel)]="formdata.idposition" disabled />             
+            <input type="text" class="form-control" name="idposition" [(ngModel)]="formdata.id" disabled />             
             <small>ID</small>  
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
+            <input type="text" class="form-control" name="market" [(ngModel)]="formdata.marketid" disabled />             
             <small>Mercado</small>  
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
+            <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.tickerid" disabled />             
             <small>Ticker</small>  
           </div>
         </div>
@@ -64,7 +64,7 @@
 
         <div class="col-2">
           <div class="form-group">
-            <input type="text" class="form-control" name="timeIN" [(ngModel)]="formdata.timeIN" />             
+            <input type="text" class="form-control" name="timeIN" [(ngModel)]="formdata.datetimein" />             
             <small>Hora ENTRADA</small>
           </div>
         </div>
@@ -101,15 +101,15 @@
 
         <div class="col-2">
           <div class="form-group">
-            <select multiple class="custom-select-sm" id="setup" size="7">
-              <option value="not-set" selected>Not-set</option>
-              <option value="fv">FV</option>
-              <option value="vd-i">VD-interior</option>
-              <option value="vd-e">VD-envolvente</option>
-              <option value="vd-r">VD-rechazo</option>
-              <option value="vd-a1">VD-A1</option>
-              <option value="vd-b3">VD-B3</option>
-              <option value="vd-c">VD-carril</option>
+            <select multiple class="custom-select-sm" id="setupid" size="7">
+              <option value="0" selected>Not-set manual</option>
+              <option value="1">FV</option>
+              <option value="2">VD-interior</option>
+              <option value="3">VD-envolvente</option>
+              <option value="4">VD-rechazo</option>
+              <option value="5">VD-A1</option>
+              <option value="6">VD-B3</option>
+              <option value="7">VD-carril</option>
             </select>
           </div>
         </div>
@@ -179,7 +179,7 @@
 
         <div class="col-2">
           <div class="form-group">
-            <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commisions" disabled />
+            <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
             <small>Comisiones</small>
           </div>
         </div>
