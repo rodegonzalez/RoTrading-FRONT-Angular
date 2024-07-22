@@ -197,19 +197,15 @@
                     </div> 
                   </div>
 
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group  d-block w-100 p-1">                                  
-                        <button type="button" id="reset" class="btn btn-outline-danger w-100">Reset</button>
-                      </div>
-                    </div> 
-                  </div>
+                 
 
                   <div class="row">
                     <div class="col">
-                      <DIV class="formgroup d-block w-100 p-1"><textarea class="w-100" placeholder="Notes"></textarea></DIV>
+                      <DIV class="formgroup d-block w-100 p-1 pb-4"><textarea class="w-100" placeholder="Notas e hipótesis"></textarea></DIV>
                     </div> 
                   </div>
+
+
 
                   <div class="row">
                     <div class="col">
@@ -219,6 +215,39 @@
                     </div>
                   </div>
 
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group  d-block w-100 p-1">                                  
+                        <button type="button" id="reset" class="btn btn-outline-danger w-100">Reset</button>
+                      </div>
+                    </div> 
+                  </div>
+                  <div class="row">
+                  <div class="col">
+                    <div class="form-group  d-block w-100 p-1">                                  
+                      <div class="form-group d-block w-100 p-1">
+                        <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button></div>
+                    </div>
+                  </div> 
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group  d-block w-100 p-1">                                  
+                      <div class="form-group d-block w-100 p-1">
+                        <button type="button" class="btn btn-outline-warning w-100" (click)="newOperation()">Nueva sesión</button></div>
+                    </div>
+                  </div> 
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group  d-block w-100 p-1">                                  
+                      <div class="form-group d-block w-100 p-1">
+                        <button type="button" class="btn btn-outline-danger w-100" (click)="newOperation()">Cerrar sesión</button></div>
+                    </div>
+                  </div> 
+                </div>
           </div>
 
     </div>
@@ -230,9 +259,6 @@
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->  
 
-    <div class="card-footer">
-      <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button>
-    </div>
 
   </div>
 
