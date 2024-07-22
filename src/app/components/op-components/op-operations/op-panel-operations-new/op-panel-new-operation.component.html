@@ -2,7 +2,6 @@
 <form method="POST" #newpositions = "ngForm" (ngSubmit) = "onClickSubmit(formdata)">
 
 
-
   <div class="accordion" id="AcordeonNew-Operations">
     <div class="accordion-item">
       <h2 class="accordion-header" id="AcordeonNew-OperationsH">
@@ -16,276 +15,277 @@
       <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="AcordeonNew-OperationsH" data-bs-parent="#AcordeonNew-Operations">
         <div class="accordion-body">
           
-
-
-  <div class="card">
-
-
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->
-
-    <div class="card-body">
-
-
-<div class="row flex-grow-1">
-  <!-- FORM DATA-->
-    <div class="col-lg-9 col-md-9 col-sm-10">
-
-                <div class="row">
-                  <div class="col-3">
-                    <div class="form-group p-1">
-                      <input type="text" id="idaccount" name="idaccount" class="form-control" [(ngModel)]="formdata.accountid" disabled /> 
-                      <small>Cuenta</small>            
-                    </div>
-                    <div class="form-group p-1">
-                      <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />             
-                      <small>Bloque</small>  
-                    </div>
-                    <div class="form-group p-1">
-                      <input type="text" class="form-control" name="idposition" [(ngModel)]="formdata.id" disabled />             
-                      <small>ID</small>  
-                    </div>
-                  </div>
-
-                  <div class="col-3">
-
-                    <div class="form-group p-1">
-                      <input type="text" class="form-control"name="broker" [(ngModel)]="formdata.broker" disabled />             
-                      <small>Broker</small>  
-                    </div>
-
-                    <div class="form-group p-1">
-                      <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
-                      <small>Mercado</small>  
-                    </div>
-                 
-                    <div class="form-group p-1">
-                      <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
-                      <small>Ticker</small>  
-                    </div>
-
-                  </div>
-
-                  <div class="col-3">
-                  
-                    <div class="form-group p-1">
-                      <input type="number" class="form-control" name="priceIN" [(ngModel)]="formdata.priceIN" />
-                      <small>Precio ENTRADA</small>
-                    </div>
-                    <div class="form-group p-1">
-                      <input type="text" class="form-control" name="timeIN" [(ngModel)]="formdata.datetimein" />             
-                      <small>Hora ENTRADA</small>
-                    </div>
-
-                  </div>
-
-                  <div class="col-3">
-
-                    <div class="form-group p-1">
-                      <input type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.priceIN" />
-                      <small>Ticks</small>
-                    </div>
-                    <div class="form-group p-1">
-                      <input type="number" class="form-control" name="priceOUT" [(ngModel)]="formdata.priceOUT" />
-                      <small>Precio SALIDA</small>
-                    </div>
-                    <div class="form-group p-1">
-                      <input type="text" class="form-control" name="timeIN" [(ngModel)]="formdata.datetimeout" />             
-                      <small>Hora SALIDA</small>
-                    </div>
-                  </div>
+    <div class="card">
+      <div class="card-body">
 
 
-                </div>
+      <div class="row flex-grow-1">
+        <!-- FORM DATA-->
+          <div class="col-lg-9 col-md-9 col-sm-10">
 
-                <!-- -----------------------------  -->
-                <div class="row">
-
-                  <div class="col-3">
-                              <div class="form-group p-1">
-                                <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
-                                <small>Nº de contratos</small>
-                              </div>
-                              <div class="form-group p-1">
-                                <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
-                                <small>Profit</small>
-                              </div>
-                              <div class="form-group p-1">
-                                <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
-                                <small>Stoploss</small>
-                              </div>
-                              <div class="form-group p-1">
-                                <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
-                                <small>Comisiones</small>
-                              </div>
-                  </div>
-          
-                  <div class="col-3">
-          
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="BuySellRadios" id="BuySellRadioBuy" value="buy" checked>
-                              <label class="form-check-label" for="BuySellRadioBuy">Comprar</label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="BuySellRadios" id="BuySellRadioSell" value="sell">
-                              <label class="form-check-label" for="BuySellRadioSell">Vender</label>
-                            </div>
-                    <hr>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="TimeFrameRadios" id="m1Check" />
-                              <label class="form-check-label" for="m1Check">m1</label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="TimeFrameRadios" id="m3Check" />
-                              <label class="form-check-label" for="m3Check">m3</label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="TimeFrameRadios" id="m5Check" checked />
-                              <label class="form-check-label" for="m5Check">m5</label>
-                            </div>
-                  </div>
-          
-                  <div class="col-3">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="tppCheck" checked>
-                            <label class="form-check-label" for="tppCheck">Es TPP</label>
+                      <div class="row">
+                        <div class="col-3">
+                          <div class="form-group p-1">
+                            <input type="text" id="idaccount" name="idaccount" class="form-control" [(ngModel)]="formdata.accountid" disabled /> 
+                            <small>Cuenta</small>            
                           </div>
-                          <div class="form-check" title="Is real operation or B-register">
-                            <input type="checkbox" class="form-check-input" id="realCheck" checked>
-                            <label class="form-check-label" for="realCheck">Es Real</label>
+                          <div class="form-group p-1">
+                            <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />             
+                            <small>Bloque</small>  
                           </div>
-                    <hr>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioG" value="g" checked>
-                            <label class="form-check-label" for="PatternRadioG">Giro</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioCont" value="c">
-                            <label class="form-check-label" for="PatternRadioCont">Continuaci&oacute;n</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioFac" value="f">
-                            <label class="form-check-label" for="PatternRadioFac">Facilidad</label>
-                          </div>
-                          <div class="form-check disabled">
-                            <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioOther" value="o" disabled>
-                            <label class="form-check-label" for="PatternRadioOther">Otro</label>
-                          </div>
-          
-                  </div>
-          
-                  <div class="col-3 center">
-                       
 
-                          <div class="row">
-                            <div class="col w-100">
-                                  <div class="form-group ">
-                                    <select multiple title="Setups" class="custom-select-sm w-100" id="setupid" size="7">
-                                      <option value="0" selected>Not-set manual</option>
-                                      <option value="1">FV</option>
-                                      <option value="2">VD-interior</option>
-                                      <option value="3">VD-envolvente</option>
-                                      <option value="4">VD-rechazo</option>
-                                      <option value="5">VD-A1</option>
-                                      <option value="6">VD-B3</option>
-                                      <option value="7">VD-carril</option>
-                                    </select>
+                          <!--
+                          <div class="form-group p-1">
+                            <input type="text" class="form-control" name="idposition" [(ngModel)]="formdata.id" disabled />             
+                            <small>ID</small>  
+                          </div>
+                          -->
+
+                        </div>
+
+                        <div class="col-3">
+
+                          <div class="form-group p-1">
+                            <input type="text" class="form-control"name="broker" [(ngModel)]="formdata.broker" disabled />             
+                            <small>Broker</small>  
+                          </div>
+
+                          <div class="form-group p-1">
+                            <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
+                            <small>Mercado</small>  
+                          </div>
+                      
+                          <div class="form-group p-1">
+                            <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
+                            <small>Ticker</small>  
+                          </div>
+
+                        </div>
+
+                        <div class="col-3">
+                        
+                          <div class="form-group p-1">
+                            <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" />
+                            <small>Precio ENTRADA</small>
+                          </div>
+                          <div class="form-group p-1">
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimein" />             
+                            <small>Hora ENTRADA</small>
+                          </div>
+
+                        </div>
+
+                        <div class="col-3">
+
+                          <div class="form-group p-1">
+                            <input type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" />
+                            <small>Ticks</small>
+                          </div>
+                          <div class="form-group p-1">
+                            <input type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" />
+                            <small>Precio SALIDA</small>
+                          </div>
+                          <div class="form-group p-1">
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimeout" />             
+                            <small>Hora SALIDA</small>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                      <!-- -----------------------------  -->
+                      <div class="row">
+
+                        <div class="col-3">
+                                    <div class="form-group p-1">
+                                      <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                                      <small>Nº de contratos</small>
+                                    </div>
+                                    <div class="form-group p-1">
+                                      <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
+                                      <small>Profit</small>
+                                    </div>
+                                    <div class="form-group p-1">
+                                      <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
+                                      <small>Stoploss</small>
+                                    </div>
+                                    <div class="form-group p-1">
+                                      <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
+                                      <small>Comisiones</small>
+                                    </div>
+                        </div>
+                
+                        <div class="col-3">
+                
+                                <div class="form-group">
+                                        <div class="form-check">
+                                          <input  [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buyoption" name="buysell" type="radio" value="buy" checked>
+                                         Comprar
+                                        </div>
+                                        <div class="form-check">
+                                          <input  [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="selloption" name="buysell" type="radio" value="sell">
+                                         Vender
+                                        </div>
+                                </div>
+
+                          <hr>
+
+                              <div class="form-group">  
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="temporal" id="temporal1" [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m1" />
+                                          m1
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="temporal" id="temporal3"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m3"/>
+                                          m3
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="temporal" id="temporal5"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m5" checked />
+                                          m5
+                                        </div>
+                                </div>
+                        </div>
+                
+                        <div class="col-3">
+                                <div class="form-check">
+                                  <input type="checkbox" class="form-check-input" id="tppCheck" checked>
+                                  <label class="form-check-label" for="tppCheck">Es TPP</label>
+                                </div>
+                                <div class="form-check" title="Is real operation or B-register">
+                                  <input type="checkbox" class="form-check-input" id="realCheck" checked>
+                                  <label class="form-check-label" for="realCheck">Es Real</label>
+                                </div>
+                          <hr>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioG" value="g" checked>
+                                  <label class="form-check-label" for="PatternRadioG">Giro</label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioCont" value="c">
+                                  <label class="form-check-label" for="PatternRadioCont">Continuaci&oacute;n</label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioFac" value="f">
+                                  <label class="form-check-label" for="PatternRadioFac">Facilidad</label>
+                                </div>
+                                <div class="form-check disabled">
+                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioOther" value="o" disabled>
+                                  <label class="form-check-label" for="PatternRadioOther">Otro</label>
+                                </div>
+                
+                        </div>
+                
+                        <div class="col-3 center">
+                            
+                                <div class="row">
+                                  <div class="col w-100">
+                                        <div class="form-group ">
+                                          <select [(ngModel)]="formdata.setupid" multiple title="Setups" class="custom-select-sm w-100" id="setupid" size="7">
+                                            <option value="0" selected>Not-set manual</option>
+                                            <option value="1">FV</option>
+                                            <option value="2">VD-interior</option>
+                                            <option value="3">VD-envolvente</option>
+                                            <option value="4">VD-rechazo</option>
+                                            <option value="5">VD-A1</option>
+                                            <option value="6">VD-B3</option>
+                                            <option value="7">VD-carril</option>
+                                          </select>
+                                        </div>
+
+                                  </div> 
+                                </div>
+
+                                <div class="row">
+                                <div class="col">
+                                  <div class="form-group  d-block w-100 p-1">                                  
+                                    <div class="form-group d-block w-100 p-1">
+                                      <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button></div>
                                   </div>
+                                </div> 
+                              </div>
 
-                            </div> 
-                          </div>
+                        </div>
+                                
+                      </div>  
+                      
+              </div>
 
-                          <div class="row">
+              <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
+              <div class="col-lg-3 col-md-3 col-sm-2">
+                        <div class="row pb-3">
                           <div class="col">
-                            <div class="form-group  d-block w-100 p-1">                                  
-                              <div class="form-group d-block w-100 p-1">
-                                <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button></div>
+                                    <div class="card border-primary">
+                                      <div class="card-header bg-warning text-dark border-warning">
+                                        <h6 class="card-title">Notas e hipótesis</h6>
+                                    </div>
+                                    <div class="card-body">
+                                
+
+                                    <DIV class="formgroup d-block w-100">
+                                      <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
+                                  </div> 
+                                </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group  d-block w-100 p-1">
+                              <button type="button" id="edit" class="btn btn-outline-success  w-100">Profit</button>             
                             </div>
                           </div> 
                         </div>
 
-                  </div>
-          
-          
-                </div>  
-                
-        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group  d-block w-100 p-1">
+                              <button type="button" id="edit" class="btn btn-outline-danger  w-100">Stoploss</button>             
+                            
+                            </div>
+                          </div> 
+                        </div>
 
-        <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
-        <div class="col-lg-3 col-md-3 col-sm-2">
-                  <div class="row pb-3">
-                    <div class="col">
-                              <div class="card border-primary">
-                                <div class="card-header bg-warning text-dark border-warning">
-                                  <h6 class="card-title">Notas e hipótesis</h6>
-                              </div>
-                              <div class="card-body">
-                          
-
-                              <DIV class="formgroup d-block w-100">
-                                <textarea class="w-100" placeholder="Notas e hipótesis"></textarea></DIV>
-                            </div> 
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group p-1">
+                              <button type="submit" name="execute" class="btn btn-primary btn-block d-block w-100">Ejecutar</button>            
+                            </div>
                           </div>
-                    </div>
-                  </div>
+                        </div>
 
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group  d-block w-100 p-1">
-                        <button type="button" id="edit" class="btn btn-outline-success  w-100">Profit</button>             
+                        <hr>
+
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group  d-block w-100 p-1">                                  
+                            <div class="form-group d-block w-100 p-1">
+                              <button type="button" class="btn btn-outline-warning w-100">Nueva sesión</button></div>
+                          </div>
+                        </div> 
                       </div>
-                    </div> 
-                  </div>
 
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group  d-block w-100 p-1">
-                        <button type="button" id="edit" class="btn btn-outline-danger  w-100">Stoploss</button>             
-                       
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group  d-block w-100 p-1">                                  
+                            <div class="form-group d-block w-100 p-1">
+                              <button type="button" class="btn btn-outline-danger w-100">Cerrar sesión</button></div>
+                          </div>
+                        </div> 
                       </div>
-                    </div> 
-                  </div>
-
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group p-1">
-                        <button type="submit" name="execute" class="btn btn-primary btn-block d-block w-100">Ejecutar</button>            
-                      </div>
-                    </div>
-                  </div>
-
-                  <hr>
-
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group  d-block w-100 p-1">                                  
-                      <div class="form-group d-block w-100 p-1">
-                        <button type="button" class="btn btn-outline-warning w-100" (click)="newOperation()">Nueva sesión</button></div>
-                    </div>
-                  </div> 
                 </div>
 
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group  d-block w-100 p-1">                                  
-                      <div class="form-group d-block w-100 p-1">
-                        <button type="button" class="btn btn-outline-danger w-100" (click)="newOperation()">Cerrar sesión</button></div>
-                    </div>
-                  </div> 
-                </div>
           </div>
 
-    </div>
 
-
-  </div>
-
-
+        </div>
+      </div>
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->  
 
 
-  </div>
 
 
 
@@ -293,11 +293,6 @@
 </div>
 </div>
 </div>
-
-
-
-
-
 
 
 </form>

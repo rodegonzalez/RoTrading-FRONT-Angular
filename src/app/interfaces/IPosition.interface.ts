@@ -2,6 +2,7 @@
 	id:     number;
 	block:  string;
 	creation:       string;
+	modification:   string;
 	datetimein:     string;
 	datetimeout:    string;
 	buysell:        string;
@@ -27,12 +28,20 @@
 	tppCheck:		number;
 	note:			string;
 	temporal:		string;
+	tppid:			number;
+	tpp:			string;
+	active:			number;
+	deleted:		number;
+	processed:		number;
+
+
   }
 
   export interface IPositionView{
-	id:     number;
+	//id:     number;
 	block:  string;
 	creation:       string;
+	modification:   string;
 	datetimein:     string;
 	datetimeout:    string;
 	buysell:        string;
@@ -66,4 +75,10 @@
 	tppCheck:		number;
 	note:			string;
 	temporal:		string;
+	tppid:			number;
+	tpp:			string;
+	active:			number;
+	deleted:		number;
+	processed:		number;
+
   }
