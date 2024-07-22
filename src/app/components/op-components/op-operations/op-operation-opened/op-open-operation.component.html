@@ -49,48 +49,60 @@
 
     <div class="row bg-light small">
 
-            <div class="col-lg-8 col-md-9 col-sm-12">
+            <div class="col-lg-9 col-md-12 col-sm-12 mt-1 mb-1">
 
                     <div class="row">
-                            <div class="col-lg-3 col-md-5 col-sm-6 text-start">
-                                    <div title="Ticker">{{position.ticker}} <br>Block (Id): {{position.block}} ( {{position.id}} )</div>
-                                    <div title="Block"></div>
+                            <div class="col-lg-3 col-md-4 col-sm-12 text-start">
+                                    <div title="Ticker">
+                                            {{position.ticker}} - 
+                                            <span class="text-start" title="Status and Buysell">{{position.status}}
+                                            
+                                                - ( <span class="text-primary font-weight-bold">
+                                                    <span *ngIf="position.buysell == 'buy'">Buy</span>
+                                                    <span *ngIf="position.buysell != 'buy'">Sell</span>
+                                                    </span> 
+                                                )
+                                                </span>
+                                            <br>
+                                            <div  title="Account (Broker) [accType]">{{position.account}} ({{position.broker}}) [{{position.acctype}}]</div>
+                                            <div title="Block"> Block (Id): {{position.block}} ( {{position.id}} )</div>
+                                            <div  title="Pattern/setup">Pattern (setup): {{position.pattern}} ( {{position.setup}} ) </div>
+                                            
+                                    </div>
+                                   
                                 </div>                                      
-                            <div class="col-lg-4 col-md-7 col-sm-6 text-end">
-                                <div  title="Pattern/setup">Pattern (setup): {{position.pattern}} ( {{position.setup}} ) </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 text-start">
+                                
                                 <div title="datetimeIN">Date: {{position.datetimein}}</div>
+                                <div title="Price IN">{{position.pricein}} &euro; IN </div>
+                                <div title="Ver">(Ver gráfico) (<span title="{{position.note}}">Ver nota</span>) </div>
+                                <div title="Ver">Temporality: {{position.temporal}} </div>
                             </div>
                                 
-                            <div class="col-lg-5 col-md-12 col-sm-12 text-end">
-                               <div title="Price IN"> &euro; IN <input type="text" disabled value=" {{position.pricein}}" /></div>
-                                <div title="price OUT">&euro; OUT <input type="text" /> </div>
+                            <div class="col-lg-5 col-md-4 col-sm-12 text-start">
+                            
+                                    <div class="form-group"> 
+                                    <div title="price OUT"><input  type="text" /> &euro; OUT  </div>
+                                    </div>
+                                
+                                    <div class="form-group"> 
+                                    <div title="price OUT"><input type="text"  /> Ticks </div>
+                                    </div>
+
+                                    <div class="form-group"> 
+                                    <div title="TPP">TPP: {{position.tpp}}</div>
+                                    </div>
                             </div>
-                                   
+                    </div>             
+            </div>
+          
+
+            <div class="col-lg-3 col-md-12 col-sm-12 p-4 m-auto d-flex">
+
+                    <div class="form-group">
+                    <button type="button" id="edit" class="btn btn-outline-dark mb-auto">Cerrar</button> 
+                    <button type="button" id="reset" class="btn btn-outline-danger mb-auto mx-2">Anular</button>                       
                     </div>
-            </div>
-
-            <div class="col-lg-4 col-md-3 col-sm-12">
-
-                <div class="row">
-                        <div class="col-6">
-                                <div class="text-start" title="Status and Buysell">{{position.status}}
-                                <br/>
-                                ( <span class="text-primary font-weight-bold">
-                                    <span *ngIf="position.buysell == 'buy'">Buy</span>
-                                    <span *ngIf="position.buysell != 'buy'">Sell</span>
-                                    </span> 
-                                )
-                                </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="row text-end">    
-                                <div class="col-lg-6 col-sm-6 col-sm-6"><button type="button" name="" id="" class="btn btn-success btn-sm btn-block">S</button></div>
-                                <div class="col-lg-6 col-sm-6 col-sm-6"> <button type="button" name="" id="" class="btn btn-secondary btn-sm btn-block" title="Close">C</button></div>    
-                            </div>
-                        </div>
-                </div>
-
                 
-            </div>
-                                       
+            </div>                                       
 </div>

@@ -23,6 +23,10 @@
 	patternid:		number;
 	setupid:		number;
 	brokerid:		number;
+	isrealCheck:	number;
+	tppCheck:		number;
+	note:			string;
+	temporal:		string;
   }
 
   export interface IPositionView{
@@ -57,4 +61,9 @@
 	pattern:		string;
 	setup:			string;
 	broker:			string;	
+	acctype:		string;
+	isrealCheck:	number;
+	tppCheck:		number;
+	note:			string;
+	temporal:		string;
   }

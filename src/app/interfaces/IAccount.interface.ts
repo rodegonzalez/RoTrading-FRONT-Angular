@@ -14,7 +14,7 @@ export interface IAccount{
 */
 
   export interface IAccount{
-	idaccount:      number;
+	id:      number;
 	creation:       string;
 	name:           string;
 	description:    string;
