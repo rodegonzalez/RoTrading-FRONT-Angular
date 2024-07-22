@@ -49,10 +49,10 @@
 
     <div class="row bg-light small">
 
-            <div class="col-lg-9 col-md-12 col-sm-12 mt-1 mb-1">
+            <div class="col-lg-8 col-md-12 col-sm-12 mt-1 mb-1">
 
                     <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-12 text-start">
+                            <div class="col-lg-4 col-md-4 col-sm-12 text-start">
                                     <div title="Ticker">
                                             {{position.ticker}} - 
                                             <span class="text-start" title="Status and Buysell">{{position.status}}
@@ -79,7 +79,7 @@
                                 <div title="Ver">Temporality: {{position.temporal}} </div>
                             </div>
                                 
-                            <div class="col-lg-5 col-md-4 col-sm-12 text-start">
+                            <div class="col-lg-4 col-md-4 col-sm-12 text-start">
                             
                                     <div class="form-group"> 
                                     <div title="price OUT"><input  type="text" /> &euro; OUT  </div>
@@ -97,12 +97,34 @@
             </div>
           
 
-            <div class="col-lg-3 col-md-12 col-sm-12 p-4 m-auto d-flex">
+            <div class="col-lg-4 col-md-12 col-sm-12 p-0 m-auto d-flex">
 
-                    <div class="form-group">
-                    <button type="button" id="edit" class="btn btn-outline-dark mb-auto">Cerrar</button> 
-                    <button type="button" id="reset" class="btn btn-outline-danger mb-auto mx-2">Anular</button>                       
-                    </div>
+    
                 
+                    <div class="row">
+                        <div class="col">
+                          <div class="form-group  d-block w-100 p-1">
+                            <button type="button" id="edit" class="btn btn-primary  w-100">Cerrar</button>             
+                          </div>
+                        </div> 
+                      </div>
+
+                    <div class="row">
+                        <div class="col">
+                          <div class="form-group  d-block w-100 p-1">
+                            <button type="button" id="edit" class="btn btn-outline-success  w-100">Profit</button>             
+                          </div>
+                        </div> 
+                      </div>
+    
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group  d-block w-100 p-1">
+                            <button type="button" id="edit" class="btn btn-outline-danger  w-100">Stoploss</button>             
+                          </div>
+                        </div> 
+                      </div>
+
+                      
             </div>                                       
 </div>

@@ -19,26 +19,46 @@
 
                 <div class="row">
                   <div class="col-3">
-                    <div class="form-group">
+                    <div class="form-group p-1">
                       <input type="text" id="idaccount" name="idaccount" class="form-control" [(ngModel)]="formdata.accountid" disabled /> 
                       <small>Cuenta</small>            
                     </div>
-                    <div class="form-group">
+                    <div class="form-group p-1">
                       <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />             
                       <small>Bloque</small>  
                     </div>
-                    <div class="form-group">
+                    <div class="form-group p-1">
                       <input type="text" class="form-control" name="idposition" [(ngModel)]="formdata.id" disabled />             
                       <small>ID</small>  
                     </div>
                   </div>
 
                   <div class="col-3">
-                    <div class="form-group">
+
+                    <div class="form-group p-1">
+                      <input type="text" class="form-control"name="broker" [(ngModel)]="formdata.broker" disabled />             
+                      <small>Broker</small>  
+                    </div>
+
+                    <div class="form-group p-1">
                       <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
                       <small>Mercado</small>  
                     </div>
-                    <div class="form-group">
+                 
+                    <div class="form-group p-1">
+                      <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
+                      <small>Ticker</small>  
+                    </div>
+
+                  </div>
+
+                  <div class="col-3">
+                  
+                    <div class="form-group p-1">
+                      <input type="number" class="form-control" name="priceIN" [(ngModel)]="formdata.priceIN" />
+                      <small>Precio ENTRADA</small>
+                    </div>
+                    <div class="form-group p-1">
                       <input type="text" class="form-control" name="timeIN" [(ngModel)]="formdata.datetimein" />             
                       <small>Hora ENTRADA</small>
                     </div>
@@ -46,28 +66,16 @@
                   </div>
 
                   <div class="col-3">
-                    <div class="form-group">
-                      <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
-                      <small>Ticker</small>  
-                    </div>
-                    <div class="form-group">
-                      <input type="number" class="form-control" name="priceIN" [(ngModel)]="formdata.priceIN" />
-                      <small>Precio ENTRADA</small>
-                    </div>
 
-                  </div>
-
-                  <div class="col-3">
-
-                    <div class="form-group">
+                    <div class="form-group p-1">
                       <input type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.priceIN" />
                       <small>Ticks</small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group p-1">
                       <input type="number" class="form-control" name="priceOUT" [(ngModel)]="formdata.priceOUT" />
                       <small>Precio SALIDA</small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group p-1">
                       <input type="text" class="form-control" name="timeIN" [(ngModel)]="formdata.datetimeout" />             
                       <small>Hora SALIDA</small>
                     </div>
@@ -80,19 +88,19 @@
                 <div class="row">
 
                   <div class="col-3">
-                              <div class="form-group">
+                              <div class="form-group p-1">
                                 <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
                                 <small>Nº de contratos</small>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group p-1">
                                 <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
                                 <small>Profit</small>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group p-1">
                                 <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
                                 <small>Stoploss</small>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group p-1">
                                 <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
                                 <small>Comisiones</small>
                               </div>
@@ -152,19 +160,36 @@
           
                   </div>
           
-                  <div class="col-3">
-                          <div class="form-group">
-                            <select multiple class="custom-select-sm" id="setupid" size="7">
-                              <option value="0" selected>Not-set manual</option>
-                              <option value="1">FV</option>
-                              <option value="2">VD-interior</option>
-                              <option value="3">VD-envolvente</option>
-                              <option value="4">VD-rechazo</option>
-                              <option value="5">VD-A1</option>
-                              <option value="6">VD-B3</option>
-                              <option value="7">VD-carril</option>
-                            </select>
+                  <div class="col-3 center">
+                       
+
+                          <div class="row">
+                            <div class="col w-100">
+                                  <div class="form-group ">
+                                    <select multiple title="Setups" class="custom-select-sm w-100" id="setupid" size="7">
+                                      <option value="0" selected>Not-set manual</option>
+                                      <option value="1">FV</option>
+                                      <option value="2">VD-interior</option>
+                                      <option value="3">VD-envolvente</option>
+                                      <option value="4">VD-rechazo</option>
+                                      <option value="5">VD-A1</option>
+                                      <option value="6">VD-B3</option>
+                                      <option value="7">VD-carril</option>
+                                    </select>
+                                  </div>
+
+                            </div> 
                           </div>
+
+                          <div class="row">
+                          <div class="col">
+                            <div class="form-group  d-block w-100 p-1">                                  
+                              <div class="form-group d-block w-100 p-1">
+                                <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button></div>
+                            </div>
+                          </div> 
+                        </div>
+
                   </div>
           
           
@@ -174,11 +199,20 @@
 
         <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
         <div class="col-lg-3 col-md-3 col-sm-2">
-
-                  <div class="row">
+                  <div class="row pb-3">
                     <div class="col">
+                              <div class="card border-primary">
+                                <div class="card-header bg-warning text-dark border-warning">
+                                  <h6 class="card-title">Notas e hipótesis</h6>
+                              </div>
+                              <div class="card-body">
+                          
 
-                    </div> 
+                              <DIV class="formgroup d-block w-100">
+                                <textarea class="w-100" placeholder="Notas e hipótesis"></textarea></DIV>
+                            </div> 
+                          </div>
+                    </div>
                   </div>
 
                   <div class="row">
@@ -193,19 +227,10 @@
                     <div class="col">
                       <div class="form-group  d-block w-100 p-1">
                         <button type="button" id="edit" class="btn btn-outline-danger  w-100">Stoploss</button>             
+                       
                       </div>
                     </div> 
                   </div>
-
-                 
-
-                  <div class="row">
-                    <div class="col">
-                      <DIV class="formgroup d-block w-100 p-1 pb-4"><textarea class="w-100" placeholder="Notas e hipótesis"></textarea></DIV>
-                    </div> 
-                  </div>
-
-
 
                   <div class="row">
                     <div class="col">
@@ -215,21 +240,7 @@
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group  d-block w-100 p-1">                                  
-                        <button type="button" id="reset" class="btn btn-outline-danger w-100">Reset</button>
-                      </div>
-                    </div> 
-                  </div>
-                  <div class="row">
-                  <div class="col">
-                    <div class="form-group  d-block w-100 p-1">                                  
-                      <div class="form-group d-block w-100 p-1">
-                        <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button></div>
-                    </div>
-                  </div> 
-                </div>
+                  <hr>
 
                 <div class="row">
                   <div class="col">
