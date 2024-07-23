@@ -1,6 +1,6 @@
 <div class="pt-2 mb-2">
 <form method="POST" #newpositions = "ngForm" (ngSubmit) = "onClickSubmit(formdata)">
-
+  <input type="hydden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" disabled /> 
 
   <div class="accordion" id="AcordeonNew-Operations">
     <div class="accordion-item">
@@ -35,13 +35,6 @@
                             <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />             
                             <small>Bloque</small>  
                           </div>
-
-                          <!--
-                          <div class="form-group p-1">
-                            <input type="text" class="form-control" name="idposition" [(ngModel)]="formdata.id" disabled />             
-                            <small>ID</small>  
-                          </div>
-                          -->
 
                         </div>
 

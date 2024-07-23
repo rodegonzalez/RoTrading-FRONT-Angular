@@ -12,7 +12,9 @@ import { IPositionView } from 'src/app/interfaces/IPosition.interface';
 })
 export class OpPanelNewOperationComponent {
   
- 
+  updaterecord = {
+    id: null,
+  }
 
   formdata: IPositionView = {
     //id: null,
