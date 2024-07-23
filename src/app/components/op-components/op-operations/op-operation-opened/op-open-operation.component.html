@@ -6,7 +6,7 @@
 
                     <div class="row">
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 text-start">
+                            <div class="col-lg-3 col-md-3 col-sm-12 text-start">
                                     <div title="Ticker">
                                             {{position.ticker}} - 
                                             <span class="text-start" title="Status and Buysell">{{position.status}}
@@ -20,27 +20,27 @@
                                             <br>
                                             <div  title="Account (Broker) [accType]">{{position.account}} ({{position.broker}}) [{{position.acctype}}]</div>
                                             <div title="Block"> Block (Id): {{position.block}} ( {{position.id}} )</div>
-                                            <div  title="Pattern/setup">Patrón (entrada): {{position.pattern}} ( {{position.setup}} ) </div>                                            
+                                                                                      
                                     </div>                                   
                             </div>                                      
-                            <div class="col-lg-4 col-md-4 col-sm-12 text-start">                                
+                            <div class="col-lg-6 col-md-6 col-sm-12 text-start">                                
                                 <div title="datetimeIN">Fecha: {{position.datetimein}}</div>
-                                <div title="Price IN">{{position.pricein}} &euro; IN </div>
-                                <div title="Ver">(Ver gráfico) (<span title="{{position.note}}">Ver nota</span>) </div>
-                                <div title="TPP">TPP: {{position.tpp}}</div>                                 
-                                <div title="Ver">Temporalidad: {{position.temporal}} </div>
-                            </div>
+                                <div title="">{{position.pricein}} &euro; IN - TPP: {{position.tpp}} - Temporalidad: {{position.temporal}}</div>
+                                <div  title="Pattern/setup">Patrón (entrada): {{position.pattern}} ( {{position.setup}} ) </div>  
+                                                            
                                 
-                            <div class="col-lg-4 col-md-4 col-sm-12 text-start">
+                            </div>                                
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 text-start">
                             
                                     <div class="row w-100">
                                         <div class="col">
                                           <div class="form-group  d-block w-100 p-1">
-                                            <div title="price OUT"><input class="p-1 form-control"  type="text" placeholder="&euro; OUT"/></div>                                                      
+                                            <div title="price OUT"><input class="form-control"  type="text" placeholder="&euro; OUT"/></div>                                                      
                                           </div>
 
                                           <div class="form-group  d-block w-100 p-1">
-                                            <div title="price OUT"><input class="p-1 form-control" type="text" placeholder="Ticks" /></div>                                               
+                                            <div title="price OUT"><input class="form-control" type="text" placeholder="Ticks" /></div>                                               
                                           </div> 
 
                                         </div> 
@@ -56,16 +56,17 @@
                   <div class="row w-100">
                             <div class="col">
                                     <div class="form-group  d-block w-100 p-1">
-                                        <button type="button" class="btn btn-primary w-100">Cerrar</button>                                            
+                                    
+                                        <i title="Cerrar con datos" class="fas fa-square-check fa-2x px-1 pe-3" style="color: rgb(38, 32, 210);"></i>
+                                        <i title="Cerrar con profit" class="fas fa-square-plus fa-2x px-1" style="color: green;"></i>                                        
+                                        <i title="Cerrar con Stoploss" class="fas fa-square-minus fa-2x pe-3" style="color: red;"></i>         
+                                        <i title="Ver imágenes" class="fas fa-images fa-2x px-1" style="color: brown;"></i> 
+                                        <i title="Ver notas" class="fas fa-message fa-2x px-1" style="color: brown;"></i> 
+
                                     </div>
 
                                     <div class="form-group  d-block w-100 p-1">
-                                        <button type="button" class="btn btn-outline-success w-100">Profit</button>                                             
-                                    </div>
-
-                                    <div class="form-group  d-block w-100 p-1">
-                                        <button type="button" class="btn btn-outline-danger w-100">Stoploss</button>                                            
-                                    </div>                            
+                                                            
                             </div> 
                   </div>      
             </div>  

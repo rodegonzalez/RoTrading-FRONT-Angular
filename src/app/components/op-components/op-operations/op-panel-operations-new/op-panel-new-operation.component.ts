@@ -100,6 +100,10 @@ export class OpPanelNewOperationComponent {
     data.active = '1';
     data.deleted = '0';
     data.processed = '0';
+
+    //TODO: fix this
+    data.brokerid = 1;
+    
     data.tppCheck =  data.tppCheck == true ? '1' : '0';
     data.isrealcheck = data.isrealCheck == true ? '1' : '0';
 
