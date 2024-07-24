@@ -35,17 +35,19 @@ import { OpConfigurationComponent } from './components/op-components/op-configur
 import { OpCalendarComponent } from './components/op-components/op-calendar/op-calendar.component';
 import { OpAccountComponent } from './components/op-components/op-account/op-account.component';
 import { OpPanelAccountsComponent } from './components/op-components/op-panel-accounts/op-panel-accounts.component';
+import { BrComponentListComponent } from './components/br-components/br-component-list/br-list.component';
 
 /* Routing */
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  //{path: '', component: HomeComponent},
   {path: 'operativa', component: OpOperationsComponent},
   {path: 'posiciones', component: OpPositionsComponent},
   {path: 'analisis', component: AnAnalysisComponent},
   {path: 'configuracion', component: OpConfigurationComponent},
   {path: 'ayuda', component: HelpComponent},
   {path: 'test', component: TestComponent},
-  {path: '**', redirectTo: ''}
+  {path: 'brokers', component: BrComponentListComponent},
+  {path: '**',  component: HomeComponent}
 ]
 
 @NgModule({
@@ -71,7 +73,8 @@ const appRoutes: Routes = [
       AnPanelReportsComponent,
       AnReportOperationsComponent,
       AnReportBlocksComponent,
-      OpPanelNewOperationComponent
+      OpPanelNewOperationComponent,
+      BrComponentListComponent
    ],
   imports: [
     BrowserModule,
