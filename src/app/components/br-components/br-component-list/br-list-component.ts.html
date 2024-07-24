@@ -32,30 +32,52 @@
                         <div class="accordion-body">
 
 
-                          <div class="container-fuid">
+                          <form method="PUT" #newpositions = "ngForm" (ngSubmit)="onClickSubmitUpdate(formdata, item.id)">
+                           
                             <div class="row">
+
                               <div class="col">
                                 <div>Id: {{item.id}}</div>  
+                                
                               </div>
+                           
                               <div class="col">
-                                <div>Broker: {{item.name}}</div>  
-                              </div>
-                              <div class="col">
-                                <div>Description: {{item.description}}</div>  
-                              </div>
-                              <div class="col">
-                                <div>Status: {{item.status}}</div>  
+                                <div class="form-group">
+                                  <div>Name:<input [(ngModel)]="formdata.name"  [ngModelOptions]="{standalone: true}"  id="name" type="text" class="form-control" value="{{item.name}}">  </div>  
+                                </div>
                               </div>
 
                               <div class="col">
+                                <div class="form-group">
+                                <div>Description:<input [(ngModel)]="formdata.description"  [ngModelOptions]="{standalone: true}"  name="description"  type="text" class="form-control" value="{{item.description}}">  </div>  
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                <div>Status:<input [(ngModel)]="formdata.status"  [ngModelOptions]="{standalone: true}" id="status"  type="text" class="form-control" value="{{item.status}}">  </div>  
+                              </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                <div>Note:<input [(ngModel)]="formdata.note"  [ngModelOptions]="{standalone: true}" id="note"  type="text" class="form-control" value="{{item.note}}">  </div>  
+                              </div>
+                              </div>
+                              <div class="col">
                                 <i class="fas fa-2x px-2 fa-edit" style="color:brown"></i>
-                                <i class="fas fa-2x px-2 fa-circle-check" style="color:green"></i>
+
+                                <button class="form-control" type="submit" >
+                                  <i class="fas fa-2x px-2 fa-circle-check" style="color:green"></i>
+                                </button>
+
+                                
                                 <i class="fas fa-2x px-2 fa-cancel" style="color:red"></i>
                               </div>
 
                             </div>
-                          </div>
-                  </div></div></div>
+                        
+                          </form>
+           </div></div></div>
                 
 
                   <!-- NEW -->

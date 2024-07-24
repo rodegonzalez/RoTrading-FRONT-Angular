@@ -12,6 +12,18 @@ import { IBroker } from '../../../interfaces/IBoker.interface';
 })
 export class BrComponentListComponent {
 
+  formdata: IBroker = {
+    id: 0,
+    creation: "",
+    modification: "",
+    name: "",
+    description: "",
+    status: "",
+    note: "",
+    active: 1,
+    deleted: 0
+  }
+
   newitem: IBroker;
   items: Array<IBroker>;
   constructor(private brokersService: BrokersService, private loggerService: LoggerService) {
@@ -19,11 +31,13 @@ export class BrComponentListComponent {
     this.newitem = {
       id: 0,
       creation: "",
+      modification: "",
       name: "",
       description: "",
       status: "",
       note: "",
-      active: 1
+      active: 1,
+      deleted: 0
     }
 
    }
@@ -47,4 +61,34 @@ export class BrComponentListComponent {
 
   }
 
+  onClickSubmitUpdate(data: any, id: number){ {
+    data.modification = this.getDate();
+
+
+    this.loggerService.log(Tlog.info, "FORM formdata:");
+    this.loggerService.log(Tlog.info, data);
+
+    this.loggerService.log(Tlog.info, "FORM updaterecord:");
+    this.loggerService.log(Tlog.info, `data.id=${id}`);
+    //this.loggerService.log(Tlog.info, `data.id=${id}`);
+
+    let response : any = this.brokersService.update(data, id);
+    this.loggerService.log(Tlog.info, "FORM updaterecord response:");
+    this.loggerService.log(Tlog.info,response);
+  }
 }
+
+   getDate(): string {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth() + 1}`.padStart(2, '0');
+    const day = `${now.getDate()}`.padStart(2, '0'); // Corregido para obtener el día correcto
+    const hour = `${now.getHours()}`.padStart(2, '0');
+    const minute = `${now.getMinutes()}`.padStart(2, '0');
+    const second = `${now.getSeconds()}`.padStart(2, '0');
+    return `${year}/${month}/${day} ${hour}:${minute}:${second}`; // Añadido hora y minutos
+   }
+
+
+  }
+

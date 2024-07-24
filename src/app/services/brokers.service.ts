@@ -59,7 +59,7 @@ export class BrokersService {
         let response: IBroker;
 
         const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
-        let uri = environment.APIUri +"/broker";
+        let uri = environment.APIUri + "/broker/" + formdata.id;
 
         this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
         this.loggerService.log(Tlog.info, "SERVICE formdata: ");
@@ -81,23 +81,19 @@ export class BrokersService {
     }
 
     // PUT
-    update(formdata: any): any{
+    update(formdata: any, id:number): any{
         let response: IBroker;
 
         const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
-        //const body = { title: 'title post var' };
-        //let uri = environment.APIUri +"/positions/savepositionform";
-        let uri = environment.APIUri +"/position";
+        let uri = environment.APIUri +"/broker/" + id;
 
-        this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
+        this.loggerService.log(Tlog.info, "Sending update broker to: " + uri);
         this.loggerService.log(Tlog.info, "SERVICE formdata: ");
         this.loggerService.log(Tlog.info, formdata);
 
         return this.http
-        .post<any>(uri,formdata).subscribe({
+        .put<any>(uri,formdata).subscribe({
             next: data => {
-            //response.msg = data.msg;
-            //response.status = data.status;
             this.loggerService.log(Tlog.info, "http post response. data:");
             this.loggerService.log(Tlog.info, data);
             return null;
