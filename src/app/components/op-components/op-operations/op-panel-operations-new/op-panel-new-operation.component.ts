@@ -112,7 +112,12 @@ export class OpPanelNewOperationComponent {
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, data);
 
-    this.positionsService.savePositionForm(data);
+    this.loggerService.log(Tlog.info, "FORM updaterecord:");
+    this.loggerService.log(Tlog.info, `data.id=${data.id}`);
+
+    let response : any = this.positionsService.savePositionForm(data);
+    this.loggerService.log(Tlog.info, "FORM updaterecord response:");
+    this.loggerService.log(Tlog.info,response);
   }
 
 }

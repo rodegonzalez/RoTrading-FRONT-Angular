@@ -112,4 +112,33 @@ export class PositionsService {
             }
         });
     }
+
+    // PUT
+    updatePositionForm(formdata: any): any{
+        let response: IPositionResponseInterface;
+
+        const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
+        //const body = { title: 'title post var' };
+        //let uri = environment.APIUri +"/positions/savepositionform";
+        let uri = environment.APIUri +"/position";
+
+        this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
+        this.loggerService.log(Tlog.info, "SERVICE formdata: ");
+        this.loggerService.log(Tlog.info, formdata);
+
+        return this.http
+        .post<any>(uri,formdata).subscribe({
+            next: data => {
+            //response.msg = data.msg;
+            //response.status = data.status;
+            this.loggerService.log(Tlog.info, "http post response. data:");
+            this.loggerService.log(Tlog.info, data);
+            return null;
+            },
+            error: error => {
+                this.loggerService.log(Tlog.error, error);
+            }
+        });
+    }
+
 }

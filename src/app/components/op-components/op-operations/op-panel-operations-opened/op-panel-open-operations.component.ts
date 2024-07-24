@@ -11,17 +11,11 @@ import { IPositionView } from '../../../../interfaces/IPosition.interface';
 })
 export class OpPanelOpenOperationsComponent {
   positions: Array<IPositionView>;
-  currentDateTime: string;
   constructor(private positionsService: PositionsService, private loggerService: LoggerService) {
     this.positions = new Array<IPositionView>;
-
-    this.currentDateTime = new Date().toString();
    }
 
   ngOnInit(): void{
-
-    this.updateDateTime();
-    setInterval(() => this.updateDateTime(), 1000);
 
     this.positionsService.getAllByStatus('opened').subscribe({
       complete: () => {
@@ -38,11 +32,6 @@ export class OpPanelOpenOperationsComponent {
       }
     });
 
-  }
-  updateDateTime(): void {
-    //const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    //this.currentDateTime = fecha.toLocaleDateString('es-ES', opciones) + ' ' + fecha.toLocaleTimeString('es-ES');
-    this.currentDateTime = new Date().toLocaleTimeString('es-ES');
   }
 
 }

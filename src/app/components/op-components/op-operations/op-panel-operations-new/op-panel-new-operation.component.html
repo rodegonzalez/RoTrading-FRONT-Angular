@@ -1,6 +1,6 @@
 <div class="pt-2 mb-2">
 <form method="POST" #newpositions = "ngForm" (ngSubmit) = "onClickSubmit(formdata)">
-  <input type="hydden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" disabled /> 
+  <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
 
   <div class="accordion" id="AcordeonNew-Operations">
     <div class="accordion-item">
@@ -209,43 +209,35 @@
               <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
               <div class="col-lg-3 col-md-3 col-sm-2">
                         <div class="row pb-3">
+
+
+                          <div class="row">
+                            <div class="col">                             
+                                      <div class="row w-100">
+                                          <div class="col">
+                                                  <div class="form-group  d-block w-100 p-1">                                                  
+                                                      <i title="Cerrar con datos" class="fas fa-money-bills fa-2x px-2 pe-1" style="color: rgb(38, 32, 210);"></i>
+                                                      <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x pe-1" style="color: green;"></i>                                        
+                                                      <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x pe-1" style="color: red;"></i>         
+                                                      <i title="Ver imágenes" class="fas fa-images fa-2x pe-0" style="color: brown;"></i>                                                       
+                                                  </div>              
+                                                  
+                            </div>      
+                          </div>  
+                            </div> 
+                          </div>
+
+
                           <div class="col">
-                                    <div class="card border-primary">
+                                <div class="card border-primary">
                                       <div class="card-header bg-warning text-dark border-warning">
                                         <h6 class="card-title">Notas e hipótesis &nbsp;  <i title="Ver imágenes" class="fas fa-message fa-2x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
                                     </div>
-                                    <div class="card-body">
-                                
-
-                                    <DIV class="formgroup d-block w-100">
+                                    <div class="card-body">                                
+                                      <DIV class="formgroup d-block w-100">
                                       <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
-                                  </div> 
+                                    </div> 
                                 </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group  d-block w-100 p-1">
-                              <button type="button" id="edit" class="btn btn-outline-success  w-100">Profit</button>             
-                            </div>
-                          </div> 
-                        </div>
-
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group  d-block w-100 p-1">
-                              <button type="button" id="edit" class="btn btn-outline-danger  w-100">Stoploss</button>             
-                            
-                            </div>
-                          </div> 
-                        </div>
-
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group p-1">
-                              <button type="submit" name="execute" class="btn btn-primary btn-block d-block w-100">Ejecutar</button>            
-                            </div>
                           </div>
                         </div>
 
