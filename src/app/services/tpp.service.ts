@@ -64,8 +64,18 @@ export class TppService {
 
         return this.http.post(environment.APIUri + '/tpp',data)
             .pipe( map(data =>{
-                console.log("returned id="+ data);
-                this.router.navigate(['/tpps']);
+                console.log("returned id="+ data);               
+            })            
+        );        
+    }
+
+    update(data: any, id: number): Observable<any>{
+
+        console.log("items en service update: entrando ");
+        console.log("data="+ data);
+
+        return this.http.put(environment.APIUri + '/tpp/' + id, data)
+            .pipe( map(data =>{                
             })            
         );        
     }

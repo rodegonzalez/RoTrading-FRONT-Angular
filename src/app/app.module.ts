@@ -40,6 +40,7 @@ import { TppListComponent } from './components/tpp/tpp-list/tpp-list.component';
 import { TppCardComponent } from './components/tpp/tpp-card/tpp-card.component';
 import { TppDetailComponent } from './components/tpp/tpp-detail/tpp-detail.component';
 import { TppAddComponent } from './components/tpp/tpp-add/tpp-add.component';
+import { TppEditComponent } from './components/tpp/tpp-edit/tpp-edit.component';
 
 /* Routing */
 const appRoutes: Routes = [
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
   {path: 'tpps', component: TppListComponent},
   {path: 'tpp-detail/:id', component: TppDetailComponent},
   {path: 'tpp-add', component: TppAddComponent},
+  {path: 'tpp-edit/:id', component: TppEditComponent},
   {path: '**',  component: HomeComponent}
 ]
 
@@ -85,7 +87,8 @@ const appRoutes: Routes = [
       TppListComponent,
       TppCardComponent,
       TppDetailComponent,
-      TppAddComponent
+      TppAddComponent,
+      TppEditComponent
    ],
   imports: [
     BrowserModule,

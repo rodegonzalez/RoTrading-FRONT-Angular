@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tpp-card',
@@ -7,5 +8,11 @@ import { Component, Input } from '@angular/core';
 })
 export class TppCardComponent {
   @Input() item: any;
+
+  constructor( private router: Router) {
+  }
+
+
+
 }
 

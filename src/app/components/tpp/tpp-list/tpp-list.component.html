@@ -1,13 +1,48 @@
-<div class="row">
-    <div *ngFor="let item of items" class="shadow-lg col-sm-4 p-3">
-      <app-tpp-card [item]="item" ></app-tpp-card>
-    </div>
-    </div>
+   
+ <div class="container-fluid">
+  <div class="card">
+                <div class="card-header bg-secondary">
+                  <div class="row">
+                    <div class="col-3 text-start">
+                      &nbsp;
+                    </div>
+                    <div class="col-6">
+                      <h4 class="card-title text-white  pt-2">Listado</h4>
+                  </div>
+                  <div class="col-3 text-end">
+                    <button title="Volver a configuración"  class="btn btn-dark m-2 " (click)="onBackConfiguration()" >Back to configuration</button>
+                </div>
+                </div>
+              </div>
+
+              <div class="card-header text-blue pt-3">    
+                <h6>Trading plans</h6>  
+            </div>
 
 
-  <div>
-    <button title="Add new item" class="btn btn-primary m-2" routerLink="/tpp-add">
-      <i class="fa fa-plus"></i>
-    </button>
-  </div>
-    
+            <!-- =================================================== -->
+            <!-- =================================================== -->
+
+            <div class="card-body">
+            <div class="container-fluid">
+
+                        <!-- <div *ngFor="let item of items" class="shadow-lg col-sm-4 p-3"> -->
+                        <div *ngFor="let item of items" class="p-1"> 
+                          <app-tpp-card [item]="item" ></app-tpp-card>
+                        </div>
+
+            </div>
+            </div>
+
+            <!-- =================================================== -->
+            <!-- =================================================== -->
+
+
+            <div class="card-footer text-muted">
+              Nuevo:  <button title="Add new item" class="btn btn-primary m-2" routerLink="/tpp-add">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+
+</div>
+</div>

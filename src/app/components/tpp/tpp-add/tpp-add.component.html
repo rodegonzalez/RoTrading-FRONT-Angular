@@ -2,9 +2,30 @@
 <div class="container">
     <div class="card">
       <form (ngSubmit)="onSubmit(Form)" #Form="ngForm" >
-      <div class="card-header">
-        Add New Item
-      </div>
+
+
+
+        <div class="card-header bg-dark">
+    
+          <div class="row">
+            <div class="col-3 text-start">
+              <button title="Volver al listado"  class="btn btn-dark m-2" (click)="onBack()" >Back to list</button>
+            </div>
+            <div class="col-6">
+              <h4 class="card-title text-white  pt-2">Nuevo</h4>
+          </div>
+          <div class="col-3 text-end">
+            <button title="Volver a configuración"  class="btn btn-dark m-2 " (click)="onBackConfiguration()" >Back to configuration</button>
+        </div>
+        </div>  
+
+    </div>
+
+
+    <div class="card-header text-blue pt-3">    
+          <h6>Trading plans</h6>  
+    </div>
+
       <div class="card-body">
     
           <div class="form-group col-12">
@@ -36,12 +57,15 @@
           </div>
 
       </div>
+
       <div class="card-footer text-muted">
-        <button type="submit" class="btn btn-success m-2">Save</button>
-        <button [disabled]="!Form.valid" type="submit" class="btn btn-success m-2">Save</button>
-        <button type="reset" class="btn btn-secondary m-2">Cancel</button>
-        <button class="btn btn-dark m-2" (click)="onBack()" >Back</button>
+        Actualizar: 
+        <button [disabled]="!Form.valid" type="submit"  title="Crear" class="btn btn-success m-2" ><i class="fa fa-check"></i></button>        
+        Cancelar: <button type="reset" class="btn btn-secondary m-2">Cancel</button>
+      
       </div>
+
+
     </form>
     </div>
     </div>

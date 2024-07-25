@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { TppService } from '../../../services/tpp.service';
 import { ITpp } from '../../../interfaces/ITpp.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-list',
   templateUrl: './tpp-list.component.html',
-  styleUrls: ['./tpp-list.component.css']
+  styleUrls: []
 })
 export class TppListComponent implements OnInit  {
 
   items: Array<ITpp>;
 
-  constructor(private route: ActivatedRoute, private tppService: TppService) {
+  constructor(private route: ActivatedRoute,  private router: Router, private tppService: TppService) {
     this.items = new Array<ITpp> ;
    }
 
@@ -33,5 +33,9 @@ export class TppListComponent implements OnInit  {
         console.log(e);
       }
     });
+  }
+
+  onBackConfiguration(){
+    this.router.navigate(['/configuracion']);
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TppService } from '../../../services/tpp.service';
-import { ITpp } from '../../../interfaces/ITpp.interface';
 
 @Component({
   selector: 'app-tpp-add',
@@ -17,12 +16,6 @@ export class TppAddComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-  onBack()
-  {
-    this.router.navigate(['/tpps']);
-  }
-
   onSubmit(Form : NgForm){
     console.log("Submitted form!");
     console.log(Form.value);
@@ -38,5 +31,12 @@ export class TppAddComponent implements OnInit {
     });
 
   }
+  onBack(){
+    this.router.navigate(['/tpps']);
+  }
+  onBackConfiguration(){
+    this.router.navigate(['/configuracion']);
+  }
+
 
 }

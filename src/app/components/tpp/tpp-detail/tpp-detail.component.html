@@ -9,22 +9,91 @@
   </div>
   -->
 
-    <div class="card-body p-2">
-          <br/><br/>
-          <h3 class="card-title">{{item.name}}</h3>
-          <h4 class="card-text">Descripción: {{item.description}}</h4>
-          <h4 class="card-text">Estado: ({{item.status}})</h4>
-          <h6 class="card-text">Creación: {{item.creation}}</h6>
-          <h6 class="card-text">Última modificación: {{item.mofication}}</h6>
 
-          <button title="Delete" class="btn btn-danger m-2" (click)="deleteOne()"><i class="fa fa-cancel"></i></button>
-          <button class="btn btn-primary m-2" (click)="onPrevious()">Previous</button>
-          <button class="btn btn-primary m-2" (click)="onNext()">Next</button>
-
-          <h6 class="card-text">Note: {{item.note}}</h6>
-
+  <div class="card-header bg-dark">
+    
+    <div class="row">
+      <div class="col-3 text-start">
+        <button title="Volver al listado"  class="btn btn-dark m-2" (click)="onBack()" >Back to list</button>
+      </div>
+      <div class="col-6">
+        <h4 class="card-title text-white  pt-2">Detalle</h4>
     </div>
+    <div class="col-3 text-end">
+      <button title="Volver a configuración"  class="btn btn-dark m-2 " (click)="onBackConfiguration()" >Back to configuration</button>
+  </div>
+  </div>  
 
+</div>
+
+
+<div class="card-header text-blue pt-3">    
+    <h6>Trading plans</h6>  
+</div>
+
+    <div class="card-body">
+
+      <div class="row">
+                <div class="col-3 text-start">
+                  
+                </div>
+                <div class="col-9">
+                  <h4 class="card-title text-primary">{{item.name}}</h4>
+                </div>
+      </div>  
+
+      <div class="row">
+        <div class="col-3 text-start">
+          Descripción:
+        </div>
+        <div class="col-9">
+          <div class="card-text"> {{item.description}}</div>
+        </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-3 text-start">
+            Estado:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> ({{item.status}})</div>
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-3 text-start">
+            Creación:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> {{item.creation}}</div>
+          </div>
+        </div>  
+
+
+        <div class="row">
+          <div class="col-3 text-start">
+            Última modificación:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> {{item.modification}}</div>
+          </div>
+        </div>    
+              
+        <div class="row">
+          <div class="col-3 text-start">
+            Note: 
+          </div>
+          <div class="col-9">
+            <h4 class="card-text">{{item.note}}</h4>
+          </div>
+        </div>    
+     
+ </div> 
+      
+ <div class="card-footer text-muted">
+  Editar: <button title="Editar" class="btn btn-warning m-2" (click)="edit()"><i class="fa fa-pencil"></i></button>
+  <!-- Eliminar: <button title="Borrar" class="btn btn-danger m-2" (click)="deleteOne()"><i class="fa fa-cancel"></i></button> -->
+</div>
 
 
 
