@@ -1,0 +1,31 @@
+<div class="card">
+
+  <!-- 
+  <div class="card-img-wrapper">
+
+    <img *ngIf="item.Image" class="card-img-top" src="assets/images/{{item.Image}}" alt="{{item.Name}}">
+    <img *ngIf="!item.Image" class="card-img-top" src="assets/images/default.png">
+
+  </div>
+  -->
+
+    <div class="card-body p-2">
+          <br/><br/>
+          <h3 class="card-title">{{item.name}}</h3>
+          <h4 class="card-text">Descripción: {{item.description}}</h4>
+          <h4 class="card-text">Estado: ({{item.status}})</h4>
+          <h6 class="card-text">Creación: {{item.creation}}</h6>
+          <h6 class="card-text">Última modificación: {{item.mofication}}</h6>
+
+          <button title="Delete" class="btn btn-danger m-2" (click)="deleteOne()"><i class="fa fa-cancel"></i></button>
+          <button class="btn btn-primary m-2" (click)="onPrevious()">Previous</button>
+          <button class="btn btn-primary m-2" (click)="onNext()">Next</button>
+
+          <h6 class="card-text">Note: {{item.note}}</h6>
+
+    </div>
+
+
+
+
+</div>

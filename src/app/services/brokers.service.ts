@@ -16,8 +16,7 @@ export class BrokersService {
     constructor(private http:HttpClient, private loggerService: LoggerService) {}
 
     getAll(): Observable<IBroker[]>{
-        return this.http
-        .get(environment.APIUri + '/brokers')
+        return this.http.get(environment.APIUri + '/brokers')
         .pipe(
             map(data => {
                 let items: Array<IBroker> = [];

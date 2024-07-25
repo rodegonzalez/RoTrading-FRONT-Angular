@@ -36,6 +36,10 @@ import { OpCalendarComponent } from './components/op-components/op-calendar/op-c
 import { OpAccountComponent } from './components/op-components/op-account/op-account.component';
 import { OpPanelAccountsComponent } from './components/op-components/op-panel-accounts/op-panel-accounts.component';
 import { BrComponentListComponent } from './components/br-components/br-component-list/br-list.component';
+import { TppListComponent } from './components/tpp/tpp-list/tpp-list.component';
+import { TppCardComponent } from './components/tpp/tpp-card/tpp-card.component';
+import { TppDetailComponent } from './components/tpp/tpp-detail/tpp-detail.component';
+import { TppAddComponent } from './components/tpp/tpp-add/tpp-add.component';
 
 /* Routing */
 const appRoutes: Routes = [
@@ -47,6 +51,9 @@ const appRoutes: Routes = [
   {path: 'ayuda', component: HelpComponent},
   {path: 'test', component: TestComponent},
   {path: 'brokers', component: BrComponentListComponent},
+  {path: 'tpps', component: TppListComponent},
+  {path: 'tpp-detail/:id', component: TppDetailComponent},
+  {path: 'tpp-add', component: TppAddComponent},
   {path: '**',  component: HomeComponent}
 ]
 
@@ -74,7 +81,11 @@ const appRoutes: Routes = [
       AnReportOperationsComponent,
       AnReportBlocksComponent,
       OpPanelNewOperationComponent,
-      BrComponentListComponent
+      BrComponentListComponent,
+      TppListComponent,
+      TppCardComponent,
+      TppDetailComponent,
+      TppAddComponent
    ],
   imports: [
     BrowserModule,
