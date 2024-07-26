@@ -1,25 +1,11 @@
    
  <div class="container-fluid">
   <div class="card">
-                <div class="card-header bg-secondary">
-                  <div class="row">
-                    <div class="col-3 text-start">
-                      &nbsp;
-                    </div>
-                    <div class="col-6">
-                      <h4 class="card-title text-white  pt-2">Listado</h4>
-                  </div>
-                  <div class="col-3 text-end">
-                    <button title="Volver a configuración"  class="btn btn-dark m-2 " (click)="onBackConfiguration()" >Back to configuration</button>
-                </div>
-                </div>
-              </div>
-
-              <div class="card-header text-blue pt-3">    
-                <h6>Trading plans</h6>  
-            </div>
-
-
+               
+    <app-common-title [title]="'Listado'" [bg]="'secondary'"  [color]="'black'" ></app-common-title>
+    <app-common-subtitle [subtitle]="'Trading plans'"></app-common-subtitle>
+              
+         
             <!-- =================================================== -->
             <!-- =================================================== -->
 

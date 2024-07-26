@@ -41,6 +41,8 @@ import { TppCardComponent } from './components/tpp/tpp-card/tpp-card.component';
 import { TppDetailComponent } from './components/tpp/tpp-detail/tpp-detail.component';
 import { TppAddComponent } from './components/tpp/tpp-add/tpp-add.component';
 import { TppEditComponent } from './components/tpp/tpp-edit/tpp-edit.component';
+import { CommonSubtitleComponent } from './components/common/common-subtitle/common-subtitle.component';
+import { CommonTitleComponent } from './components/common/common-title/common-title.component';
 
 /* Routing */
 const appRoutes: Routes = [
@@ -88,7 +90,9 @@ const appRoutes: Routes = [
       TppCardComponent,
       TppDetailComponent,
       TppAddComponent,
-      TppEditComponent
+      TppEditComponent,
+      CommonSubtitleComponent,
+      CommonTitleComponent
    ],
   imports: [
     BrowserModule,

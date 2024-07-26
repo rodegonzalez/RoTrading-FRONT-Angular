@@ -1,0 +1,14 @@
+<div class="card-header bg-{{bg}} text-{{color}}">
+    
+    <div class="row">
+                <div class="col-3 text-start">
+                  <button *ngIf="title!=='Listado'" title="Volver al listado"  class="btn btn-dark m-2" (click)="onBack()" >Back to list</button>
+                </div>
+                <div class="col-6">
+                  <h4 class="card-title text-white  pt-2">{{title}}</h4>
+                </div>
+                <div class="col-3 text-end">
+                  <button title="Volver a configuración"  class="btn btn-dark m-2 " (click)="onBackConfiguration()" >Back to configuration</button>
+              </div>
+    </div>
+</div>
