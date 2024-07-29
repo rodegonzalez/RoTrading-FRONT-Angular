@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TppService } from '../../../services/tpp.service';
+import { LoggerService, Tlog } from '../../../services/logger.service';
 
 @Component({
   selector: 'app-tpp-add',
@@ -10,22 +11,24 @@ import { TppService } from '../../../services/tpp.service';
 })
 export class TppAddComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private tppService: TppService) {
+  constructor(private route: ActivatedRoute
+    , private router: Router, private tppService: TppService
+    , private loggerService: LoggerService) {
   }
 
   ngOnInit(): void {
 
   }
   onSubmit(Form : NgForm){
-    console.log("Submitted form!");
-    console.log(Form.value);
+    this.loggerService.log(Tlog.info,"Submitted form!");
+    this.loggerService.log(Tlog.info,Form.value);
 
     var data = Form.value;
     console.log(data);
 
     this.tppService.create(Form.value).subscribe({
       complete: () => {
-          console.log("Terminado tppService-http");
+           this.loggerService.log(Tlog.info,"Terminado tppService-http");
           this.router.navigate(['/tpps']);
       }
     });

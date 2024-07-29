@@ -2,6 +2,7 @@ import { Component,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TppService } from '../../../services/tpp.service';
 import { ITpp } from '../../../interfaces/ITpp.interface';
+import { LoggerService, Tlog } from '../../../services/logger.service';
 
 @Component({
   selector: 'app-tpp-detail',
@@ -18,7 +19,9 @@ export class TppDetailComponent {
   item: any;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private tppService: TppService) {
+  constructor(private route: ActivatedRoute, private router: Router
+    , private tppService: TppService
+    , private loggerService: LoggerService) {
     const id = 'id';
     this.itemId = +this.route.snapshot.params[id];
     //this.item = new Array<ITpp> ;
@@ -32,21 +35,21 @@ export class TppDetailComponent {
   ngOnInit(): void{
     this.tppService.getOne(this.itemId).subscribe({
       complete: () => {
-          console.log("Terminado tppService-http");
-          console.log("route="+ this.route.snapshot.url.toString());
-          console.log("data: ");
-          console.log(this.item);
+         this.loggerService.log(Tlog.info,"Terminado tppService-http");
+         this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
+         this.loggerService.log(Tlog.info,"data: ");
+         this.loggerService.log(Tlog.info,this.item);
       },
 
       //next : (data: Array<ITpp>) => {
         next : (data: ITpp) => {
         this.item = data;
-        console.log("data en next: ");
-          console.log(this.item);
+       this.loggerService.log(Tlog.info,"data en next: ");
+         this.loggerService.log(Tlog.info,this.item);
       },
       error : (e) => {
-        console.log("tppService-http error:");
-        console.log(e);
+       this.loggerService.log(Tlog.error,"tppService-http error:");
+       this.loggerService.log(Tlog.error,e);
       }
     });
   }
@@ -54,10 +57,10 @@ export class TppDetailComponent {
   deleteOne(): void{
     this.tppService.deleteOne(this.itemId).subscribe({
       complete: () => {
-          console.log("Terminado tppService-http");
-          console.log("route="+ this.route.snapshot.url.toString());
-          console.log("data: ");
-          console.log(this.item);
+         this.loggerService.log(Tlog.info,"Terminado tppService-http");
+         this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
+         this.loggerService.log(Tlog.info,"data: ");
+         this.loggerService.log(Tlog.info,this.item);
           this.router.navigate(['/tpps']);
       },
     });
