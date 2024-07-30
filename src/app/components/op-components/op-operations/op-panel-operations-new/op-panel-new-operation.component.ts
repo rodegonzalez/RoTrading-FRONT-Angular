@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
-import { PositionsService } from '../../../../services/positions.service';
+
 import { FormGroup, FormControl } from '@angular/forms';
 import { IPositionView } from 'src/app/interfaces/IPosition.interface';
+import { IPositionSetup } from 'src/app/interfaces/IPositionSetup.interface';
+import { IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface';
+
+import { PositionsService } from '../../../../services/positions.service';
+import { PositionSetupsService } from '../../../../services/position_setups.service';
+import { PositionPatternsService } from '../../../../services/position_patterns.service';
 
 @Component({
   selector: 'app-op-panel-new-operation',
@@ -15,6 +21,9 @@ export class OpPanelNewOperationComponent {
   updaterecord = {
     id: null,
   }
+
+  positionSetups: Array<IPositionSetup> = [];
+  positionPatterns: Array<IPositionPattern> = [];
 
   formdata: IPositionView = {
     //id: null,
@@ -68,14 +77,19 @@ export class OpPanelNewOperationComponent {
 
   };
 
-  constructor(private positionsService: PositionsService, private loggerService: LoggerService) {
+  constructor(private positionsService: PositionsService
+    , private positionSetupsService: PositionSetupsService
+    , private positionPatternsService: PositionPatternsService
+    , private loggerService: LoggerService) 
+  {
     const mydate = this.getDate();
     this.formdata.datetimein = mydate;
     this.formdata.datetimeout = mydate;
     this.formdata.creation = mydate;
    }
 
-   getDate(){
+     // Auxiliar
+  getDate(){
     const now = new Date();
     const year = now.getFullYear();
     const month = `${now.getMonth() + 1}`.padStart(2, '0');
@@ -85,8 +99,32 @@ export class OpPanelNewOperationComponent {
     return `${year}/${month}/${day} ${hour}:${minute}`; // Añadido hora y minutos
    }
 
-  ngOnInit(){
+     // combos y selectores
+  loadSetups(){
+    this.positionSetupsService.getAll().subscribe({
+      complete: () => {
+          this.loggerService.log(Tlog.info, "positionSetupsService.getAll() vía http - Ended.");
+      },
+      next: (data: Array<IPositionSetup>) => {
+        this.loggerService.log(Tlog.info, "positionSetupsService.getAll() vía http - data:");
+        this.loggerService.log(Tlog.info, data);
+        this.positionSetups = data;        
+      },
+      error: (e: any) => {
+        this.loggerService.log(Tlog.error, "positionSetupsService.getAll() vía http - http error.");
+        this.loggerService.log(Tlog.error, e);
+      }
+    });
+  }
+  loadPatterns(){}
+  loadBrokers(){}
+  loadTickers(){}
 
+  ngOnInit(){
+    this.loadSetups();
+    this.loadPatterns();
+    this.loadBrokers();
+    this.loadTickers();
   }
 
   newOperation(){
@@ -120,4 +158,10 @@ export class OpPanelNewOperationComponent {
     this.loggerService.log(Tlog.info,response);
   }
 
-}
+
+
+
+  }
+
+
+

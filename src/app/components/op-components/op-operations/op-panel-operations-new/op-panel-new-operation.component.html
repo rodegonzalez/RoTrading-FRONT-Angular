@@ -177,6 +177,7 @@
                                   <div class="col w-100">
                                         <div class="form-group ">
                                           <select [(ngModel)]="formdata.setupid" multiple title="Setups" class="custom-select-sm w-100" id="setupid" size="7">
+                                            <!-- 
                                             <option value="0" selected>Not-set manual</option>
                                             <option value="1">FV</option>
                                             <option value="2">VD-interior</option>
@@ -185,6 +186,13 @@
                                             <option value="5">VD-A1</option>
                                             <option value="6">VD-B3</option>
                                             <option value="7">VD-carril</option>
+                                            -->
+
+
+                                            <option value="0" selected>Not-set manual</option>
+                                            <option *ngFor="let setup of positionSetups" [value]="setup.id">{{ setup.name }}</option>   
+
+                                           
                                           </select>
                                         </div>
 
