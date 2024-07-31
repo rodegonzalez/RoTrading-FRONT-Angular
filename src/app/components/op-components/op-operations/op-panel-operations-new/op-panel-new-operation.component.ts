@@ -26,6 +26,8 @@ export class OpPanelNewOperationComponent {
   @ViewChild('input_tppCheck') input_tppCheck!: ElementRef;
   @ViewChild('input_isrealCheck') input_isrealCheck!: ElementRef;
   @ViewChild('selectSetup') selectSetup!: ElementRef;
+  @ViewChild('selectHighPattern') selectHighPattern!: ElementRef;
+  
   
 
 
@@ -36,11 +38,11 @@ export class OpPanelNewOperationComponent {
     id: null,
   }
 
-  mytppcheck=1;
-  myisrealcheck = 0;
+  positionid = 0;
 
   positionSetups: Array<IPositionSetup> = [];
   positionPatterns: Array<IPositionPattern> = [];
+  positionHighPatterns: Array<IPositionPattern> = [];
 
   
   formdata: IPositionView = {
@@ -154,6 +156,43 @@ export class OpPanelNewOperationComponent {
         this.loggerService.log(Tlog.error, e);
       }
     });
+
+    //--------------------------------
+    this.positionHighPatterns = [
+      {
+          id: 1,
+          creation: "2021/01/01",
+          modification: "2021/01/01",
+          name: "A Tipo 1",
+          description: "pattern 1 description",
+          status: "active",
+          note: "note",
+          active: 1,
+          deleted: 0
+      },
+      {
+        id: 2,
+        creation: "2021/01/01",
+        modification: "2021/01/01",
+        name: "A Tipo 2",
+        description: "pattern 2 description",
+        status: "active",
+        note: "note",
+        active: 1,
+        deleted: 0
+    },
+    {
+      id: 3,
+      creation: "2021/01/01",
+      modification: "2021/01/01",
+      name: "B Tipo 1",
+      description: "pattern 3 description",
+      status: "active",
+      note: "note",
+      active: 1,
+      deleted: 0
+  },
+    ];
   }
 
   loadBrokers(){}
@@ -195,8 +234,21 @@ export class OpPanelNewOperationComponent {
         selectedValues.push(options[i].value);
       }
     }
-    this.loggerService.log(Tlog.info, selectedValues.join(' '));
+    this.loggerService.log(Tlog.info, selectedValues.join(','));
 
+    this.loggerService.log(Tlog.info, "this.selectHighPattern.nativeElement.checked: ");
+    const optionsHP = this.selectHighPattern.nativeElement.options;
+    const selectedValuesHP = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedValuesHP.push(options[i].value);
+      }
+    }
+    const highpattern = (selectedValuesHP.length>0)?selectedValuesHP.join(' ') + ' ':'';
+    this.formdata.pattern = highpattern  + this.formdata.pattern;
+
+
+    this.loggerService.log(Tlog.info, this.formdata);
   }
 
   onSubmit2(){
@@ -207,6 +259,7 @@ export class OpPanelNewOperationComponent {
         this.formdata.active = 1;
         this.formdata.deleted = 0;
         this.formdata.processed = 0;
+        this.formdata.status = "opened";
     
         //TODO: fix this
         this.formdata.brokerid = 1;
@@ -225,8 +278,19 @@ export class OpPanelNewOperationComponent {
           }
         }
         //this.formdata.setup = (selectedValues.length>0)?selectedValues.join(' '):'';
-        this.formdata.setup = selectedValues.join(' ');
-        
+        this.formdata.setup = selectedValues.join(',');
+
+        const optionsHP = this.selectHighPattern.nativeElement.options;
+        const selectedValuesHP = [];
+        for (let i = 0; i < optionsHP.length; i++) {
+          if (optionsHP[i].selected) {
+            selectedValuesHP.push(optionsHP[i].value);
+          }
+        }
+        const highpattern = (selectedValuesHP.length>0)?selectedValuesHP.join(',') + '; ':'';
+        this.formdata.pattern = highpattern  + this.formdata.pattern;
+
+
         this.loggerService.log(Tlog.info, "FORM formdata:");
         this.loggerService.log(Tlog.info, this.formdata);
   }
@@ -248,6 +312,7 @@ export class OpPanelNewOperationComponent {
     this.formdata.active = 1;
     this.formdata.deleted = 0;
     this.formdata.processed = 0;
+    this.formdata.status = "opened";
 
     //TODO: fix this
     this.formdata.brokerid = 1;
@@ -265,7 +330,18 @@ export class OpPanelNewOperationComponent {
         selectedValues.push(options[i].value);
       }
     }
-    this.formdata.setup = selectedValues.join(' ');
+    this.formdata.setup = selectedValues.join(',');
+
+    const optionsHP = this.selectHighPattern.nativeElement.options;
+    const selectedValuesHP = [];
+    for (let i = 0; i < optionsHP.length; i++) {
+      if (optionsHP[i].selected) {
+        selectedValuesHP.push(optionsHP[i].value);
+      }
+    }
+    const highpattern = (selectedValuesHP.length>0)?selectedValuesHP.join(',') + '; ':'';
+    this.formdata.pattern = highpattern  + this.formdata.pattern;
+
 
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
