@@ -33,7 +33,8 @@
 	active:			number;
 	deleted:		number;
 	processed:		number;
-
+	pattern:		string;
+	setup:			string;
 
   }
 

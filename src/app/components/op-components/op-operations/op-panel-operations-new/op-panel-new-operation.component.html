@@ -1,5 +1,5 @@
 <div class="pt-2 mb-2">
-<form method="POST" #newpositions = "ngForm" (ngSubmit) = "onClickSubmit(formdata)">
+<form method="POST" #newpositions="ngForm" (ngSubmit)="onSubmit()">
   <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
 
   <div class="accordion" id="AcordeonNew-Operations">
@@ -115,11 +115,11 @@
                 
                                 <div class="form-group">
                                         <div class="form-check">
-                                          <input  [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buyoption" name="buysell" type="radio" value="buy" checked>
+                                          <input [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="buy" checked>
                                          Comprar
                                         </div>
                                         <div class="form-check">
-                                          <input  [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="selloption" name="buysell" type="radio" value="sell">
+                                          <input  [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="sell">
                                          Vender
                                         </div>
                                 </div>
@@ -128,47 +128,47 @@
 
                               <div class="form-group">  
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="temporal" id="temporal1" [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m1" />
+                                          <input class="form-check-input" type="radio" name="temporal" id="temporal" [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m1" />
                                           m1
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="temporal" id="temporal3"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m3"/>
+                                          <input class="form-check-input" type="radio" name="temporal" id="temporal"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m3"/>
                                           m3
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="temporal" id="temporal5"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m5" checked />
+                                          <input class="form-check-input" type="radio" name="temporal" id="temporal"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m5" checked />
                                           m5
                                         </div>
                                 </div>
                         </div>
                 
                         <div class="col-3">
+
                                 <div class="form-check">
-                                  <input type="checkbox" class="form-check-input" id="tppCheck" checked>
+                                  <input #input_tppCheck type="checkbox" class="form-check-input" id="tppCheck"  checked >
                                   <label class="form-check-label" for="tppCheck">Es TPP</label>
                                 </div>
                                 <div class="form-check" title="Is real operation or B-register">
-                                  <input type="checkbox" class="form-check-input" id="realCheck" checked>
-                                  <label class="form-check-label" for="realCheck">Es Real</label>
+                                  <input  #input_isrealCheck type="checkbox" class="form-check-input" id="isrealCheck" checked >
+                                  <label class="form-check-label" for="isrealCheck">Es Real</label>
                                 </div>
-                          <hr>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioG" value="g" checked>
-                                  <label class="form-check-label" for="PatternRadioG">Giro</label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioCont" value="c">
-                                  <label class="form-check-label" for="PatternRadioCont">Continuaci&oacute;n</label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioFac" value="f">
-                                  <label class="form-check-label" for="PatternRadioFac">Facilidad</label>
-                                </div>
-                                <div class="form-check disabled">
-                                  <input class="form-check-input" type="radio" name="PatternRadios" id="PatternRadioOther" value="o" disabled>
-                                  <label class="form-check-label" for="PatternRadioOther">Otro</label>
-                                </div>
-                
+
+
+                                <hr>
+
+                                <div class="form-group">  
+                                    <div class="form-check disabled">
+                                      <input [(ngModel)]="formdata.pattern" class="form-check-input" type="radio" name="pattern" id="pattern"   [ngModelOptions]="{standalone: true}" value="Otro" checked>
+                                     Otro
+                                    </div>  
+
+                                    <div class="form-check" *ngFor="let pattern of positionPatterns">
+                                      <input [(ngModel)]="formdata.pattern" class="form-check-input" type="radio" name="pattern"  id="pattern" value="{{pattern.name}}" [ngModelOptions]="{standalone: true}">
+                                     {{pattern.name}}
+                                    </div>  
+                                    
+                              </div>
+
                         </div>
                 
                         <div class="col-3 center">
@@ -176,22 +176,10 @@
                                 <div class="row">
                                   <div class="col w-100">
                                         <div class="form-group ">
-                                          <select [(ngModel)]="formdata.setupid" multiple title="Setups" class="custom-select-sm w-100" id="setupid" size="7">
-                                            <!-- 
-                                            <option value="0" selected>Not-set manual</option>
-                                            <option value="1">FV</option>
-                                            <option value="2">VD-interior</option>
-                                            <option value="3">VD-envolvente</option>
-                                            <option value="4">VD-rechazo</option>
-                                            <option value="5">VD-A1</option>
-                                            <option value="6">VD-B3</option>
-                                            <option value="7">VD-carril</option>
-                                            -->
-
+                                          <select #selectSetup multiple title="Setups" class="custom-select-sm w-100" id="setupid" size="7">
 
                                             <option value="0" selected>Not-set manual</option>
-                                            <option *ngFor="let setup of positionSetups" [value]="setup.id">{{ setup.name }}</option>   
-
+                                            <option *ngFor="let setup of positionSetups" [value]="setup.name">{{ setup.name }}</option>   
                                            
                                           </select>
                                         </div>
@@ -203,15 +191,13 @@
                                 <div class="col">
                                   <div class="form-group  d-block w-100 p-1">                                  
                                     <div class="form-group d-block w-100 p-1">
-                                      <button type="button" class="btn btn-success w-100" (click)="newOperation()">Nueva operación</button></div>
+                                      <button type="button" class="btn btn-success w-100" (click)="onSubmit2()">Submit 2</button></div>
                                   </div>
                                 </div> 
                               </div>
 
-                        </div>
-                                
-                      </div>  
-                      
+                        </div>                                
+                      </div>                        
               </div>
 
               <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
@@ -223,17 +209,19 @@
                             <div class="col">                             
                                       <div class="row w-100">
                                           <div class="col">
-                                                  <div class="form-group  d-block w-100 p-1">                                                  
+                                                  <div class="form-group  d-block w-100 p-1">       
+                                                    <button type="submit" class="btn btn-outline-success w-100">Submit</button>                                          
                                                       <i title="Cerrar con datos" class="fas fa-money-bills fa-2x px-2 pe-1" style="color: rgb(38, 32, 210);"></i>
                                                       <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x pe-1" style="color: green;"></i>                                        
                                                       <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x pe-1" style="color: red;"></i>         
                                                       <i title="Ver imágenes" class="fas fa-images fa-2x pe-0" style="color: brown;"></i>                                                       
-                                                  </div>              
+                                                    </div>  
+                                          </div>              
                                                   
-                            </div>      
-                          </div>  
-                            </div> 
-                          </div>
+                                      </div>      
+                            </div>  
+                          </div> 
+                        
 
 
                           <div class="col">
@@ -275,18 +263,15 @@
 
         </div>
       </div>
+
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->  
 
 
-
-
-
 </div>
 </div>
 </div>
 </div>
-
 
 </form>
 </div>

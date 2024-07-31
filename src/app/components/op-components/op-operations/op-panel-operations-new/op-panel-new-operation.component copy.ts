@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 import { FormGroup } from '@angular/forms';
@@ -17,21 +17,8 @@ import { LoggerService, Tlog } from '../../../../services/logger.service';
   styles: [
   ]
 })
-
-// --------------------------------------------------------------
-// --------------------------------------------------------------
 export class OpPanelNewOperationComponent {
   
-
-  @ViewChild('input_tppCheck') input_tppCheck!: ElementRef;
-  @ViewChild('input_isrealCheck') input_isrealCheck!: ElementRef;
-  @ViewChild('selectSetup') selectSetup!: ElementRef;
-  
-
-
-  // --------------------------------------------------------------
-  // --------------------------------------------------------------
-
   updaterecord = {
     id: null,
   }
@@ -43,53 +30,57 @@ export class OpPanelNewOperationComponent {
   positionPatterns: Array<IPositionPattern> = [];
 
   
-  formdata: IPositionView = {
-    block: "",
-    creation: "",
-    modification: "",
-    datetimein: "",
-    datetimeout: "",
-    buysell: "",
-    pricein: 0,
-    priceout: 0,
-    ticks: 0,
-    profit: 0,
-    stoploss: 0,
-    contracts: 0,
-    commision: 0,
-    euros: 0,
-    dollareuro: 0,
-    imagepath: "",
-    status: "",
-    divisaid: 0,
-    accountid: 0,
-    marketid: 0,
-    tickerid: 0,
-    patternid: 0,
-    setupid: 0,
-    brokerid: 0,
-    isrealCheck: 0,
-    tppCheck: 0,
-    note: "",
-    temporal: "",
-    tppid: 0,
-    tpp: "",
-    active: 0,
-    deleted: 0,
-    processed: 0,
-    divisa:			'',
-    account:		'',
-    market:			'',
-    ticker:			'',
-    pattern:		'',
-    setup:			'',
-    broker:			'',
-    acctype:		'',
-  };
+  formdata = {
+    //id: null,
+    accountid:  1,
+    block:      'B001',
+    creation:   '2021-01-01',
+    modification:   '2021-01-01',
 
-  
-   // --------------------------------------------------------------
-   // --------------------------------------------------------------
+    datetimein:     '00:00',
+    datetimeout:     '00:00',
+    pricein:    0.0,
+    priceout:    0.0,
+    contracts:  1,
+    profit:     80,
+    stoploss:   -20,
+    commision: 4.5,
+    tppCheck:   1,
+    isrealCheck: 1,
+    temporal:   'm5',
+    note:       '',
+    
+    divisaid:     1,
+    marketid:     1,
+    tickerid:     1,
+    patternid:    1,
+    setupid:      1,
+    brokerid:     1,
+    tppid:        1,
+
+    account:     'iBroker',
+    divisa:     'EUR',
+    market:    'Forex',
+    ticker:     'EURUSD',
+    pattern:     'Patron1',
+    setup:      'Setup1',
+    broker:     'Broker1',
+    tpp:        'TPP1',
+    status:     'opened',
+    active:     1,
+    deleted:    0,
+
+    processed:  0,
+    
+    buysell: 'buy',
+    euros: 1000,
+    dollareuro: 1.2,
+    ticks: 100,
+    imagepath: '',
+    acctype: 'real',
+
+
+  };
 
   constructor(private positionsService: PositionsService
     , private positionSetupsService: PositionSetupsService
@@ -173,7 +164,7 @@ export class OpPanelNewOperationComponent {
   // --------------------------------------------------------------
   // --------------------------------------------------------------
 
-  onSubmit3(){
+  onSubmit2(){
     this.loggerService.log(Tlog.info, "contenido de formData: ");
     this.loggerService.log(Tlog.info, this.formdata);
 
@@ -181,54 +172,9 @@ export class OpPanelNewOperationComponent {
     this.loggerService.log(Tlog.info, this.formdata.tppCheck);
     this.loggerService.log(Tlog.info, (this.formdata.tppCheck) ? 1 : 0);
 
-    this.loggerService.log(Tlog.info, "this.input_tppCheck.nativeElement.checked: ");
-    this.loggerService.log(Tlog.info, this.input_tppCheck.nativeElement.checked);
-
-    this.loggerService.log(Tlog.info, "this.input_isrealCheck.nativeElement.checked: ");
-    this.loggerService.log(Tlog.info, this.input_isrealCheck.nativeElement.checked);
-
-    this.loggerService.log(Tlog.info, "this.select_setup.nativeElement.checked: ");
-    const options = this.selectSetup.nativeElement.options;
-    const selectedValues = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-    this.loggerService.log(Tlog.info, selectedValues.join(' '));
-
-  }
-
-  onSubmit2(){
-        //this.idaccount = data.idaccount;
-        const mydate = this.getDate();
-        this.formdata.creation = mydate;
-        this.formdata.modification = mydate;
-        this.formdata.active = 1;
-        this.formdata.deleted = 0;
-        this.formdata.processed = 0;
+    this.loggerService.log(Tlog.info, "this.formdata.isrealCheck: ");
+    this.loggerService.log(Tlog.info, this.formdata.isrealCheck);
     
-        //TODO: fix this
-        this.formdata.brokerid = 1;
-        this.formdata.brokerid = 1;
-        
-        this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
-    
-        this.formdata.tppCheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
-        this.formdata.isrealCheck = this.input_isrealCheck.nativeElement.checked ? 1 : 0;
-    
-        const options = this.selectSetup.nativeElement.options;
-        const selectedValues = [];
-        for (let i = 0; i < options.length; i++) {
-          if (options[i].selected) {
-            selectedValues.push(options[i].value);
-          }
-        }
-        //this.formdata.setup = (selectedValues.length>0)?selectedValues.join(' '):'';
-        this.formdata.setup = selectedValues.join(' ');
-        
-        this.loggerService.log(Tlog.info, "FORM formdata:");
-        this.loggerService.log(Tlog.info, this.formdata);
   }
 
   // --------------------------------------------------------------
@@ -253,19 +199,9 @@ export class OpPanelNewOperationComponent {
     this.formdata.brokerid = 1;
     this.formdata.brokerid = 1;
     
-    this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
-
-    this.formdata.tppCheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
-    this.formdata.isrealCheck = this.input_isrealCheck.nativeElement.checked ? 1 : 0;
-
-    const options = this.selectSetup.nativeElement.options;
-    const selectedValues = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-    this.formdata.setup = selectedValues.join(' ');
+    //data.tppCheck =  data.tppChecked == true ? '1' : '0';
+    //data.isrealcheck = data.isrealChecked == true ? '1' : '0';
+    this.formdata.buysell = this.formdata.buysell == "buy" ? 'buy' : 'sell';
 
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
