@@ -8,7 +8,7 @@ import { IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface'
 
 import { PositionsService } from '../../../../services/positions.service';
 import { PositionSetupsService } from '../../../../services/position_setups.service';
-import { PositionPatternsService } from '../../../../services/position_patterns.service';
+import { PositionPatternsService, PositionHighPatternsService } from '../../../../services/position_patterns.service';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
@@ -98,6 +98,7 @@ export class OpPanelNewOperationComponent {
   constructor(private positionsService: PositionsService
     , private positionSetupsService: PositionSetupsService
     , private positionPatternsService: PositionPatternsService
+    , private positionHighPatternsService: PositionHighPatternsService
     , private loggerService: LoggerService) 
   {
     const mydate = this.getDate();
@@ -144,6 +145,8 @@ export class OpPanelNewOperationComponent {
   // --------------------------------------------------------------
 
   loadPatterns(){
+
+    // Patterns
     this.positionPatternsService.getAll().subscribe({
       complete: () => {
           this.loggerService.log(Tlog.info, "positionPatternsService.getAll() vía http - Ended.");
@@ -159,42 +162,23 @@ export class OpPanelNewOperationComponent {
       }
     });
 
-    //--------------------------------
-    this.positionHighPatterns = [
-      {
-          id: 1,
-          creation: "2021/01/01",
-          modification: "2021/01/01",
-          name: "A Tipo 1",
-          description: "pattern 1 description",
-          status: "active",
-          note: "note",
-          active: 1,
-          deleted: 0
+
+    // High Patterns
+    this.positionHighPatternsService.getAll().subscribe({
+      complete: () => {
+          this.loggerService.log(Tlog.info, "positionHighPatternsService.getAll() vía http - Ended.");
       },
-      {
-        id: 2,
-        creation: "2021/01/01",
-        modification: "2021/01/01",
-        name: "A Tipo 2",
-        description: "pattern 2 description",
-        status: "active",
-        note: "note",
-        active: 1,
-        deleted: 0
-    },
-    {
-      id: 3,
-      creation: "2021/01/01",
-      modification: "2021/01/01",
-      name: "B Tipo 1",
-      description: "pattern 3 description",
-      status: "active",
-      note: "note",
-      active: 1,
-      deleted: 0
-  },
-    ];
+      next: (data: Array<IPositionPattern>) => {
+        this.loggerService.log(Tlog.info, "positionHighPatternsService.getAll() vía http - data:");
+        this.loggerService.log(Tlog.info, data);
+        this.positionHighPatterns = data;        
+      },
+      error: (e: any) => {
+        this.loggerService.log(Tlog.error, "positionHighPatternsService.getAll() vía http - http error.");
+        this.loggerService.log(Tlog.error, e);
+      }
+    });
+
   }
 
   loadBrokers(){}
@@ -272,6 +256,7 @@ export class OpPanelNewOperationComponent {
         this.formdata.tppCheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
         this.formdata.isrealCheck = this.input_isrealCheck.nativeElement.checked ? 1 : 0;
     
+        // setups
         const options = this.selectSetup.nativeElement.options;
         const selectedValues = [];
         for (let i = 0; i < options.length; i++) {
@@ -279,9 +264,9 @@ export class OpPanelNewOperationComponent {
             selectedValues.push(options[i].value);
           }
         }
-        //this.formdata.setup = (selectedValues.length>0)?selectedValues.join(' '):'';
         this.formdata.setup = selectedValues.join(',');
 
+        // high patterns
         const optionsHP = this.selectHighPattern.nativeElement.options;
         const selectedValuesHP = [];
         for (let i = 0; i < optionsHP.length; i++) {
@@ -325,6 +310,7 @@ export class OpPanelNewOperationComponent {
     this.formdata.tppCheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
     this.formdata.isrealCheck = this.input_isrealCheck.nativeElement.checked ? 1 : 0;
 
+     // setups
     const options = this.selectSetup.nativeElement.options;
     const selectedValues = [];
     for (let i = 0; i < options.length; i++) {
@@ -334,6 +320,7 @@ export class OpPanelNewOperationComponent {
     }
     this.formdata.setup = selectedValues.join(',');
 
+    // high patterns
     const optionsHP = this.selectHighPattern.nativeElement.options;
     const selectedValuesHP = [];
     for (let i = 0; i < optionsHP.length; i++) {

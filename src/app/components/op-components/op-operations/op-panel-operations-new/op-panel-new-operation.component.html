@@ -195,44 +195,38 @@
 
                         <div class="col-3">
                           <div class="form-group p-1">
-                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimein" />             
                             <small>Hora ENTRADA</small>
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimein" />                                         
                           </div>
    
                           <div class="form-group p-1">
-                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimeout" />             
                             <small>Hora SALIDA</small>
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimeout" />                                         
                           </div>
 
 
                         </div>
 
                         <div class="col-3">
-                        
-                    
 
-                          <div class="form-group p-1">
-                            <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" />
-                            <small>Precio ENTRADA</small>
-                          </div>
-                          
-
+                              <div class="form-group p-1">
+                                <small>Precio ENTRADA</small>
+                                <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" />                            
+                              </div>                          
                         </div>
 
                         <div class="col-3">
+                              <div class="form-group p-1">
+                                <small>Precio SALIDA</small>
+                                <input (ngModelChange)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>
+                                
+                              </div>
 
-                         
-                      
-
-                          <div class="form-group p-1">
-                            <input (ngModelChange)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>
-                            <small>Precio SALIDA</small>
-                          </div>
-
-                          <div class="form-group p-1">
-                            <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
-                            <small>Ticks</small>
-                          </div>
+                              <div class="form-group p-1">
+                                <small>Ticks</small>
+                                <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
+                                
+                              </div>
 
                         </div>
 
@@ -246,7 +240,7 @@
                         <div class="col-3">
                           <div class="col w-100">
                             <div class="form-group ">
-                              <select #selectHighPattern title="High Patterns" class=" w-100" id="highpatternid" size="7">
+                              <select #selectHighPattern multiple title="High Patterns" class=" w-100" id="highpatternid" size="7">
 
                                 <option value="0" selected>Not-set manual</option>
                                 <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.name">{{ highpattern.name }}</option>   
@@ -259,9 +253,9 @@
                 
                         <div class="col-3">
                 
-                               <div class="row">
+                               <div class="row h-100">
 
-                                      <div class="col-6">
+                                      <div class="col-6 border h-100" >
                                                   <div class="form-group">  
                                                     <div class="form-check disabled">
                                                       <input [(ngModel)]="formdata.pattern" class="form-check-input" type="radio" name="pattern" id="pattern"   [ngModelOptions]="{standalone: true}" value="Otro" checked>
@@ -276,7 +270,7 @@
                                                   </div>
 
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 border h-100">
                                                   <div class="form-group">  
                                                     <div class="form-check">
                                                       <input class="form-check-input" type="radio" name="temporal" id="temporal" [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m1" />
