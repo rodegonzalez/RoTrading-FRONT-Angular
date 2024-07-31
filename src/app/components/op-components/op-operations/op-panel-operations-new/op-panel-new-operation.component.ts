@@ -44,6 +44,8 @@ export class OpPanelNewOperationComponent {
   positionPatterns: Array<IPositionPattern> = [];
   positionHighPatterns: Array<IPositionPattern> = [];
 
+  curr_ticks: number = 0;
+  curr_priceout: number = 0;
   
   formdata: IPositionView = {
     block: "",
@@ -353,6 +355,19 @@ export class OpPanelNewOperationComponent {
 
 
 
+  priceOutChanged(event: any){
+    this.loggerService.log(Tlog.info, "PriceOut changed: ");
+    this.curr_ticks = this.curr_ticks + 50;
+    this.formdata.ticks = this.curr_ticks;
+    this.formdata.priceout = this.curr_priceout;
+  }
+
+  ticksChanged(event: any){
+    this.loggerService.log(Tlog.info, "Ticks changed: ");
+    this.curr_priceout = this.formdata.priceout + 50;
+    this.formdata.ticks = this.curr_ticks;
+    this.formdata.priceout = this.curr_priceout;
+  }
 
   }
 

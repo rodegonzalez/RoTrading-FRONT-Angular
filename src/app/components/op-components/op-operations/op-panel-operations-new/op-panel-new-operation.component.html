@@ -225,12 +225,12 @@
                       
 
                           <div class="form-group p-1">
-                            <input type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" />
+                            <input (ngModelChange)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>
                             <small>Precio SALIDA</small>
                           </div>
 
                           <div class="form-group p-1">
-                            <input type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" />
+                            <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
                             <small>Ticks</small>
                           </div>
 
