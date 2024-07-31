@@ -48,21 +48,21 @@ export class OpPanelNewOperationComponent {
   curr_priceout: number = 0;
   
   formdata: IPositionView = {
-    block: "",
+    block: "B-2024-001",
     creation: "",
     modification: "",
     datetimein: "",
     datetimeout: "",
-    buysell: "",
+    buysell: "buy",
     pricein: 0,
     priceout: 0,
-    ticks: 0,
+    ticks: 81,
     profit: 0,
-    stoploss: 0,
-    contracts: 0,
-    commision: 0,
+    stoploss: -20,
+    contracts: 1,
+    commision: 4.5,
     euros: 0,
-    dollareuro: 0,
+    dollareuro: 1.0005,
     imagepath: "",
     status: "",
     divisaid: 0,
@@ -75,7 +75,7 @@ export class OpPanelNewOperationComponent {
     isrealCheck: 0,
     tppCheck: 0,
     note: "",
-    temporal: "",
+    temporal: "m5",
     tppid: 0,
     tpp: "",
     active: 0,
@@ -85,7 +85,7 @@ export class OpPanelNewOperationComponent {
     account:		'',
     market:			'',
     ticker:			'',
-    pattern:		'',
+    pattern:		'Otro',
     setup:			'',
     broker:			'',
     acctype:		'',
@@ -187,17 +187,51 @@ export class OpPanelNewOperationComponent {
   // --------------------------------------------------------------
   // --------------------------------------------------------------
 
+  loadDefaults(){
+
+    // search for default values by default_tppid
+    const defaults = {
+      "tppid": 1,
+      "tpp": "TPP2024",
+      "accountid": 1,
+      "account": "A0045679",
+      "brokerid":1,
+      "broker": "iBroker",
+      "market": "NYMEX",
+      "marketid": 1,
+      "ticker": "MCL",
+      "tickerid": 1,
+      "dollareuro": 1.0005,      
+    }
+
+    const default_tppid: number = 1;
+
+    this.formdata.datetimein = this.getDate();
+    this.formdata.accountid = defaults.accountid;
+    this.formdata.account = defaults.account;
+    this.formdata.brokerid = defaults.brokerid;
+    this.formdata.broker = defaults.broker;
+    this.formdata.marketid = defaults.marketid;
+    this.formdata.market = defaults.market;
+    this.formdata.tickerid = defaults.tickerid;
+    this.formdata.ticker = defaults.ticker;    
+    this.formdata.tppid = defaults.tppid;
+    this.formdata.tpp = defaults.tpp;
+    this.formdata.dollareuro = defaults.dollareuro;
+  }
+
   ngOnInit(){    
     this.loadSetups();
     this.loadPatterns();
     this.loadBrokers();
     this.loadTickers();
-
+    const defaults = this.loadDefaults();
   }
 
   // --------------------------------------------------------------
   // --------------------------------------------------------------
 
+  /*
   onSubmit3(){
     this.loggerService.log(Tlog.info, "contenido de formData: ");
     this.loggerService.log(Tlog.info, this.formdata);
@@ -236,6 +270,7 @@ export class OpPanelNewOperationComponent {
 
     this.loggerService.log(Tlog.info, this.formdata);
   }
+  */
 
   onSubmit2(){
         //this.idaccount = data.idaccount;
@@ -277,7 +312,7 @@ export class OpPanelNewOperationComponent {
         const highpattern = (selectedValuesHP.length>0)?selectedValuesHP.join(',') + '; ':'';
         this.formdata.pattern = highpattern  + this.formdata.pattern;
 
-
+        // LOG Form data
         this.loggerService.log(Tlog.info, "FORM formdata:");
         this.loggerService.log(Tlog.info, this.formdata);
   }
@@ -340,7 +375,8 @@ export class OpPanelNewOperationComponent {
     this.loggerService.log(Tlog.info,response);
   }
 
-
+  // --------------------------------------------------------------
+  // --------------------------------------------------------------
 
   priceOutChanged(event: any){
     this.loggerService.log(Tlog.info, "PriceOut changed: ");

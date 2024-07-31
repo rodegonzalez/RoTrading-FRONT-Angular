@@ -37,7 +37,12 @@
                           <div class="col-3">
                                     <div class="col">
                                       <div class="form-group p-1">
-                                        <input type="text" id="idaccount" name="idaccount" class="form-control" [(ngModel)]="formdata.accountid" disabled /> 
+                                        <input type="text" id="idaccount" name="tpp" class="form-control" [(ngModel)]="formdata.tpp" /> 
+                                        <small>TPP</small>            
+                                      </div>
+
+                                      <div class="form-group p-1">
+                                        <input type="text" id="account" name="account" class="form-control" [(ngModel)]="formdata.account" disabled /> 
                                         <small>Cuenta</small>            
                                       </div>
 
@@ -62,7 +67,7 @@
                                       </div>
 
                                       <div class="form-group p-1">
-                                        <input type="text" class="form-control"name="eurodollar" disabled />             
+                                        <input type="text" class="form-control"name="dollareuro" [(ngModel)]="formdata.dollareuro" disabled />             
                                         <small>Euro/Dóllar</small>  
                                       </div>
 
@@ -337,18 +342,17 @@
                                                         <div class="col">
                                                           <div class="form-group  d-block w-100 p-1">                                  
                                                             <div class="form-group d-block w-100 p-1">
-                                                              <button type="submit" class="btn btn-outline-success w-100">Submit</button>   
+                                                              <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
                                                           </div>
                                                         </div> 
                                                       </div>
                                                 </div>
 
                                                   <div class="form-group  d-block w-100 p-1 m-2">       
-                                                                                          
-                                                      <i title="Cerrar con datos" class="fas fa-money-bills fa-2x px-2 pe-1" style="color: rgb(38, 32, 210);"></i>
-                                                      <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x pe-1" style="color: green;"></i>                                        
-                                                      <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x pe-1" style="color: red;"></i>         
-                                                      <i title="Ver imágenes" class="fas fa-images fa-2x pe-0" style="color: brown;"></i>                                                       
+                                                                                                                                                
+                                                      <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x px-1" style="color: green;"></i>                                        
+                                                      <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x px-1" style="color: red;"></i>         
+                                                      <i title="Ver imágenes" class="fas fa-images fa-2x px-1" style="color: brown;"></i>                                                       
                                                     </div>  
 
 
@@ -356,7 +360,7 @@
                                                       <div class="col">
                                                         <div class="form-group  d-block w-100 p-1">                                  
                                                           <div class="form-group d-block w-100 p-1">
-                                                            <button type="button" class="btn btn-success w-100" (click)="onSubmit2()">Submit 2</button></div>
+                                                            <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button></div>
                                                         </div>
                                                       </div> 
                                                     </div>
