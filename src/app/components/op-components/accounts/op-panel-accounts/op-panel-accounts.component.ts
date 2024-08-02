@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggerService, Tlog } from '../../../services/logger.service';
-import { AccountsService } from '../../../services/accounts.service';
-import { IAccount } from '../../../interfaces/IAccount.interface';
+import { LoggerService, Tlog } from '../../../../services/logger.service';
+import { AccountsService } from '../../../../services/accounts.service';
+import { IAccount } from '../../../../interfaces/IAccount.interface';
 
 @Component({
   selector: 'app-op-panel-accounts',

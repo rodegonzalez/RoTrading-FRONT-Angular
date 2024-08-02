@@ -1,35 +1,26 @@
 import { Component,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TppService } from '../../../services/tpp.service';
-import { ITpp } from '../../../interfaces/ITpp.interface';
-import { LoggerService, Tlog } from '../../../services/logger.service';
+import { TppService } from '../../../../services/tpp.service';
+import { ITpp } from '../../../../interfaces/ITpp.interface';
+import { NgForm } from '@angular/forms';
+import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
-  selector: 'app-tpp-detail',
-  templateUrl: './tpp-detail.component.html',
+  selector: 'app-tpp-edit',
+  templateUrl: './tpp-edit.component.html',
   styleUrls: []
 })
 
-export class TppDetailComponent {
-  //@Input() item: any;
-
+export class TppEditComponent {
 
   public itemId: number;
-  //item: Array<ITpp>;
   item: any;
-
 
   constructor(private route: ActivatedRoute, private router: Router
     , private tppService: TppService
     , private loggerService: LoggerService) {
     const id = 'id';
-    this.itemId = +this.route.snapshot.params[id];
-    //this.item = new Array<ITpp> ;
-  }
-
-  onGo(id:any){
-    this.itemId = +id;
-    this.router.navigate(['tpp-detail', this.itemId]);
+    this.itemId = +this.route.snapshot.params[id];;
   }
 
   ngOnInit(): void{
@@ -40,8 +31,6 @@ export class TppDetailComponent {
          this.loggerService.log(Tlog.info,"data: ");
          this.loggerService.log(Tlog.info,this.item);
       },
-
-      //next : (data: Array<ITpp>) => {
         next : (data: ITpp) => {
         this.item = data;
        this.loggerService.log(Tlog.info,"data en next: ");
@@ -66,9 +55,18 @@ export class TppDetailComponent {
     });
   }
 
-  edit(): void{
-    this.router.navigate(['/tpp-edit/', this.itemId]);
+  onSubmit(Form : NgForm): void{
+    this.tppService.update(Form.value, this.itemId).subscribe({
+      complete: () => {
+         this.loggerService.log(Tlog.info,"Terminado tppService-http");
+         this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
+         this.loggerService.log(Tlog.info,"data: ");
+         this.loggerService.log(Tlog.info,this.item);
+          this.router.navigate(['/tpp-detail/' + this.itemId]);
+      },
+    });
   }
+
 
   onBack()
   {
@@ -78,6 +76,13 @@ export class TppDetailComponent {
   onBackConfiguration(){
     this.router.navigate(['/configuracion']);
   }
+
+  onBackToDetails(){
+    const uri = '/tpp-detail/' + this.itemId;
+    this.router.navigate([uri]);
+  }
+
+
 }
 
 

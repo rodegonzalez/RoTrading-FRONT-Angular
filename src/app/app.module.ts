@@ -30,17 +30,20 @@ import { OpOpenOperationComponent } from './components/op-components/op-operatio
 import { OpPanelNewOperationComponent } from './components/op-components/op-operations/op-panel-operations-new/op-panel-new-operation.component';
 import { OpPanelClosedOperationsComponent } from './components/op-components/op-operations/op-panel-operations-closed/op-panel-closed-operations.component';
 import { OpPanelOpenOperationsComponent } from './components/op-components/op-operations/op-panel-operations-opened/op-panel-open-operations.component';
-import { OpPositionsComponent } from './components/op-components/op-panel-positions/op-panel-positions.component';
-import { OpConfigurationComponent } from './components/op-components/op-configuration/op-configuration.component';
-import { OpCalendarComponent } from './components/op-components/op-calendar/op-calendar.component';
-import { OpAccountComponent } from './components/op-components/op-account/op-account.component';
-import { OpPanelAccountsComponent } from './components/op-components/op-panel-accounts/op-panel-accounts.component';
-import { BrComponentListComponent } from './components/br-components/br-component-list/br-list.component';
-import { TppListComponent } from './components/tpp/tpp-list/tpp-list.component';
-import { TppCardComponent } from './components/tpp/tpp-card/tpp-card.component';
-import { TppDetailComponent } from './components/tpp/tpp-detail/tpp-detail.component';
-import { TppAddComponent } from './components/tpp/tpp-add/tpp-add.component';
-import { TppEditComponent } from './components/tpp/tpp-edit/tpp-edit.component';
+import { OpPositionsComponent } from './components/op-components/op-operations/op-panel-positions/op-panel-positions.component';
+
+import { OpAccountComponent } from './components/op-components/accounts/op-account/op-account.component';
+import { OpPanelAccountsComponent } from './components/op-components/accounts/op-panel-accounts/op-panel-accounts.component';
+import { BrComponentListComponent } from './components/op-components/br-components/br-component-list/br-list.component';
+import { TppListComponent } from './components/op-components/tpps/tpp-list/tpp-list.component';
+import { TppCardComponent } from './components/op-components/tpps/tpp-card/tpp-card.component';
+import { TppDetailComponent } from './components/op-components/tpps/tpp-detail/tpp-detail.component';
+import { TppAddComponent } from './components/op-components/tpps/tpp-add/tpp-add.component';
+import { TppEditComponent } from './components/op-components/tpps/tpp-edit/tpp-edit.component';
+
+import { ConfigurationComponent } from './components/configuration/configuration.component';
+
+import { CalendarComponent } from './components/common/calendar/calendar.component';
 import { CommonSubtitleComponent } from './components/common/common-subtitle/common-subtitle.component';
 import { CommonTitleComponent } from './components/common/common-title/common-title.component';
 
@@ -50,7 +53,7 @@ const appRoutes: Routes = [
   {path: 'operativa', component: OpOperationsComponent},
   {path: 'posiciones', component: OpPositionsComponent},
   {path: 'analisis', component: AnAnalysisComponent},
-  {path: 'configuracion', component: OpConfigurationComponent},
+  {path: 'configuracion', component: ConfigurationComponent},
   {path: 'ayuda', component: HelpComponent},
   {path: 'test', component: TestComponent},
   {path: 'brokers', component: BrComponentListComponent},
@@ -72,11 +75,18 @@ const appRoutes: Routes = [
         OpOpenOperationComponent,
         OpClosedOperationComponent,
         OpPositionsComponent,
-        OpCalendarComponent,
+        CalendarComponent,
         OpAccountComponent,
         OpPanelAccountsComponent,
         OpPanelClosedOperationsComponent,
         OpPanelOpenOperationsComponent,
+        OpPanelNewOperationComponent,
+        BrComponentListComponent,
+      TppListComponent,
+        TppCardComponent,
+        TppDetailComponent,
+        TppAddComponent,
+        TppEditComponent,
       AnAnalysisComponent,
         AnGraphMonthComponent,
         AnGraphYearComponent,
@@ -84,15 +94,10 @@ const appRoutes: Routes = [
         AnPanelReportsComponent,
         AnReportOperationsComponent,
         AnReportBlocksComponent,
-      OpPanelNewOperationComponent,
-      BrComponentListComponent,
-      TppListComponent,
-        TppCardComponent,
-        TppDetailComponent,
-        TppAddComponent,
-        TppEditComponent,
+     
       CommonSubtitleComponent,
-        CommonTitleComponent
+        CommonTitleComponent,
+        ConfigurationComponent
    ],
   imports: [
     BrowserModule,

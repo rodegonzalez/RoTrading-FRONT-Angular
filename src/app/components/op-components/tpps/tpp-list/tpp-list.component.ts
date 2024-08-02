@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TppService } from '../../../services/tpp.service';
-import { ITpp } from '../../../interfaces/ITpp.interface';
+import { TppService } from '../../../../services/tpp.service';
+import { ITpp } from '../../../../interfaces/ITpp.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoggerService, Tlog } from '../../../services/logger.service';
+import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
   selector: 'app-property-list',

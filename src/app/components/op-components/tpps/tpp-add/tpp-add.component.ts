@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TppService } from '../../../services/tpp.service';
-import { LoggerService, Tlog } from '../../../services/logger.service';
+import { TppService } from '../../../../services/tpp.service';
+import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
   selector: 'app-tpp-add',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LoggerService, Tlog } from '../../../services/logger.service';
-import { BrokersService } from '../../../services/brokers.service';
-import { IBroker } from '../../../interfaces/IBoker.interface';
+import { LoggerService, Tlog } from '../../../../services/logger.service';
+import { BrokersService } from '../../../../services/brokers.service';
+import { IBroker } from '../../../../interfaces/IBoker.interface';
 
 
 @Component({
