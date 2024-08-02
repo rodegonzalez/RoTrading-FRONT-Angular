@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PatternService } from '../../../../services/patterns.service';
+import { PositionHighPatternsService } from '../../../../services/position_patterns.service';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { LoggerService, Tlog } from '../../../../services/logger.service';
 export class PatternAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute
-    , private router: Router, private patternService: PatternService
+    , private router: Router, private positionHighPatternsService: PositionHighPatternsService
     , private loggerService: LoggerService) {
   }
 
@@ -26,7 +26,7 @@ export class PatternAddComponent implements OnInit {
     var data = Form.value;
     console.log(data);
 
-    this.patternService.create(Form.value).subscribe({
+    this.positionHighPatternsService.create(Form.value).subscribe({
       complete: () => {
           this.loggerService.log(Tlog.info,"Terminado PatternService-http");
           this.onBack();

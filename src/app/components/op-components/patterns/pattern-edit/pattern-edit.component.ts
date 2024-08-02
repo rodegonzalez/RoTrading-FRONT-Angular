@@ -1,7 +1,7 @@
 import { Component,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PatternService } from '../../../../services/patterns.service';
-import { IPattern } from '../../../../interfaces/IPattern.interface';
+import { PositionHighPatternsService } from '../../../../services/position_patterns.service';
+import { IPositionHighPattern } from '../../../../interfaces/IPositionPattern.interface';
 import { NgForm } from '@angular/forms';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
@@ -17,21 +17,21 @@ export class PatternEditComponent {
   item: any;
 
   constructor(private route: ActivatedRoute, private router: Router
-    , private patternService: PatternService
+    , private positionHighPatternsService: PositionHighPatternsService
     , private loggerService: LoggerService) {
     const id = 'id';
     this.itemId = +this.route.snapshot.params[id];;
   }
 
   ngOnInit(): void{
-    this.patternService.getOne(this.itemId).subscribe({
+    this.positionHighPatternsService.getOne(this.itemId).subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado Service-http");
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
          this.loggerService.log(Tlog.info,"data: ");
          this.loggerService.log(Tlog.info,this.item);
       },
-        next : (data: IPattern) => {
+        next : (data: IPositionHighPattern) => {
         this.item = data;
        this.loggerService.log(Tlog.info,"data en next: ");
          this.loggerService.log(Tlog.info,this.item);
@@ -44,7 +44,7 @@ export class PatternEditComponent {
   }
 
   deleteOne(): void{
-    this.patternService.deleteOne(this.itemId).subscribe({
+    this.positionHighPatternsService.deleteOne(this.itemId).subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado Service-http");
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
@@ -56,7 +56,7 @@ export class PatternEditComponent {
   }
 
   onSubmit(Form : NgForm): void{
-    this.patternService.update(Form.value, this.itemId).subscribe({
+    this.positionHighPatternsService.update(Form.value, this.itemId).subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado Service-http");
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
