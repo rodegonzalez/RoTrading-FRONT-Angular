@@ -50,6 +50,13 @@ import { PatternDetailComponent } from './components/op-components/patterns/patt
 import { PatternAddComponent } from './components/op-components/patterns/pattern-add/pattern-add.component';
 import { PatternEditComponent } from './components/op-components/patterns/pattern-edit/pattern-edit.component';
 
+// Setups
+import { SetupListComponent } from './components/op-components/setups/setup-list/setup-list.component';
+import { SetupCardComponent } from './components/op-components/setups/setup-card/setup-card.component';
+import { SetupDetailComponent } from './components/op-components/setups/setup-detail/setup-detail.component';
+import { SetupAddComponent } from './components/op-components/setups/setup-add/setup-add.component';
+import { SetupEditComponent } from './components/op-components/setups/setup-edit/setup-edit.component';
+
 // Configuration
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
@@ -68,14 +75,22 @@ const appRoutes: Routes = [
   {path: 'ayuda', component: HelpComponent},
   {path: 'test', component: TestComponent},
   {path: 'brokers', component: BrComponentListComponent},
+
   {path: 'tpps', component: TppListComponent},
   {path: 'tpp-detail/:id', component: TppDetailComponent},
   {path: 'tpp-add', component: TppAddComponent},
   {path: 'tpp-edit/:id', component: TppEditComponent},
+
   {path: 'patterns', component: PatternListComponent},
   {path: 'pattern-detail/:id', component: PatternDetailComponent},
   {path: 'pattern-add', component: PatternAddComponent},
   {path: 'pattern-edit/:id', component: PatternEditComponent},
+
+  {path: 'setups', component: SetupListComponent},
+  {path: 'setup-detail/:id', component: SetupDetailComponent},
+  {path: 'setup-add', component: SetupAddComponent},
+  {path: 'setup-edit/:id', component: SetupEditComponent},
+
   {path: '**',  component: HomeComponent}
 ]
 
@@ -107,6 +122,11 @@ const appRoutes: Routes = [
         PatternDetailComponent,
         PatternAddComponent,
         PatternEditComponent,
+      SetupListComponent,
+        SetupCardComponent,
+        SetupDetailComponent,
+        SetupAddComponent,
+        SetupEditComponent,
       AnAnalysisComponent,
         AnGraphMonthComponent,
         AnGraphYearComponent,

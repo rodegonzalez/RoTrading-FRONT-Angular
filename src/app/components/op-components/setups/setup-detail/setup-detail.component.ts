@@ -1,37 +1,46 @@
 import { Component,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PatternService } from '../../../../services/patterns.service';
-import { IPattern } from '../../../../interfaces/IPattern.interface';
-import { NgForm } from '@angular/forms';
+import { PositionSetupsService } from '../../../../services/position_setups.service';
+import { IPositionSetup } from '../../../../interfaces/IPositionSetup.interface';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
-  selector: 'app-pattern-edit',
-  templateUrl: './pattern-edit.component.html',
+  selector: 'app-setup-detail',
+  templateUrl: './setup-detail.component.html',
   styleUrls: []
 })
 
-export class PatternEditComponent {
+export class SetupDetailComponent {
+  //@Input() item: any;
+
 
   public itemId: number;
+  //item: Array<ITpp>;
   item: any;
 
+
   constructor(private route: ActivatedRoute, private router: Router
-    , private patternService: PatternService
+    , private positionSetupsService: PositionSetupsService
     , private loggerService: LoggerService) {
     const id = 'id';
-    this.itemId = +this.route.snapshot.params[id];;
+    this.itemId = +this.route.snapshot.params[id];
+  }
+
+  onGo(id:any){
+    this.itemId = +id;
+    this.router.navigate(['pattern-detail', this.itemId]);
   }
 
   ngOnInit(): void{
-    this.patternService.getOne(this.itemId).subscribe({
+    this.positionSetupsService.getOne(this.itemId).subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado Service-http");
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
          this.loggerService.log(Tlog.info,"data: ");
          this.loggerService.log(Tlog.info,this.item);
       },
-        next : (data: IPattern) => {
+
+        next : (data: IPositionSetup) => {
         this.item = data;
        this.loggerService.log(Tlog.info,"data en next: ");
          this.loggerService.log(Tlog.info,this.item);
@@ -44,45 +53,29 @@ export class PatternEditComponent {
   }
 
   deleteOne(): void{
-    this.patternService.deleteOne(this.itemId).subscribe({
+    this.positionSetupsService.deleteOne(this.itemId).subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado Service-http");
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
          this.loggerService.log(Tlog.info,"data: ");
          this.loggerService.log(Tlog.info,this.item);
-          this.router.navigate(['/patterns']);
+        this.onBack();
       },
     });
   }
 
-  onSubmit(Form : NgForm): void{
-    this.patternService.update(Form.value, this.itemId).subscribe({
-      complete: () => {
-         this.loggerService.log(Tlog.info,"Terminado Service-http");
-         this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
-         this.loggerService.log(Tlog.info,"data: ");
-         this.loggerService.log(Tlog.info,this.item);
-          this.router.navigate(['/pattern-detail/' + this.itemId]);
-      },
-    });
+  edit(): void{
+    this.router.navigate(['/setup-edit/', this.itemId]);
   }
-
 
   onBack()
   {
-    this.router.navigate(['/patterns']);
+    this.router.navigate(['/setups']);
   }
 
   onBackConfiguration(){
     this.router.navigate(['/configuracion']);
   }
-
-  onBackToDetails(){
-    const uri = '/pattern-detail/' + this.itemId;
-    this.router.navigate([uri]);
-  }
-
-
 }
 
 

@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { PatternService } from '../../../../services/patterns.service';
-import { IPattern } from '../../../../interfaces/IPattern.interface';
+import { PositionSetupsService } from '../../../../services/position_setups.service';
+import { IPositionSetup } from '../../../../interfaces/IPositionSetup.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
-  selector: 'app-pattern-list',
-  templateUrl: './pattern-list.component.html',
+  selector: 'app-setup-list',
+  templateUrl: './setup-list.component.html',
   styleUrls: []
 })
-export class PatternListComponent implements OnInit  {
+export class SetupListComponent implements OnInit  {
 
-  items: Array<IPattern>;
+  items: Array<IPositionSetup>;
 
   constructor(private route: ActivatedRoute,  private router: Router
-    , private patternService: PatternService
+    , private positionSetupsService: PositionSetupsService
     , private loggerService: LoggerService) {
-    this.items = new Array<IPattern> ;
+    this.items = new Array<IPositionSetup> ;
    }
 
   ngOnInit(): void{
-    this.patternService.getAll().subscribe({
+    this.positionSetupsService.getAll().subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado Service-http");
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
@@ -28,7 +28,7 @@ export class PatternListComponent implements OnInit  {
          this.loggerService.log(Tlog.info,this.items);
       },
 
-      next : (data: Array<IPattern>) => {
+      next : (data: Array<IPositionSetup>) => {
         this.items = data;
       },
       error : (e) => {

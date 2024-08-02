@@ -1,0 +1,73 @@
+<div class="card">
+
+  <app-common-title [title]="'Detalle'" [bg]="'dark'"  [color]="'white'" [backuri]="'setups'"></app-common-title>
+  <app-common-subtitle [subtitle]="'Setups'"></app-common-subtitle>
+
+
+    <div class="card-body">
+
+      <div class="row">
+                <div class="col-3 text-start">
+                  
+                </div>
+                <div class="col-9">
+                  <h4 class="card-title text-primary">{{item.name}}</h4>
+                </div>
+      </div>  
+
+      <div class="row">
+        <div class="col-3 text-start">
+          Descripción:
+        </div>
+        <div class="col-9">
+          <div class="card-text"> {{item.description}}</div>
+        </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-3 text-start">
+            Estado:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> ({{item.status}})</div>
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-3 text-start">
+            Creación:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> {{item.creation}}</div>
+          </div>
+        </div>  
+
+
+        <div class="row">
+          <div class="col-3 text-start">
+            Última modificación:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> {{item.modification}}</div>
+          </div>
+        </div>    
+              
+        <div class="row">
+          <div class="col-3 text-start">
+            Note: 
+          </div>
+          <div class="col-9">
+            <h4 class="card-text">{{item.note}}</h4>
+          </div>
+        </div>    
+     
+ </div> 
+      
+ <div class="card-footer text-muted">
+  Editar: <button title="Editar" class="btn btn-warning m-2" (click)="edit()"><i class="fa fa-pencil"></i></button>
+  <!-- Eliminar: <button title="Borrar" class="btn btn-danger m-2" (click)="deleteOne()"><i class="fa fa-cancel"></i></button> -->
+</div>
+
+
+
+</div>

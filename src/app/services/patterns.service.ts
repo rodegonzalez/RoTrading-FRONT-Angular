@@ -11,8 +11,6 @@ import { LoggerService, Tlog } from './logger.service';
 })
 export class PatternService {
 
-    //accounts: IAccount[] = []
-
     constructor(private http:HttpClient
         , private router: Router
         , private loggerService: LoggerService) { }
@@ -31,7 +29,6 @@ export class PatternService {
         );
     }
 
-    //getOne(id: any): Observable<ITpp[]>{
     getOne(id: any): Observable<IPattern>{
         return this.http.get(environment.APIUri + '/position_highpattern/' + id)
         .pipe(
@@ -48,7 +45,6 @@ export class PatternService {
     }
 
     deleteOne(id: any): any{
-
        this.loggerService.log(Tlog.info,"items en service delete: entrando ");
        this.loggerService.log(Tlog.info,"id="+ id);
 
@@ -61,7 +57,6 @@ export class PatternService {
     }
 
     create(data: any): Observable<any>{
-
        this.loggerService.log(Tlog.info,"items en service create: entrando ");
        this.loggerService.log(Tlog.info,"data="+ data);
 
@@ -73,7 +68,6 @@ export class PatternService {
     }
 
     update(data: any, id: number): Observable<any>{
-
        this.loggerService.log(Tlog.info,"items en service update: entrando ");
        this.loggerService.log(Tlog.info,"data="+ data);
 
@@ -82,6 +76,5 @@ export class PatternService {
             })            
         );        
     }
-
 
 }

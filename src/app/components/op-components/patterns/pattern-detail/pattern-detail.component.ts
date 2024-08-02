@@ -1,6 +1,6 @@
 import { Component,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PatternService } from '../../../../services/pattern.service';
+import { PatternService } from '../../../../services/patterns.service';
 import { IPattern } from '../../../../interfaces/IPattern.interface';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 

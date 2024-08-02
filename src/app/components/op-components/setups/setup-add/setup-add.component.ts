@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PatternService } from '../../../../services/patterns.service';
+import { PositionSetupsService } from '../../../../services/position_setups.service';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 @Component({
-  selector: 'app-pattern-add',
-  templateUrl: './pattern-add.component.html',
-  styleUrls: ['./pattern-add.component.css']
+  selector: 'app-setup-add',
+  templateUrl: './setup-add.component.html',
+  styleUrls: ['./setup-add.component.css']
 })
-export class PatternAddComponent implements OnInit {
+export class SetupAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute
-    , private router: Router, private patternService: PatternService
+    , private router: Router, private positionSetupsService: PositionSetupsService
     , private loggerService: LoggerService) {
   }
 
@@ -26,16 +26,16 @@ export class PatternAddComponent implements OnInit {
     var data = Form.value;
     console.log(data);
 
-    this.patternService.create(Form.value).subscribe({
+    this.positionSetupsService.create(Form.value).subscribe({
       complete: () => {
-          this.loggerService.log(Tlog.info,"Terminado PatternService-http");
+          this.loggerService.log(Tlog.info,"Terminado Service-http");
           this.onBack();
       }
     });
 
   }
   onBack(){
-    this.router.navigate(['/patterns']);
+    this.router.navigate(['/setups']);
   }
   onBackConfiguration(){
     this.router.navigate(['/configuracion']);
