@@ -59,7 +59,20 @@
           <div class="col-9">
             <h4 class="card-text">{{item.note}}</h4>
           </div>
-        </div>    
+        </div>   
+        
+        <div class="row">
+          <div class="col-3 text-start">
+            <label class="form-check-label" for="activeitem">Activo</label>
+          </div>
+          <div class="col-9">
+            <div class="form-check" title="Activo">
+              <input  [(ngModel)]="item.active" type="checkbox" class="form-check-input" name="active" [checked]="item.active" [ngModelOptions]="{standalone: true}" disabled>
+              
+            </div>
+          </div>
+        </div>
+        
      
  </div> 
       

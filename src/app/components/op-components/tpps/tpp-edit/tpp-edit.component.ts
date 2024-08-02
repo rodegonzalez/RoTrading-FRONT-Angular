@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TppService } from '../../../../services/tpp.service';
 import { ITpp } from '../../../../interfaces/ITpp.interface';
@@ -12,18 +12,37 @@ import { LoggerService, Tlog } from '../../../../services/logger.service';
 })
 
 export class TppEditComponent {
+  @ViewChild('input_active') input_active!: ElementRef;
 
   public itemId: number;
-  item: any;
+  item: ITpp;
 
   constructor(private route: ActivatedRoute, private router: Router
     , private tppService: TppService
     , private loggerService: LoggerService) {
     const id = 'id';
     this.itemId = +this.route.snapshot.params[id];;
+
+    // Inicializa item con un objeto vacío o con los valores necesarios
+    this.item = {
+      name: '',
+      description: '',
+      status: '',              
+      creation: '',
+      modification: '',
+      id: 0,
+      note:'',
+      active: 0,
+      deleted: 0
+    };
+
   }
 
   ngOnInit(): void{
+
+
+
+
     this.tppService.getOne(this.itemId).subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado tppService-http");
@@ -55,8 +74,9 @@ export class TppEditComponent {
     });
   }
 
-  onSubmit(Form : NgForm): void{
-    this.tppService.update(Form.value, this.itemId).subscribe({
+  onSubmit(): void{
+    this.item.active = this.input_active.nativeElement.checked ? 1 : 0;
+    this.tppService.update(this.item, this.itemId).subscribe({
       complete: () => {
          this.loggerService.log(Tlog.info,"Terminado tppService-http");
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());

@@ -55,7 +55,7 @@ import { environment } from '../environment/global.environment';
 
     create(data: any): Observable<any>{
         this.loggerService.log(Tlog.info,"items en service create: entrando ");
-        this.loggerService.log(Tlog.info,"data="+ data);
+        this.loggerService.log(Tlog.info, data);
         return this.http.post(environment.APIUri + '/position_setup',data)
             .pipe( map(data =>{
                 this.loggerService.log(Tlog.info,"returned id="+ data);               
@@ -65,7 +65,7 @@ import { environment } from '../environment/global.environment';
 
     update(data: any, id: number): Observable<any>{
         this.loggerService.log(Tlog.info,"items en service update: entrando ");
-        this.loggerService.log(Tlog.info,"data="+ data);
+        this.loggerService.log(Tlog.info, data);
         return this.http.put(environment.APIUri + '/position_setup/' + id, data)
             .pipe( map(data =>{                
             })            

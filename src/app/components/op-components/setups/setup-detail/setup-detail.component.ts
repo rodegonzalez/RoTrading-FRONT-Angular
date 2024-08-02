@@ -16,7 +16,7 @@ export class SetupDetailComponent {
 
   public itemId: number;
   //item: Array<ITpp>;
-  item: any;
+  item: IPositionSetup;
 
 
   constructor(private route: ActivatedRoute, private router: Router
@@ -24,6 +24,20 @@ export class SetupDetailComponent {
     , private loggerService: LoggerService) {
     const id = 'id';
     this.itemId = +this.route.snapshot.params[id];
+
+    // Inicializa item con un objeto vacío o con los valores necesarios
+    this.item = {
+      name: '',
+      description: '',
+      status: '',              
+      creation: '',
+      modification: '',
+      id: 0,
+      note:'',
+      active: 0,
+      deleted: 0
+    };
+    
   }
 
   onGo(id:any){

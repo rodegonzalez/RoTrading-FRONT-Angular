@@ -13,13 +13,27 @@ import { LoggerService, Tlog } from '../../../../services/logger.service';
 export class PatternDetailComponent {
 
   public itemId: number;
-  item: any;
+  item: IPositionHighPattern;
 
   constructor(private route: ActivatedRoute, private router: Router
     , private positionHighPatternsService: PositionHighPatternsService
     , private loggerService: LoggerService) {
     const id = 'id';
     this.itemId = +this.route.snapshot.params[id];
+    
+    // Inicializa item con un objeto vacío o con los valores necesarios
+    this.item = {
+      name: '',
+      description: '',
+      status: '',              
+      creation: '',
+      modification: '',
+      id: 0,
+      note:'',
+      active: 0,
+      deleted: 0
+    };
+
   }
 
   onGo(id:any){

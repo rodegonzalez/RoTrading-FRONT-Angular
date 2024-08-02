@@ -1,5 +1,5 @@
 <div class="card">
-  <form (ngSubmit)="onSubmit(Form)" #Form="ngForm" >
+  <form (ngSubmit)="onSubmit()" #Form="ngForm" >
 
     <app-common-title [title]="'Editar'" [bg]="'dark'"  [color]="'white'" [backuri]="'patterns'"></app-common-title>
     <app-common-subtitle [subtitle]="'Patrones'"></app-common-subtitle>
@@ -83,7 +83,21 @@
             <input type="text" class="form-control" [(ngModel)]="item.note" name="note">
           </div>
           </div>
-        </div>    
+        </div>  
+        
+        <div class="row p-1">
+          <div class="col-3 text-start">
+            <label class="form-check-label" for="activeitem">Activo</label>
+          </div>
+          <div class="col-9">
+            <div class="form-check" title="Activo">
+              <input  #input_active [(ngModel)]="item.active" type="checkbox" class="form-check-input" name="active" [checked]="item.active" [ngModelOptions]="{standalone: true}">
+              
+            </div>
+          </div>
+        </div>  
+
+
      
  </div> 
       
