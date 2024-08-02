@@ -1,29 +1,25 @@
-
-<div class="card p-0"> 
-<div class="card-body">
-    <div class="row">
-        <div class="col-8">
-          <div>
-            <span class="h3">{{item.name}}</span>
-            <br>
-            <span class="">( {{item.description}} )</span>
-          </div>
+<div class="card shadow"> 
+        <div class="card-header">
+                <span class="h3">{{item.name}}</span>
+                
         </div>
+
+        <div class="card-body">
+                <span class="">( {{item.description}} )</span>
+        </div>
+
+        <div class="card-footer">               
+                <button title="Ver detalles" 
+                  class="btn btn-primary m-2" 
+                  routerLink="/pattern-detail/{{item.id}}">
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  </button>
+
+                <button title="Editar" 
+                  class="btn btn-warning m-2" 
+                  routerLink="/pattern-edit/{{item.id}}">
+                  <i class="fa fa-pencil"></i>
+                  </button>
         
-        <div class="col-4">               
-              <button title="Ver detalles" 
-              class="btn btn-primary m-2" 
-              routerLink="/pattern-detail/{{item.id}}">
-              <i class="fa fa-edit" aria-hidden="true"></i>
-              </button>
-
-              <button title="Editar" 
-              class="btn btn-warning m-2" 
-              routerLink="/pattern-edit/{{item.id}}">
-              <i class="fa fa-pencil"></i>
-            </button>
-            
-        </div>
-    </div>
-</div>
+        </div>    
 </div>
