@@ -35,14 +35,25 @@ import { OpPositionsComponent } from './components/op-components/op-operations/o
 import { OpAccountComponent } from './components/op-components/accounts/op-account/op-account.component';
 import { OpPanelAccountsComponent } from './components/op-components/accounts/op-panel-accounts/op-panel-accounts.component';
 import { BrComponentListComponent } from './components/op-components/br-components/br-component-list/br-list.component';
+
+// Tpps
 import { TppListComponent } from './components/op-components/tpps/tpp-list/tpp-list.component';
 import { TppCardComponent } from './components/op-components/tpps/tpp-card/tpp-card.component';
 import { TppDetailComponent } from './components/op-components/tpps/tpp-detail/tpp-detail.component';
 import { TppAddComponent } from './components/op-components/tpps/tpp-add/tpp-add.component';
 import { TppEditComponent } from './components/op-components/tpps/tpp-edit/tpp-edit.component';
 
+// Patterns
+import { PatternListComponent } from './components/op-components/patterns/pattern-list/pattern-list.component';
+import { PatternCardComponent } from './components/op-components/patterns/pattern-card/pattern-card.component';
+import { PatternDetailComponent } from './components/op-components/patterns/pattern-detail/pattern-detail.component';
+import { PatternAddComponent } from './components/op-components/patterns/pattern-add/pattern-add.component';
+import { PatternEditComponent } from './components/op-components/patterns/pattern-edit/pattern-edit.component';
+
+// Configuration
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
+// Common
 import { CalendarComponent } from './components/common/calendar/calendar.component';
 import { CommonSubtitleComponent } from './components/common/common-subtitle/common-subtitle.component';
 import { CommonTitleComponent } from './components/common/common-title/common-title.component';
@@ -61,6 +72,10 @@ const appRoutes: Routes = [
   {path: 'tpp-detail/:id', component: TppDetailComponent},
   {path: 'tpp-add', component: TppAddComponent},
   {path: 'tpp-edit/:id', component: TppEditComponent},
+  {path: 'patterns', component: PatternListComponent},
+  {path: 'pattern-detail/:id', component: PatternDetailComponent},
+  {path: 'pattern-add', component: PatternAddComponent},
+  {path: 'pattern-edit/:id', component: PatternEditComponent},
   {path: '**',  component: HomeComponent}
 ]
 
@@ -87,6 +102,11 @@ const appRoutes: Routes = [
         TppDetailComponent,
         TppAddComponent,
         TppEditComponent,
+      PatternListComponent,
+        PatternCardComponent,
+        PatternDetailComponent,
+        PatternAddComponent,
+        PatternEditComponent,
       AnAnalysisComponent,
         AnGraphMonthComponent,
         AnGraphYearComponent,

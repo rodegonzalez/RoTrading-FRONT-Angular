@@ -11,11 +11,12 @@ export class CommonTitleComponent {
     @Input() title: any;
     @Input() bg: any;
     @Input() color: any;
+    @Input() backuri: any;
   
     constructor(private router: Router) { }
 
     onBack(){
-      this.router.navigate(['/tpps']);
+      this.router.navigate(['/' + this.backuri]);
     }
     onBackConfiguration(){
       this.router.navigate(['/configuracion']);

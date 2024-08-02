@@ -1,0 +1,42 @@
+   
+ <div class="container-fluid">
+  <div class="card">
+               
+    <app-common-title [title]="'Listado'" [bg]="'secondary'"  [color]="'black'" [backuri]="'patterns'"></app-common-title>
+    <app-common-subtitle [subtitle]="'Patrones'"></app-common-subtitle>
+              
+         
+            <!-- =================================================== -->
+            <!-- =================================================== -->
+
+            <div class="card-footer text-muted">
+              Nuevo:  <button title="Add new item" class="btn btn-primary m-2" routerLink="/pattern-add">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+            
+            <div class="card-body">
+            <div class="container-fluid">
+
+              <div class="row">
+                <div class="col-4">
+                 
+                        <!-- <div *ngFor="let item of items" class="shadow-lg col-sm-4 p-3"> -->
+                        <div *ngFor="let item of items" class="p-1"> 
+                          <app-pattern-card [item]="item" ></app-pattern-card>
+                        </div>
+                   </div>  
+                  </div>  
+                </div>
+
+            </div>
+           
+
+            <!-- =================================================== -->
+            <!-- =================================================== -->
+
+
+          
+
+</div>
+</div>
