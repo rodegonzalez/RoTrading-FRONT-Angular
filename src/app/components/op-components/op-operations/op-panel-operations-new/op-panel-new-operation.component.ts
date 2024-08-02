@@ -10,6 +10,7 @@ import { PositionsService } from '../../../../services/positions.service';
 import { PositionSetupsService } from '../../../../services/position_setups.service';
 import { PositionPatternsService, PositionHighPatternsService } from '../../../../services/position_patterns.service';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-op-panel-new-operation',
@@ -46,6 +47,7 @@ export class OpPanelNewOperationComponent {
 
   curr_ticks: number = 0;
   curr_priceout: number = 0;
+  result: number = 0;
   
   formdata: IPositionView = {
     block: "B-2024-001",
@@ -99,7 +101,8 @@ export class OpPanelNewOperationComponent {
     , private positionSetupsService: PositionSetupsService
     , private positionPatternsService: PositionPatternsService
     , private positionHighPatternsService: PositionHighPatternsService
-    , private loggerService: LoggerService) 
+    , private loggerService: LoggerService
+    , private router: Router) 
   {
     const mydate = this.getDate();
     this.formdata.datetimein = mydate;
@@ -202,6 +205,11 @@ export class OpPanelNewOperationComponent {
       "ticker": "MCL",
       "tickerid": 1,
       "dollareuro": 1.0005,      
+      "patternid": 1,
+      "setupid": 1,
+      "divisa": "EUR",
+      "divisaid": 1,
+      
     }
 
     const default_tppid: number = 1;
@@ -218,6 +226,10 @@ export class OpPanelNewOperationComponent {
     this.formdata.tppid = defaults.tppid;
     this.formdata.tpp = defaults.tpp;
     this.formdata.dollareuro = defaults.dollareuro;
+    this.formdata.patternid = defaults.patternid;
+    this.formdata.setupid = defaults.setupid;
+    this.formdata.divisaid = defaults.divisaid;
+    this.formdata.divisa = defaults.divisa;
   }
 
   ngOnInit(){    
@@ -373,6 +385,13 @@ export class OpPanelNewOperationComponent {
     let response : any = this.positionsService.savePositionForm(this.formdata);
     this.loggerService.log(Tlog.info, "FORM updaterecord response:");
     this.loggerService.log(Tlog.info,response);
+
+    // reload panel
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/posiciones']);
+    });
+    
+
   }
 
   // --------------------------------------------------------------

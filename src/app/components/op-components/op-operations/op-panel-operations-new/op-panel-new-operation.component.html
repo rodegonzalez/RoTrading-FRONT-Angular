@@ -50,6 +50,11 @@
                                         <input type="text" class="form-control"name="broker" [(ngModel)]="formdata.broker" disabled />             
                                         <small>Broker</small>  
                                       </div>
+
+                                      <div class="form-group p-1">
+                                        <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />             
+                                        <small>Divisa</small>  
+                                      </div>
                                     
                                     </div>
                           </div>
@@ -64,6 +69,11 @@
                                       <div class="form-group p-1">
                                         <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
                                         <small>Ticker</small>  
+                                      </div>
+
+                                      <div class="form-group pt-2">
+                                        <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
+                                        <small>Comisiones</small>
                                       </div>
 
                                       <div class="form-group p-1">
@@ -89,10 +99,7 @@
                                     </div>
 
 
-                                      <div class="form-group pt-2">
-                                        <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
-                                        <small>Comisiones</small>
-                                      </div>
+                                     
 
                           </div>
 
@@ -166,9 +173,9 @@
   <!-- ----------------------------------------------------------------------------------------------------- -->
      <!-- ----------------------------------------------------------------------------------------------------- -->
 
-      <div class="row flex-grow-1 mt-4 p-2">
+      <div class="row flex-grow-1 px-4 h-100">
         <!-- FORM DATA-->
-          <div class="col-lg-9 col-md-9 col-sm-10">
+          <div class="col-lg-9 col-md-9 col-sm-10 ">
 
                       <div class="row">
                         <div class="col-3">
@@ -217,15 +224,22 @@
                               <div class="form-group p-1">
                                 <small>Precio ENTRADA</small>
                                 <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" />                            
-                              </div>                          
-                        </div>
+                              </div>   
 
-                        <div class="col-3">
                               <div class="form-group p-1">
                                 <small>Precio SALIDA</small>
-                                <input (ngModelChange)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>
-                                
+                                <input (ngModelChange)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>                                
                               </div>
+
+                        </div>
+
+                        <div class="col-3">                             
+
+                          <div class="form-group p-1 border border-success">
+                            <small>Resultado</small>
+                            <input type="number" class="form-control" name="result"  value="{{result}}" disabled />
+                            
+                          </div>
 
                               <div class="form-group p-1">
                                 <small>Ticks</small>
@@ -333,18 +347,18 @@
 
               <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
               <div class="col-lg-3 col-md-3 col-sm-2">
-                  <div class="row w-100">
+                  <div class="row  ">
                           
     
-                                          <div class="col">
+                                          <div class="col ">
 
-                                                <div class="row">
-                                                        <div class="col">
-                                                          <div class="form-group  d-block w-100 p-1">                                  
+                                                <div class="row ">
+                                                        <div class="col ">
+                              
                                                             <div class="form-group d-block w-100 p-1">
                                                               <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
                                                           </div>
-                                                        </div> 
+
                                                       </div>
                                                 </div>
 
@@ -359,8 +373,7 @@
                                                     <div class="row">
                                                       <div class="col">
                                                         <div class="form-group  d-block w-100 p-1">                                  
-                                                          <div class="form-group d-block w-100 p-1">
-                                                            <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button></div>
+                                                            <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button>
                                                         </div>
                                                       </div> 
                                                     </div>
