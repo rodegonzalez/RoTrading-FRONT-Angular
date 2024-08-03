@@ -78,6 +78,11 @@ import { ConfigurationComponent } from './components/configuration/configuration
 import { CalendarComponent } from './components/common/calendar/calendar.component';
 import { CommonSubtitleComponent } from './components/common/common-subtitle/common-subtitle.component';
 import { CommonTitleComponent } from './components/common/common-title/common-title.component';
+import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
+
+// Shared
+import { SharedModule } from './shared/shared.module'; // Importa el SharedModule
+import { CommonModule } from '@angular/common';
 
 /* Routing */
 const appRoutes: Routes = [
@@ -177,14 +182,18 @@ const appRoutes: Routes = [
     
     CommonSubtitleComponent,
       CommonTitleComponent,
-      ConfigurationComponent
+      ConfigurationComponent,
+    
+    //NumberFormatWithDecimalsPipe,
    ],
-  imports: [
+  imports: [    
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     //RouterModule.forChild(appRoutesChild)
+    CommonModule,
+    SharedModule,
   ],
   providers: [
     AccountsService,

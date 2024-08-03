@@ -7,7 +7,7 @@ import { LoggerService, Tlog } from '../../../../services/logger.service';
 @Component({
   selector: 'app-ticker-detail',
   templateUrl: './ticker-detail.component.html',
-  styleUrls: []
+  styleUrls: []  
 })
 
 export class TickerDetailComponent {
@@ -19,7 +19,7 @@ export class TickerDetailComponent {
     , private tickerService: TickerService
     , private loggerService: LoggerService) {
     const id = 'id';
-    this.itemId = +this.route.snapshot.params[id];
+    this.itemId = this.route.snapshot.params[id];
 
     // Inicializa item con un objeto vacío o con los valores necesarios
     this.item = {
