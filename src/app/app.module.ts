@@ -32,8 +32,8 @@ import { OpPanelClosedOperationsComponent } from './components/op-components/op-
 import { OpPanelOpenOperationsComponent } from './components/op-components/op-operations/op-panel-operations-opened/op-panel-open-operations.component';
 import { OpPositionsComponent } from './components/op-components/op-operations/op-panel-positions/op-panel-positions.component';
 
-import { OpAccountComponent } from './components/op-components/accounts/op-account/op-account.component';
-import { OpPanelAccountsComponent } from './components/op-components/accounts/op-panel-accounts/op-panel-accounts.component';
+import { OpAccountComponent } from './components/op-components/accounts-op-panel/op-account/op-account.component';
+import { OpPanelAccountsComponent } from './components/op-components/accounts-op-panel/op-panel-accounts/op-panel-accounts.component';
 import { BrComponentListComponent } from './components/op-components/br-components/br-component-list/br-list.component';
 
 // Tpps
@@ -56,6 +56,13 @@ import { SetupCardComponent } from './components/op-components/setups/setup-card
 import { SetupDetailComponent } from './components/op-components/setups/setup-detail/setup-detail.component';
 import { SetupAddComponent } from './components/op-components/setups/setup-add/setup-add.component';
 import { SetupEditComponent } from './components/op-components/setups/setup-edit/setup-edit.component';
+
+// Accounts & brokers
+import { AccountListComponent } from './components/op-components/accounts/account-list/account-list.component';
+import { AccountCardComponent } from './components/op-components/accounts/account-card/account-card.component';
+import { AccountDetailComponent } from './components/op-components/accounts/account-detail/account-detail.component';
+import { AccountAddComponent } from './components/op-components/accounts/account-add/account-add.component';
+import { AccountEditComponent } from './components/op-components/accounts/account-edit/account-edit.component';
 
 // Configuration
 import { ConfigurationComponent } from './components/configuration/configuration.component';
@@ -91,6 +98,11 @@ const appRoutes: Routes = [
   {path: 'setup-add', component: SetupAddComponent},
   {path: 'setup-edit/:id', component: SetupEditComponent},
 
+  {path: 'accounts', component: AccountListComponent},
+  {path: 'account-detail/:id', component: AccountDetailComponent},
+  {path: 'account-add', component: AccountAddComponent},
+  {path: 'account-edit/:id', component: AccountEditComponent},
+
   {path: '**',  component: HomeComponent}
 ]
 
@@ -112,21 +124,31 @@ const appRoutes: Routes = [
         OpPanelOpenOperationsComponent,
         OpPanelNewOperationComponent,
         BrComponentListComponent,
+        
       TppListComponent,
         TppCardComponent,
         TppDetailComponent,
         TppAddComponent,
         TppEditComponent,
+
       PatternListComponent,
         PatternCardComponent,
         PatternDetailComponent,
         PatternAddComponent,
         PatternEditComponent,
+
       SetupListComponent,
         SetupCardComponent,
         SetupDetailComponent,
         SetupAddComponent,
         SetupEditComponent,
+
+      AccountListComponent,
+        AccountCardComponent,
+        AccountDetailComponent,
+        AccountAddComponent,
+        AccountEditComponent,
+
       AnAnalysisComponent,
         AnGraphMonthComponent,
         AnGraphYearComponent,
