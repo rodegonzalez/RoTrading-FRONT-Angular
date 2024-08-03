@@ -1,0 +1,44 @@
+   
+ <div class="container-fluid">
+  <div class="card">
+               
+    <app-common-title [title]="'Listado'" [bg]="'secondary'"  [color]="'black'" [backuri]="'tickers'"></app-common-title>
+    <app-common-subtitle [subtitle]="'Tickers y mercados'"></app-common-subtitle>
+              
+         
+            <!-- =================================================== -->
+            <!-- =================================================== -->
+
+            <div class="card-header text-muted">
+              Nuevo:  <button title="Add new item" class="btn btn-primary m-2" routerLink="/ticker-add">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+            
+            <div class="card-body">
+            <div class="container-fluid">
+
+              <div class="row w-100">
+               
+                 
+                        <!-- <div *ngFor="let item of items" class="shadow-lg col-sm-4 p-3"> -->
+                        <div *ngFor="let item of items" class="col-3 h-100 p-2"> 
+                        
+                              <app-ticker-card [item]="item" ></app-ticker-card>
+                        
+                        </div>
+                   
+                  </div>  
+                </div>
+
+            </div>
+           
+
+            <!-- =================================================== -->
+            <!-- =================================================== -->
+
+
+          
+
+</div>
+</div>

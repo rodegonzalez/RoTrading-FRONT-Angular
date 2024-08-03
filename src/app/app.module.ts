@@ -64,6 +64,13 @@ import { AccountDetailComponent } from './components/op-components/accounts/acco
 import { AccountAddComponent } from './components/op-components/accounts/account-add/account-add.component';
 import { AccountEditComponent } from './components/op-components/accounts/account-edit/account-edit.component';
 
+// Tickers & markets
+import { TickerListComponent } from './components/op-components/tickers/ticker-list/ticker-list.component';
+import { TickerCardComponent } from './components/op-components/tickers/ticker-card/ticker-card.component';
+import { TickerDetailComponent } from './components/op-components/tickers/ticker-detail/ticker-detail.component';
+import { TickerAddComponent } from './components/op-components/tickers/ticker-add/ticker-add.component';
+import { TickerEditComponent } from './components/op-components/tickers/ticker-edit/ticker-edit.component';
+
 // Configuration
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
@@ -103,6 +110,11 @@ const appRoutes: Routes = [
   {path: 'account-add', component: AccountAddComponent},
   {path: 'account-edit/:id', component: AccountEditComponent},
 
+  {path: 'tickers', component: TickerListComponent},
+  {path: 'ticker-detail/:id', component: TickerDetailComponent},
+  {path: 'ticker-add', component: TickerAddComponent},
+  {path: 'ticker-edit/:id', component: TickerEditComponent},
+
   {path: '**',  component: HomeComponent}
 ]
 
@@ -112,54 +124,60 @@ const appRoutes: Routes = [
     NavBarComponent,
     FooterComponent,
     HomeComponent,
-      TestComponent,
-      OpOperationsComponent,
-        OpOpenOperationComponent,
-        OpClosedOperationComponent,
-        OpPositionsComponent,
-        CalendarComponent,
-        OpAccountComponent,
-        OpPanelAccountsComponent,
-        OpPanelClosedOperationsComponent,
-        OpPanelOpenOperationsComponent,
-        OpPanelNewOperationComponent,
-        BrComponentListComponent,
-        
-      TppListComponent,
-        TppCardComponent,
-        TppDetailComponent,
-        TppAddComponent,
-        TppEditComponent,
+    TestComponent,
+    OpOperationsComponent,
+      OpOpenOperationComponent,
+      OpClosedOperationComponent,
+      OpPositionsComponent,
+      CalendarComponent,
+      OpAccountComponent,
+      OpPanelAccountsComponent,
+      OpPanelClosedOperationsComponent,
+      OpPanelOpenOperationsComponent,
+      OpPanelNewOperationComponent,
+      BrComponentListComponent,
+      
+    TppListComponent,
+      TppCardComponent,
+      TppDetailComponent,
+      TppAddComponent,
+      TppEditComponent,
 
-      PatternListComponent,
-        PatternCardComponent,
-        PatternDetailComponent,
-        PatternAddComponent,
-        PatternEditComponent,
+    PatternListComponent,
+      PatternCardComponent,
+      PatternDetailComponent,
+      PatternAddComponent,
+      PatternEditComponent,
 
-      SetupListComponent,
-        SetupCardComponent,
-        SetupDetailComponent,
-        SetupAddComponent,
-        SetupEditComponent,
+    SetupListComponent,
+      SetupCardComponent,
+      SetupDetailComponent,
+      SetupAddComponent,
+      SetupEditComponent,
 
-      AccountListComponent,
-        AccountCardComponent,
-        AccountDetailComponent,
-        AccountAddComponent,
-        AccountEditComponent,
+    AccountListComponent,
+      AccountCardComponent,
+      AccountDetailComponent,
+      AccountAddComponent,
+      AccountEditComponent,
 
-      AnAnalysisComponent,
-        AnGraphMonthComponent,
-        AnGraphYearComponent,
-        AnPanelGraphsComponent,
-        AnPanelReportsComponent,
-        AnReportOperationsComponent,
-        AnReportBlocksComponent,
-     
-      CommonSubtitleComponent,
-        CommonTitleComponent,
-        ConfigurationComponent
+    TickerListComponent,
+      TickerCardComponent,
+      TickerDetailComponent,
+      TickerAddComponent,
+      TickerEditComponent,
+
+    AnAnalysisComponent,
+      AnGraphMonthComponent,
+      AnGraphYearComponent,
+      AnPanelGraphsComponent,
+      AnPanelReportsComponent,
+      AnReportOperationsComponent,
+      AnReportBlocksComponent,
+    
+    CommonSubtitleComponent,
+      CommonTitleComponent,
+      ConfigurationComponent
    ],
   imports: [
     BrowserModule,

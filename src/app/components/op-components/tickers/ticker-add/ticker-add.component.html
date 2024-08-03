@@ -1,0 +1,56 @@
+
+<div class="container">
+    <div class="card">
+      <form (ngSubmit)="onSubmit(Form)" #Form="ngForm" >
+
+
+
+        <app-common-title [title]="'Nuevo'" [bg]="'dark'"  [color]="'white'" [backuri]="'tickers'"></app-common-title>
+        <app-common-subtitle [subtitle]="'Tickers y mercados'"></app-common-subtitle>
+
+      <div class="card-body">
+    
+          <div class="form-group col-12">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" #propName="ngModel" ngModel name="Name" required minlength="5">
+            <span *ngIf="!propName.valid && propName.touched" class="error-block mb-3">
+              Errors {{propName.errors | json}}: Name must have at least 5 characters
+              <!--
+              <span *ngIf="propName.errors.required">Please provide a name</span>
+               <span *ngIf="propName.errors.minlength">Name must have at least 5 characters</span>
+              -->
+            </span>
+    
+          </div>
+    
+          <div class="form-group col-12">
+            <label for="type">Descripción</label>
+            <input escription="text" class="form-control" ngModel name="description">
+          </div>
+    
+          <div class="form-group col-12">
+            <label for="sellrent">Estado</label>
+            <input type="text" class="form-control" ngModel name="status">
+          </div>
+
+          <div class="form-group col-12">
+            <label for="sellrent">Nota</label>
+            <input type="text" class="form-control" ngModel name="note">
+          </div>
+
+      </div>
+
+      <div class="card-footer text-muted">
+        Actualizar: 
+        <button [disabled]="!Form.valid" type="submit"  title="Crear" class="btn btn-success m-2" ><i class="fa fa-check"></i></button>        
+        Cancelar: <button type="reset" class="btn btn-secondary m-2">Cancel</button>
+      
+      </div>
+
+
+    </form>
+    </div>
+    </div>
+    
+    
+    
