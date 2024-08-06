@@ -1,0 +1,99 @@
+<div class="card">
+  <form (ngSubmit)="onSubmit()" #Form="ngForm" >
+
+    <app-common-title [title]="'Editar'" [bg]="'dark'"  [color]="'white'" [backuri]="'divisas'"></app-common-title>
+    <app-common-subtitle [subtitle]="'Divisas'"></app-common-subtitle>
+
+
+    <div class="card-body">
+
+      <div class="row p-1">
+                <div class="col-3 text-start">
+                  <label class="text-blue" for="name">Nombre:</label>
+                </div>
+                <div class="col-9">
+                  <div class="form-group col-12">
+                   
+                    <input type="text" class="form-control h4 text-blue" #propName="ngModel"  [(ngModel)]="item.name" name="name" required minlength="5" />
+
+                    <span *ngIf="!propName.valid && propName.touched" class="error-block mb-3">
+                      Errors {{propName.errors | json}}: Name must have at least 5 characters
+                      <!--
+                      <span *ngIf="propName.errors.required">Please provide a name</span>
+                       <span *ngIf="propName.errors.minlength">Name must have at least 5 characters</span>
+                      -->
+                    </span>
+            
+                  </div>
+                </div>
+    </div>
+
+      <div class="row p-1">
+        <div class="col-3 text-start">
+          <label for="type">Descripción:</label>
+        </div>
+        <div class="col-9">
+          <div class="form-group col-12">
+            
+            <input escription="text" class="form-control"  [(ngModel)]="item.description" name="description" >
+          </div>
+        </div>
+      </div>
+
+        <div class="row p-1">
+          <div class="col-3 text-start">
+            Creación:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> {{item.creation}}</div>
+          </div>
+        </div>  
+
+
+        <div class="row p-1">
+          <div class="col-3 text-start">
+            Última modificación:
+          </div>
+          <div class="col-9">
+            <div class="card-text"> {{item.modification}}</div>
+          </div>
+        </div>                           
+
+        <div class="row p-1">
+          <div class="col-3 text-start">
+            <label for="sellrent">Nota:</label>
+          </div>
+          <div class="col-9">
+           
+          <div class="form-group col-12">
+            
+            <input type="text" class="form-control" [(ngModel)]="item.note" name="note">
+          </div>
+          </div>
+        </div>    
+     
+        <div class="row p-1">
+          <div class="col-3 text-start">
+            <label class="form-check-label" for="activeitem">Activo</label>
+          </div>
+          <div class="col-9">
+            <div class="form-check" title="Activo">
+              <input  #input_active [(ngModel)]="item.active" type="checkbox" class="form-check-input" name="active" [checked]="item.active" [ngModelOptions]="{standalone: true}">
+              
+            </div>
+          </div>
+        </div>  
+
+
+ </div> 
+      
+
+<div class="card-footer text-muted">
+  Actualizar: <button  type="submit"  title="Actualizar" class="btn btn-success m-2" ><i class="fa fa-check"></i></button>
+  Eliminar: <button title="Borrar" class="btn btn-danger m-2" (click)="deleteOne()"><i class="fa fa-cancel"></i></button>
+  Volver: <button title="Volver a detalles" class="btn btn-secondary m-2" (click)="onBackToDetails()" >Volver a detalles</button>
+</div>
+  
+
+</form>
+</div>

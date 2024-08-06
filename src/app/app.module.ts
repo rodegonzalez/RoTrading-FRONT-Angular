@@ -71,6 +71,13 @@ import { TickerDetailComponent } from './components/op-components/tickers/ticker
 import { TickerAddComponent } from './components/op-components/tickers/ticker-add/ticker-add.component';
 import { TickerEditComponent } from './components/op-components/tickers/ticker-edit/ticker-edit.component';
 
+// Divisas
+import { DivisaListComponent } from './components/op-components/divisas/divisa-list/divisa-list.component';
+import { DivisaCardComponent } from './components/op-components/divisas/divisa-card/divisa-card.component';
+import { DivisaDetailComponent } from './components/op-components/divisas/divisa-detail/divisa-detail.component';
+import { DivisaAddComponent } from './components/op-components/divisas/divisa-add/divisa-add.component';
+import { DivisaEditComponent } from './components/op-components/divisas/divisa-edit/divisa-edit.component';
+
 // Configuration
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
@@ -78,11 +85,11 @@ import { ConfigurationComponent } from './components/configuration/configuration
 import { CalendarComponent } from './components/common/calendar/calendar.component';
 import { CommonSubtitleComponent } from './components/common/common-subtitle/common-subtitle.component';
 import { CommonTitleComponent } from './components/common/common-title/common-title.component';
-import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
 
 // Shared
 import { SharedModule } from './shared/shared.module'; // Importa el SharedModule
 import { CommonModule } from '@angular/common';
+//import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
 
 /* Routing */
 const appRoutes: Routes = [
@@ -119,6 +126,11 @@ const appRoutes: Routes = [
   {path: 'ticker-detail/:id', component: TickerDetailComponent},
   {path: 'ticker-add', component: TickerAddComponent},
   {path: 'ticker-edit/:id', component: TickerEditComponent},
+
+  {path: 'divisas', component: DivisaListComponent},
+  {path: 'divisa-detail/:id', component: DivisaDetailComponent},
+  {path: 'divisa-add', component: DivisaAddComponent},
+  {path: 'divisa-edit/:id', component: DivisaEditComponent},
 
   {path: '**',  component: HomeComponent}
 ]
@@ -172,6 +184,12 @@ const appRoutes: Routes = [
       TickerAddComponent,
       TickerEditComponent,
 
+    DivisaListComponent,
+      DivisaCardComponent,
+      DivisaDetailComponent,
+      DivisaAddComponent,
+      DivisaEditComponent,
+
     AnAnalysisComponent,
       AnGraphMonthComponent,
       AnGraphYearComponent,
@@ -184,14 +202,14 @@ const appRoutes: Routes = [
       CommonTitleComponent,
       ConfigurationComponent,
     
-    //NumberFormatWithDecimalsPipe,
+    //NumberFormatWithDecimalsPipe, // declared on SharedModule
    ],
   imports: [    
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    //RouterModule.forChild(appRoutesChild)
+    //RouterModule.forChild(appRoutesChild),
     CommonModule,
     SharedModule,
   ],
