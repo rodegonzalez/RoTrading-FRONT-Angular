@@ -1,0 +1,26 @@
+<div class="card-header text-muted">
+  Nueva operación:  <button title="Add new item" class="btn btn-primary m-2" routerLink="/position-add">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
+
+  <div class="card">
+    <div class="card-body">        
+      <div class="row">
+
+      <div class="col-12">
+        <!-- rows (positions) -----------------------------------------------------------------  -->    
+        <div *ngFor="let position of positions" class="mb-2">            
+
+            <app-position-list-one [position]="position"></app-position-list-one>
+
+        </div>    
+      </div>
+
+      </div>
+      </div>
+  </div>
+
+
+
+

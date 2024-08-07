@@ -1,0 +1,386 @@
+
+<app-common-title [title]="'Detalles'" [bg]="'secondary'"  [color]="'black'" [backuri]="'positions'"></app-common-title>
+<app-common-subtitle [subtitle]="'Posiciones'"></app-common-subtitle>
+
+
+<div class="pt-2 mb-2">
+<form method="POST" #newpositions="ngForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
+
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+    <div class="card">
+      <div class="card-body">
+
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+      <!-- COMMON SESSION VALUES -->
+
+
+      <!-- ----------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+      <!-- OPERATION VALUES -->
+
+      <div class="row bg-light border border-secondary m-1">
+              <div class="col-lg-9 col-md-9 col-sm-10 p-2">   
+                
+                <div class="row">
+
+                          <div class="col-3">
+                                    <div class="col">
+                                      <div class="form-group p-1">
+                                        <input type="text" id="idaccount" name="tpp" class="form-control" [(ngModel)]="formdata.tpp" /> 
+                                        <small>TPP</small>            
+                                      </div>
+
+                                      <div class="form-group p-1">
+                                        <input type="text" id="account" name="account" class="form-control" [(ngModel)]="formdata.account" disabled /> 
+                                        <small>Cuenta</small>            
+                                      </div>
+
+                                      <div class="form-group p-1">
+                                        <input type="text" class="form-control"name="broker" [(ngModel)]="formdata.broker" disabled />             
+                                        <small>Broker</small>  
+                                      </div>
+
+                                      <div class="form-group p-1">
+                                        <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />             
+                                        <small>Divisa</small>  
+                                      </div>
+                                    
+                                    </div>
+                          </div>
+
+                          <div class="col-3">
+                                      
+                                      <div class="form-group p-1">
+                                        <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
+                                        <small>Mercado</small>  
+                                      </div>
+                                  
+                                      <div class="form-group p-1">
+                                        <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
+                                        <small>Ticker</small>  
+                                      </div>
+
+                                      <div class="form-group pt-2">
+                                        <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
+                                        <small>Comisiones</small>
+                                      </div>
+
+                                      <div class="form-group p-1">
+                                        <input type="text" class="form-control"name="dollareuro" [(ngModel)]="formdata.dollareuro" disabled />             
+                                        <small>Euro/Dóllar</small>  
+                                      </div>
+
+
+
+                          </div>
+
+                          <div class="col-3">
+                                                      
+                                      
+                                    <div class="form-group pt-2">
+                                      <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />             
+                                      <small>Bloque</small>  
+                                    </div>
+
+                                    <div class="form-group pt-2">
+                                      <input type="text" class="form-control" name="block" value="{{positionid}}" disabled />             
+                                      <small>ID de operación</small>  
+                                    </div>
+
+
+                                     
+
+                          </div>
+
+                          <div class="col-3">
+                            <div class="form-group p-1">
+                              <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                              <small>Nº de contratos</small>
+                            </div>
+                            <div class="form-group p-1">
+                              <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
+                              <small>Profit</small>
+                            </div>
+                            <div class="form-group p-1">
+                              <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
+                              <small>Stoploss</small>
+                            </div>
+                          </div>
+
+                          <div class="col-3">
+                            
+                          </div>
+
+                </div>
+
+
+              </div> 
+          
+        <!-- ----------------------------------------------------------------------------------------------------- -->
+        <div class="col-lg-3 col-md-3 col-sm-2 p-2 ">
+
+                      <div class="row p-2">
+                        <div class="col h-100">
+                                  <div class="card border-primary ">
+                                    <div class="card-header bg-warning text-dark border-warning">
+                                      <h6 class="card-title">Notas de sesión &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
+                                  </div>
+                                  <div class="card-body">                                
+                                    <DIV class="formgroup d-block w-100">
+                                    <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
+                                  </div> 
+                                  </div>
+                        </div>
+                      </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+  <!-- ----------------------------------------------------------------------------------------------------- -->
+     <!-- ----------------------------------------------------------------------------------------------------- -->
+
+      <div class="row flex-grow-1 px-4 h-100">
+        <!-- FORM DATA-->
+          <div class="col-lg-9 col-md-9 col-sm-10 ">
+
+                      <div class="row">
+                        <div class="col-3">
+
+                          
+                                    <div class="form-check">
+                                      <input #input_tppCheck type="checkbox" class="form-check-input" id="tppCheck"  checked >
+                                      <label class="form-check-label" for="tppCheck">Es TPP</label>
+                                    </div>
+                                    <div class="form-check" title="Is real operation or B-register">
+                                      <input  #input_isrealCheck type="checkbox" class="form-check-input" id="isrealCheck" checked >
+                                      <label class="form-check-label" for="isrealCheck">Es Real</label>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group">
+                                      <div class="form-check">
+                                        <input [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="buy" checked>
+                                      Comprar
+                                      </div>
+                                      <div class="form-check">
+                                        <input  [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="sell">
+                                      Vender
+                                      </div>
+
+                                    </div>
+                        </div>
+
+                        <div class="col-3">
+                          <div class="form-group p-1">
+                            <small>Hora ENTRADA</small>
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimein" />                                         
+                          </div>
+   
+                          <div class="form-group p-1">
+                            <small>Hora SALIDA</small>
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimeout" />                                         
+                          </div>
+
+
+                        </div>
+
+                        <div class="col-3">
+
+                              <div class="form-group p-1">
+                                <small>Precio ENTRADA</small>
+                                <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" />                            
+                              </div>   
+
+                              <div class="form-group p-1">
+                                <small>Precio SALIDA</small>
+                                <input (ngModelChange)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>                                
+                              </div>
+
+                        </div>
+
+                        <div class="col-3">                             
+
+                          <div class="form-group p-1 border border-success">
+                            <small>Resultado</small>
+                            <input type="number" class="form-control" name="result"  value="{{result}}" disabled />
+                            
+                          </div>
+
+                              <div class="form-group p-1">
+                                <small>Ticks</small>
+                                <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
+                                
+                              </div>
+
+                        </div>
+
+
+                      </div>
+
+         <!-- ----------------------------------------------------------------------------------------------------- -->
+
+                      <div class="row pt-4">
+
+                        <div class="col-3">
+                          <div class="col w-100">
+                            <div class="form-group ">
+                              <select #selectHighPattern multiple title="High Patterns" class=" w-100" id="highpatternid" size="7">
+
+                                <option value="0" selected>Not-set manual</option>
+                                <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.name">{{ highpattern.name }}</option>   
+                               
+                              </select>
+                            </div>
+
+                      </div> 
+                        </div>
+                
+                        <div class="col-3">
+                
+                               <div class="row h-100">
+
+                                      <div class="col-6 border h-100" >
+                                                  <div class="form-group">  
+                                                    <div class="form-check disabled">
+                                                      <input [(ngModel)]="formdata.pattern" class="form-check-input" type="radio" name="pattern" id="pattern"   [ngModelOptions]="{standalone: true}" value="Otro" checked>
+                                                    Otro
+                                                    </div>  
+                        
+                                                    <div class="form-check" *ngFor="let pattern of positionPatterns">
+                                                      <input [(ngModel)]="formdata.pattern" class="form-check-input" type="radio" name="pattern"  id="pattern" value="{{pattern.name}}" [ngModelOptions]="{standalone: true}">
+                                                    {{pattern.name}}
+                                                    </div>  
+
+                                                  </div>
+
+                                        </div>
+                                        <div class="col-6 border h-100">
+                                                  <div class="form-group">  
+                                                    <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="temporal" id="temporal" [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m1" />
+                                                      m1
+                                                    </div>
+                                                    <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="temporal" id="temporal"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m3"/>
+                                                      m3
+                                                    </div>
+                                                    <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="temporal" id="temporal"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m5" checked />
+                                                      m5
+                                                    </div>
+                                                  </div>
+                                        </div>
+ 
+                                </div>
+
+                        </div>
+                
+                        <div class="col-3">
+                               
+                                    <div class="row">
+                                      <div class="col w-100">
+                                            <div class="form-group ">
+                                              <select #selectSetup multiple title="Setups" class="custom-select-sm w-100" id="setupid" size="7">
+
+                                                <option value="0" selected>Not-set manual</option>
+                                                <option *ngFor="let setup of positionSetups" [value]="setup.name">{{ setup.name }}</option>   
+                                              
+                                              </select>
+                                            </div>
+
+                                      </div> 
+                                    </div>                                                                       
+
+                        </div>
+                
+                        <div class="col-3 center">
+                            
+                          <div class="card border-primary">
+                            <div class="card-header bg-warning text-dark border-warning">
+                              <h6 class="card-title">Notas de operación &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
+                          </div>
+                          <div class="card-body">                                
+                            <DIV class="formgroup d-block w-100">
+                            <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
+                          </div> 
+                          </div>
+                               
+                          
+                        </div>                                
+                      </div>                        
+              </div>
+
+              <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
+              <div class="col-lg-3 col-md-3 col-sm-2">
+                  <div class="row  ">
+                          
+    
+                                          <div class="col ">
+
+                                                <div class="row ">
+                                                        <div class="col ">
+                              
+                                                            <div class="form-group d-block w-100 p-1">
+                                                              <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
+                                                          </div>
+
+                                                      </div>
+                                                </div>
+
+                                                  <div class="form-group  d-block w-100 p-1 m-2">       
+                                                                                                                                                
+                                                      <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x px-1" style="color: green;"></i>                                        
+                                                      <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x px-1" style="color: red;"></i>         
+                                                      <i title="Ver imágenes" class="fas fa-images fa-2x px-1" style="color: brown;"></i>                                                       
+                                                    </div>  
+
+
+                                                    <div class="row">
+                                                      <div class="col">
+                                                        <div class="form-group  d-block w-100 p-1">                                  
+                                                            <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button>
+                                                        </div>
+                                                      </div> 
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <div class="row">
+                                                      <div class="col">
+                                                        Alertas...
+                                                      </div> 
+                                                    </div>
+
+
+
+
+                                          </div>              
+                                                  
+
+
+                        
+
+                  </div>
+
+
+
+              </div>
+
+
+        </div>
+      </div>
+
+    <!-- ----------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------- -->  
+
+
+</form>
+</div>

@@ -91,6 +91,18 @@ import { SharedModule } from './shared/shared.module'; // Importa el SharedModul
 import { CommonModule } from '@angular/common';
 //import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
 
+
+// --------------------------------------------------
+import { PositionListOneComponent } from './components/op-components/positions/position-list-one/position-list-one.component';
+import { PositionListComponent } from './components/op-components/positions/position-list/position-list.component';
+import { PositionDetailComponent } from './components/op-components/positions/position-detail/position-detail.component';
+import { PositionAddComponent } from './components/op-components/positions/position-add/position-add.component';
+import { PositionEditComponent } from './components/op-components/positions/position-edit/position-edit.component';
+
+// --------------------------------------------------
+
+
+
 /* Routing */
 const appRoutes: Routes = [
   //{path: '', component: HomeComponent},
@@ -131,6 +143,14 @@ const appRoutes: Routes = [
   {path: 'divisa-detail/:id', component: DivisaDetailComponent},
   {path: 'divisa-add', component: DivisaAddComponent},
   {path: 'divisa-edit/:id', component: DivisaEditComponent},
+
+
+  {path: 'positions', component: PositionListComponent},
+  {path: 'position-detail/:id', component: PositionDetailComponent},
+  {path: 'position-add', component: PositionAddComponent},
+  {path: 'position-edit/:id', component: PositionEditComponent},
+
+
 
   {path: '**',  component: HomeComponent}
 ]
@@ -203,6 +223,16 @@ const appRoutes: Routes = [
       ConfigurationComponent,
     
     //NumberFormatWithDecimalsPipe, // declared on SharedModule
+
+
+    // --------------------------------------------------
+    PositionListComponent,
+    PositionListOneComponent,
+    PositionDetailComponent,
+    PositionAddComponent,
+    PositionEditComponent,
+
+
    ],
   imports: [    
     BrowserModule,

@@ -1,0 +1,93 @@
+<div class="container-fluid p-0">
+
+  <div class="row bg-light small">
+
+          <div class="col-lg-9 col-md-12 col-sm-12 mt-1 mb-1 p-0">
+
+                  <div class="row">
+                          <div class="col-lg-4 col-md-4 col-sm-12 text-start">
+
+                                  <div title="Ticker">
+                                          {{position.ticker}} - 
+                                          <span class="text-start" title="Status and Buysell">{{position.status}}
+                                          
+                                              - ( <span class="text-primary font-weight-bold">
+                                                  <span *ngIf="position.buysell == 'buy'">Buy</span>
+                                                  <span *ngIf="position.buysell != 'buy'">Sell</span>
+                                                  </span> 
+                                              )
+                                              </span>
+                                          <br>
+                                          <div  title="Account (Broker) [accType]">{{position.account}} ({{position.broker}}) [{{position.acctype}}]</div>
+                                          <div title="Block"> Block (Id): {{position.block}} ( {{position.id}} )</div>   
+                                          <div title="datetimeIN">{{position.datetimein}}</div> 
+
+                                                                                                                                                                
+                                  </div>  
+                                                               
+                          </div>                                      
+                          <div class="col-lg-4 col-md-4 col-sm-12 text-start">  
+
+                              
+                              <div title="">{{position.pricein}} &euro; IN - TPP: {{position.tpp}} - Temporalidad: {{position.temporal}}</div>
+                              <div  title="Pattern/setup">Patrón (entrada): {{position.pattern}} ( {{position.setup}} ) </div>     
+
+                              <div class="row">
+                                      <div class="col-4">
+                                              Fecha OUT: 
+                                      </div>
+                                      <div class="col-8">
+                                              <div class="form-group  d-block w-100 p-1">
+                                                      <div title="Datetime OUT"><input class="form-control" type="text" placeholder="{{position.datimeout}}" value="{{position.datimeout}}"/></div>                                               
+                                              </div>   
+                                      </div>
+                              </div>    
+                                                                                                                   
+                          </div>                                
+
+                          <div class="col-lg-4 col-md-4 col-sm-12 text-start">  
+
+                                  <div class="row w-100">
+                                      <div class="col">
+                                        <div class="form-group  d-block w-100 p-1">
+                                          <div title="price OUT"><input class="form-control"  type="text" placeholder="&euro; OUT"/></div>                                                      
+                                        </div>
+
+                                        <div class="form-group  d-block w-100 p-1">
+                                          <div title="price OUT"><input class="form-control" type="text" placeholder="Ticks" /></div>                                               
+                                        </div> 
+
+                                      </div> 
+                                  </div>
+                          </div>
+                  </div>             
+          </div>
+        
+          <div class="col-lg-3 col-md-12 col-sm-12 p-0 m-auto d-flex">
+
+              <div class="row w-100">
+                          <div class="col">
+                                  <div>
+                                        <button title="Ver detalles" 
+                                          class="btn btn-primary m-2" 
+                                          routerLink="/position-detail/{{position.id}}">
+                                          <i class="fa fa-edit" aria-hidden="true"></i>
+                                          </button>
+
+                                        <button title="Editar" 
+                                          class="btn btn-warning m-2" 
+                                          routerLink="/position-edit/{{position.id}}">
+                                          <i class="fa fa-pencil"></i>
+                                          </button>
+                                  </div>
+                         </div>      
+              </div>  
+           
+</div>
+
+
+
+
+
+
+
