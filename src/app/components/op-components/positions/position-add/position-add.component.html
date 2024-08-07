@@ -1,5 +1,5 @@
 
-<app-common-title [title]="'Nueva'" [bg]="'secondary'"  [color]="'black'" [backuri]="'positions'"></app-common-title>
+<app-common-title [title]="'Nueva posición'" [bg]="'secondary'"  [color]="'black'" [backuri]="'positions'"></app-common-title>
 <app-common-subtitle [subtitle]="'Posiciones'"></app-common-subtitle>
 
 
@@ -7,18 +7,6 @@
 <form method="POST" #newpositions="ngForm" (ngSubmit)="onSubmit()">
   <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
 
-  <div class="accordion" id="AcordeonNew-Operations">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="AcordeonNew-OperationsH">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          <div class="row">
-            <div class="col-6 text-start"><em>Nuevas operaciones</em></div>
-            
-          </div>
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="AcordeonNew-OperationsH" data-bs-parent="#AcordeonNew-Operations">
-        <div class="accordion-body">
           
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -39,92 +27,90 @@
                 
                 <div class="row">
 
-                          <div class="col-3">
+                          <div class="col-4">
                                     <div class="col">
-                                      <div class="form-group p-1">
-                                        <input type="text" id="idaccount" name="tpp" class="form-control" [(ngModel)]="formdata.tpp" /> 
-                                        <small>TPP</small>            
+                                      <div class="form-group ">
+                                            <div class="row">
+                                              <div class="col-5">
+                                                <small>TPP</small>          
+                                              </div>
+                                              <div class="col-7">
+                                                <input type="text" id="idaccount" name="tpp" class="form-control" [(ngModel)]="formdata.tpp" />         
+                                              </div>
+                                            </div>                                                                                          
                                       </div>
 
-                                      <div class="form-group p-1">
-                                        <input type="text" id="account" name="account" class="form-control" [(ngModel)]="formdata.account" disabled /> 
-                                        <small>Cuenta</small>            
+                                      <div class="form-group pt-2">
+                                            <div class="row">
+                                              <div class="col-5">
+                                                <small>Bloque / Secuencia</small>           
+                                              </div>
+                                              <div class="col-7">
+                                                <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />       
+                                              </div>
+                                            </div>                                                                                             
                                       </div>
 
-                                      <div class="form-group p-1">
-                                        <input type="text" class="form-control"name="broker" [(ngModel)]="formdata.broker" disabled />             
-                                        <small>Broker</small>  
-                                      </div>
-
-                                      <div class="form-group p-1">
-                                        <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />             
-                                        <small>Divisa</small>  
+                                      <div class="form-group pt-2">
+                                            <div class="row">
+                                              <div class="col-5">
+                                                <small>Divisa</small>        
+                                              </div>
+                                              <div class="col-7">
+                                                <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />        
+                                              </div>
+                                            </div>                                                                                              
                                       </div>
                                     
                                     </div>
                           </div>
 
-                          <div class="col-3">
-                                      
-                                      <div class="form-group p-1">
-                                        <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
-                                        <small>Mercado</small>  
+                          <div class="col-4">                                      
+                                      <div class="form-group">
+                                            <div class="row">
+                                              <div class="col-5">
+                                                <small>Cuenta (Broker)</small>        
+                                              </div>
+                                              <div class="col-7">
+                                                <input type="text" id="account" name="account" class="form-control" [(ngModel)]="formdata.account" disabled />       
+                                              </div>
+                                            </div>                                                                                                 
                                       </div>
                                   
-                                      <div class="form-group p-1">
-                                        <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
-                                        <small>Ticker</small>  
+                                      <div class="form-group pt-2">
+                                            <div class="row">
+                                              <div class="col-5">
+                                                <small>Ticker (Mercado)</small>         
+                                              </div>
+                                              <div class="col-7">
+                                                <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />         
+                                              </div>
+                                            </div>                                                                                             
                                       </div>
 
                                       <div class="form-group pt-2">
-                                        <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
-                                        <small>Comisiones</small>
-                                      </div>
-
-                                      <div class="form-group p-1">
-                                        <input type="text" class="form-control"name="dollareuro" [(ngModel)]="formdata.dollareuro" disabled />             
-                                        <small>Euro/Dóllar</small>  
-                                      </div>
-
-
-
+                                            <div class="row">
+                                              <div class="col-5">
+                                                <small>Comisiones</small>      
+                                              </div>
+                                              <div class="col-7">
+                                                <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />        
+                                              </div>
+                                            </div>                                                                                    
+                                      </div>                                      
                           </div>
 
-                          <div class="col-3">
-                                                      
-                                      
-                                    <div class="form-group pt-2">
-                                      <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />             
-                                      <small>Bloque</small>  
-                                    </div>
-
-                                    <div class="form-group pt-2">
-                                      <input type="text" class="form-control" name="block" value="{{positionid}}" disabled />             
-                                      <small>ID de operación</small>  
-                                    </div>
-
-
-                                     
-
-                          </div>
-
-                          <div class="col-3">
-                            <div class="form-group p-1">
-                              <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
-                              <small>Nº de contratos</small>
+                          <div class="col-4">
+                            <div class="form-group">
+                                      <div class="row">
+                                        <div class="col-5">
+                                          <small>Euro/Dóllar</small>       
+                                        </div>
+                                        <div class="col-7">
+                                          <input type="text" class="form-control"name="dollareuro" [(ngModel)]="formdata.dollareuro" disabled />        
+                                        </div>
+                                      </div>                                                                            
                             </div>
-                            <div class="form-group p-1">
-                              <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
-                              <small>Profit</small>
-                            </div>
-                            <div class="form-group p-1">
-                              <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
-                              <small>Stoploss</small>
-                            </div>
-                          </div>
-
-                          <div class="col-3">
-                            
                           </div>
 
                 </div>
@@ -134,34 +120,17 @@
           
         <!-- ----------------------------------------------------------------------------------------------------- -->
         <div class="col-lg-3 col-md-3 col-sm-2 p-2">
-                      <div class="row">
 
+
+                      <div class="row h-100">
                         <div class="col">
-                          <div class="form-group  d-block w-100 p-1">                                  
-                            <div class="form-group d-block w-100 p-1">
-                              <button type="button" class="btn btn-outline-warning w-100">Nueva sesión</button></div>
-                          </div>
-                        </div> 
-                      </div>
-
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-group  d-block w-100 p-1">                                  
-                            <div class="form-group d-block w-100 p-1">
-                              <button type="button" class="btn btn-outline-danger w-100">Cerrar sesión</button></div>
-                          </div>
-                        </div> 
-                      </div>
-
-                      <div class="row p-2">
-                        <div class="col h-100">
-                                  <div class="card border-primary">
+                                  <div class="card border-primary h-100">
                                     <div class="card-header bg-warning text-dark border-warning">
                                       <h6 class="card-title">Notas de sesión &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
                                   </div>
                                   <div class="card-body">                                
-                                    <DIV class="formgroup d-block w-100">
-                                    <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
+                                    <DIV class="formgroup d-block w-100 h-100">
+                                    <textarea [(ngModel)]="formdata.note" class="w-100 h-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
                                   </div> 
                                   </div>
                       </div>
@@ -239,6 +208,19 @@
                         </div>
 
                         <div class="col-3">                             
+
+                          <div class="form-group p-1">
+                            <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                            <small>Nº de contratos</small>
+                          </div>
+                          <div class="form-group p-1">
+                            <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
+                            <small>Profit</small>
+                          </div>
+                          <div class="form-group p-1">
+                            <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
+                            <small>Stoploss</small>
+                          </div>
 
                           <div class="form-group p-1 border border-success">
                             <small>Resultado</small>
@@ -414,10 +396,6 @@
     <!-- ----------------------------------------------------------------------------------------------------- -->  
 
 
-</div>
-</div>
-</div>
-</div>
 
 </form>
 </div>

@@ -197,17 +197,17 @@ export class PositionAddComponent {
       "tppid": 1,
       "tpp": "TPP2024",
       "accountid": 1,
-      "account": "A0045679",
+      "account": "A0045679 (iBroker)",
       "brokerid":1,
-      "broker": "iBroker",
-      "market": "NYMEX",
+      "broker": "",
+      "market": "",
       "marketid": 1,
-      "ticker": "MCL",
+      "ticker": "MCL (NYMEX)",
       "tickerid": 1,
       "dollareuro": 1.0005,      
       "patternid": 1,
       "setupid": 1,
-      "divisa": "EUR",
+      "divisa": "USD",
       "divisaid": 1,
       
     }
@@ -242,47 +242,6 @@ export class PositionAddComponent {
 
   // --------------------------------------------------------------
   // --------------------------------------------------------------
-
-  /*
-  onSubmit3(){
-    this.loggerService.log(Tlog.info, "contenido de formData: ");
-    this.loggerService.log(Tlog.info, this.formdata);
-
-    this.loggerService.log(Tlog.info, "this.formdata.tppCheck: ");
-    this.loggerService.log(Tlog.info, this.formdata.tppCheck);
-    this.loggerService.log(Tlog.info, (this.formdata.tppCheck) ? 1 : 0);
-
-    this.loggerService.log(Tlog.info, "this.input_tppCheck.nativeElement.checked: ");
-    this.loggerService.log(Tlog.info, this.input_tppCheck.nativeElement.checked);
-
-    this.loggerService.log(Tlog.info, "this.input_isrealCheck.nativeElement.checked: ");
-    this.loggerService.log(Tlog.info, this.input_isrealCheck.nativeElement.checked);
-
-    this.loggerService.log(Tlog.info, "this.select_setup.nativeElement.checked: ");
-    const options = this.selectSetup.nativeElement.options;
-    const selectedValues = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-    this.loggerService.log(Tlog.info, selectedValues.join(','));
-
-    this.loggerService.log(Tlog.info, "this.selectHighPattern.nativeElement.checked: ");
-    const optionsHP = this.selectHighPattern.nativeElement.options;
-    const selectedValuesHP = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValuesHP.push(options[i].value);
-      }
-    }
-    const highpattern = (selectedValuesHP.length>0)?selectedValuesHP.join(' ') + ' ':'';
-    this.formdata.pattern = highpattern  + this.formdata.pattern;
-
-
-    this.loggerService.log(Tlog.info, this.formdata);
-  }
-  */
 
   onSubmit2(){
         //this.idaccount = data.idaccount;
@@ -388,7 +347,7 @@ export class PositionAddComponent {
 
     // reload panel
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/posiciones']);
+      this.router.navigate(['/positions']);
     });
     
 
@@ -415,7 +374,7 @@ export class PositionAddComponent {
   // --------------------------------------------------------------
 
   onBack(){
-    this.router.navigate(['/posiciones']);
+    this.router.navigate(['/positions']);
   }
 
 
