@@ -316,7 +316,7 @@
                         </div>
                 
                         <div class="col-4">                            
-                                    <div class="row">
+                                    <div class="row border border-dark pt-1 pb-1">
                                               <div class="col-5">
                                                 <small>Resultado</small>
                                               </div>
@@ -335,7 +335,23 @@
     
                                           <div class="col ">
 
-                                                <div class="card border-primary">
+                                            <div class="row pt-2">
+                                              <div class="col-6">
+                                                <div class="form-group d-block w-100 ">
+                                                  <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
+                                                </div>
+                                              </div>
+                                              <div class="col-6">
+                                                      <div class="form-group  d-block w-100">                                  
+                                                        <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button>
+                                                      </div>
+                                              </div>
+                                          </div>
+
+
+                                               
+
+                                                <div class="card border-primary mt-2">
                                                         <div class="card-header bg-warning text-dark border-warning">
                                                           <h6 class="card-title">Notas de operación &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
                                                       </div>
@@ -345,32 +361,6 @@
                                                         </DIV>
                                                       </div> 
                                                 </div>
-
-                                                  <div class="form-group d-block w-100 pt-4">
-                                                          <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
-                                                  </div>
-
-                                               
-
-                                                  <div class="row pt-2">
-                                                      <div class="col-6">
-                                                              <div class="form-group  d-block w-100 p-1 m-2">                                                                                                                                                       
-                                                                <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x px-1" style="color: green;"></i>                                        
-                                                                <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x px-1" style="color: red;"></i>         
-                                                                <i title="Ver imágenes" class="fas fa-images fa-2x px-1" style="color: brown;"></i>                                                       
-                                                              </div> 
-                                                      </div>
-                                                      <div class="col-6">
-                                                              <div class="form-group  d-block w-100 p-1">                                  
-                                                                <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button>
-                                                              </div>
-                                                      </div>
-                                                  </div>
-
-
-                                                  <div class="pt-2">
-                                                            Alertas...
-                                                  </div> 
                                                   
                                           </div>              
                                                   
