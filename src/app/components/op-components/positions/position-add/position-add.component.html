@@ -3,15 +3,15 @@
 <app-common-subtitle [subtitle]="'Posiciones'"></app-common-subtitle>
 
 
-<div class="pt-2 mb-2">
+<div class="pt-2 mb-2 ">
 <form method="POST" #newpositions="ngForm" (ngSubmit)="onSubmit()">
   <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
 
           
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->
-    <div class="card">
-      <div class="card-body">
+    <div class="card  border border-dark pb-3">
+      <div class="card-body ">
 
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -125,8 +125,8 @@
                       <div class="row h-100">
                         <div class="col">
                                   <div class="card border-primary h-100">
-                                    <div class="card-header bg-warning text-dark border-warning">
-                                      <h6 class="card-title">Notas de sesión &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
+                                    <div class="card-header bg-dark text-white border-warning">
+                                      <h6 class="card-title">Notas de sesión &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(211, 156, 54);"></i> </h6>
                                   </div>
                                   <div class="card-body">                                
                                     <DIV class="formgroup d-block w-100 h-100">
@@ -209,52 +209,73 @@
 
                         <div class="col-3">                             
 
-                          <div class="form-group p-1">
-                            <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
-                            <small>Nº de contratos</small>
-                          </div>
-                          <div class="form-group p-1">
-                            <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
-                            <small>Profit</small>
-                          </div>
-                          <div class="form-group p-1">
-                            <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
-                            <small>Stoploss</small>
+                          <div class="form-group pt-1">
+                                <div class="row">
+                                        <div class="col-6">
+                                          <small>Contratos</small>
+                                        </div>
+                                        <div class="col-6">
+                                          <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                                        </div>
+                                </div>
                           </div>
 
-                          <div class="form-group p-1 border border-success">
-                            <small>Resultado</small>
-                            <input type="number" class="form-control" name="result"  value="{{result}}" disabled />
-                            
+                          <div class="form-group pt-1">
+                                <div class="row">
+                                    <div class="col-6">
+                                      <small>Profit</small>
+                                    </div>
+                                    <div class="col-6">
+                                      <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
+                                    </div> 
+                                  </div>                                                     
                           </div>
 
-                              <div class="form-group p-1">
-                                <small>Ticks</small>
-                                <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
-                                
+                          <div class="form-group pt-1">
+                                <div class="row">
+                                    <div class="col-6">
+                                      <small>Stoploss</small>
+                                    </div>
+                                    <div class="col-6">
+                                      <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
+                                    </div>
+                                  </div>   
+                          </div>
+
+                     
+                          <div class="form-group pt-1">
+                                <div class="row">
+                                <div class="col-6">
+                                  <small>Ticks</small>
+                                </div>
+                                <div class="col-6">
+                                  <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
+                                </div>    
                               </div>
+                          </div>
+                 
+
+                       
 
                         </div>
-
-
-                      </div>
+            </div>
 
          <!-- ----------------------------------------------------------------------------------------------------- -->
 
-                      <div class="row pt-4">
+             <div class="row pt-4">
 
                         <div class="col-3">
-                          <div class="col w-100">
-                            <div class="form-group ">
-                              <select #selectHighPattern multiple title="High Patterns" class=" w-100" id="highpatternid" size="7">
+                              <div class="col w-100">
+                                <div class="form-group ">
+                                  <select #selectHighPattern multiple title="High Patterns" class=" w-100" id="highpatternid" size="7">
 
-                                <option value="0" selected>Not-set manual</option>
-                                <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.name">{{ highpattern.name }}</option>   
-                               
-                              </select>
-                            </div>
+                                    <option value="0" selected>Not-set manual</option>
+                                    <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.name">{{ highpattern.name }}</option>   
+                                  
+                                  </select>
+                                </div>
 
-                      </div> 
+                              </div> 
                         </div>
                 
                         <div class="col-3">
@@ -314,24 +335,18 @@
                                     </div>                                                                       
 
                         </div>
-                
-                        <div class="col-3 center">
-                            
-                          <div class="card border-primary">
-                            <div class="card-header bg-warning text-dark border-warning">
-                              <h6 class="card-title">Notas de operación &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
-                          </div>
-                          <div class="card-body">                                
-                            <DIV class="formgroup d-block w-100">
-                            <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
-                          </div> 
-                          </div>
-                               
-                          
-                        </div>                                
-                      </div>                        
-              </div>
 
+                        <div class="col-3">
+                                  <div class="form-group pt-1 border border-success">
+                                    <small>Resultado</small>
+                                    <input type="number" class="form-control" name="result"  value="{{result}}" disabled />
+                                    
+                                  </div>
+                        </div>
+                                              
+                                           
+              </div>
+          </div>
               <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
               <div class="col-lg-3 col-md-3 col-sm-2">
                   <div class="row  ">
@@ -339,49 +354,45 @@
     
                                           <div class="col ">
 
-                                                <div class="row ">
-                                                        <div class="col ">
-                              
-                                                            <div class="form-group d-block w-100 p-1">
-                                                              <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
-                                                          </div>
-
+                                                <div class="card border-primary">
+                                                        <div class="card-header bg-warning text-dark border-warning">
+                                                          <h6 class="card-title">Notas de operación &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
                                                       </div>
+                                                      <div class="card-body">                                
+                                                        <DIV class="formgroup d-block w-100">
+                                                        <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea>
+                                                        </DIV>
+                                                      </div> 
                                                 </div>
 
-                                                  <div class="form-group  d-block w-100 p-1 m-2">       
-                                                                                                                                                
-                                                      <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x px-1" style="color: green;"></i>                                        
-                                                      <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x px-1" style="color: red;"></i>         
-                                                      <i title="Ver imágenes" class="fas fa-images fa-2x px-1" style="color: brown;"></i>                                                       
-                                                    </div>  
+                                                  <div class="form-group d-block w-100 pt-4">
+                                                          <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
+                                                  </div>
+
+                                               
+
+                                                  <div class="row pt-2">
+                                                      <div class="col-6">
+                                                              <div class="form-group  d-block w-100 p-1 m-2">                                                                                                                                                       
+                                                                <i title="Cerrar con profit" class="fas fa-circle-plus fa-2x px-1" style="color: green;"></i>                                        
+                                                                <i title="Cerrar con Stoploss" class="fas fa-circle-minus fa-2x px-1" style="color: red;"></i>         
+                                                                <i title="Ver imágenes" class="fas fa-images fa-2x px-1" style="color: brown;"></i>                                                       
+                                                              </div> 
+                                                      </div>
+                                                      <div class="col-6">
+                                                              <div class="form-group  d-block w-100 p-1">                                  
+                                                                <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button>
+                                                              </div>
+                                                      </div>
+                                                  </div>
 
 
-                                                    <div class="row">
-                                                      <div class="col">
-                                                        <div class="form-group  d-block w-100 p-1">                                  
-                                                            <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button>
-                                                        </div>
-                                                      </div> 
-                                                    </div>
-
-                                                    <hr>
-
-                                                    <div class="row">
-                                                      <div class="col">
-                                                        Alertas...
-                                                      </div> 
-                                                    </div>
-
-
-
-
+                                                  <div class="pt-2">
+                                                            Alertas...
+                                                  </div> 
+                                                  
                                           </div>              
                                                   
-
-
-                        
-
                   </div>
 
 
