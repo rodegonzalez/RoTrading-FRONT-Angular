@@ -104,10 +104,10 @@
                             <div class="form-group">
                                       <div class="row">
                                         <div class="col-5">
-                                          <small>Euro/Dóllar</small>       
+                                          <small>USDEUR</small>       
                                         </div>
                                         <div class="col-7">
-                                          <input type="text" class="form-control"name="dollareuro" [(ngModel)]="formdata.dollareuro" disabled />        
+                                          <input type="text" class="form-control"name="dollareuro"  disabled />        
                                         </div>
                                       </div>                                                                            
                             </div>
@@ -160,10 +160,7 @@
                                               <input #input_tppCheck type="checkbox" class="form-check-input" id="tppCheck"  checked >
                                               <label class="form-check-label" for="tppCheck">Es TPP</label>
                                             </div>
-                                            <div class="form-check" title="Is real operation or B-register">
-                                              <input  #input_isrealCheck type="checkbox" class="form-check-input" id="isrealCheck" checked >
-                                              <label class="form-check-label" for="isrealCheck">Es Real</label>
-                                            </div>
+                                            
                                 </div>
 
                                 <div class="col-6">
@@ -192,7 +189,7 @@
                                             <small>Hora IN</small>
                                       </div>
                                       <div class="col-7">
-                                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimein" />      
+                                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.timein" />      
                                       </div>                                        
                                 </div>
                                 <div class="row pt-1">
@@ -227,7 +224,7 @@
                                   <small>Hora OUT</small>
                                 </div>
                                 <div class="col-7">
-                                  <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimeout" />    
+                                  <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.timeout" />    
                                 </div>                                        
                               </div>
                                   <div class="row pt-1">
@@ -245,7 +242,7 @@
                                         <small>Ticks</small>
                                       </div>
                                       <div class="col-7">
-                                        <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
+                                        <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.opresultticks" value="{{curr_ticks}}" />
                                       </div>    
                                     </div>
                               </div>
@@ -262,10 +259,10 @@
                               <div class="row">
                                       <div class="col-6">
                                                     <div class="form-group ">
-                                                      <select #selectHighPattern title="High Patterns" class=" w-100" id="highpatternid">
+                                                      <select #selectHighPattern title="High Patterns" class="w-100" name="highpattern" id="highpattern">
 
-                                                        <option value="0" selected>Not-set</option>
-                                                        <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.name">{{ highpattern.name }}</option>   
+                                                        <option value="Not-set" selected>Not-set</option>
+                                                        <option *ngFor="let highpattern of positionHighPatterns" value="{{highpattern.name}}">{{ highpattern.name }}</option>   
                                                       
                                                       </select>
                                                     </div>
@@ -274,9 +271,9 @@
                                       <div class="col-6">
                                                   <div class="form-group"> 
                                                                                                         
-                                                        <select #selectPositionPattern title="Patterns" class="w-100" id="highpatternid">
+                                                        <select #selectPattern title="Patterns" class="w-100" name="pattern" id="pattern">
 
-                                                          <option value="0" selected>Not-set</option>
+                                                          <option value="Not-set" selected>Not-set</option>
                                                           <option *ngFor="let pattern of positionPatterns" value="{{pattern.name}}">{{ pattern.name }}</option>   
                                                         
                                                         </select>
@@ -291,7 +288,7 @@
                                                   <div class="row">
                                                       <div class="col-5">
                                                               <div class="form-group">                                                                                                         
-                                                                    <select #selectPositionPattern title="Temporalidad" class="w-100" id="temporal">
+                                                                    <select [(ngModel)]="formdata.setup2id" title="Temporalidad" class="w-100" name="setup2id">
             
                                                                       <option value="m1" >m1</option>
                                                                       <option value="m3" >m3</option>
@@ -305,7 +302,7 @@
                                                                 <div class="form-group">
                                                                   <select #selectSetup title="Setups" class="custom-select-sm w-100" id="setupid" >
                     
-                                                                    <option value="0" selected>Not-set</option>
+                                                                    <option value="Not-set" selected>Not-set</option>
                                                                     <option *ngFor="let setup of positionSetups" [value]="setup.name">{{ setup.name }}</option>   
                                                                   
                                                                   </select>
@@ -343,7 +340,7 @@
                                               </div>
                                               <div class="col-6">
                                                       <div class="form-group  d-block w-100">                                  
-                                                        <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2()">Submit a LOG</button>
+                                                        <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2log()">Submit LOG</button>
                                                       </div>
                                               </div>
                                           </div>

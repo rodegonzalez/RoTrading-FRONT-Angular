@@ -39,11 +39,6 @@
                                       </div>
 
                                       <div class="form-group p-1">
-                                        <input type="text" class="form-control"name="broker" [(ngModel)]="formdata.broker" disabled />             
-                                        <small>Broker</small>  
-                                      </div>
-
-                                      <div class="form-group p-1">
                                         <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />             
                                         <small>Divisa</small>  
                                       </div>
@@ -51,12 +46,7 @@
                                     </div>
                           </div>
 
-                          <div class="col-3">
-                                      
-                                      <div class="form-group p-1">
-                                        <input type="text" class="form-control" name="market" [(ngModel)]="formdata.market" disabled />             
-                                        <small>Mercado</small>  
-                                      </div>
+                          <div class="col-3">                                      
                                   
                                       <div class="form-group p-1">
                                         <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled />             
@@ -66,11 +56,6 @@
                                       <div class="form-group pt-2">
                                         <input type="number" class="form-control" name="commisions" [(ngModel)]="formdata.commision" disabled />
                                         <small>Comisiones</small>
-                                      </div>
-
-                                      <div class="form-group p-1">
-                                        <input type="text" class="form-control"name="dollareuro" [(ngModel)]="formdata.dollareuro" disabled />             
-                                        <small>Euro/Dóllar</small>  
                                       </div>
 
 
@@ -99,14 +84,6 @@
                             <div class="form-group p-1">
                               <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
                               <small>Nº de contratos</small>
-                            </div>
-                            <div class="form-group p-1">
-                              <input type="number" class="form-control" name="profit" [(ngModel)]="formdata.profit" />
-                              <small>Profit</small>
-                            </div>
-                            <div class="form-group p-1">
-                              <input type="number" class="form-control" name="stoploss" [(ngModel)]="formdata.stoploss" />
-                              <small>Stoploss</small>
                             </div>
                           </div>
 
@@ -181,12 +158,12 @@
                         <div class="col-3">
                           <div class="form-group p-1">
                             <small>Hora ENTRADA</small>
-                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimein" />                                         
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.timein" />                                         
                           </div>
    
                           <div class="form-group p-1">
                             <small>Hora SALIDA</small>
-                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.datetimeout" />                                         
+                            <input type="text" class="form-control" name="datetimein" [(ngModel)]="formdata.timeout" />                                         
                           </div>
 
 
@@ -216,7 +193,7 @@
 
                               <div class="form-group p-1">
                                 <small>Ticks</small>
-                                <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.ticks" value="{{curr_ticks}}" />
+                                <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="opresultticks" [(ngModel)]="formdata.opresultticks" value="{{curr_ticks}}" />
                                 
                               </div>
 
@@ -265,15 +242,15 @@
                                         <div class="col-6 border h-100">
                                                   <div class="form-group">  
                                                     <div class="form-check">
-                                                      <input class="form-check-input" type="radio" name="temporal" id="temporal" [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m1" />
+                                                      <input class="form-check-input" type="radio" name="setup2id" id="setup2id" [(ngModel)]="formdata.setup2id" [ngModelOptions]="{standalone: true}" value="m1" />
                                                       m1
                                                     </div>
                                                     <div class="form-check">
-                                                      <input class="form-check-input" type="radio" name="temporal" id="temporal"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m3"/>
+                                                      <input class="form-check-input" type="radio" name="setup2id" id="setup2id"  [(ngModel)]="formdata.setup2id" [ngModelOptions]="{standalone: true}" value="m3"/>
                                                       m3
                                                     </div>
                                                     <div class="form-check">
-                                                      <input class="form-check-input" type="radio" name="temporal" id="temporal"  [(ngModel)]="formdata.temporal" [ngModelOptions]="{standalone: true}" value="m5" checked />
+                                                      <input class="form-check-input" type="radio" name="setup2id" id="setup2id"  [(ngModel)]="formdata.setup2id" [ngModelOptions]="{standalone: true}" value="m5" checked />
                                                       m5
                                                     </div>
                                                   </div>

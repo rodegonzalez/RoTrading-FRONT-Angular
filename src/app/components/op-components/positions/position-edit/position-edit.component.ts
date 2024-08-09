@@ -50,47 +50,45 @@ export class PositionEditComponent {
   result: number = 0;
   
   formdata: IPositionView = {
-    block: "B-2024-001",
+    id: 0,
+    sessionid: "20240809",
+    guid: "",
+    block: "B-2024",
+    blocksecuence: 0,
     creation: "",
     modification: "",
-    datetimein: "",
-    datetimeout: "",
+    timein: "",
+    timeout: "",
     buysell: "buy",
     pricein: 0,
     priceout: 0,
-    ticks: 81,
-    profit: 0,
-    stoploss: -20,
+    opresultticks: 81,
+    opresult: 0,
     contracts: 1,
     commision: 4.5,
-    euros: 0,
-    dollareuro: 1.0005,
+    opresulteur: 0,
     imagepath: "",
     status: "",
     divisaid: 0,
     accountid: 0,
-    marketid: 0,
     tickerid: 0,
-    patternid: 0,
-    setupid: 0,
-    brokerid: 0,
-    isrealCheck: 0,
-    tppCheck: 0,
+    pattern1id: 0,
+    pattern2id: "Not-set",
+    setup1id: 0,
+    setup2id: "m5",
     note: "",
-    temporal: "m5",
     tppid: 0,
     tpp: "",
-    active: 0,
+    tppcheck: 0,
     deleted: 0,
     processed: 0,
     divisa:			'',
     account:		'',
-    market:			'',
-    ticker:			'',
-    pattern:		'Otro',
-    setup:			'',
-    broker:			'',
     acctype:		'',
+    ticker:			'',
+    pattern:		'Not-set',
+    setup:			'',
+
   };
 
   
@@ -105,8 +103,8 @@ export class PositionEditComponent {
     , private router: Router) 
   {
     const mydate = this.getDate();
-    this.formdata.datetimein = mydate;
-    this.formdata.datetimeout = mydate;
+    this.formdata.timein = mydate;
+    this.formdata.timeout = mydate;
     this.formdata.creation = mydate;
    }
 
@@ -197,37 +195,32 @@ export class PositionEditComponent {
       "tppid": 1,
       "tpp": "TPP2024",
       "accountid": 1,
-      "account": "A0045679",
+      "account": "A0045679 (iBroker)",
       "brokerid":1,
-      "broker": "iBroker",
-      "market": "NYMEX",
-      "marketid": 1,
-      "ticker": "MCL",
+      "broker": "",
+      "ticker": "MCL (NYMEX)",
       "tickerid": 1,
       "dollareuro": 1.0005,      
-      "patternid": 1,
-      "setupid": 1,
-      "divisa": "EUR",
+      "pattern1id": 1,
+      "setup1id": 1,
+      "divisa": "USD",
       "divisaid": 1,
       
     }
 
     const default_tppid: number = 1;
 
-    this.formdata.datetimein = this.getDate();
+    this.formdata.timein = this.getDate();
     this.formdata.accountid = defaults.accountid;
     this.formdata.account = defaults.account;
-    this.formdata.brokerid = defaults.brokerid;
-    this.formdata.broker = defaults.broker;
-    this.formdata.marketid = defaults.marketid;
-    this.formdata.market = defaults.market;
     this.formdata.tickerid = defaults.tickerid;
     this.formdata.ticker = defaults.ticker;    
     this.formdata.tppid = defaults.tppid;
     this.formdata.tpp = defaults.tpp;
-    this.formdata.dollareuro = defaults.dollareuro;
-    this.formdata.patternid = defaults.patternid;
-    this.formdata.setupid = defaults.setupid;
+    this.formdata.pattern1id = defaults.pattern1id;
+    this.formdata.pattern2id = "Not-set";
+    this.formdata.setup1id = defaults.setup1id;
+    this.formdata.setup2id = "m5";
     this.formdata.divisaid = defaults.divisaid;
     this.formdata.divisa = defaults.divisa;
   }
@@ -289,19 +282,13 @@ export class PositionEditComponent {
         const mydate = this.getDate();
         this.formdata.creation = mydate;
         this.formdata.modification = mydate;
-        this.formdata.active = 1;
         this.formdata.deleted = 0;
         this.formdata.processed = 0;
         this.formdata.status = "opened";
-    
-        //TODO: fix this
-        this.formdata.brokerid = 1;
-        this.formdata.brokerid = 1;
         
         this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
     
-        this.formdata.tppCheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
-        this.formdata.isrealCheck = this.input_isrealCheck.nativeElement.checked ? 1 : 0;
+        this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
     
         // setups
         const options = this.selectSetup.nativeElement.options;
@@ -343,19 +330,13 @@ export class PositionEditComponent {
     const mydate = this.getDate();
     this.formdata.creation = mydate;
     this.formdata.modification = mydate;
-    this.formdata.active = 1;
     this.formdata.deleted = 0;
     this.formdata.processed = 0;
     this.formdata.status = "opened";
-
-    //TODO: fix this
-    this.formdata.brokerid = 1;
-    this.formdata.brokerid = 1;
     
     this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
 
-    this.formdata.tppCheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
-    this.formdata.isrealCheck = this.input_isrealCheck.nativeElement.checked ? 1 : 0;
+    this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
 
      // setups
     const options = this.selectSetup.nativeElement.options;
@@ -400,14 +381,14 @@ export class PositionEditComponent {
   priceOutChanged(event: any){
     this.loggerService.log(Tlog.info, "PriceOut changed: ");
     this.curr_ticks = this.curr_ticks + 50;
-    this.formdata.ticks = this.curr_ticks;
+    this.formdata.opresultticks = this.curr_ticks;
     this.formdata.priceout = this.curr_priceout;
   }
 
   ticksChanged(event: any){
     this.loggerService.log(Tlog.info, "Ticks changed: ");
     this.curr_priceout = this.formdata.priceout + 50;
-    this.formdata.ticks = this.curr_ticks;
+    this.formdata.opresultticks = this.curr_ticks;
     this.formdata.priceout = this.curr_priceout;
   }
 
