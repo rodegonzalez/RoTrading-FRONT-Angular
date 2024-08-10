@@ -177,7 +177,6 @@ export class PositionAddComponent {
 
   }
 
-  loadBrokers(){}
   loadTickers(){}
 
   // --------------------------------------------------------------
@@ -223,9 +222,8 @@ export class PositionAddComponent {
   ngOnInit(){    
     this.loadSetups();
     this.loadPatterns();
-    this.loadBrokers();
     this.loadTickers();
-    const defaults = this.loadDefaults();
+    this.loadDefaults();
   }
 
   // --------------------------------------------------------------

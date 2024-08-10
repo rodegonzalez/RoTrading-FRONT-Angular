@@ -182,7 +182,6 @@ export class PositionEditComponent {
 
   }
 
-  loadBrokers(){}
   loadTickers(){}
 
   // --------------------------------------------------------------
@@ -228,9 +227,8 @@ export class PositionEditComponent {
   ngOnInit(){    
     this.loadSetups();
     this.loadPatterns();
-    this.loadBrokers();
     this.loadTickers();
-    const defaults = this.loadDefaults();
+    this.loadDefaults();
   }
 
   // --------------------------------------------------------------
