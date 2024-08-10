@@ -200,7 +200,7 @@ export class PositionEditComponent {
 
     const default_tppid: number = 1;
 
-    this.formdata.timein = this.sharedModule.getDate();
+    this.formdata.timein = this.sharedModule.getTime();
     this.formdata.accountid = defaults.accountid;
     this.formdata.account = defaults.account;
     this.formdata.tickerid = defaults.tickerid;
@@ -268,7 +268,7 @@ export class PositionEditComponent {
 
   onSubmit2(){
         //this.idaccount = data.idaccount;
-        const mydate = this.sharedModule.getDate();
+        const mydate = this.sharedModule.getDateTime();
         this.formdata.creation = mydate;
         this.formdata.modification = mydate;
         this.formdata.deleted = 0;
@@ -316,7 +316,7 @@ export class PositionEditComponent {
     this.loggerService.log(Tlog.info, this.formdata);
 
     //this.idaccount = data.idaccount;
-    const mydate = this.sharedModule.getDate();
+    const mydate = this.sharedModule.getDateTime();
     this.formdata.creation = mydate;
     this.formdata.modification = mydate;
     this.formdata.deleted = 0;

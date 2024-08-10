@@ -99,7 +99,6 @@ export class PositionAddComponent {
     , private router: Router
     , private sharedModule: SharedModule) 
   {
-    //const mydate = this.getDate();
     const mydate = this.sharedModule.getTime();
     this.formdata.timein = mydate;
     this.formdata.timeout = mydate;
@@ -196,7 +195,7 @@ export class PositionAddComponent {
 
     const default_tppid: number = 1;
 
-    this.formdata.timein = this.sharedModule.getDate();
+    this.formdata.timein = this.sharedModule.getTime();
     this.formdata.accountid = defaults.accountid;
     this.formdata.account = defaults.account;
     this.formdata.tickerid = defaults.tickerid;
@@ -223,7 +222,7 @@ export class PositionAddComponent {
 
   onSubmit2log(){
         //this.idaccount = data.idaccount;
-        const mydate = this.sharedModule.getDate();
+        const mydate = this.sharedModule.getDateTime();
         this.formdata.creation = mydate;
         this.formdata.modification = mydate;
         this.formdata.deleted = 0;
@@ -280,7 +279,7 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, this.formdata);
 
     //this.idaccount = data.idaccount;
-    const mydate = this.sharedModule.getDate();
+    const mydate = this.sharedModule.getDateTime();
     this.formdata.creation = mydate;
     this.formdata.modification = mydate;
     this.formdata.deleted = 0;

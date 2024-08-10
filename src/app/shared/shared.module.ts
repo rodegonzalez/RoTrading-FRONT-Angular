@@ -10,16 +10,25 @@ declarations: [NumberFormatWithDecimalsPipe], // Declara el pipe
 })
 export class SharedModule {
 
-  getDate(){
+  getDateTime(){
     const now = new Date();
     const year = now.getFullYear();
     const month = `${now.getMonth() + 1}`.padStart(2, '0');
     const day = `${now.getDate()}`.padStart(2, '0'); // Corregido para obtener el día correcto
     const hour = `${now.getHours()}`.padStart(2, '0');
     const minute = `${now.getMinutes()}`.padStart(2, '0');
-    return `${year}/${month}/${day} ${hour}:${minute}`; // Añadido hora y minutos
+    const second = `${now.getSeconds()}`.padStart(2, '0');
+    return `${year}/${month}/${day} ${hour}:${minute}:${second}`; // Añadido hora y minutos
    }
-   
+
+   getDate(){
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth() + 1}`.padStart(2, '0');
+    const day = `${now.getDate()}`.padStart(2, '0'); // Corregido para obtener el día correcto
+    return `${year}/${month}/${day}`; // Añadido hora y minutos
+   }
+
   getTime(){
     const now = new Date();
     const hour = `${now.getHours()}`.padStart(2, '0');
