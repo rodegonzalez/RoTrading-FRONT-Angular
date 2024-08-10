@@ -22,17 +22,11 @@ import { Router } from '@angular/router';
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 export class PositionAddComponent {
-  
-
   @ViewChild('input_tppCheck') input_tppCheck!: ElementRef;
-  @ViewChild('input_isrealCheck') input_isrealCheck!: ElementRef;
   @ViewChild('selectSetup') selectSetup!: ElementRef;
   @ViewChild('selectHighPattern') selectHighPattern!: ElementRef;
   @ViewChild('selectPattern') selectPattern!: ElementRef;
   
-  
-
-
   // --------------------------------------------------------------
   // --------------------------------------------------------------
 
