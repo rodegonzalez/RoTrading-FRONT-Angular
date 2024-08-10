@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { LoggerService, Tlog } from '../services/logger.service';
 import { map, Observable } from 'rxjs';
 import { IPositionView } from '../interfaces/IPosition.interface';
-import {IPositionResponseInterface} from '../interfaces/iposition-response.interface';
 import { environment } from '../environment/global.environment';
 
 @Injectable({
@@ -64,7 +63,6 @@ export class PositionsService {
     // POST
 
     savePosition(): any{
-        let response: IPositionResponseInterface;
 
         const headers = {'Content-Type': 'multipart/json charset=utf-8'};
         const body = { title: 'title post var', msg: "mensaje" };
@@ -88,7 +86,6 @@ export class PositionsService {
     
     // POST
     savePositionForm(formdata: any): any{
-        let response: IPositionResponseInterface;
 
         const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
         //const body = { title: 'title post var' };
@@ -115,7 +112,6 @@ export class PositionsService {
 
     // PUT
     updatePositionForm(formdata: any): any{
-        let response: IPositionResponseInterface;
 
         const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
         //const body = { title: 'title post var' };
