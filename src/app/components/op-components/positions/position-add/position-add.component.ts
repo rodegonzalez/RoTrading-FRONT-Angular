@@ -60,7 +60,7 @@ export class PositionAddComponent {
     opresultticks: 81,
     opresult: 0,
     contracts: 1,
-    commision: 4.5,
+    commission: 4.5,
     opresulteur: 0,
     imagepath: "",
     status: "",

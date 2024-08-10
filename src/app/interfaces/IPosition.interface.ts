@@ -16,7 +16,7 @@
 	contracts:      number;
 	opresultticks:  number;
 	opresult:		number;
-	commision:      number;
+	commission:      number;
 	opresulteur:	number;
 	divisaid:       number;
 	accountid:      number;
@@ -50,7 +50,7 @@
 	contracts:      number;
 	opresultticks:  number;
 	opresult:		number;
-	commision:      number;
+	commission:      number;
 	opresulteur:	number;
 	divisaid:       number;
 	accountid:      number;
