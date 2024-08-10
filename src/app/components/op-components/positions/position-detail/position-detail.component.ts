@@ -11,6 +11,7 @@ import { PositionSetupsService } from '../../../../services/position_setups.serv
 import { PositionPatternsService, PositionHighPatternsService } from '../../../../services/position_patterns.service';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 import { Router } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-position-detail',
@@ -100,9 +101,10 @@ export class PositionDetailComponent {
     , private positionPatternsService: PositionPatternsService
     , private positionHighPatternsService: PositionHighPatternsService
     , private loggerService: LoggerService
-    , private router: Router) 
+    , private router: Router
+    , private sharedModule: SharedModule) 
   {
-    const mydate = this.getDate();
+    const mydate = this.sharedModule.getTime();
     this.formdata.timein = mydate;
     this.formdata.timeout = mydate;
     this.formdata.creation = mydate;
@@ -112,19 +114,8 @@ export class PositionDetailComponent {
 
    // --------------------------------------------------------------
    // --------------------------------------------------------------
-
-     // Auxiliar
-  getDate(){
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = `${now.getMonth() + 1}`.padStart(2, '0');
-    const day = `${now.getDate()}`.padStart(2, '0'); // Corregido para obtener el día correcto
-    const hour = `${now.getHours()}`.padStart(2, '0');
-    const minute = `${now.getMinutes()}`.padStart(2, '0');
-    return `${year}/${month}/${day} ${hour}:${minute}`; // Añadido hora y minutos
-   }
-
-     // combos y selectores
+     
+   // combos y selectores
   loadSetups(){
     this.positionSetupsService.getAll().subscribe({
       complete: () => {
@@ -209,7 +200,7 @@ export class PositionDetailComponent {
 
     const default_tppid: number = 1;
 
-    this.formdata.timein = this.getDate();
+    this.formdata.timein = this.sharedModule.getDate();
     this.formdata.accountid = defaults.accountid;
     this.formdata.account = defaults.account;
     this.formdata.tickerid = defaults.tickerid;
@@ -277,7 +268,7 @@ export class PositionDetailComponent {
 
   onSubmit2(){
         //this.idaccount = data.idaccount;
-        const mydate = this.getDate();
+        const mydate = this.sharedModule.getDate();
         this.formdata.creation = mydate;
         this.formdata.modification = mydate;
         this.formdata.deleted = 0;
@@ -325,7 +316,7 @@ export class PositionDetailComponent {
     this.loggerService.log(Tlog.info, this.formdata);
 
     //this.idaccount = data.idaccount;
-    const mydate = this.getDate();
+    const mydate = this.sharedModule.getDate();
     this.formdata.creation = mydate;
     this.formdata.modification = mydate;
     this.formdata.deleted = 0;
