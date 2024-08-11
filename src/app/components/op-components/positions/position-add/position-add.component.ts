@@ -5,19 +5,21 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { IPositionView } from 'src/app/interfaces/IPosition.interface';
 import { IPositionSetup } from 'src/app/interfaces/IPositionSetup.interface';
-import { IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface';
+import { IPositionHighPattern, IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface';
 import { ITicker } from 'src/app/interfaces/ITicker.interface';
 import { ITickerAccount } from 'src/app/interfaces/ITickerAccount.interface';
 import { ITpp } from 'src/app/interfaces/ITpp.interface';
 import { IAccount } from 'src/app/interfaces/IAccount.interface';
+import { IDivisa } from 'src/app/interfaces/IDivisa.interface';
 
 import { PositionsService } from '../../../../services/positions.service';
 import { PositionSetupsService } from '../../../../services/position_setups.service';
 import { PositionPatternsService, PositionHighPatternsService } from '../../../../services/position_patterns.service';
-import { TickerService } from '../../../../services/ticker.service'
-import { TickerAccountService } from '../../../../services/tickeraccount.service'
-import { TppService } from '../../../../services/tpp.service'
-import { AccountsService } from '../../../../services/accounts.service'
+import { TickerService } from '../../../../services/ticker.service';
+import { TickerAccountService } from '../../../../services/tickeraccount.service';
+import { TppService } from '../../../../services/tpp.service';
+import { AccountsService } from '../../../../services/accounts.service';
+import { DivisaService } from '../../../../services/divisa.service';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -49,6 +51,7 @@ export class PositionAddComponent {
   positionid = 0;
 
   tpps: Array<ITpp> = [];
+  divisas: Array<IDivisa> = [];
   accounts: Array<IAccount> = [];
   tickers: Array<ITicker> = [];
   tickerAccounts: Array<ITickerAccount> = [];
@@ -91,69 +94,201 @@ export class PositionAddComponent {
     , private tickerAccountService: TickerAccountService
     , private tppService: TppService
     , private accountService: AccountsService
+    , private divisaService: DivisaService
     , private loggerService: LoggerService
     , private router: Router
     , private sharedModule: SharedModule) 
     {
-      const mydate = this.sharedModule.getTime();
-      this.formdata.timein = mydate;
-      this.formdata.timeout = mydate;
-      this.formdata.creation = mydate;
     }
 
 
    // --------------------------------------------------------------
    // --------------------------------------------------------------
    
-  loadTppsAsync(): Promise<void> {
+  loadDivisasAsync(): Promise<void> {
+    return new Promise((resolve, reject) => {
+          this.divisaService  .getAll().subscribe({
+            complete: () => {
+                resolve();
+            },
+            next: (data: Array<IDivisa>) => {
+              this.divisas = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadDivisasAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
 
+  loadAccountsAsync(): Promise<void> {
           return new Promise((resolve, reject) => {
-
-                this.tppService.getAll().subscribe({
+                this.accountService.getAll().subscribe({
                   complete: () => {
                       resolve();
                   },
-                  next: (data: Array<ITpp>) => {
-                    this.tpps = data;        
+                  next: (data: Array<IAccount>) => {
+                    this.accounts = data;        
                   },
                   error: (e: any) => {
-                    this.loggerService.log(Tlog.error, "loadTppsAsync.getAll() vía http - http error.");
+                    this.loggerService.log(Tlog.error, "loadAccountsAsync error:");
                     this.loggerService.log(Tlog.error, e);
+                    reject(e);
                   }
                 });
-
           });
   }
 
+  loadTppsAsync(): Promise<void> {
+    return new Promise((resolve, reject) => {
+          this.tppService.getAll().subscribe({
+            complete: () => {
+                resolve();
+            },
+            next: (data: Array<ITpp>) => {
+              this.tpps = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadTppsAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
 
-  loadFunction1(): Promise<void> {
-      return new Promise((resolve, reject) => {
-        // Simulación de una operación asíncrona
-        setTimeout(() => {
-          console.log("loadFunction1 completada");
-          resolve();
-        }, 0);
-      });
-    }
+  loadSetupsAsync(): Promise<void> {
+    return new Promise((resolve, reject) => {
+          this.positionSetupsService.getAll().subscribe({
+            complete: () => {
+                resolve();
+            },
+            next: (data: Array<IPositionSetup>) => {
+              this.positionSetups = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadSetupsAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
 
-   async loadData(): Promise<void> {
-     await this.loadFunction1();
-     await this.loadTppsAsync();
-    }
+  loadHighPatternsAsync(): Promise<void> {
+    return new Promise((resolve, reject) => {
+          this.positionHighPatternsService.getAll().subscribe({
+            complete: () => {
+                resolve();
+            },
+            next: (data: Array<IPositionHighPattern>) => {
+              this.positionHighPatterns = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadHighPatternsAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
+
+  loadPatternsAsync(): Promise<void> {
+    return new Promise((resolve, reject) => {
+          this.positionPatternsService.getAll().subscribe({
+            complete: () => {
+                resolve();
+            },
+            next: (data: Array<IPositionPattern>) => {
+              this.positionPatterns = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadPatternsAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
+
+  loadTickersAsync(): Promise<void> {
+    return new Promise((resolve, reject) => {
+          this.tickerService.getAll().subscribe({
+            complete: () => {
+                resolve();
+            },
+            next: (data: Array<ITicker>) => {
+              this.tickers = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadTickersAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
+
+  loadTickerAccountsAsync(): Promise<void> {
+    return new Promise((resolve, reject) => {
+          this.tickerAccountService.getAll().subscribe({
+            complete: () => {
+                resolve();
+            },
+            next: (data: Array<ITickerAccount>) => {
+              this.tickerAccounts = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadTickerAccountsAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
+
+  async loadDataAsync(): Promise<void> {
+    await this.loadDivisasAsync();
+    await this.loadTppsAsync();
+    await this.loadAccountsAsync();
+    await this.loadSetupsAsync();
+    await this.loadPatternsAsync();
+    await this.loadHighPatternsAsync();
+    await this.loadTickersAsync();
+    await this.loadTickerAccountsAsync();
+  }
+
+  loadDefaultData(){
+    const mydate = this.sharedModule.getTime();
+    this.formdata.timein = mydate;
+    this.formdata.timeout = mydate;
+    this.formdata.creation = mydate;
+    this.formdata.timein = this.sharedModule.getTime();
+    this.formdata.accountid = this.accounts[0].id;
+    this.formdata.account = this.accounts[0].name;
+    this.formdata.tickerid = this.tickers[0].id;
+    this.formdata.ticker = this.tickers[0].name;    
+    this.formdata.tppid = this.tpps[0].id;
+    this.formdata.tpp = this.tpps[0].name;
+    this.formdata.pattern1id = this.positionHighPatterns[0].id;
+    this.formdata.pattern2id = "Not-set";
+    this.formdata.setup1id = this.positionPatterns[0].id;
+    this.formdata.setup2id = "m5";
+    this.formdata.divisaid = this.divisas[0].id;
+    this.formdata.divisa = this.divisas[0].name;
+  }
 
   loadDefaultsAsync(){
-    this.loggerService.log(Tlog.info, "loadDefaultsAsync - Init.");
+    this.loadDataAsync().then(() => {
+      this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
+      this.loadDefaultData();
 
-    this.loadData().then(() => {
-      console.log("Todas las funciones de carga completadas");
-      this.loggerService.log(Tlog.info, "tpps[0].id:");
-      this.loggerService.log(Tlog.info, this.tpps[0].id);
     }).catch((error) => {
-      console.error("Error en la carga de datos:", error);
+      this.loggerService.log(Tlog.error, "Error en la carga de datos:");
+      this.loggerService.log(Tlog.error, error);
     });
-
-
-    this.loggerService.log(Tlog.info, "loadDefaultsAsync - End.");
 
   }
 
@@ -178,12 +313,6 @@ export class PositionAddComponent {
         }
       });
   }
-
-
-
-
-  // --------------------------------------------------------------
-   // --------------------------------------------------------------
 
    loadAccounts(){
     this.accountService.getAll().subscribe({
@@ -218,9 +347,6 @@ export class PositionAddComponent {
       }
     });
   }
-
-  // --------------------------------------------------------------
-  // --------------------------------------------------------------
 
   loadPatterns(){
 
@@ -352,7 +478,6 @@ export class PositionAddComponent {
     this.loadTickerAccounts();
     this.loadSetups();
     this.loadPatterns();
-
     this.loadDefaults();
 */
 
