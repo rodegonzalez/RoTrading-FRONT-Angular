@@ -260,6 +260,7 @@ export class PositionAddComponent {
     await this.loadTickerAccountsAsync();
   }
 
+  // load data after async methods
   loadDefaultData(){
     const mydate = this.sharedModule.getTime();
     this.formdata.timein = mydate;
@@ -280,210 +281,20 @@ export class PositionAddComponent {
     this.formdata.divisa = this.divisas[0].name;
   }
 
-  loadDefaultsAsync(){
+   // --------------------------------------------------------------
+   // --------------------------------------------------------------
+
+  ngOnInit(){  
+    // load data
     this.loadDataAsync().then(() => {
       this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
       this.loadDefaultData();
-
     }).catch((error) => {
       this.loggerService.log(Tlog.error, "Error en la carga de datos:");
       this.loggerService.log(Tlog.error, error);
     });
 
-  }
-
-
-   // --------------------------------------------------------------
-   // --------------------------------------------------------------
-
-
-  loadTpps() {
-      this.tppService.getAll().subscribe({
-        complete: () => {
-            //this.loggerService.log(Tlog.info, "tppService.getAll() vía http - Ended.");
-        },
-        next: (data: Array<ITpp>) => {
-          this.loggerService.log(Tlog.info, "tppService.getAll() vía http - data:");
-          this.loggerService.log(Tlog.info, data);
-          this.tpps = data;        
-        },
-        error: (e: any) => {
-          this.loggerService.log(Tlog.error, "tppService.getAll() vía http - http error.");
-          this.loggerService.log(Tlog.error, e);
-        }
-      });
-  }
-
-   loadAccounts(){
-    this.accountService.getAll().subscribe({
-      complete: () => {
-          //this.loggerService.log(Tlog.info, "accountService.getAll() vía http - Ended.");
-      },
-      next: (data: Array<IAccount>) => {
-        this.loggerService.log(Tlog.info, "accountService.getAll() vía http - data:");
-        this.loggerService.log(Tlog.info, data);
-        this.accounts = data;        
-      },
-      error: (e: any) => {
-        this.loggerService.log(Tlog.error, "accountService.getAll() vía http - http error.");
-        this.loggerService.log(Tlog.error, e);
-      }
-    });
-  }
-
-  loadSetups(){
-    this.positionSetupsService.getAll().subscribe({
-      complete: () => {
-          //this.loggerService.log(Tlog.info, "positionSetupsService.getAll() vía http - Ended.");
-      },
-      next: (data: Array<IPositionSetup>) => {
-        this.loggerService.log(Tlog.info, "positionSetupsService.getAll() vía http - data:");
-        this.loggerService.log(Tlog.info, data);
-        this.positionSetups = data;        
-      },
-      error: (e: any) => {
-        this.loggerService.log(Tlog.error, "positionSetupsService.getAll() vía http - http error.");
-        this.loggerService.log(Tlog.error, e);
-      }
-    });
-  }
-
-  loadPatterns(){
-
-    // Patterns
-    this.positionPatternsService.getAll().subscribe({
-      complete: () => {
-          //this.loggerService.log(Tlog.info, "positionPatternsService.getAll() vía http - Ended.");
-      },
-      next: (data: Array<IPositionPattern>) => {
-        this.loggerService.log(Tlog.info, "positionPatternsService.getAll() vía http - data:");
-        this.loggerService.log(Tlog.info, data);
-        this.positionPatterns = data;        
-      },
-      error: (e: any) => {
-        this.loggerService.log(Tlog.error, "positionPatternsService.getAll() vía http - http error.");
-        this.loggerService.log(Tlog.error, e);
-      }
-    });
-
-    // High Patterns
-    this.positionHighPatternsService.getAll().subscribe({
-      complete: () => {
-          //this.loggerService.log(Tlog.info, "positionHighPatternsService.getAll() vía http - Ended.");
-      },
-      next: (data: Array<IPositionPattern>) => {
-        this.loggerService.log(Tlog.info, "positionHighPatternsService.getAll() vía http - data:");
-        this.loggerService.log(Tlog.info, data);
-        this.positionHighPatterns = data;        
-      },
-      error: (e: any) => {
-        this.loggerService.log(Tlog.error, "positionHighPatternsService.getAll() vía http - http error.");
-        this.loggerService.log(Tlog.error, e);
-      }
-    });
-
-  }
-
-  loadTickers(){
-            this.tickerService.getAll().subscribe({
-              complete: () => {
-                  //this.loggerService.log(Tlog.info, "tickerService.getAll() vía http - Ended.");
-              },
-              next: (data: Array<ITicker>) => {
-                this.loggerService.log(Tlog.info, "tickerService.getAll() vía http - data:");
-                this.loggerService.log(Tlog.info, data);
-                this.tickers = data;        
-              },
-              error: (e: any) => {
-                this.loggerService.log(Tlog.error, "tickerService.getAll() vía http - http error.");
-                this.loggerService.log(Tlog.error, e);
-              }
-            });
-  }
-
-  loadTickerAccounts(){
-    this.tickerAccountService.getAll().subscribe({
-      complete: () => {
-          //this.loggerService.log(Tlog.info, "tickerAccountService.getAll() vía http - Ended.");
-      },
-      next: (data: Array<ITickerAccount>) => {
-        this.loggerService.log(Tlog.info, "tickerAccountService.getAll() vía http - data:");
-        this.loggerService.log(Tlog.info, data);
-        this.tickerAccounts = data;        
-      },
-      error: (e: any) => {
-        this.loggerService.log(Tlog.error, "tickerAccountService.getAll() vía http - http error.");
-        this.loggerService.log(Tlog.error, e);
-      }
-    });
-  }
-
-  // --------------------------------------------------------------
-  // --------------------------------------------------------------
-
-  loadDefaults(){
-
-    // search for default values by default_tppid
-    this.loggerService.log(Tlog.info, "this.tpps[0]: ");
-    this.loggerService.log(Tlog.info, this.tpps);
-
-    const defaults = {
-      /*
-      "tppid": this.tpps[0].id,
-      "tpp": this.tpps[0].name,
-      "accountid": this.accounts[0].id,
-      "account": this.accounts[0].name,
-      "ticker": this.tickers[0].name,
-      "tickerid": this.tickers[0].id,
-            "ticker": this.tickers[0].name,
-      "tickerid": this.tickers[0].id,
-      */
-      "tppid": 1,
-      "tpp": "TPPDefault",
-      "accountid": 1,
-      "account": "AccountDefault",
-      "ticker": "MCL",
-      "tickerid": 1,
-      "dollareuro": 1.0005,      
-      "pattern1id": 1,
-      "setup1id": 1,
-      "divisa": "USD",
-      "divisaid": 1,
-  
-    }
-
-    const default_tppid: number = 1;
-
-    this.formdata.timein = this.sharedModule.getTime();
-    this.formdata.accountid = defaults.accountid;
-    this.formdata.account = defaults.account;
-    this.formdata.tickerid = defaults.tickerid;
-    this.formdata.ticker = defaults.ticker;    
-    this.formdata.tppid = defaults.tppid;
-    this.formdata.tpp = defaults.tpp;
-    this.formdata.pattern1id = defaults.pattern1id;
-    this.formdata.pattern2id = "Not-set";
-    this.formdata.setup1id = defaults.setup1id;
-    this.formdata.setup2id = "m5";
-    this.formdata.divisaid = defaults.divisaid;
-    this.formdata.divisa = defaults.divisa;
-  }
-
-  ngOnInit(){  
-
-/*
-    this.loadAccounts();      
-    this.loadTpps();
-    this.loadTickers();
-    this.loadTickerAccounts();
-    this.loadSetups();
-    this.loadPatterns();
-    this.loadDefaults();
-*/
-
-    this.loadDefaultsAsync();
-
-    // update timeout
+    // update timeouts
     this.updateTimeOut();
     setInterval(() => this.updateTimeOut(), 1000)
   }
