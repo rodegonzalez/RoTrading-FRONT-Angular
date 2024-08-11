@@ -105,24 +105,64 @@ export class PositionAddComponent {
    // --------------------------------------------------------------
    // --------------------------------------------------------------
    
+  loadTppsAsync(): Promise<void> {
 
-  // async loadTpps(): Promise<ITpp[]> {
-    loadTpps() {
+          return new Promise((resolve, reject) => {
 
-  /*
-    try{
-      const tppsObservable = this.tppService.getAll();
-      const tpps: ITpp[] = await lastValueFrom(tppsObservable);
-      return tpps;
+                this.tppService.getAll().subscribe({
+                  complete: () => {
+                      resolve();
+                  },
+                  next: (data: Array<ITpp>) => {
+                    this.tpps = data;        
+                  },
+                  error: (e: any) => {
+                    this.loggerService.log(Tlog.error, "loadTppsAsync.getAll() vía http - http error.");
+                    this.loggerService.log(Tlog.error, e);
+                  }
+                });
 
-    }catch (e: any){
-      this.loggerService.log(Tlog.error, "tppService.getAll() vía http - http error.");
-      this.loggerService.log(Tlog.error, e);
+          });
+  }
+
+
+  loadFunction1(): Promise<void> {
+      return new Promise((resolve, reject) => {
+        // Simulación de una operación asíncrona
+        setTimeout(() => {
+          console.log("loadFunction1 completada");
+          resolve();
+        }, 0);
+      });
     }
-    return [];
-  */
+
+   async loadData(): Promise<void> {
+     await this.loadFunction1();
+     await this.loadTppsAsync();
+    }
+
+  loadDefaultsAsync(){
+    this.loggerService.log(Tlog.info, "loadDefaultsAsync - Init.");
+
+    this.loadData().then(() => {
+      console.log("Todas las funciones de carga completadas");
+      this.loggerService.log(Tlog.info, "tpps[0].id:");
+      this.loggerService.log(Tlog.info, this.tpps[0].id);
+    }).catch((error) => {
+      console.error("Error en la carga de datos:", error);
+    });
 
 
+    this.loggerService.log(Tlog.info, "loadDefaultsAsync - End.");
+
+  }
+
+
+   // --------------------------------------------------------------
+   // --------------------------------------------------------------
+
+
+  loadTpps() {
       this.tppService.getAll().subscribe({
         complete: () => {
             //this.loggerService.log(Tlog.info, "tppService.getAll() vía http - Ended.");
@@ -137,12 +177,13 @@ export class PositionAddComponent {
           this.loggerService.log(Tlog.error, e);
         }
       });
-  
-
   }
 
-  // --------------------------------------------------------------
 
+
+
+  // --------------------------------------------------------------
+   // --------------------------------------------------------------
 
    loadAccounts(){
     this.accountService.getAll().subscribe({
@@ -161,9 +202,6 @@ export class PositionAddComponent {
     });
   }
 
-
-
-   // combos y selectores
   loadSetups(){
     this.positionSetupsService.getAll().subscribe({
       complete: () => {
@@ -264,18 +302,28 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, this.tpps);
 
     const defaults = {
-       "tppid": this.tpps[0]["id"],
+      /*
+      "tppid": this.tpps[0].id,
       "tpp": this.tpps[0].name,
       "accountid": this.accounts[0].id,
       "account": this.accounts[0].name,
       "ticker": this.tickers[0].name,
       "tickerid": this.tickers[0].id,
+            "ticker": this.tickers[0].name,
+      "tickerid": this.tickers[0].id,
+      */
+      "tppid": 1,
+      "tpp": "TPPDefault",
+      "accountid": 1,
+      "account": "AccountDefault",
+      "ticker": "MCL",
+      "tickerid": 1,
       "dollareuro": 1.0005,      
       "pattern1id": 1,
       "setup1id": 1,
       "divisa": "USD",
       "divisaid": 1,
-      
+  
     }
 
     const default_tppid: number = 1;
@@ -296,20 +344,19 @@ export class PositionAddComponent {
   }
 
   ngOnInit(){  
-    this.loadAccounts();  
-    
+
+/*
+    this.loadAccounts();      
     this.loadTpps();
-    /*
-    this.loadTpps().then((data: ITpp[]) => {
-      this.tpps = data;
-    });
-*/
     this.loadTickers();
     this.loadTickerAccounts();
     this.loadSetups();
     this.loadPatterns();
 
     this.loadDefaults();
+*/
+
+    this.loadDefaultsAsync();
 
     // update timeout
     this.updateTimeOut();
