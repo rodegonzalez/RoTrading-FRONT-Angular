@@ -40,6 +40,7 @@ export class PositionAddComponent {
   @ViewChild('selectSetup') selectSetup!: ElementRef;
   @ViewChild('selectHighPattern') selectHighPattern!: ElementRef;
   @ViewChild('selectPattern') selectPattern!: ElementRef;
+  @ViewChild('selectAccount') selectAccount!: ElementRef;
   
   // --------------------------------------------------------------
   // --------------------------------------------------------------
@@ -59,15 +60,27 @@ export class PositionAddComponent {
   positionPatterns: Array<IPositionPattern> = [];
   positionHighPatterns: Array<IPositionPattern> = [];
 
+  // --------------------------------------------------------------
+  curr_account_or_ticker_changed: boolean = false;
+  curr_account_id: number = 0;
+  curr_account_name: string = "";
+  curr_ticker_id: number = 0;
+  curr_ticker_name: string = "";
+
+
+
+
+  // --------------------------------------------------------------
   curr_ticks: number = 0;
   curr_priceout: number = 0;
   result: number = 0;
 
-  curr_ticker: number = 0;
+
+
   curr_tickeraccount_commission: number = 0;
   curr_sessionid: string = "2024-08-09";
   curr_session_usdeur: number = 1;
-
+  
 
   
   formdata: IPositionView = {
@@ -97,9 +110,7 @@ export class PositionAddComponent {
     , private divisaService: DivisaService
     , private loggerService: LoggerService
     , private router: Router
-    , private sharedModule: SharedModule) 
-    {
-    }
+    , private sharedModule: SharedModule) { }
 
 
    // --------------------------------------------------------------
@@ -302,7 +313,12 @@ export class PositionAddComponent {
   }
 
   // --------------------------------------------------------------
+  // Submits and redirections
   // --------------------------------------------------------------
+
+  onBack(){
+    this.router.navigate(['/positions']);
+  }
 
   onSubmit2log(){
 
@@ -356,9 +372,6 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
   }
-
-  // --------------------------------------------------------------
-  // --------------------------------------------------------------
 
   onSubmit() {
 
@@ -419,35 +432,7 @@ export class PositionAddComponent {
   }
 
   // --------------------------------------------------------------
-  // --------------------------------------------------------------
-
-  updateTimeOut(): void {  
-    this.formdata.timeout = this.sharedModule.getTime();
-  }
-
-  priceOutChanged(event: any){
-    this.loggerService.log(Tlog.info, "PriceOut changed: ");
-    this.curr_ticks = this.curr_ticks + 50;
-    this.formdata.opresultticks = this.curr_ticks;
-    this.formdata.priceout = this.curr_priceout;
-  }
-
-  ticksChanged(event: any){
-    this.loggerService.log(Tlog.info, "Ticks changed: ");
-    this.curr_priceout = this.formdata.priceout + 50;
-    this.formdata.opresultticks = this.curr_ticks;
-    this.formdata.priceout = this.curr_priceout;
-  }
-
-  // --------------------------------------------------------------
-  // --------------------------------------------------------------
-
-  onBack(){
-    this.router.navigate(['/positions']);
-  }
-
-
-  // --------------------------------------------------------------
+  // Validation
   // --------------------------------------------------------------
 
   validate(){
@@ -480,4 +465,70 @@ export class PositionAddComponent {
     }
     return true;
   }
-}
+
+  // --------------------------------------------------------------
+  // Time intervals
+  // --------------------------------------------------------------
+
+  updateTimeOut(): void {  
+    this.formdata.timeout = this.sharedModule.getTime();
+  }
+
+  // --------------------------------------------------------------
+  // Form controls changes
+  // --------------------------------------------------------------
+
+  priceOutChanged(event: any){
+    this.loggerService.log(Tlog.info, "PriceOut changed: ");
+    this.curr_ticks = this.curr_ticks + 50;
+    this.formdata.opresultticks = this.curr_ticks;
+    this.formdata.priceout = this.curr_priceout;
+  }
+
+  ticksChanged(event: any){
+    this.loggerService.log(Tlog.info, "Ticks changed: ");
+    this.curr_priceout = this.formdata.priceout + 50;
+    this.formdata.opresultticks = this.curr_ticks;
+    this.formdata.priceout = this.curr_priceout;
+  }
+
+  selectAccountChanged(event: any){   
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    //this.loggerService.log(Tlog.info, "Account changed to: ");
+    //this.loggerService.log(Tlog.info, selectedOption.value);
+    //this.loggerService.log(Tlog.info, selectedOption.text);
+    this.curr_account_id = selectedOption.value;
+    this.curr_account_name = selectedOption.text;
+    this.curr_account_or_ticker_changed = true;
+    this.updateCurrForm();
+  }
+
+  selectTickerChanged(event: any){    
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    //this.loggerService.log(Tlog.info, "Account changed to: ");
+    //this.loggerService.log(Tlog.info, selectedOption.value);
+    //this.loggerService.log(Tlog.info, selectedOption.text);
+    this.curr_ticker_id = selectedOption.value;
+    this.curr_ticker_name = selectedOption.text;
+    this.curr_account_or_ticker_changed = true;
+    this.updateCurrForm();
+  }
+
+  // Update actions
+  updateCommission(){
+    //this.loggerService.log(Tlog.info, this.tickerAccounts);
+    //this.curr_tickeraccount_commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;
+    this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;
+    //this.formdata.commission = this.curr_tickeraccount_commission;
+    this.curr_account_or_ticker_changed = false;
+  }
+
+  updateCurrForm(){
+    if (this.curr_account_or_ticker_changed){
+      this.updateCommission();
+    }
+
+  }
+
+  // --------------------------------------------------------------
+} // end class

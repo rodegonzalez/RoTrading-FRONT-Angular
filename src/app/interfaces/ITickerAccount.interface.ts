@@ -1,6 +1,6 @@
   export interface ITickerAccount{
-	idticker:      number;
-	idaccount:      number;
+	tickerid:      number;
+	accountid:      number;
 	creation:       string;
 	modification:   string;
 	commission:     number;
