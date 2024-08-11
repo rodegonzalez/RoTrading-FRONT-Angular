@@ -31,17 +31,11 @@ export class TppService {
         );
     }
 
-    //getOne(id: any): Observable<ITpp[]>{
     getOne(id: any): Observable<ITpp>{
         return this.http.get(environment.APIUri + '/tpp/' + id)
         .pipe(
             map(data => {
-                //let items: Array<ITpp> = [];
                 const _item: ITpp = Object.values(data)[0];
-                //items.push(_item);
-               this.loggerService.log(Tlog.info,"items en service en next: ");
-               this.loggerService.log(Tlog.info,_item);
-                //return items;
                 return _item;
             })  
         );

@@ -23,8 +23,6 @@ import { environment } from '../environment/global.environment';
                     const item: IPositionSetup = Object.values(data)[id];
                     items.push(item);
                 }
-                this.loggerService.log(Tlog.info, 'itemsetupsService-getAll() -> data:');
-                this.loggerService.log(Tlog.info, items);
                 return items;
             })
         );
@@ -35,8 +33,6 @@ import { environment } from '../environment/global.environment';
         .pipe(
             map(data => {
                 const _item: IPositionSetup = Object.values(data)[0];
-                this.loggerService.log(Tlog.info,"items en service en next: ");
-                this.loggerService.log(Tlog.info,_item);
                 return _item;
             })  
         );
