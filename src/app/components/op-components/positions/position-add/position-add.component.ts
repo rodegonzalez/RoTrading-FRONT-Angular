@@ -61,10 +61,13 @@ export class PositionAddComponent {
   positionHighPatterns: Array<IPositionPattern> = [];
 
   // --------------------------------------------------------------
-  curr_account_or_ticker_changed: boolean = false;
-  curr_account_id: number = 0;
+
+  // force update form
+  curr_account_or_ticker_changed: boolean = true;
+  
+  curr_account_id: number = 1;
   curr_account_name: string = "";
-  curr_ticker_id: number = 0;
+  curr_ticker_id: number = 1;
   curr_ticker_name: string = "";
 
 
@@ -306,6 +309,10 @@ export class PositionAddComponent {
       this.loggerService.log(Tlog.error, "Error en la carga de datos:");
       this.loggerService.log(Tlog.error, error);
     });
+
+    // update form after load data
+    this.curr_account_or_ticker_changed = true;
+    this.updateCurrForm();
 
     // update timeouts
     this.updateTimeOut();
