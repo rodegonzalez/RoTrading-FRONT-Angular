@@ -107,7 +107,7 @@ export class PositionAddComponent {
    
   loadDivisasAsync(): Promise<void> {
     return new Promise((resolve, reject) => {
-          this.divisaService  .getAll().subscribe({
+          this.divisaService.getAll().subscribe({
             complete: () => {
                 resolve();
             },
@@ -279,6 +279,8 @@ export class PositionAddComponent {
     this.formdata.setup2id = "m5";
     this.formdata.divisaid = this.divisas[0].id;
     this.formdata.divisa = this.divisas[0].name;
+    this.formdata.commission = this.tickerAccounts[0].commission;
+
   }
 
    // --------------------------------------------------------------
