@@ -305,14 +305,19 @@ export class PositionAddComponent {
     this.loadDataAsync().then(() => {
       this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
       this.loadDefaultData();
+
+      // update form after load data
+      this.curr_account_name = this.accounts.find(x => x.id == this.curr_account_id)?.name || "";
+      this.curr_ticker_name = this.tickers.find(x => x.id == this.curr_ticker_id)?.name || "";
+      this.curr_account_or_ticker_changed = true;
+      this.updateCurrForm();
+      
     }).catch((error) => {
       this.loggerService.log(Tlog.error, "Error en la carga de datos:");
       this.loggerService.log(Tlog.error, error);
     });
 
-    // update form after load data
-    this.curr_account_or_ticker_changed = true;
-    this.updateCurrForm();
+    
 
     // update timeouts
     this.updateTimeOut();
@@ -525,7 +530,7 @@ export class PositionAddComponent {
   updateCommission(){
     //this.loggerService.log(Tlog.info, this.tickerAccounts);
     //this.curr_tickeraccount_commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;
-    this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;
+    this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;    
     //this.formdata.commission = this.curr_tickeraccount_commission;
     this.curr_account_or_ticker_changed = false;
   }
