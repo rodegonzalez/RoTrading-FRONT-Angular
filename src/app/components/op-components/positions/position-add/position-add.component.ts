@@ -83,7 +83,7 @@ export class PositionAddComponent {
 
 
   curr_tickeraccount_commission: number = 0;
-  curr_sessionid: string = "2024-08-09";
+  curr_sessionid: string = this.sharedModule.getSessionid();
   curr_session_usdeur: number = 0.92;
   
 
