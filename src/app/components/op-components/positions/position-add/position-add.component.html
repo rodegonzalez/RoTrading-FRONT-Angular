@@ -148,7 +148,7 @@
                                           <small>Sesión</small>       
                                         </div>
                                         <div class="col-7">
-                                          <input type="text" class="form-control" [(ngModel)]="formdata.sessionid" name="sessionid"  disabled />        
+                                          <input type="number" class="form-control" [(ngModel)]="formdata.sessionid" name="sessionid"  />        
                                         </div>
                                       </div>                                                                            
                                   </div>
@@ -159,7 +159,7 @@
                                                 <small>USDEUR</small>       
                                               </div>
                                               <div class="col-7">
-                                                <input type="text" class="form-control" name="usdeur"  disabled />        
+                                                <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="curr_session_usdeur | numberFormatWithDecimalsPipe" name="curr_session_usdeur" (ngModelChange)="curr_session_usdeur = $event"   />        
                                               </div>
                                             </div>                                                                            
                                   </div>

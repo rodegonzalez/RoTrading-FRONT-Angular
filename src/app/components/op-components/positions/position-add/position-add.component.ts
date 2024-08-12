@@ -530,6 +530,7 @@ export class PositionAddComponent {
     this.formdata.opresulteur = resulteur.toNumber();
   
     /*
+    this.loggerService.log(Tlog.info, "-----------------------------------------------");
     this.loggerService.log(Tlog.info, "PriceOut changed: ");
     this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
     this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
@@ -587,6 +588,17 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "Result: " + result.toString());
     this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur.toString());
     */
+  }
+
+  usdeurChanged(){
+    const usdeur = new Decimal(this.curr_session_usdeur).toDecimalPlaces(4);
+    const result = new Decimal(this.formdata.opresult);
+    if (!result.isNaN() || !result.equals(0)){
+    const resulteur = result.times(usdeur);
+    this.formdata.opresulteur = resulteur.toNumber();
+    }else{
+      this.formdata.opresulteur = 0;
+    }
   }
 
   selectAccountChanged(event: any){   
