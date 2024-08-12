@@ -69,7 +69,8 @@ export class PositionAddComponent {
   curr_account_name: string = "";
   curr_ticker_id: number = 1;
   curr_ticker_name: string = "";
-
+  curr_tpp_id: number = 1;
+  curr_tpp_name: string = "";
 
 
 
@@ -82,7 +83,7 @@ export class PositionAddComponent {
 
   curr_tickeraccount_commission: number = 0;
   curr_sessionid: string = "2024-08-09";
-  curr_session_usdeur: number = 1;
+  curr_session_usdeur: number = 0.92;
   
 
   
@@ -90,7 +91,7 @@ export class PositionAddComponent {
     id: 0, sessionid: this.curr_sessionid, guid: "", block: "B-2024", blocksecuence: 0,
     creation: "", modification: "",
     timein: "", timeout: "", buysell: "buy", pricein: 0, priceout: 0,
-    opresultticks: 81, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,
+    opresultticks: 0, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,
     imagepath: "", status: "",
     divisaid: 0, accountid: 0, tickerid: 0, pattern1id: 0, pattern2id: "not-set", setup1id: 0, setup2id: "m5",
     note: "",  tppid: 0,  tpp: "",  tppcheck: 0,
@@ -303,14 +304,23 @@ export class PositionAddComponent {
   ngOnInit(){  
     // load data
     this.loadDataAsync().then(() => {
+
+      // after async... do it!
       this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
       this.loadDefaultData();
 
       // update form after load data
       this.curr_account_name = this.accounts.find(x => x.id == this.curr_account_id)?.name || "";
       this.curr_ticker_name = this.tickers.find(x => x.id == this.curr_ticker_id)?.name || "";
+      this.curr_tpp_name = this.tpps.find(x => x.id == this.curr_tpp_id)?.name || "";
       this.curr_account_or_ticker_changed = true;
       this.updateCurrForm();
+
+      // log for testing
+      this.loggerService.log(Tlog.info, "PositionAddComponent initialized");
+      this.loggerService.log(Tlog.info, "Tickers:");
+      this.loggerService.log(Tlog.info, this.tickers);
+      
       
     }).catch((error) => {
       this.loggerService.log(Tlog.error, "Error en la carga de datos:");
@@ -321,7 +331,9 @@ export class PositionAddComponent {
 
     // update timeouts
     this.updateTimeOut();
-    setInterval(() => this.updateTimeOut(), 1000)
+    setInterval(() => this.updateTimeOut(), 1000);
+
+
   }
 
   // --------------------------------------------------------------
@@ -491,10 +503,46 @@ export class PositionAddComponent {
   // --------------------------------------------------------------
 
   priceOutChanged(event: any){
-    this.loggerService.log(Tlog.info, "PriceOut changed: ");
+    //this.loggerService.log(Tlog.info, "PriceOut changed: ");
+
+    const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || {tickmin: 0, tickminvalue: 0};
+    const pricein = this.formdata.pricein;
+    const priceout = this.formdata.priceout;
+    const contracts = this.formdata.contracts;
+    const commission = this.formdata.commission;
+    const buysell = (this.formdata.buysell.toLowerCase() == "buy") ? 1 : -1;
+
+    const diff = (priceout - pricein) * buysell;
+    
+    const resultticks = diff * contracts / ticker.tickmin;
+    const result = (resultticks * ticker.tickminvalue) - commission;
+    const resulteur = result * this.curr_session_usdeur;
+
+    this.formdata.opresultticks = resultticks;
+    this.formdata.opresult = result ;
+    this.formdata.opresulteur = resulteur;
+
+    /*
+    this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
+    this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
+    this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
+    this.loggerService.log(Tlog.info, "tickminvalue: " + ticker.tickminvalue);
+     this.loggerService.log(Tlog.info, "PriceIN: " + pricein);
+    this.loggerService.log(Tlog.info, "PriceOUT: " + priceout);
+    this.loggerService.log(Tlog.info, "Diff: " + diff);
+    this.loggerService.log(Tlog.info, "Contracts: " + contracts);
+    this.loggerService.log(Tlog.info, "Commission: " + commission);
+
+    this.loggerService.log(Tlog.info, "ResultTicks: " + resultticks);
+    this.loggerService.log(Tlog.info, "Result: " + result);
+    this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur);
+    */
+
+    /*
     this.curr_ticks = this.curr_ticks + 50;
     this.formdata.opresultticks = this.curr_ticks;
     this.formdata.priceout = this.curr_priceout;
+    */
   }
 
   ticksChanged(event: any){
@@ -524,6 +572,12 @@ export class PositionAddComponent {
     this.curr_ticker_name = selectedOption.text;
     this.curr_account_or_ticker_changed = true;
     this.updateCurrForm();
+  }
+
+  selectTppChanged(event: any){    
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    this.curr_tpp_id = selectedOption.value;
+    this.curr_tpp_name = selectedOption.text;
   }
 
   // Update actions
