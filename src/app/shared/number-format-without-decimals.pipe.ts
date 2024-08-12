@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'numberFormaRoundedPipe'
+  name: 'numberFormatRoundedPipe'
 })
 export class NumberFormatRoundedPipe implements PipeTransform {
 

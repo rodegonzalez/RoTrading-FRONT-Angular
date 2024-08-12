@@ -218,11 +218,11 @@
                                 <div class="col-6">
                                           <div class="form-group">
                                                 <div class="form-check">
-                                                  <input [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="buy" checked>
+                                                  <input (change)="priceOutChanged()" [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="buy" checked>
                                                 Comprar
                                                 </div>
                                                 <div class="form-check">
-                                                  <input  [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="sell">
+                                                  <input (change)="priceOutChanged()" [(ngModel)]="formdata.buysell" [ngModelOptions]="{standalone: true}" class="form-check-input" id="buysell" type="radio" value="sell">
                                                 Vender
                                                 </div>
                                           </div>
@@ -249,7 +249,8 @@
                                     <small>Precio IN</small>
                                   </div>
                                   <div class="col-7">
-                                    <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" />       
+                                    <!-- <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" /> -->
+                                    <input (change)="priceOutChanged()" type="text" class="form-control" name="pricein" [ngModel]="formdata.pricein | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.pricein = $event" />
                                   </div>                                        
                                 </div>
 
@@ -259,7 +260,7 @@
                                             <small>Contratos</small>
                                           </div>
                                           <div class="col-7">
-                                            <input type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                                            <input (change)="priceOutChanged()" type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
                                           </div>
                                   </div>
                             </div>
@@ -284,7 +285,16 @@
                                           <small>Precio OUT</small>
                                         </div>
                                         <div class="col-7">
+                                          <!--
                                           <input (change)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>  
+                                          -->
+                                          <!--
+                                          <input (change)="priceOutChanged()" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" [value]="formdata.priceout | numberFormatWithDecimalsPipe"/>  
+                                          -->
+
+                                          <input (change)="priceOutChanged()" type="text" class="form-control" name="priceout" [ngModel]="formdata.priceout | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.priceout = $event" />
+
+
                                         </div>                                        
                                   </div>
 
@@ -297,7 +307,10 @@
                                         <!--
                                         <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.opresultticks" value="{{curr_ticks}}" />
                                         -->
+                                        <!--
                                         <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" value="{{formdata.opresultticks | numberFormaRoundedPipe}}" />
+                                        -->
+                                        <input (change)="ticksChanged()" type="text" class="form-control" name="opresultticks" [(ngModel)]="formdata.opresultticks" [value]="formdata.opresultticks | numberFormatRoundedPipe" />
                                       </div>    
                                     </div>
                               </div>

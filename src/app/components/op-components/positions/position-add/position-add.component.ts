@@ -504,7 +504,8 @@ export class PositionAddComponent {
   // Form controls changes
   // --------------------------------------------------------------
 
-  priceOutChanged(event: any){
+  //priceOutChanged(event: any){
+    priceOutChanged(){
     //this.loggerService.log(Tlog.info, "PriceOut changed: ");
 
     const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
@@ -523,6 +524,7 @@ export class PositionAddComponent {
     this.formdata.opresult = result.toNumber();
     this.formdata.opresulteur = resulteur.toNumber();
   
+    /*
     this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
     this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
     this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
@@ -535,7 +537,7 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "ResultTicks: " + resultticks.toString());
     this.loggerService.log(Tlog.info, "Result: " + result.toString());
     this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur.toString());
-    
+    */
 
     /*
     this.curr_ticks = this.curr_ticks + 50;
@@ -544,11 +546,32 @@ export class PositionAddComponent {
     */
   }
 
-  ticksChanged(event: any){
-    this.loggerService.log(Tlog.info, "Ticks changed: ");
+  //ticksChanged(event: any){
+    ticksChanged(){
+    //this.loggerService.log(Tlog.info, "Ticks changed: ");
+
+    const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
+    const resultticks = new Decimal(this.formdata.opresultticks);
+    const pricein = new Decimal(this.formdata.pricein);
+    const priceout = pricein.add(resultticks).times(ticker.tickmin);
+
+    this.formdata.priceout = priceout.toNumber();
+
+    /*
+    this.loggerService.log(Tlog.info, "---PriceIN: " + pricein.toString());
+    this.loggerService.log(Tlog.info, "---resultticks: " + resultticks.toString());
+    this.loggerService.log(Tlog.info, "---PriceOUT: " + priceout.toString());
+    */
+
+    this.priceOutChanged();
+
+
+
+    /*
     this.curr_priceout = this.formdata.priceout + 50;
     this.formdata.opresultticks = this.curr_ticks;
     this.formdata.priceout = this.curr_priceout;
+    */
   }
 
   selectAccountChanged(event: any){   
@@ -571,6 +594,7 @@ export class PositionAddComponent {
     this.curr_ticker_name = selectedOption.text;
     this.curr_account_or_ticker_changed = true;
     this.updateCurrForm();
+    this.priceOutChanged();
   }
 
   selectTppChanged(event: any){    
