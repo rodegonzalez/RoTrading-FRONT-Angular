@@ -250,7 +250,7 @@
                                   </div>
                                   <div class="col-7">
                                     <!-- <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" /> -->
-                                    <input (change)="priceOutChanged()" type="text" class="form-control" name="pricein" [ngModel]="formdata.pricein | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.pricein = $event" />
+                                    <input (blur)="priceInChanged()" type="text" class="form-control" name="pricein" [ngModel]="formdata.pricein | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.pricein = $event" />
                                   </div>                                        
                                 </div>
 
@@ -260,7 +260,7 @@
                                             <small>Contratos</small>
                                           </div>
                                           <div class="col-7">
-                                            <input (change)="priceOutChanged()" type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                                            <input (blur)="priceOutChanged()" type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
                                           </div>
                                   </div>
                             </div>
@@ -292,7 +292,7 @@
                                           <input (change)="priceOutChanged()" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" [value]="formdata.priceout | numberFormatWithDecimalsPipe"/>  
                                           -->
 
-                                          <input (change)="priceOutChanged()" type="text" class="form-control" name="priceout" [ngModel]="formdata.priceout | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.priceout = $event" />
+                                          <input (blur)="priceOutChanged()" type="text" class="form-control" name="priceout" [ngModel]="formdata.priceout | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.priceout = $event" />
 
 
                                         </div>                                        
@@ -310,7 +310,10 @@
                                         <!--
                                         <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" value="{{formdata.opresultticks | numberFormaRoundedPipe}}" />
                                         -->
-                                        <input (change)="ticksChanged()" type="text" class="form-control" name="opresultticks" [(ngModel)]="formdata.opresultticks" [value]="formdata.opresultticks | numberFormatRoundedPipe" />
+                                        <!--
+                                        <input (blur)="ticksChanged()" type="text" class="form-control" name="opresultticks" [(ngModel)]="formdata.opresultticks" [value]="formdata.opresultticks | numberFormatRoundedPipe" />
+                                        -->
+                                        <input (blur)="ticksChanged()" type="text" class="form-control" name="opresultticks" [ngModel]="formdata.opresultticks | numberFormatRoundedPipe" (ngModelChange)="formdata.opresultticks = $event"/>
                                       </div>    
                                     </div>
                               </div>

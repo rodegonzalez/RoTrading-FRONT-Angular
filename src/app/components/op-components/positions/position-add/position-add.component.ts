@@ -504,27 +504,23 @@ export class PositionAddComponent {
   // Form controls changes
   // --------------------------------------------------------------
 
-  //priceOutChanged(event: any){
-    priceOutChanged(){
-    //this.loggerService.log(Tlog.info, "PriceOut changed: ");
-
+  priceOutChanged(){
     const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
     const pricein = new Decimal(this.formdata.pricein);
     const priceout = new Decimal(this.formdata.priceout);
     const contracts = new Decimal(this.formdata.contracts);
     const commission = new Decimal(this.formdata.commission);
     const buysell = (this.formdata.buysell.toLowerCase() == "buy") ? new Decimal(1) : new Decimal(-1);
-  
     const diff = priceout.minus(pricein).times(buysell);
     const resultticks = diff.dividedBy(ticker.tickmin);
     const result = resultticks.times(contracts).times(ticker.tickminvalue).minus(commission);
     const resulteur = result.times(this.curr_session_usdeur);
-  
     this.formdata.opresultticks = resultticks.toNumber();
     this.formdata.opresult = result.toNumber();
     this.formdata.opresulteur = resulteur.toNumber();
   
     /*
+    this.loggerService.log(Tlog.info, "PriceOut changed: ");
     this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
     this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
     this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
@@ -538,47 +534,58 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "Result: " + result.toString());
     this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur.toString());
     */
-
-    /*
-    this.curr_ticks = this.curr_ticks + 50;
-    this.formdata.opresultticks = this.curr_ticks;
-    this.formdata.priceout = this.curr_priceout;
-    */
   }
 
-  //ticksChanged(event: any){
-    ticksChanged(){
-    //this.loggerService.log(Tlog.info, "Ticks changed: ");
-
+  priceInChanged(){    
     const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
-    const resultticks = new Decimal(this.formdata.opresultticks);
+    const maxdecimals = new Decimal(this.sharedModule.countDecimalDigits(ticker.tickmin));
+    const pricein = new Decimal(this.formdata.pricein).toDecimalPlaces(maxdecimals.toNumber());
+    this.formdata.pricein = pricein.toNumber();
+    this.priceOutChanged(); 
+  }
+
+  ticksChanged(){
+    const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
+    const maxdecimals = new Decimal(this.sharedModule.countDecimalDigits(ticker.tickmin));
+    const resultticks = new Decimal(this.formdata.opresultticks).toDecimalPlaces(0);
     const pricein = new Decimal(this.formdata.pricein);
-    const priceout = pricein.add(resultticks).times(ticker.tickmin);
-
-    this.formdata.priceout = priceout.toNumber();
-
-    /*
-    this.loggerService.log(Tlog.info, "---PriceIN: " + pricein.toString());
-    this.loggerService.log(Tlog.info, "---resultticks: " + resultticks.toString());
-    this.loggerService.log(Tlog.info, "---PriceOUT: " + priceout.toString());
-    */
-
-    this.priceOutChanged();
-
-
+    const priceout = pricein.add(resultticks).times(ticker.tickmin).toDecimalPlaces(maxdecimals.toNumber());
+    const contracts = new Decimal(this.formdata.contracts);
+    const commission = new Decimal(this.formdata.commission);
+    const buysell = (this.formdata.buysell.toLowerCase() == "buy") ? new Decimal(1) : new Decimal(-1);
+    const diff = priceout.minus(pricein).times(buysell);
+    const result = resultticks.times(contracts).times(ticker.tickminvalue).minus(commission);
+    const resulteur = result.times(this.curr_session_usdeur);
+    this.formdata.priceout = diff.toNumber();
+    this.formdata.opresultticks = resultticks.toNumber();
+    this.formdata.opresult = result.toNumber();
+    this.formdata.opresulteur = resulteur.toNumber();
 
     /*
-    this.curr_priceout = this.formdata.priceout + 50;
-    this.formdata.opresultticks = this.curr_ticks;
-    this.formdata.priceout = this.curr_priceout;
+    this.loggerService.log(Tlog.info, "Ticks changed: ");
+    this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
+    this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
+    this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
+    this.loggerService.log(Tlog.info, "maxdecimals: " + maxdecimals);
+    this.loggerService.log(Tlog.info, "tickminvalue: " + ticker.tickminvalue);
+    this.loggerService.log(Tlog.info, "PriceIN: " + pricein.toString());
+    this.loggerService.log(Tlog.info, "PriceOUT: " + priceout.toString());
+    this.loggerService.log(Tlog.info, "Diff: " + diff.toString());
+    this.loggerService.log(Tlog.info, "Contracts: " + contracts.toString());
+    this.loggerService.log(Tlog.info, "Commission: " + commission.toString());
+    this.loggerService.log(Tlog.info, "ResultTicks: " + resultticks.toString());
+    this.loggerService.log(Tlog.info, "Result: " + result.toString());
+    this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur.toString());
     */
   }
 
   selectAccountChanged(event: any){   
+    /*
+    this.loggerService.log(Tlog.info, "Account changed to: ");
+    this.loggerService.log(Tlog.info, selectedOption.value);
+    this.loggerService.log(Tlog.info, selectedOption.text);
+    */
     const selectedOption = event.target.options[event.target.selectedIndex];
-    //this.loggerService.log(Tlog.info, "Account changed to: ");
-    //this.loggerService.log(Tlog.info, selectedOption.value);
-    //this.loggerService.log(Tlog.info, selectedOption.text);
     this.curr_account_id = selectedOption.value;
     this.curr_account_name = selectedOption.text;
     this.curr_account_or_ticker_changed = true;
@@ -586,10 +593,12 @@ export class PositionAddComponent {
   }
 
   selectTickerChanged(event: any){    
+    /*
+    this.loggerService.log(Tlog.info, "Account changed to: ");
+    this.loggerService.log(Tlog.info, selectedOption.value);
+    this.loggerService.log(Tlog.info, selectedOption.text);
+    */
     const selectedOption = event.target.options[event.target.selectedIndex];
-    //this.loggerService.log(Tlog.info, "Account changed to: ");
-    //this.loggerService.log(Tlog.info, selectedOption.value);
-    //this.loggerService.log(Tlog.info, selectedOption.text);
     this.curr_ticker_id = selectedOption.value;
     this.curr_ticker_name = selectedOption.text;
     this.curr_account_or_ticker_changed = true;
@@ -606,9 +615,7 @@ export class PositionAddComponent {
   // Update actions
   updateCommission(){
     //this.loggerService.log(Tlog.info, this.tickerAccounts);
-    //this.curr_tickeraccount_commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;
     this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;    
-    //this.formdata.commission = this.curr_tickeraccount_commission;
     this.curr_account_or_ticker_changed = false;
   }
 
@@ -616,7 +623,6 @@ export class PositionAddComponent {
     if (this.curr_account_or_ticker_changed){
       this.updateCommission();
     }
-
   }
 
   // --------------------------------------------------------------
