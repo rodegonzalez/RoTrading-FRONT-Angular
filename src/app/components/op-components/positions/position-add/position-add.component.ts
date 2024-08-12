@@ -463,27 +463,37 @@ export class PositionAddComponent {
 
   validate(){
     let errors = [];
+    /*
     if (this.formdata.pricein == 0){
       errors.push("PriceIn is required");
     }
     if (this.formdata.priceout == 0){
       errors.push("PriceOut is required");
     }
+    */
     if (this.formdata.contracts == 0){
       errors.push("Contracts is required");
     }
-    if (this.formdata.pattern1id == 0){
-      errors.push("Pattern1 is required");
+
+    const selectedHighPatternValue = this.selectHighPattern.nativeElement.value;
+    if (selectedHighPatternValue.toLowerCase() == "not-set"){
+      errors.push("High pattern is required");
     }
+    const selectedPatternValue = this.selectPattern.nativeElement.value;
+    if (selectedPatternValue.toLowerCase() == "not-set"){
+      errors.push("Pattern is required");
+    }
+
+    /*
     if (this.formdata.setup1id == 0){
       errors.push("Setup1 is required");
+    } 
+    */  
+    const selectedSetupValue = this.selectSetup.nativeElement.value; 
+    if (selectedSetupValue.toLowerCase() == "not-set"){
+      errors.push("Setup is required");
     }
-    if (this.formdata.pattern2id.toLowerCase() == "not-set"){
-      errors.push("Pattern2 is required");
-    }
-    if (this.formdata.setup2id.toLowerCase() == "not-set"){
-      errors.push("Setup2 is required");
-    }
+
     if (errors.length > 0){
       this.loggerService.log(Tlog.error, "Validation errors:");
       this.loggerService.log(Tlog.error, errors);
