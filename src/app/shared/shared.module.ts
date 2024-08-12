@@ -42,4 +42,17 @@ export class SharedModule {
     const minute = `${now.getMinutes()}`.padStart(2, '0');
     return `${hour}:${minute}`; 
    }
+
+   countDecimalDigits(value: number): number {
+    const valueStr = value.toString();
+    const decimalIndex = valueStr.indexOf('.');
+    
+    if (decimalIndex === -1) {
+      return 0;
+    }
+    
+    return valueStr.length - decimalIndex - 1;
+  }
+
+
  }
