@@ -317,10 +317,11 @@ export class PositionAddComponent {
       this.updateCurrForm();
 
       // log for testing
+      /*
       this.loggerService.log(Tlog.info, "PositionAddComponent initialized");
       this.loggerService.log(Tlog.info, "Tickers:");
       this.loggerService.log(Tlog.info, this.tickers);
-      
+      */
       
     }).catch((error) => {
       this.loggerService.log(Tlog.error, "Error en la carga de datos:");
@@ -514,15 +515,15 @@ export class PositionAddComponent {
 
     const diff = (priceout - pricein) * buysell;
     
-    const resultticks = diff * contracts / ticker.tickmin;
-    const result = (resultticks * ticker.tickminvalue) - commission;
+    const resultticks = diff / ticker.tickmin;
+    const result = (resultticks * contracts * ticker.tickminvalue) - commission;
     const resulteur = result * this.curr_session_usdeur;
 
     this.formdata.opresultticks = resultticks;
     this.formdata.opresult = result ;
     this.formdata.opresulteur = resulteur;
 
-    /*
+    
     this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
     this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
     this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
@@ -536,7 +537,7 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "ResultTicks: " + resultticks);
     this.loggerService.log(Tlog.info, "Result: " + result);
     this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur);
-    */
+    
 
     /*
     this.curr_ticks = this.curr_ticks + 50;
