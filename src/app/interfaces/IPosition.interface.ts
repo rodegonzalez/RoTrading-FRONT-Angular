@@ -4,8 +4,8 @@
 	guid:			string;
 	tppid:			number;
 	tppCheck:		number;
-	block:  		string;
-	blocksecuence:  number;
+	tppblock:  		number;
+	tppblocksecuence:  number;
 	creation:       string;
 	modification:   string;
 	timein:     	string;
@@ -38,8 +38,8 @@
 	guid:			string;
 	tppid:			number;
 	tppcheck:		number;
-	block:  		string;
-	blocksecuence:  number;
+	tppblock:  		number;
+	tppblocksecuence:  number;
 	creation:       string;
 	modification:   string;
 	timein:     	string;

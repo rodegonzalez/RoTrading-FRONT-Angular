@@ -77,7 +77,7 @@ export class PositionAddComponent {
   curr_session_usdeur: number = 0.92;
   
   formdata: IPositionView = {
-    id: 0, sessionid: this.curr_sessionid, guid: "", block: "B-2024", blocksecuence: 0,
+    id: 0, sessionid: this.curr_sessionid, guid: "", tppblock: 0, tppblocksecuence: 0,
     creation: "", modification: "",
     timein: "", timeout: "", buysell: "buy", pricein: 0, priceout: 0,
     opresultticks: 0, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,
