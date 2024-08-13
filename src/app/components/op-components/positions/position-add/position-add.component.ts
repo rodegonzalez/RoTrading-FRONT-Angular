@@ -25,8 +25,6 @@ import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
-
 @Component({
   selector: 'app-position-add',
   templateUrl: './position-add.component.html',
@@ -51,7 +49,6 @@ export class PositionAddComponent {
   }
 
   positionid = 0;
-
   tpps: Array<ITpp> = [];
   divisas: Array<IDivisa> = [];
   accounts: Array<IAccount> = [];
@@ -62,10 +59,8 @@ export class PositionAddComponent {
   positionHighPatterns: Array<IPositionPattern> = [];
 
   // --------------------------------------------------------------
-
   // force update form
   curr_account_or_ticker_changed: boolean = true;
-  
   curr_account_id: number = 1;
   curr_account_name: string = "";
   curr_ticker_id: number = 1;
@@ -73,20 +68,13 @@ export class PositionAddComponent {
   curr_tpp_id: number = 1;
   curr_tpp_name: string = "";
 
-
-
   // --------------------------------------------------------------
   curr_ticks: number = 0;
   curr_priceout: number = 0;
   result: number = 0;
-
-
-
   curr_tickeraccount_commission: number = 0;
   curr_sessionid: string = this.sharedModule.getSessionid();
   curr_session_usdeur: number = 0.92;
-  
-
   
   formdata: IPositionView = {
     id: 0, sessionid: this.curr_sessionid, guid: "", block: "B-2024", blocksecuence: 0,
@@ -100,7 +88,6 @@ export class PositionAddComponent {
     divisa:	'', account:'', acctype:'',  ticker:	'',  pattern:	'not-set', setup:	'',
     };
 
-  
    // --------------------------------------------------------------
    // --------------------------------------------------------------
 
@@ -116,7 +103,6 @@ export class PositionAddComponent {
     , private loggerService: LoggerService
     , private router: Router
     , private sharedModule: SharedModule) { }
-
 
    // --------------------------------------------------------------
    // --------------------------------------------------------------
@@ -296,7 +282,6 @@ export class PositionAddComponent {
     this.formdata.divisaid = this.divisas[0].id;
     this.formdata.divisa = this.divisas[0].name;
     this.formdata.commission = this.tickerAccounts[0].commission;
-
   }
 
    // --------------------------------------------------------------
@@ -317,11 +302,8 @@ export class PositionAddComponent {
       this.curr_account_or_ticker_changed = true;
       this.updateCurrForm();
 
-      // log for testing
       /*
       this.loggerService.log(Tlog.info, "PositionAddComponent initialized");
-      this.loggerService.log(Tlog.info, "Tickers:");
-      this.loggerService.log(Tlog.info, this.tickers);
       */
       
     }).catch((error) => {
@@ -329,13 +311,9 @@ export class PositionAddComponent {
       this.loggerService.log(Tlog.error, error);
     });
 
-    
-
     // update timeouts
     this.updateTimeOut();
     setInterval(() => this.updateTimeOut(), 1000);
-
-
   }
 
   // --------------------------------------------------------------
@@ -352,16 +330,13 @@ export class PositionAddComponent {
       return;
     }
 
-    //this.idaccount = data.idaccount;
     const mydate = this.sharedModule.getDateTime();
     this.formdata.creation = mydate;
     this.formdata.modification = mydate;
     this.formdata.deleted = 0;
     this.formdata.processed = 0;
     this.formdata.status = "opened";
-    
     this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
-
     this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
 
     // setups
@@ -391,9 +366,6 @@ export class PositionAddComponent {
     }
     this.formdata.pattern = selectHighPattern_selectedValues.join(',')  + "; " + selectPattern_selectedValues.join(',');
 
-    // temporalidad
-
-
     // LOG Form data
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
@@ -405,10 +377,10 @@ export class PositionAddComponent {
       return;
     }
 
+    /*
     this.loggerService.log(Tlog.info, "contenido de formData: ");
     this.loggerService.log(Tlog.info, this.formdata);
-
-    //this.idaccount = data.idaccount;
+    */
     const mydate = this.sharedModule.getDateTime();
     this.formdata.creation = mydate;
     this.formdata.modification = mydate;
@@ -417,7 +389,6 @@ export class PositionAddComponent {
     this.formdata.status = "opened";
     
     this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
-
     this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
 
      // setups
@@ -441,7 +412,6 @@ export class PositionAddComponent {
     const highpattern = (selectedValuesHP.length>0)?selectedValuesHP.join(',') + '; ':'';
     this.formdata.pattern = highpattern  + this.formdata.pattern;
 
-
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
 
@@ -454,7 +424,6 @@ export class PositionAddComponent {
       this.router.navigate(['/positions']);
     });
     
-
   }
 
   // --------------------------------------------------------------
@@ -463,14 +432,7 @@ export class PositionAddComponent {
 
   validate(){
     let errors = [];
-    /*
-    if (this.formdata.pricein == 0){
-      errors.push("PriceIn is required");
-    }
-    if (this.formdata.priceout == 0){
-      errors.push("PriceOut is required");
-    }
-    */
+
     if (this.formdata.contracts == 0){
       errors.push("Contracts is required");
     }
@@ -483,12 +445,7 @@ export class PositionAddComponent {
     if (selectedPatternValue.toLowerCase() == "not-set"){
       errors.push("Pattern is required");
     }
-
-    /*
-    if (this.formdata.setup1id == 0){
-      errors.push("Setup1 is required");
-    } 
-    */  
+ 
     const selectedSetupValue = this.selectSetup.nativeElement.value; 
     if (selectedSetupValue.toLowerCase() == "not-set"){
       errors.push("Setup is required");
@@ -571,23 +528,6 @@ export class PositionAddComponent {
     this.formdata.opresultticks = resultticks.toNumber();
     this.formdata.opresult = result.toNumber();
     this.formdata.opresulteur = resulteur.toNumber();
-
-    /*
-    this.loggerService.log(Tlog.info, "Ticks changed: ");
-    this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
-    this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
-    this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
-    this.loggerService.log(Tlog.info, "maxdecimals: " + maxdecimals);
-    this.loggerService.log(Tlog.info, "tickminvalue: " + ticker.tickminvalue);
-    this.loggerService.log(Tlog.info, "PriceIN: " + pricein.toString());
-    this.loggerService.log(Tlog.info, "PriceOUT: " + priceout.toString());
-    this.loggerService.log(Tlog.info, "Diff: " + diff.toString());
-    this.loggerService.log(Tlog.info, "Contracts: " + contracts.toString());
-    this.loggerService.log(Tlog.info, "Commission: " + commission.toString());
-    this.loggerService.log(Tlog.info, "ResultTicks: " + resultticks.toString());
-    this.loggerService.log(Tlog.info, "Result: " + result.toString());
-    this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur.toString());
-    */
   }
 
   usdeurChanged(){
@@ -602,11 +542,6 @@ export class PositionAddComponent {
   }
 
   selectAccountChanged(event: any){   
-    /*
-    this.loggerService.log(Tlog.info, "Account changed to: ");
-    this.loggerService.log(Tlog.info, selectedOption.value);
-    this.loggerService.log(Tlog.info, selectedOption.text);
-    */
     const selectedOption = event.target.options[event.target.selectedIndex];
     this.curr_account_id = selectedOption.value;
     this.curr_account_name = selectedOption.text;
@@ -615,11 +550,6 @@ export class PositionAddComponent {
   }
 
   selectTickerChanged(event: any){    
-    /*
-    this.loggerService.log(Tlog.info, "Account changed to: ");
-    this.loggerService.log(Tlog.info, selectedOption.value);
-    this.loggerService.log(Tlog.info, selectedOption.text);
-    */
     const selectedOption = event.target.options[event.target.selectedIndex];
     this.curr_ticker_id = selectedOption.value;
     this.curr_ticker_name = selectedOption.text;
@@ -635,6 +565,7 @@ export class PositionAddComponent {
   }
 
   // Update actions
+  
   updateCommission(){
     //this.loggerService.log(Tlog.info, this.tickerAccounts);
     this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;    

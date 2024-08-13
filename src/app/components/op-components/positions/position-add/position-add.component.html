@@ -1,110 +1,74 @@
 
 <app-common-title [title]="'Nueva posición'" [bg]="'secondary'"  [color]="'black'" [backuri]="'positions'"></app-common-title>
-<!-- <app-common-subtitle [subtitle]="'Posiciones'"></app-common-subtitle>-->
-
 
 <div class="pt-2 ">
 <form method="POST" #newpositions="ngForm" (ngSubmit)="onSubmit()">
   <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
-
-          
+   
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <div class="card  border border-dark pb-2">
       <div class="card-body ">
 
-    <!-- ----------------------------------------------------------------------------------------------------- -->
-    <!-- ----------------------------------------------------------------------------------------------------- -->
-      <!-- COMMON SESSION VALUES -->
+        <!-- ----------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------- -->
+        <!-- SESSION VALUES -->
 
-
-      <!-- ----------------------------------------------------------------------------------------------------- -->
-    <!-- ----------------------------------------------------------------------------------------------------- -->
-      <!-- OPERATION VALUES -->
-
-      <div class="row bg-light border border-secondary m-1 pt-2 pb-2">
-              <div class="col-lg-9 col-md-9 col-sm-10 ">   
-                
+        <div class="row bg-light border border-secondary m-1 pt-2 pb-2">
+              <div class="col-lg-9 col-md-9 col-sm-10 ">                   
                 <div class="row">
-
                           <div class="col-4">
-                                    <div class="col">
+                              <div class="col">
                                       <div class="form-group ">
-                                            <div class="row">
-                                              <div class="col-5">
-                                                <small>TPP</small>          
-                                              </div>
-                                              <div class="col-7">
-
-                                                <!--
-                                                <input type="text" id="idaccount" name="tpp" class="form-control" [(ngModel)]="formdata.tpp" />  
-                                                -->
-                                                
-                                                <select [(ngModel)]="curr_tpp_id" name="curr_tpp_id" class="form-select" (change)="selectTppChanged($event)" title="{{curr_tpp_name}}">
-                                                  <option *ngFor="let tpp of tpps" value="{{tpp.id}}" title="{{tpp.name}}">{{tpp.name}}</option>
-                                                </select>
-
-                                              </div>
-                                            </div>                                                                                          
+                                          <div class="row">
+                                            <div class="col-5">
+                                              <small>TPP</small>          
+                                            </div>
+                                            <div class="col-7">
+                                              <select [(ngModel)]="curr_tpp_id" name="curr_tpp_id" class="form-select" (change)="selectTppChanged($event)" title="{{curr_tpp_name}}">
+                                                <option *ngFor="let tpp of tpps" value="{{tpp.id}}" title="{{tpp.name}}">{{tpp.name}}</option>
+                                              </select>
+                                            </div>
+                                          </div>                                                                                          
                                       </div>
 
                                       <div class="form-group pt-2">
-                                            <div class="row">
-                                              <div class="col-5">
-                                                <small>Bloque</small>           
-                                              </div>
-                                              <div class="col-7">
-                                                <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />       
-                                              </div>
-                                            </div>                                                                                             
+                                          <div class="row">
+                                            <div class="col-5">
+                                              <small>Bloque</small>           
+                                            </div>
+                                            <div class="col-7">
+                                              <input type="text" class="form-control" name="block" [(ngModel)]="formdata.block" disabled />       
+                                            </div>
+                                          </div>                                                                                             
                                       </div>
 
                                       <div class="form-group pt-2">
-                                        <div class="row">
-                                          <div class="col-5">
-                                            <small>Secuencia</small>           
-                                          </div>
-                                          <div class="col-7">
-                                            <input type="text" class="form-control" name="blocksecuence" [(ngModel)]="formdata.blocksecuence" disabled />       
-                                          </div>
-                                        </div>                                                                                             
-                                  </div>
+                                          <div class="row">
+                                            <div class="col-5">
+                                              <small>Secuencia</small>           
+                                            </div>
+                                            <div class="col-7">
+                                              <input type="text" class="form-control" name="blocksecuence" [(ngModel)]="formdata.blocksecuence" disabled />       
+                                            </div>
+                                          </div>                                                                                             
+                                      </div>                                     
+                                </div>
+                            </div>
 
- 
-                                    
-                                    </div>
-                          </div>
-
-                          <div class="col-4">                                      
+                            <div class="col-4">   
                                       <div class="form-group">
                                             <div class="row">
-                                              <div class="col-5">
-                                                <small title="Cuenta y broker">Cuenta</small>        
-                                              </div>
-                                              <div class="col-7">
-                                                <!--
-                                                <input type="text" id="account" name="account" class="form-control" [(ngModel)]="formdata.account" disabled />       
-                                                -->
+                                                <div class="col-5">
+                                                  <small title="Cuenta y broker">Cuenta</small>        
+                                                </div>
+                                                <div class="col-7">
 
-                                                <!--
-                                                <select #selectAccount (change)="selectAccountChanged($event)" [(ngModel)]="formdata.account" class="form-select" name="account" id="account">
-                                                  <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
-                                                </select>
-                                                -->
+                                                  <select [(ngModel)]="curr_account_id" name="curr_account_id" class="form-select" (change)="selectAccountChanged($event)" title="{{curr_account_name}}">
+                                                    <option *ngFor="let account of accounts" value="{{account.id}}" title="{{account.name}}">{{account.name}}</option>
+                                                  </select>
 
-                                                <!--
-                                                <select class="form-select" (change)="selectAccountChanged($event)" title="{{curr_account_name}}">
-                                                  <option *ngFor="let account of accounts" value="{{account.id}}" title="{{account.name}}">{{account.name}}</option>
-                                                </select>
-                                                -->
-
-                                                <select [(ngModel)]="curr_account_id" name="curr_account_id" class="form-select" (change)="selectAccountChanged($event)" title="{{curr_account_name}}">
-                                                  <option *ngFor="let account of accounts" value="{{account.id}}" title="{{account.name}}">{{account.name}}</option>
-                                                </select>
-
-
-
-                                              </div>
+                                                </div>
                                             </div>                                                                                                 
                                       </div>
                                   
@@ -114,15 +78,7 @@
                                                 <small title="Ticker y mercado">Ticker</small>         
                                               </div>
                                               <div class="col-7">
-                                                <!--
-                                                <input type="text" class="form-control"name="ticker" [(ngModel)]="formdata.ticker" disabled /> 
-                                                -->
 
-                                                <!--
-                                                <select class="form-select" (change)="selectTickerChanged($event)" title="{{curr_ticker_name}}">
-                                                  <option *ngFor="let ticker of tickers" value="{{ticker.id}}">{{ticker.name}}</option>
-                                                </select>
-                                                -->
                                                 <select [(ngModel)]="curr_ticker_id" name="curr_ticker_id" class="form-select" (change)="selectTickerChanged($event)" title="{{curr_ticker_name}}">
                                                   <option *ngFor="let ticker of tickers" value="{{ticker.id}}">{{ticker.name}}</option>
                                                 </select>
@@ -141,54 +97,49 @@
                                               </div>
                                             </div>                                                                                    
                                       </div>                                      
-                          </div>
+                            </div>
 
-                          <div class="col-4">
-                                    <div class="form-group">
-                                      <div class="row">
-                                        <div class="col-5">
-                                          <small>Sesión</small>       
-                                        </div>
-                                        <div class="col-7">
-                                          <input type="number" class="form-control" [(ngModel)]="formdata.sessionid" name="sessionid"  />        
-                                        </div>
-                                      </div>                                                                            
-                                  </div>
+                            <div class="col-4">
+                                      <div class="form-group">
+                                          <div class="row">
+                                            <div class="col-5">
+                                              <small>Sesión</small>       
+                                            </div>
+                                            <div class="col-7">
+                                              <input type="number" class="form-control" [(ngModel)]="formdata.sessionid" name="sessionid"  />        
+                                            </div>
+                                          </div>                                                                            
+                                      </div>
 
-                                  <div class="form-group pt-2">
+                                      <div class="form-group pt-2">
+                                                <div class="row">
+                                                  <div class="col-5">
+                                                    <small>USDEUR</small>       
+                                                  </div>
+                                                  <div class="col-7">
+                                                    <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="curr_session_usdeur | numberFormatWithDecimalsPipe" name="curr_session_usdeur" (ngModelChange)="curr_session_usdeur = $event"   />        
+                                                  </div>
+                                                </div>                                                                            
+                                      </div>
+
+                                      <div class="form-group pt-2">
                                             <div class="row">
                                               <div class="col-5">
-                                                <small>USDEUR</small>       
+                                                <small>Divisa</small>        
                                               </div>
                                               <div class="col-7">
-                                                <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="curr_session_usdeur | numberFormatWithDecimalsPipe" name="curr_session_usdeur" (ngModelChange)="curr_session_usdeur = $event"   />        
+                                                <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />        
                                               </div>
-                                            </div>                                                                            
-                                  </div>
-
-                                  <div class="form-group pt-2">
-                                    <div class="row">
-                                      <div class="col-5">
-                                        <small>Divisa</small>        
+                                            </div>                                                                                              
                                       </div>
-                                      <div class="col-7">
-                                        <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />        
-                                      </div>
-                                    </div>                                                                                              
                               </div>
-
-                          </div>
-
                 </div>
-
-
-        </div> 
+              </div> 
           
-        <!-- ----------------------------------------------------------------------------------------------------- -->
-        <div class="col-lg-3 col-md-3 col-sm-2 px-2">
+              <!-- ------------------------------------------------------------------------ -->
 
-
-                      <div class="row h-100">
+              <div class="col-lg-3 col-md-3 col-sm-2 px-2">
+                <div class="row h-100">
                         <div class="col">
                                   <div class="card border-secondary h-100">
                                     <div class="card-header bg-secondary text-white">
@@ -199,34 +150,27 @@
                                     <textarea [(ngModel)]="formdata.note" class="w-100 h-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
                                   </div> 
                                   </div>
-                      </div>
-                    </div>
-
-
-                    </div>
-
+                          </div>
+                </div>
+              </div>
         </div>
       </div>
 
-
-
-  <!-- ----------------------------------------------------------------------------------------------------- -->
-     <!-- ----------------------------------------------------------------------------------------------------- -->
+      <!-- ----------------------------------------------------------------------------------------------------- -->
+      <!-- ----------------------------------------------------------------------------------------------------- -->
+      <!-- OPERATION VALUES -->
 
       <div class="row flex-grow-1 px-4 h-100 ">
         <!-- FORM DATA-->
           <div class="col-lg-9 col-md-9 col-sm-10 px-3">
-
+                <div class="row">
+                  <div class="col-4">
                       <div class="row">
-                        <div class="col-4">
-
-                          <div class="row">
-                                <div class="col-6">
-                                            <div class="form-check">
-                                              <input #input_tppCheck type="checkbox" class="form-check-input" id="tppCheck"  checked >
-                                              <label class="form-check-label" for="tppCheck">Es TPP</label>
-                                            </div>
-                                            
+                              <div class="col-6">
+                                    <div class="form-check">
+                                      <input #input_tppCheck type="checkbox" class="form-check-input" id="tppCheck"  checked >
+                                      <label class="form-check-label" for="tppCheck">Es TPP</label>
+                                    </div>                                            
                                 </div>
 
                                 <div class="col-6">
@@ -241,34 +185,29 @@
                                                 </div>
                                           </div>
                                 </div>
+                      </div>                                 
+                  </div>
 
-
+                  <div class="col-4">
+                          <div class="row">
+                                  <div class="col-5">
+                                        <small>Hora IN</small>
+                                  </div>
+                                  <div class="col-7">
+                                        <input type="text" class="form-control" name="timein" [(ngModel)]="formdata.timein" />      
+                                  </div>                                        
                           </div>
 
-                                 
-                        </div>
-
-                        <div class="col-4">
-
-                                <div class="row">
-                                      <div class="col-5">
-                                            <small>Hora IN</small>
-                                      </div>
-                                      <div class="col-7">
-                                            <input type="text" class="form-control" name="timein" [(ngModel)]="formdata.timein" />      
-                                      </div>                                        
-                                </div>
-                                <div class="row pt-1">
+                          <div class="row pt-1">
                                   <div class="col-5">
                                     <small>Precio IN</small>
                                   </div>
                                   <div class="col-7">
-                                    <!-- <input type="number" class="form-control" name="pricein" [(ngModel)]="formdata.pricein" /> -->
                                     <input (blur)="priceInChanged()" type="text" class="form-control" name="pricein" [ngModel]="formdata.pricein | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.pricein = $event" />
                                   </div>                                        
-                                </div>
+                          </div>
 
-                                <div class="form-group pt-1">
+                          <div class="form-group pt-1">
                                   <div class="row">
                                           <div class="col-5">
                                             <small>Contratos</small>
@@ -277,129 +216,93 @@
                                             <input (blur)="priceOutChanged()" type="number" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
                                           </div>
                                   </div>
-                            </div>
+                          </div>                               
+                  </div>
 
-                               
+                  <div class="col-4">                             
+                          <div class="row">
+                                  <div class="col-5">
+                                    <small>Hora OUT</small>
+                                  </div>
+                                  <div class="col-7">
+                                    <input type="text" class="form-control" name="timeout" [(ngModel)]="formdata.timeout" />    
+                                  </div>                                        
+                          </div>
 
-                        </div>
-
-                        <div class="col-4">
-
-                             
-                              <div class="row">
-                                <div class="col-5">
-                                  <small>Hora OUT</small>
-                                </div>
-                                <div class="col-7">
-                                  <input type="text" class="form-control" name="timeout" [(ngModel)]="formdata.timeout" />    
-                                </div>                                        
-                              </div>
-
-                              <div class="row pt-1">
+                          <div class="row pt-1">
                                     <div class="col-5">
                                       <small>Precio OUT</small>
                                     </div>
                                     <div class="col-7">
-                                      <!--
-                                      <input (change)="priceOutChanged($event)" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" value="{{curr_priceout}}"/>  
-                                      -->
-                                      <!--
-                                      <input (change)="priceOutChanged()" type="number" class="form-control" name="priceout" [(ngModel)]="formdata.priceout" [value]="formdata.priceout | numberFormatWithDecimalsPipe"/>  
-                                      -->
-
-                                      <input (blur)="priceOutChanged()" type="text" class="form-control" name="priceout" [ngModel]="formdata.priceout | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.priceout = $event" />
-
-
+                                          <input (blur)="priceOutChanged()" type="text" class="form-control" name="priceout" [ngModel]="formdata.priceout | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.priceout = $event" />
                                     </div>                                        
-                              </div>
+                            </div>
 
-                              <div class="form-group pt-1">
-                                      <div class="row">
-                                      <div class="col-5">
-                                        <small>Ticks</small>
-                                      </div>
-                                      <div class="col-7">
-                                        <!--
-                                        <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" [(ngModel)]="formdata.opresultticks" value="{{curr_ticks}}" />
-                                        -->
-                                        <!--
-                                        <input (ngModelChange)="ticksChanged($event)" type="number" class="form-control" name="Ticks" value="{{formdata.opresultticks | numberFormaRoundedPipe}}" />
-                                        -->
-                                        <!--
-                                        <input (blur)="ticksChanged()" type="text" class="form-control" name="opresultticks" [(ngModel)]="formdata.opresultticks" [value]="formdata.opresultticks | numberFormatRoundedPipe" />
-                                        -->
-                                        <input (blur)="ticksChanged()" type="text" class="form-control" name="opresultticks" [ngModel]="formdata.opresultticks | numberFormatRoundedPipe" (ngModelChange)="formdata.opresultticks = $event"/>
-                                      </div>    
+                            <div class="form-group pt-1">
+                              <div class="row">
+                                    <div class="col-5">
+                                          <small>Ticks</small>
                                     </div>
+                                    <div class="col-7">
+                                          <input (blur)="ticksChanged()" type="text" class="form-control" name="opresultticks" [ngModel]="formdata.opresultticks | numberFormatRoundedPipe" (ngModelChange)="formdata.opresultticks = $event"/>
+                                    </div>    
                               </div>
+                            </div>
+                  </div>
+                </div>
 
-                        </div>
+                <!-- ----------------------------------------------------------------------------------------------------- -->
 
-            </div>
-
-         <!-- ----------------------------------------------------------------------------------------------------- -->
-
-             <div class="row pt-4">
+                <div class="row pt-4">
 
                         <div class="col-4">
                               <div class="row">
                                       <div class="col-6">
-                                                    <div class="form-group ">
-                                                      <select #selectHighPattern title="High Patterns" class="w-100" name="highpattern" id="highpattern">
-
-                                                        <option value="Not-set" selected>Not-set</option>
-                                                        <option *ngFor="let highpattern of positionHighPatterns" value="{{highpattern.name}}">{{ highpattern.name }}</option>   
-                                                      
-                                                      </select>
-                                                    </div>
+                                              <div class="form-group ">
+                                                <select #selectHighPattern title="High Patterns" class="w-100" name="highpattern" id="highpattern">
+                                                  <option value="Not-set" selected>Not-set</option>
+                                                  <option *ngFor="let highpattern of positionHighPatterns" value="{{highpattern.name}}">{{ highpattern.name }}</option>                                                         
+                                                </select>
+                                              </div>
                                       </div>
                                       
                                       <div class="col-6">
-                                                  <div class="form-group"> 
-                                                                                                        
-                                                        <select #selectPattern title="Patterns" class="w-100" name="pattern" id="pattern">
-
-                                                          <option value="Not-set" selected>Not-set</option>
-                                                          <option *ngFor="let pattern of positionPatterns" value="{{pattern.name}}">{{ pattern.name }}</option>   
-                                                        
-                                                        </select>
-
-                                                  </div>
+                                              <div class="form-group">                                                                                                     
+                                                  <select #selectPattern title="Patterns" class="w-100" name="pattern" id="pattern">
+                                                    <option value="Not-set" selected>Not-set</option>
+                                                    <option *ngFor="let pattern of positionPatterns" value="{{pattern.name}}">{{ pattern.name }}</option>                                                       
+                                                  </select>
+                                              </div>
                                       </div>
                               </div>  
                         </div>
                 
                         <div class="col-4">
-                                      <div class="form-group">
-                                                  <div class="row">
-                                                      <div class="col-5">
-                                                              <div class="form-group">                                                                                                         
-                                                                    <select [(ngModel)]="formdata.setup2id" title="Temporalidad" class="w-100" name="setup2id">
-            
-                                                                      <option value="m1" >m1</option>
-                                                                      <option value="m3" >m3</option>
-                                                                      <option value="m5" selected>m5</option>
-                                                                    
-                                                                    </select>  
-                                                              </div>
-                                                      </div>
-
-                                                      <div class="col-7">
-                                                                <div class="form-group">
-                                                                  <select #selectSetup title="Setups" class="custom-select-sm w-100" id="setupid" >
-                    
-                                                                    <option value="Not-set" selected>Not-set</option>
-                                                                    <option *ngFor="let setup of positionSetups" [value]="setup.name">{{ setup.name }}</option>   
-                                                                  
-                                                                  </select>
-                                                                </div>
-                                                      </div>
-                                                    </div>   
+                              <div class="form-group">
+                                  <div class="row">
+                                      <div class="col-5">
+                                            <div class="form-group">                                                                                                         
+                                                <select [(ngModel)]="formdata.setup2id" title="Temporalidad" class="w-100" name="setup2id">
+                                                  <option value="m1" >m1</option>
+                                                  <option value="m3" >m3</option>
+                                                  <option value="m5" selected>m5</option>                                                    
+                                                </select>  
+                                            </div>
                                       </div>
+
+                                      <div class="col-7">
+                                            <div class="form-group">
+                                                <select #selectSetup title="Setups" class="custom-select-sm w-100" id="setupid" >    
+                                                  <option value="Not-set" selected>Not-set</option>
+                                                  <option *ngFor="let setup of positionSetups" [value]="setup.name">{{ setup.name }}</option>                                                     
+                                                </select>
+                                            </div>
+                                      </div>
+                                    </div>   
+                               </div>
                         </div>
                 
                         <div class="col-4">      
-
                                     <div class="row border border-dark pt-1 pb-1 mx-0">
                                               <div class="col-5 d-flex align-items-center">
                                                 <small>Resultado NETO</small>
@@ -417,61 +320,45 @@
                                         <input type="number" class="form-control" name="result"  value="{{formdata.opresulteur | numberFormatWithDecimalsPipe}}" disabled />
                                       </div>
                             </div>    
-
-                        </div>
-                                                                                         
+                        </div>                                                                                         
               </div>
           </div>
               <!-- NOTES AND BUTTONS ---------------------------------------------------------------- -->
-              <div class="col-lg-3 col-md-3 col-sm-2">
-                  <div class="row">
-                          
-    
-                                          <div class="col">
+          <div class="col-lg-3 col-md-3 col-sm-2">
 
-                                                  <div class="row pt-2">
-                                                    <div class="col-6">
-                                                      <div class="form-group d-block w-100 ">
-                                                        <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                            <div class="form-group  d-block w-100">                                  
-                                                              <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2log()">Submit LOG</button>
-                                                            </div>
-                                                    </div>
+              <div class="row">                          
+                        <div class="col">
+                              <div class="row pt-2">
+                                        <div class="col-6">
+                                          <div class="form-group d-block w-100 ">
+                                            <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
                                           </div>
-
-
-                                               
-
-                                                <div class="card  border-warning mt-2">
-                                                        <div class="card-header bg-warning text-dark">
-                                                          <h6 class="card-title">Notas de operación &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
-                                                      </div>
-                                                      <div class="card-body">                                
-                                                        <DIV class="formgroup d-block w-100">
-                                                        <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea>
-                                                        </DIV>
-                                                      </div> 
+                                        </div>
+                                        <div class="col-6">
+                                                <div class="form-group  d-block w-100">                                  
+                                                  <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2log()">Submit LOG</button>
                                                 </div>
-                                                  
-                                          </div>              
-                                                  
-                  </div>
+                                        </div>
+                              </div>
 
-
-
+                              <div class="card  border-warning mt-2">
+                                      <div class="card-header bg-warning text-dark">
+                                          <h6 class="card-title">Notas de operación &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(103, 75, 24);"></i> </h6>
+                                      </div>
+                                      <div class="card-body">                                
+                                            <DIV class="formgroup d-block w-100">
+                                            <textarea [(ngModel)]="formdata.note" class="w-100" name="note" placeholder="Notas e hipótesis"></textarea>
+                                            </DIV>
+                                      </div> 
+                              </div>  
+                        </div>                                                                
               </div>
-
-
+          </div>
         </div>
       </div>
 
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->  
-
-
 
 </form>
 </div>
