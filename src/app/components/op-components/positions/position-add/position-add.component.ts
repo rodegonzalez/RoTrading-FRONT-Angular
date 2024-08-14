@@ -59,34 +59,25 @@ export class PositionAddComponent {
   positionHighPatterns: Array<IPositionPattern> = [];
 
   // --------------------------------------------------------------
-  // force update form
+  //TODO: get current from defaults in server and force form update after load data
   curr_account_or_ticker_changed: boolean = true;
-  curr_account_id: number = 1;
-  curr_account_name: string = "";
-  curr_ticker_id: number = 1;
-  curr_ticker_name: string = "";
-  curr_tpp_id: number = 1;
+  curr_session_usdeur: number = 0.92;
   curr_tpp_name: string = "";
   d_tppblocksec: string = "";
+  curr_account_name: string = "";
+  curr_ticker_name: string = "";
 
   // --------------------------------------------------------------
-  curr_ticks: number = 0;
-  curr_priceout: number = 0;
-  result: number = 0;
-  curr_tickeraccount_commission: number = 0;
-  curr_sessionid: string = this.sharedModule.getSessionid();
-  curr_session_usdeur: number = 0.92;
-  
+
   formdata: IPositionView = {
-    id: 0, sessionid: this.curr_sessionid, guid: "",  tppid: 0,  tpp: "",  tppblocksec: 0, sec: 0, tppcheck: 0,
-    creation: "", modification: "",
+    id: 0, creation: "", modification: "",
+    sessionid: this.sharedModule.getSessionid(), guid: "",  
+    tppid: 0,  tpp: "",  tppblocksec: 0, sec: 0, tppcheck: 0,
+    divisaid: 0, divisa:	'', account:'', accountid: 0, acctype:'', tickerid: 0, pattern1id: 0, pattern2id: "not-set", setup1id: 0, setup2id: "m5",
+    ticker:	'',  pattern:	'not-set', setup:	'',    
     timein: "", timeout: "", buysell: "buy", pricein: 0, priceout: 0,
-    opresultticks: 0, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,
-    imagepath: "", status: "",
-    divisaid: 0, accountid: 0, tickerid: 0, pattern1id: 0, pattern2id: "not-set", setup1id: 0, setup2id: "m5",
-    note: "", 
-    deleted: 0, processed: 0,
-    divisa:	'', account:'', acctype:'',  ticker:	'',  pattern:	'not-set', setup:	'',
+    opresultticks: 0, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,    
+    imagepath: "", status: "", deleted: 0, processed: 0, note: "",         
     };
 
    // --------------------------------------------------------------
@@ -265,17 +256,23 @@ export class PositionAddComponent {
 
   // load data after async methods
   loadDefaultData(){
+
+    this.formdata.tppid = this.tpps[0].id;
+    this.formdata.tpp = this.tpps[0].name;
+
+    this.formdata.accountid = this.accounts[0].id;
+    this.formdata.account = this.accounts[0].name;
+
+
     const mydate = this.sharedModule.getTime();
     this.formdata.timein = mydate;
     this.formdata.timeout = mydate;
     this.formdata.creation = mydate;
     this.formdata.timein = this.sharedModule.getTime();
-    this.formdata.accountid = this.accounts[0].id;
-    this.formdata.account = this.accounts[0].name;
+    
     this.formdata.tickerid = this.tickers[0].id;
     this.formdata.ticker = this.tickers[0].name;    
-    this.formdata.tppid = this.tpps[0].id;
-    this.formdata.tpp = this.tpps[0].name;
+
     this.formdata.pattern1id = this.positionHighPatterns[0].id;
     this.formdata.pattern2id = "Not-set";
     this.formdata.setup1id = this.positionPatterns[0].id;
@@ -297,9 +294,9 @@ export class PositionAddComponent {
       this.loadDefaultData();
 
       // update form after load data
-      this.curr_account_name = this.accounts.find(x => x.id == this.curr_account_id)?.name || "";
-      this.curr_ticker_name = this.tickers.find(x => x.id == this.curr_ticker_id)?.name || "";
-      this.curr_tpp_name = this.tpps.find(x => x.id == this.curr_tpp_id)?.name || "";
+      this.curr_account_name = this.accounts.find(x => x.id == this.formdata.accountid)?.name || "";
+      this.curr_ticker_name = this.tickers.find(x => x.id == this.formdata.tickerid)?.name || "";
+      this.curr_tpp_name = this.tpps.find(x => x.id == this.formdata.tppid)?.name || "";
       this.curr_account_or_ticker_changed = true;
       this.updateCurrForm();
       this.updateTppSecuence();
@@ -474,7 +471,7 @@ export class PositionAddComponent {
   // --------------------------------------------------------------
 
   priceOutChanged(){
-    const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
+    const ticker = this.tickers.find(x => x.id == this.formdata.tickerid) || { tickmin: 0, tickminvalue: 0 };
     const pricein = new Decimal(this.formdata.pricein);
     const priceout = new Decimal(this.formdata.priceout);
     const contracts = new Decimal(this.formdata.contracts);
@@ -492,7 +489,7 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "-----------------------------------------------");
     this.loggerService.log(Tlog.info, "PriceOut changed: ");
     this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
-    this.loggerService.log(Tlog.info, "this.curr_ticker_id: " + this.curr_ticker_id);
+    this.loggerService.log(Tlog.info, "this.formdata.tickerid: " + this.formdata.tickerid);
     this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
     this.loggerService.log(Tlog.info, "tickminvalue: " + ticker.tickminvalue);
     this.loggerService.log(Tlog.info, "PriceIN: " + pricein.toString());
@@ -507,7 +504,7 @@ export class PositionAddComponent {
   }
 
   priceInChanged(){    
-    const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
+    const ticker = this.tickers.find(x => x.id == this.formdata.tickerid) || { tickmin: 0, tickminvalue: 0 };
     const maxdecimals = new Decimal(this.sharedModule.countDecimalDigits(ticker.tickmin));
     const pricein = new Decimal(this.formdata.pricein).toDecimalPlaces(maxdecimals.toNumber());
     this.formdata.pricein = pricein.toNumber();
@@ -515,7 +512,7 @@ export class PositionAddComponent {
   }
 
   ticksChanged(){
-    const ticker = this.tickers.find(x => x.id == this.curr_ticker_id) || { tickmin: 0, tickminvalue: 0 };
+    const ticker = this.tickers.find(x => x.id == this.formdata.tickerid) || { tickmin: 0, tickminvalue: 0 };
     const maxdecimals = new Decimal(this.sharedModule.countDecimalDigits(ticker.tickmin));
     const resultticks = new Decimal(this.formdata.opresultticks).toDecimalPlaces(0);
     const pricein = new Decimal(this.formdata.pricein);
@@ -545,7 +542,7 @@ export class PositionAddComponent {
 
   selectAccountChanged(event: any){   
     const selectedOption = event.target.options[event.target.selectedIndex];
-    this.curr_account_id = selectedOption.value;
+    this.formdata.accountid = selectedOption.value;
     this.curr_account_name = selectedOption.text;
     this.curr_account_or_ticker_changed = true;
     this.updateCurrForm();
@@ -553,7 +550,7 @@ export class PositionAddComponent {
 
   selectTickerChanged(event: any){    
     const selectedOption = event.target.options[event.target.selectedIndex];
-    this.curr_ticker_id = selectedOption.value;
+    this.formdata.tickerid = selectedOption.value;
     this.curr_ticker_name = selectedOption.text;
     this.curr_account_or_ticker_changed = true;
     this.updateCurrForm();
@@ -562,7 +559,7 @@ export class PositionAddComponent {
 
   selectTppChanged(event: any){    
     const selectedOption = event.target.options[event.target.selectedIndex];
-    this.curr_tpp_id = selectedOption.value;
+    this.formdata.tppid = selectedOption.value;
     this.curr_tpp_name = selectedOption.text;
     this.updateTppSecuence()
   }
@@ -571,13 +568,13 @@ export class PositionAddComponent {
   
   updateCommission(){
     //this.loggerService.log(Tlog.info, this.tickerAccounts);
-    this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;    
+    this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.formdata.tickerid && x.accountid == this.formdata.accountid)?.commission || 0;    
     this.curr_account_or_ticker_changed = false;
   }
 
   updateTppSecuence(){    
     let dataGetSecuence: ITppGetSecuence;
-    this.tppService.getSecuence(this.curr_tpp_id).subscribe({
+    this.tppService.getSecuence(this.formdata.tppid).subscribe({
       complete: () => {
         /*
         this.loggerService.log(Tlog.info, "getSecuence data:");
@@ -586,7 +583,7 @@ export class PositionAddComponent {
 
         var tppblocksec = new Decimal(1);
         var sec = new Decimal(1);
-        const tpp = this.tpps.find(x => x.id == this.curr_tpp_id);
+        const tpp = this.tpps.find(x => x.id == this.formdata.tppid);
         const prefix = tpp?.blockprefix || "";
         const maxblocksecuence = tpp?.maxblocksecuence || 0;
 

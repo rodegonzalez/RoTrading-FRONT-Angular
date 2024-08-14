@@ -25,7 +25,7 @@
                                               <small>TPP</small>          
                                             </div>
                                             <div class="col-7">
-                                              <select [(ngModel)]="curr_tpp_id" name="curr_tpp_id" class="form-select" (change)="selectTppChanged($event)" title="{{curr_tpp_name}}">
+                                              <select [(ngModel)]="formdata.tppid" name="tppid" class="form-select" (change)="selectTppChanged($event)" title="{{curr_tpp_name}}">
                                                 <option *ngFor="let tpp of tpps" value="{{tpp.id}}" title="{{tpp.name}}">{{tpp.name}}</option>
                                               </select>
                                             </div>
@@ -64,8 +64,7 @@
                                                   <small title="Cuenta y broker">Cuenta</small>        
                                                 </div>
                                                 <div class="col-7">
-
-                                                  <select [(ngModel)]="curr_account_id" name="curr_account_id" class="form-select" (change)="selectAccountChanged($event)" title="{{curr_account_name}}">
+                                                    <select [(ngModel)]="formdata.accountid" name="accountid" class="form-select" (change)="selectAccountChanged($event)" title="{{curr_account_name}}">
                                                     <option *ngFor="let account of accounts" value="{{account.id}}" title="{{account.name}}">{{account.name}}</option>
                                                   </select>
 
@@ -79,10 +78,9 @@
                                                 <small title="Ticker y mercado">Ticker</small>         
                                               </div>
                                               <div class="col-7">
-
-                                                <select [(ngModel)]="curr_ticker_id" name="curr_ticker_id" class="form-select" (change)="selectTickerChanged($event)" title="{{curr_ticker_name}}">
-                                                  <option *ngFor="let ticker of tickers" value="{{ticker.id}}">{{ticker.name}}</option>
-                                                </select>
+                                                  <select [(ngModel)]="formdata.tickerid" name="tickerid" class="form-select" (change)="selectTickerChanged($event)" title="{{curr_ticker_name}}">
+                                                    <option *ngFor="let ticker of tickers" value="{{ticker.id}}">{{ticker.name}}</option>
+                                                  </select>
 
                                               </div>
                                             </div>                                                                                             
