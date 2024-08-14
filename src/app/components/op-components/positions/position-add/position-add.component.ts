@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Decimal } from 'decimal.js';
 
 import { FormGroup } from '@angular/forms';
-import { IPositionView } from 'src/app/interfaces/IPosition.interface';
+import { IPosition, IPositionView } from 'src/app/interfaces/IPosition.interface';
 import { IPositionSetup } from 'src/app/interfaces/IPositionSetup.interface';
 import { IPositionHighPattern, IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface';
 import { ITicker } from 'src/app/interfaces/ITicker.interface';
@@ -36,6 +36,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 // --------------------------------------------------------------
 export class PositionAddComponent {
   @ViewChild('input_tppCheck') input_tppCheck!: ElementRef;
+  @ViewChild('selectSetupTemporality') selectSetupTemporality!: ElementRef;
   @ViewChild('selectSetup') selectSetup!: ElementRef;
   @ViewChild('selectHighPattern') selectHighPattern!: ElementRef;
   @ViewChild('selectPattern') selectPattern!: ElementRef;
@@ -59,27 +60,26 @@ export class PositionAddComponent {
   positionHighPatterns: Array<IPositionPattern> = [];
 
   // --------------------------------------------------------------
-  //TODO: get current from defaults in server and force form update after load data
+  //TODO: get current from defaults or previous; in server and force form update after load data
   curr_account_or_ticker_changed: boolean = true;
   curr_session_usdeur: number = 0.92;
   curr_tpp_name: string = "";
   d_tppblocksec: string = "";
   curr_account_name: string = "";
   curr_ticker_name: string = "";
+  curr_divisa_name: string = "";
 
   // --------------------------------------------------------------
 
-  formdata: IPositionView = {
+  formdata: IPosition = {
     id: 0, creation: "", modification: "",
     sessionid: this.sharedModule.getSessionid(), guid: "",  
-    tppid: 0,  tpp: "",  tppblocksec: 0, sec: 0, tppcheck: 0,
-    divisaid: 0, divisa:	'', account:'', accountid: 0, acctype:'', tickerid: 0, pattern1id: 0, pattern2id: "not-set", setup1id: 0, setup2id: "m5",
-    ticker:	'',  pattern:	'not-set', setup:	'',    
+    tppid: 0, tppblocksec: 0, sec: 0, tppcheck: 0,
+    divisaid: 0, accountid: 0, tickerid: 0, pattern1id: 0, pattern2id: "0", setup1id: "0", setup2id: 0,  
     timein: "", timeout: "", buysell: "buy", pricein: 0, priceout: 0,
     opresultticks: 0, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,    
-    imagepath: "", status: "", deleted: 0, processed: 0, note: "",         
+    imagepath: "", status: "", deleted: 0, deletednote: "", processed: 0, note: "",         
     };
-
    // --------------------------------------------------------------
    // --------------------------------------------------------------
 
@@ -139,13 +139,15 @@ export class PositionAddComponent {
     return new Promise((resolve, reject) => {
           this.tppService.getAll().subscribe({
             complete: () => {
+              this.loggerService.log(Tlog.info, "loadTppsAsync error:");
+              this.loggerService.log(Tlog.info, this.tpps);
                 resolve();
             },
             next: (data: Array<ITpp>) => {
               this.tpps = data;        
             },
             error: (e: any) => {
-              this.loggerService.log(Tlog.error, "loadTppsAsync error:");
+              this.loggerService.log(Tlog.error, "loadTppsAsync data:");
               this.loggerService.log(Tlog.error, e);
               reject(e);
             }
@@ -157,6 +159,8 @@ export class PositionAddComponent {
     return new Promise((resolve, reject) => {
           this.positionSetupsService.getAll().subscribe({
             complete: () => {
+              this.loggerService.log(Tlog.info, "loadSetupsAsync data:");
+              this.loggerService.log(Tlog.info, this.positionSetups);
                 resolve();
             },
             next: (data: Array<IPositionSetup>) => {
@@ -256,29 +260,23 @@ export class PositionAddComponent {
 
   // load data after async methods
   loadDefaultData(){
-
-    this.formdata.tppid = this.tpps[0].id;
-    this.formdata.tpp = this.tpps[0].name;
-
-    this.formdata.accountid = this.accounts[0].id;
-    this.formdata.account = this.accounts[0].name;
-
-
     const mydate = this.sharedModule.getTime();
     this.formdata.timein = mydate;
     this.formdata.timeout = mydate;
     this.formdata.creation = mydate;
     this.formdata.timein = this.sharedModule.getTime();
-    
+    this.formdata.tppid = this.tpps[0].id;
+    this.curr_tpp_name = this.tpps[0].name;
+    this.formdata.accountid = this.accounts[0].id;
+    this.curr_account_name = this.accounts[0].name;
     this.formdata.tickerid = this.tickers[0].id;
-    this.formdata.ticker = this.tickers[0].name;    
-
-    this.formdata.pattern1id = this.positionHighPatterns[0].id;
-    this.formdata.pattern2id = "Not-set";
-    this.formdata.setup1id = this.positionPatterns[0].id;
-    this.formdata.setup2id = "m5";
+    this.curr_ticker_name = this.tickers[0].name;    
+    this.formdata.pattern1id = 0;
+    this.formdata.pattern2id = "0";
+    this.formdata.setup1id = "0";
+    this.formdata.setup2id = 0;
     this.formdata.divisaid = this.divisas[0].id;
-    this.formdata.divisa = this.divisas[0].name;
+    this.curr_divisa_name = this.divisas[0].name;
     this.formdata.commission = this.tickerAccounts[0].commission;
   }
 
@@ -338,32 +336,9 @@ export class PositionAddComponent {
     this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
     this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
 
-    // setups
-    const options = this.selectSetup.nativeElement.options;
-    const selectedValues = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-    this.formdata.setup = selectedValues.join(',');
-
-    // high patterns and patterns
-    const selectHighPattern = this.selectHighPattern.nativeElement.options;
-    const selectHighPattern_selectedValues = [];
-    for (let i = 0; i < selectHighPattern.length; i++) {
-      if (selectHighPattern[i].selected) {
-        selectHighPattern_selectedValues.push(selectHighPattern[i].value);
-      }
-    }
-    const selectPattern = this.selectPattern.nativeElement.options;
-    const selectPattern_selectedValues = [];
-    for (let i = 0; i < selectPattern.length; i++) {
-      if (selectPattern[i].selected) {
-        selectPattern_selectedValues.push(selectPattern[i].value);
-      }
-    }
-    this.formdata.pattern = selectHighPattern_selectedValues.join(',')  + "; " + selectPattern_selectedValues.join(',');
+    // transform to numbers
+    this.formdata.pattern1id = Number(this.formdata.pattern1id);
+    this.formdata.setup2id = Number(this.formdata.setup2id);
 
     // LOG Form data
     this.loggerService.log(Tlog.info, "FORM formdata:");
@@ -390,26 +365,9 @@ export class PositionAddComponent {
     this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
     this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
 
-     // setups
-    const options = this.selectSetup.nativeElement.options;
-    const selectedValues = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-    this.formdata.setup = selectedValues.join(',');
-
-    // high patterns
-    const optionsHP = this.selectHighPattern.nativeElement.options;
-    const selectedValuesHP = [];
-    for (let i = 0; i < optionsHP.length; i++) {
-      if (optionsHP[i].selected) {
-        selectedValuesHP.push(optionsHP[i].value);
-      }
-    }
-    const highpattern = (selectedValuesHP.length>0)?selectedValuesHP.join(',') + '; ':'';
-    this.formdata.pattern = highpattern  + this.formdata.pattern;
+    // transform to numbers
+    this.formdata.pattern1id = Number(this.formdata.pattern1id);
+    this.formdata.setup2id = Number(this.formdata.setup2id);
 
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
@@ -417,11 +375,13 @@ export class PositionAddComponent {
     let response : any = this.positionsService.savePositionForm(this.formdata);
     this.loggerService.log(Tlog.info, "FORM updaterecord response:");
     this.loggerService.log(Tlog.info,response);
-
-    // reload panel
+    
+    // reload panel   
+    /* 
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/positions']);
     });
+    */
     
   }
 
@@ -437,16 +397,21 @@ export class PositionAddComponent {
     }
 
     const selectedHighPatternValue = this.selectHighPattern.nativeElement.value;
-    if (selectedHighPatternValue.toLowerCase() == "not-set"){
+    if (selectedHighPatternValue == "0"){
       errors.push("High pattern is required");
     }
     const selectedPatternValue = this.selectPattern.nativeElement.value;
-    if (selectedPatternValue.toLowerCase() == "not-set"){
+    if (selectedPatternValue == "0"){
       errors.push("Pattern is required");
     }
- 
+
+    const selectedSetupTemporalityValue = this.selectSetupTemporality.nativeElement.value; 
+    if (selectedSetupTemporalityValue == "0"){
+      errors.push("Setup temporality is required");
+    }
+
     const selectedSetupValue = this.selectSetup.nativeElement.value; 
-    if (selectedSetupValue.toLowerCase() == "not-set"){
+    if (selectedSetupValue.toLowerCase() == "0"){
       errors.push("Setup is required");
     }
 
@@ -593,6 +558,8 @@ export class PositionAddComponent {
           if (sec.greaterThanOrEqualTo(maxblocksecuence)){
             tppblocksec = tppblocksec.plus(1);
             sec = new Decimal(1);
+          }else{
+            sec = sec.plus(1);
           }
         }
         

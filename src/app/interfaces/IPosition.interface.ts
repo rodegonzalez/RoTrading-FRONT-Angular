@@ -3,9 +3,9 @@
 	sessionid: 		string;
 	guid:			string;
 	tppid:			number;
-	tppCheck:		number;
-	tppblocksec:  		number;
-	sec:  number;
+	tppcheck:		number;
+	tppblocksec:  	number;
+	sec:  			number;
 	creation:       string;
 	modification:   string;
 	timein:     	string;
@@ -23,10 +23,11 @@
 	tickerid:		number;
 	pattern1id:		number;
 	pattern2id:		string;
-	setup1id:		number;
-	setup2id:		string;
+	setup1id:		string;
+	setup2id:		number;
 	processed:		number;
 	deleted:		number;
+	deletednote:	string;
 	note:			string;
 	imagepath:      string;
 	status:			string;

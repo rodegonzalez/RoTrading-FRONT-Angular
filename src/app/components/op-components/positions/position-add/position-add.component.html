@@ -26,7 +26,7 @@
                                             </div>
                                             <div class="col-7">
                                               <select [(ngModel)]="formdata.tppid" name="tppid" class="form-select" (change)="selectTppChanged($event)" title="{{curr_tpp_name}}">
-                                                <option *ngFor="let tpp of tpps" value="{{tpp.id}}" title="{{tpp.name}}">{{tpp.name}}</option>
+                                                <option *ngFor="let tpp of tpps" [value]="tpp.id">{{tpp.name}}</option>
                                               </select>
                                             </div>
                                           </div>                                                                                          
@@ -65,7 +65,7 @@
                                                 </div>
                                                 <div class="col-7">
                                                     <select [(ngModel)]="formdata.accountid" name="accountid" class="form-select" (change)="selectAccountChanged($event)" title="{{curr_account_name}}">
-                                                    <option *ngFor="let account of accounts" value="{{account.id}}" title="{{account.name}}">{{account.name}}</option>
+                                                    <option *ngFor="let account of accounts" [value]="account.id">{{account.name}}</option>
                                                   </select>
 
                                                 </div>
@@ -79,7 +79,7 @@
                                               </div>
                                               <div class="col-7">
                                                   <select [(ngModel)]="formdata.tickerid" name="tickerid" class="form-select" (change)="selectTickerChanged($event)" title="{{curr_ticker_name}}">
-                                                    <option *ngFor="let ticker of tickers" value="{{ticker.id}}">{{ticker.name}}</option>
+                                                    <option *ngFor="let ticker of tickers" [value]="ticker.id">{{ticker.name}}</option>
                                                   </select>
 
                                               </div>
@@ -127,7 +127,8 @@
                                                 <small>Divisa</small>        
                                               </div>
                                               <div class="col-7">
-                                                <input type="text" class="form-control"name="divisa" [(ngModel)]="formdata.divisa" disabled />        
+                                                <input type="text" class="form-control"name="curr_divisa_name" [(ngModel)]="curr_divisa_name" disabled /> 
+                                                <input type="hidden" class="form-control"name="divisaid" [(ngModel)]="formdata.divisaid" disabled />        
                                               </div>
                                             </div>                                                                                              
                                       </div>
@@ -258,18 +259,20 @@
                               <div class="row">
                                       <div class="col-6">
                                               <div class="form-group ">
-                                                <select #selectHighPattern title="High Patterns" class="w-100" name="highpattern" id="highpattern">
-                                                  <option value="Not-set" selected>Not-set</option>
-                                                  <option *ngFor="let highpattern of positionHighPatterns" value="{{highpattern.name}}">{{ highpattern.name }}</option>                                                         
+                                                <select #selectHighPattern [(ngModel)]="formdata.pattern1id" title="High Patterns" class="form-select" name="pattern1id" >
+                                                  <option value="0" selected>Not-set</option>
+                                                  <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.id">{{ highpattern.name }}</option>                                                         
                                                 </select>
                                               </div>
                                       </div>
                                       
                                       <div class="col-6">
                                               <div class="form-group">                                                                                                     
-                                                  <select #selectPattern title="Patterns" class="w-100" name="pattern" id="pattern">
-                                                    <option value="Not-set" selected>Not-set</option>
-                                                    <option *ngFor="let pattern of positionPatterns" value="{{pattern.name}}">{{ pattern.name }}</option>                                                       
+                                                  <select #selectPattern [(ngModel)]="formdata.pattern2id" title="Patterns" class="form-select" name="pattern2id">
+                                                    <option value="0" selected>Not-set</option>
+                                                    <option value="Giro" >Giro</option>
+                                                    <option value="Cont" >Cont</option>
+                                                    <option value="Fac" >Facilidad</option>                                                               
                                                   </select>
                                               </div>
                                       </div>
@@ -280,20 +283,21 @@
                               <div class="form-group">
                                   <div class="row">
                                       <div class="col-5">
-                                            <div class="form-group">                                                                                                         
-                                                <select [(ngModel)]="formdata.setup2id" title="Temporalidad" class="w-100" name="setup2id">
-                                                  <option value="m1" >m1</option>
-                                                  <option value="m3" >m3</option>
-                                                  <option value="m5" selected>m5</option>                                                    
+                                                                                                                                                
+                                                <select #selectSetupTemporality [(ngModel)]="formdata.setup1id" title="Temporalidad" class="form-select" name="setup1id">
+                                                  <option value="0" selected>Not-set</option>
+                                                  <option value="m1">m1</option>
+                                                  <option value="m3">m3</option>
+                                                  <option value="m5">m5</option>                                                    
                                                 </select>  
-                                            </div>
+                                            
                                       </div>
 
                                       <div class="col-7">
                                             <div class="form-group">
-                                                <select #selectSetup title="Setups" class="custom-select-sm w-100" id="setupid" >    
-                                                  <option value="Not-set" selected>Not-set</option>
-                                                  <option *ngFor="let setup of positionSetups" [value]="setup.name">{{ setup.name }}</option>                                                     
+                                                <select #selectSetup [(ngModel)]="formdata.setup2id" title="Setups" class="form-select" name="setup2id" >    
+                                                  <option value="0" selected>Not-set</option>
+                                                  <option *ngFor="let setup of positionSetups" [value]="setup.id">{{ setup.name }}</option>                                                     
                                                 </select>
                                             </div>
                                       </div>
