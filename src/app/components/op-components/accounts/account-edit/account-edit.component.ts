@@ -38,7 +38,6 @@ export class AccountEditComponent {
       acctype: '',
       amount_initial: 0,
       amount_current: 0,
-      brokerid: 0,
       divisaid: 0,
     };
     

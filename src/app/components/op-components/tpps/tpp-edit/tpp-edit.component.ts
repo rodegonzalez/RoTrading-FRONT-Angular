@@ -25,12 +25,14 @@ export class TppEditComponent {
 
     // Inicializa item con un objeto vacío o con los valores necesarios
     this.item = {
+      id: 0,
       name: '',
       description: '',
       status: '',              
       creation: '',
       modification: '',
-      id: 0,
+      blockprefix: '',
+      maxblocksecuence: 0,
       note:'',
       active: 0,
       deleted: 0
