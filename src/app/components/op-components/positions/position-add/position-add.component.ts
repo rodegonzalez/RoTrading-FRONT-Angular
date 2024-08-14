@@ -67,6 +67,7 @@ export class PositionAddComponent {
   curr_ticker_name: string = "";
   curr_tpp_id: number = 1;
   curr_tpp_name: string = "";
+  d_tppblocksec: string = "";
 
   // --------------------------------------------------------------
   curr_ticks: number = 0;
@@ -582,8 +583,25 @@ export class PositionAddComponent {
         this.loggerService.log(Tlog.info, "getSecuence data:");
         this.loggerService.log(Tlog.info, dataGetSecuence);
         */
-        this.formdata.tppblocksec = Number(dataGetSecuence.tppblocksec);
-        this.formdata.sec = Number(dataGetSecuence.sec);
+
+        var tppblocksec = new Decimal(1);
+        var sec = new Decimal(1);
+        const tpp = this.tpps.find(x => x.id == this.curr_tpp_id);
+        const prefix = tpp?.blockprefix || "";
+        const maxblocksecuence = tpp?.maxblocksecuence || 0;
+
+        if (tpp != undefined || tpp != null){        
+          tppblocksec = new Decimal(dataGetSecuence.tppblocksec)
+          sec = new Decimal(dataGetSecuence.sec);
+          if (sec.greaterThanOrEqualTo(maxblocksecuence)){
+            tppblocksec = tppblocksec.plus(1);
+            sec = new Decimal(1);
+          }
+        }
+        
+        this.d_tppblocksec = prefix + tppblocksec.toString().padStart(3, '0');
+        this.formdata.tppblocksec = tppblocksec.toNumber();
+        this.formdata.sec = sec.toNumber();
       },
       next: (data: ITppGetSecuence) => {
         dataGetSecuence = data;        
