@@ -9,7 +9,7 @@ import { IPositionSetup } from 'src/app/interfaces/IPositionSetup.interface';
 import { IPositionHighPattern, IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface';
 import { ITicker } from 'src/app/interfaces/ITicker.interface';
 import { ITickerAccount } from 'src/app/interfaces/ITickerAccount.interface';
-import { ITpp } from 'src/app/interfaces/ITpp.interface';
+import { ITpp, ITppGetSecuence } from 'src/app/interfaces/ITpp.interface';
 import { IAccount } from 'src/app/interfaces/IAccount.interface';
 import { IDivisa } from 'src/app/interfaces/IDivisa.interface';
 
@@ -77,13 +77,13 @@ export class PositionAddComponent {
   curr_session_usdeur: number = 0.92;
   
   formdata: IPositionView = {
-    id: 0, sessionid: this.curr_sessionid, guid: "", tppblock: 0, tppblocksecuence: 0,
+    id: 0, sessionid: this.curr_sessionid, guid: "",  tppid: 0,  tpp: "",  tppblocksec: 0, sec: 0, tppcheck: 0,
     creation: "", modification: "",
     timein: "", timeout: "", buysell: "buy", pricein: 0, priceout: 0,
     opresultticks: 0, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,
     imagepath: "", status: "",
     divisaid: 0, accountid: 0, tickerid: 0, pattern1id: 0, pattern2id: "not-set", setup1id: 0, setup2id: "m5",
-    note: "",  tppid: 0,  tpp: "",  tppcheck: 0,
+    note: "", 
     deleted: 0, processed: 0,
     divisa:	'', account:'', acctype:'',  ticker:	'',  pattern:	'not-set', setup:	'',
     };
@@ -301,6 +301,7 @@ export class PositionAddComponent {
       this.curr_tpp_name = this.tpps.find(x => x.id == this.curr_tpp_id)?.name || "";
       this.curr_account_or_ticker_changed = true;
       this.updateCurrForm();
+      this.updateTppSecuence();
 
       /*
       this.loggerService.log(Tlog.info, "PositionAddComponent initialized");
@@ -562,14 +563,37 @@ export class PositionAddComponent {
     const selectedOption = event.target.options[event.target.selectedIndex];
     this.curr_tpp_id = selectedOption.value;
     this.curr_tpp_name = selectedOption.text;
+    this.updateTppSecuence()
   }
 
-  // Update actions
+  // Update actions --------------------------------------------------------------
   
   updateCommission(){
     //this.loggerService.log(Tlog.info, this.tickerAccounts);
     this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.curr_ticker_id && x.accountid == this.curr_account_id)?.commission || 0;    
     this.curr_account_or_ticker_changed = false;
+  }
+
+  updateTppSecuence(){    
+    let dataGetSecuence: ITppGetSecuence;
+    this.tppService.getSecuence(this.curr_tpp_id).subscribe({
+      complete: () => {
+        /*
+        this.loggerService.log(Tlog.info, "getSecuence data:");
+        this.loggerService.log(Tlog.info, dataGetSecuence);
+        */
+        this.formdata.tppblocksec = Number(dataGetSecuence.tppblocksec);
+        this.formdata.sec = Number(dataGetSecuence.sec);
+      },
+      next: (data: ITppGetSecuence) => {
+        dataGetSecuence = data;        
+      },
+      error: (e: any) => {
+        this.loggerService.log(Tlog.error, "getSecuence error:");
+        this.loggerService.log(Tlog.error, e);       
+      }
+    });
+
   }
 
   updateCurrForm(){

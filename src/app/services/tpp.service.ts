@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, observable, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ITpp } from '../interfaces/ITpp.interface';
+import { ITpp, ITppGetSecuence } from '../interfaces/ITpp.interface';
 import { environment } from '../environment/global.environment';
 import { LoggerService, Tlog } from '../services/logger.service';
 
@@ -37,6 +37,17 @@ export class TppService {
             map(data => {
                 const _item: ITpp = Object.values(data)[0];
                 return _item;
+            })  
+        );
+    }
+
+    getSecuence(id: any): Observable<ITppGetSecuence>{
+        return this.http.get(environment.APIUri + '/tpp/getsecuence/' + id)
+        .pipe(
+            map(data => {
+                //const _items: ITppGetSecuence[] = Object.values(data);
+                const _items: ITppGetSecuence = data as ITppGetSecuence;
+                return _items;
             })  
         );
     }

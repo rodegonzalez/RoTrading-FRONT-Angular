@@ -11,3 +11,10 @@
 	active:			number;
 	deleted:		number;	
   }
+
+  export interface ITppGetSecuence{
+	tppdid: number;
+	tppblocksec: number;
+	sec: number;
+  }
+
