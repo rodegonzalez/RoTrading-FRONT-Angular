@@ -39,7 +39,7 @@
 	guid:			string;
 	tppid:			number;
 	tppcheck:		number;
-	tppblocksec:  		number;
+	tppblocksec:  	number;
 	sec:  number;
 	creation:       string;
 	modification:   string;
