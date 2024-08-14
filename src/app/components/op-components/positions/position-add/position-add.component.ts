@@ -345,7 +345,7 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, this.formdata);
   }
 
-  onSubmit() {
+  async onSubmit() {
 
     if (!this.validate()){
       return;
@@ -372,16 +372,19 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
 
+    
+    await this.positionsService.savePositionForm(this.formdata);
+    /*
     let response : any = this.positionsService.savePositionForm(this.formdata);
     this.loggerService.log(Tlog.info, "FORM updaterecord response:");
     this.loggerService.log(Tlog.info,response);
-    
-    // reload panel   
-    /* 
+    */
+
+    // reload panel    
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/positions']);
     });
-    */
+    
     
   }
 

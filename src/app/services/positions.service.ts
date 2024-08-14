@@ -85,11 +85,35 @@ export class PositionsService {
     }
     
     // POST
-    savePositionForm(formdata: any): any{
-
+    savePositionForm(formdata: any): Promise<void>{
         const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
-        //const body = { title: 'title post var' };
-        //let uri = environment.APIUri +"/positions/savepositionform";
+        let uri = environment.APIUri +"/position";
+
+        this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
+        this.loggerService.log(Tlog.info, "SERVICE formdata: ");
+        this.loggerService.log(Tlog.info, formdata);
+
+        return new Promise((resolve, reject) => {
+            this.http.post<any>(uri,formdata).subscribe({
+                complete: () => {
+                    resolve();
+                },
+            next: (data: any) => {
+                this.loggerService.log(Tlog.info, "savePositionForm data:");
+                this.loggerService.log(Tlog.info, data);
+                },
+            error: e => {
+                this.loggerService.log(Tlog.error, "savePositionForm error:");
+                  this.loggerService.log(Tlog.error, e);
+                  reject(e);
+            }
+            });
+        });
+    }
+
+    /*
+    savePositionForm(formdata: any): any{
+        const headers = {'Content-Type': 'multipart/form-data charset=utf-8'};
         let uri = environment.APIUri +"/position";
 
         this.loggerService.log(Tlog.info, "Sending new position to: " + uri);
@@ -109,6 +133,7 @@ export class PositionsService {
             }
         });
     }
+    */
 
     // PUT
     updatePositionForm(formdata: any): any{
