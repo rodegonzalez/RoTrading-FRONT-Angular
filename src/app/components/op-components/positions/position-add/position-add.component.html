@@ -116,7 +116,8 @@
                                                     <small>USDEUR</small>       
                                                   </div>
                                                   <div class="col-7">
-                                                    <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="formdata.usdeur | numberFormatWithDecimalsPipe" name="usdeur" (ngModelChange)="formdata.usdeur = $event"   />        
+                                                    <!-- <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="formdata.usdeur | numberFormatWithDecimalsPipe" name="usdeur" (ngModelChange)="formdata.usdeur = $event" />  -->
+                                                    <input (blur)="usdeurChanged()" type="number" class="form-control" [(ngModel)]="formdata.usdeur" name="usdeur" />        
                                                   </div>
                                                 </div>                                                                            
                                       </div>

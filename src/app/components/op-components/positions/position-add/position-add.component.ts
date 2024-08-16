@@ -612,7 +612,11 @@ export class PositionAddComponent {
 
   updateSession(){
     this.session.id = this.formdata.sessionid;
-    this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toDecimalPlaces(4));
+    //this.session.usdeur = this.formdata.usdeur;
+    //this.session.usdeur = new Decimal((this.formdata.usdeur).toFixed(4)).toNumber();    
+    //this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toFixed(4));    
+    //this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toDecimalPlaces(4));    
+    this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toDecimalPlaces(4).toString());
     this.sessionsService.update(this.session, this.session.id).subscribe({
       complete: () => {
         //this.loggerService.log(Tlog.info, "updateSession complete");
