@@ -256,12 +256,12 @@ export class PositionEditComponent {
   }
 
   loadSessionAsync(): Promise<void> {
-    //this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
+    this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
     return new Promise((resolve, reject) => {
             this.sessionsService.getOrCreateSessionIfNotExists(this.session.id).subscribe({
             complete: () => {
-              //this.loggerService.log(Tlog.info, "loadSessionAsync complete");
-              //this.loggerService.log(Tlog.info, this.session);
+              this.loggerService.log(Tlog.info, "loadSessionAsync complete");
+              this.loggerService.log(Tlog.info, this.session);
                 resolve();
             },
             next: (data: ISession) => {
@@ -277,7 +277,7 @@ export class PositionEditComponent {
   }
 
   async loadDataAsync(): Promise<void> {
-    await this.loadSessionAsync();
+    
     await this.loadDivisasAsync();
     await this.loadTppsAsync();
     await this.loadAccountsAsync();
@@ -328,6 +328,9 @@ export class PositionEditComponent {
          this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
          this.loggerService.log(Tlog.info,"data: ");
          this.loggerService.log(Tlog.info,this.formdata);
+
+         this.session.id = this.formdata.sessionid;
+         this.loadSessionAsync();
       },
         next : (data: IPosition) => {
         this.formdata = data;
@@ -340,11 +343,10 @@ export class PositionEditComponent {
       }
     });
 
-    this.loggerService.log(Tlog.info,"this.formdata: ");
-    this.loggerService.log(Tlog.info,this.formdata);
 
-    this.session.id = this.formdata.sessionid;
-    
+
+
+
     // load data
     this.loadDataAsync().then(() => {
       // after async... do it!
@@ -433,13 +435,7 @@ export class PositionEditComponent {
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
 
-    
     await this.positionsService.savePositionForm(this.formdata);
-    /*
-    let response : any = this.positionsService.savePositionForm(this.formdata);
-    this.loggerService.log(Tlog.info, "FORM updaterecord response:");
-    this.loggerService.log(Tlog.info,response);
-    */
 
     // reload panel    
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
