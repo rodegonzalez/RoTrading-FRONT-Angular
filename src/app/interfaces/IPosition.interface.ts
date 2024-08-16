@@ -18,6 +18,7 @@
 	opresult:		number;
 	commission:      number;
 	opresulteur:	number;
+	usdeur:			number;
 	divisaid:       number;
 	accountid:      number;
 	tickerid:		number;
@@ -53,6 +54,7 @@
 	opresult:		number;
 	commission:      number;
 	opresulteur:	number;
+	usdeur:			number;
 	divisaid:       number;
 	accountid:      number;
 	tickerid:		number;

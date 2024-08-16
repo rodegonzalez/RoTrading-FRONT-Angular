@@ -68,6 +68,7 @@ export class PositionDetailComponent {
     contracts: 1,
     commission: 4.5,
     opresulteur: 0,
+    usdeur: 0.92,
     imagepath: "",
     status: "",
     divisaid: 0,

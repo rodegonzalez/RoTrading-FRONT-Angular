@@ -22,9 +22,11 @@ import { TickerAccountService } from '../../../../services/tickeraccount.service
 import { TppService } from '../../../../services/tpp.service';
 import { AccountsService } from '../../../../services/accounts.service';
 import { DivisaService } from '../../../../services/divisa.service';
+import { SessionsService } from '../../../../services/sessions.service';
 import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ISession } from 'src/app/interfaces/ISession.interface';
 
 @Component({
   selector: 'app-position-add',
@@ -63,7 +65,7 @@ export class PositionAddComponent {
   // --------------------------------------------------------------
   //TODO: get current from defaults or previous; in server and force form update after load data
   curr_account_or_ticker_changed: boolean = true;
-  curr_session_usdeur: number = 0.92;
+  //curr_session_usdeur: number = 0.92;
   curr_tpp_name: string = "";
   d_tppblocksec: string = "";
   curr_account_name: string = "";
@@ -74,13 +76,16 @@ export class PositionAddComponent {
 
   formdata: IPosition = {
     id: 0, creation: "", modification: "",
-    sessionid: this.sharedModule.getSessionid(), guid: "",  
+    sessionid: "0", usdeur: 0, guid: "",  
     tppid: 0, tppblocksec: 0, sec: 0, tppcheck: 0,
     divisaid: 0, accountid: 0, tickerid: 0, pattern1id: 0, pattern2id: "0", setup1id: "0", setup2id: 0,  
     timein: "", timeout: "", buysell: "buy", pricein: 0, priceout: 0,
     opresultticks: 0, opresult: 0, contracts: 1, commission: 4.5, opresulteur: 0,    
     imagepath: "", status: "", deleted: 0, deletednote: "", processed: 0, note: "",         
     };
+
+  session: ISession = { id: this.sharedModule.getSessionid(), creation: "", modification: "", usdeur: 0, haspositions: 0, consolidated: 0, status: "", sessionnote: "", active: 0, deleted: 0 };
+
    // --------------------------------------------------------------
    // --------------------------------------------------------------
 
@@ -93,6 +98,7 @@ export class PositionAddComponent {
     , private tppService: TppService
     , private accountService: AccountsService
     , private divisaService: DivisaService
+    , private sessionsService: SessionsService
     , private loggerService: LoggerService
     , private router: Router
     , private sharedModule: SharedModule
@@ -141,8 +147,6 @@ export class PositionAddComponent {
     return new Promise((resolve, reject) => {
           this.tppService.getAll().subscribe({
             complete: () => {
-              this.loggerService.log(Tlog.info, "loadTppsAsync error:");
-              this.loggerService.log(Tlog.info, this.tpps);
                 resolve();
             },
             next: (data: Array<ITpp>) => {
@@ -161,8 +165,6 @@ export class PositionAddComponent {
     return new Promise((resolve, reject) => {
           this.positionSetupsService.getAll().subscribe({
             complete: () => {
-              this.loggerService.log(Tlog.info, "loadSetupsAsync data:");
-              this.loggerService.log(Tlog.info, this.positionSetups);
                 resolve();
             },
             next: (data: Array<IPositionSetup>) => {
@@ -249,7 +251,30 @@ export class PositionAddComponent {
     });
   }
 
+  loadSessionAsync(): Promise<void> {
+    this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
+    return new Promise((resolve, reject) => {
+          //this.sessionsService.getOne(this.session.id).subscribe({
+            this.sessionsService.createSessionIfNotExists(this.session.id).subscribe({
+            complete: () => {
+              this.loggerService.log(Tlog.info, "loadSessionAsync complete");
+              this.loggerService.log(Tlog.info, this.session);
+                resolve();
+            },
+            next: (data: ISession) => {
+              this.session = data;        
+            },
+            error: (e: any) => {
+              this.loggerService.log(Tlog.error, "loadSessionAsync error:");
+              this.loggerService.log(Tlog.error, e);
+              reject(e);
+            }
+          });
+    });
+  }
+
   async loadDataAsync(): Promise<void> {
+    await this.loadSessionAsync();
     await this.loadDivisasAsync();
     await this.loadTppsAsync();
     await this.loadAccountsAsync();
@@ -262,23 +287,27 @@ export class PositionAddComponent {
 
   // load data after async methods
   loadDefaultData(){
+    this.formdata.sessionid = this.session.id;
+    this.formdata.usdeur = this.session.usdeur;
+    this.formdata.guid = this.sharedModule.getGuid();
+
     const mydate = this.sharedModule.getTime();
     this.formdata.timein = mydate;
     this.formdata.timeout = mydate;
     this.formdata.creation = mydate;
     this.formdata.timein = this.sharedModule.getTime();
     this.formdata.tppid = this.tpps[0].id;
-    this.curr_tpp_name = this.tpps[0].name;
+    //this.curr_tpp_name = this.tpps[0].name;
     this.formdata.accountid = this.accounts[0].id;
-    this.curr_account_name = this.accounts[0].name;
+    //this.curr_account_name = this.accounts[0].name;
     this.formdata.tickerid = this.tickers[0].id;
-    this.curr_ticker_name = this.tickers[0].name;    
+    //this.curr_ticker_name = this.tickers[0].name;  
+    this.formdata.divisaid = this.divisas[0].id;
+    //this.curr_divisa_name = this.divisas[0].name;  
     this.formdata.pattern1id = 0;
     this.formdata.pattern2id = "0";
     this.formdata.setup1id = "0";
     this.formdata.setup2id = 0;
-    this.formdata.divisaid = this.divisas[0].id;
-    this.curr_divisa_name = this.divisas[0].name;
     this.formdata.commission = this.tickerAccounts[0].commission;
   }
 
@@ -289,14 +318,17 @@ export class PositionAddComponent {
     // load data
     this.loadDataAsync().then(() => {
 
+      //const session = this.sessionsService.createSessionIfNotExists(this.session.id);
+
       // after async... do it!
-      this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
+      //this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
       this.loadDefaultData();
 
       // update form after load data
       this.curr_account_name = this.accounts.find(x => x.id == this.formdata.accountid)?.name || "";
       this.curr_ticker_name = this.tickers.find(x => x.id == this.formdata.tickerid)?.name || "";
       this.curr_tpp_name = this.tpps.find(x => x.id == this.formdata.tppid)?.name || "";
+      this.curr_divisa_name = this.divisas.find(x => x.id == this.formdata.divisaid)?.name || "";;
       this.curr_account_or_ticker_changed = true;
       this.updateCurrForm();
       this.updateTppSecuence();
@@ -460,7 +492,7 @@ export class PositionAddComponent {
     const diff = priceout.minus(pricein).times(buysell);
     const resultticks = diff.dividedBy(ticker.tickmin);
     const result = resultticks.times(contracts).times(ticker.tickminvalue).minus(commission);
-    const resulteur = result.times(this.curr_session_usdeur);
+    const resulteur = result.times(this.formdata.usdeur);
 
     this.formdata.opresultticks = resultticks.toNumber();
     this.formdata.opresult = result.toNumber();
@@ -497,7 +529,7 @@ export class PositionAddComponent {
     const contracts = new Decimal(this.formdata.contracts);
     const commission = new Decimal(this.formdata.commission);        
     const result = resultticks.times(contracts).times(ticker.tickminvalue).minus(commission);
-    const resulteur = result.times(this.curr_session_usdeur);
+    const resulteur = result.times(this.formdata.usdeur);
 
     this.formdata.priceout = priceout.toNumber();
     this.formdata.opresultticks = resultticks.toNumber();
@@ -523,8 +555,17 @@ export class PositionAddComponent {
 
   }
 
+  sessionChanged(){
+
+
+  }
+
+  sessionNotesChanged(){
+
+  }
+
   usdeurChanged(){
-    const usdeur = new Decimal(this.curr_session_usdeur).toDecimalPlaces(4);
+    const usdeur = new Decimal(this.formdata.usdeur).toDecimalPlaces(4);
     const result = new Decimal(this.formdata.opresult);
     if (!result.isNaN() || !result.equals(0)){
     const resulteur = result.times(usdeur);
@@ -560,6 +601,18 @@ export class PositionAddComponent {
 
   // Update actions --------------------------------------------------------------
   
+  createSessionIfNotExists(){
+    this.sessionsService.createSessionIfNotExists(this.formdata.sessionid).subscribe({
+      complete: () => {
+        //this.loggerService.log(Tlog.info, "createSessionIfNotExists complete");
+      },
+      error: (e: any) => {
+        this.loggerService.log(Tlog.error, "createSessionIfNotExists error:");
+        this.loggerService.log(Tlog.error, e);
+      }
+    });
+  }
+
   updateCommission(){
     //this.loggerService.log(Tlog.info, this.tickerAccounts);
     this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.formdata.tickerid && x.accountid == this.formdata.accountid)?.commission || 0;    

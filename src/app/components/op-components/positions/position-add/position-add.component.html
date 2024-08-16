@@ -105,7 +105,7 @@
                                               <small>Sesión</small>       
                                             </div>
                                             <div class="col-7">
-                                              <input type="number" class="form-control" [(ngModel)]="formdata.sessionid" name="sessionid"  />        
+                                              <input  (blur)="sessionChanged()" type="number" class="form-control" [(ngModel)]="formdata.sessionid" name="sessionid"  />        
                                             </div>
                                           </div>                                                                            
                                       </div>
@@ -116,7 +116,7 @@
                                                     <small>USDEUR</small>       
                                                   </div>
                                                   <div class="col-7">
-                                                    <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="curr_session_usdeur | numberFormatWithDecimalsPipe" name="curr_session_usdeur" (ngModelChange)="curr_session_usdeur = $event"   />        
+                                                    <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="formdata.usdeur | numberFormatWithDecimalsPipe" name="usdeur" (ngModelChange)="formdata.usdeur = $event"   />        
                                                   </div>
                                                 </div>                                                                            
                                       </div>
@@ -146,8 +146,10 @@
                                       <h6 class="card-title">Notas de sesión &nbsp; <i title="Ver imágenes" class="fas fa-message fa-1x px-1" style="color: rgb(211, 156, 54);"></i> </h6>
                                   </div>
                                   <div class="card-body">                                
-                                    <DIV class="formgroup d-block w-100 h-100">
-                                    <textarea [(ngModel)]="formdata.note" class="w-100 h-100" name="note" placeholder="Notas e hipótesis"></textarea></DIV>
+                                        <DIV class="formgroup d-block w-100 h-100">
+                                        <!-- <textarea  (blur)="sessionNotesChanged()" [(ngModel)]="session.sessionnote" class="w-100 h-100" name="sessionnote" placeholder="Notas e hipótesis"></textarea> -->
+                                         <textarea></textarea>
+                                        </DIV>
                                   </div> 
                                   </div>
                           </div>
