@@ -1,11 +1,8 @@
 
-<app-common-title [title]="'Editar'" [bg]="'secondary'"  [color]="'black'" [backuri]="'positions'"></app-common-title>
-<app-common-subtitle [subtitle]="'Posiciones'"></app-common-subtitle>
-
+<app-common-title [title]="'Editar Posición'" [bg]="'secondary'"  [color]="'black'" [backuri]="'positions'"></app-common-title>
 
 <div class="pt-2 mb-2">
 <form method="POST" #newpositions="ngForm" (ngSubmit)="onSubmit()">
-  <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
 
     <!-- ----------------------------------------------------------------------------------------------------- -->
     <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -362,7 +359,7 @@
                               <div class="row pt-2">
                                         <div class="col-6">
                                           <div class="form-group d-block w-100 ">
-                                            <button type="submit" class="btn btn-success w-100" >Crear nueva</button>   
+                                            <button type="submit" class="btn btn-success w-100" >Actualizar y cerrar</button>   
                                           </div>
                                         </div>
                                         <div class="col-6">

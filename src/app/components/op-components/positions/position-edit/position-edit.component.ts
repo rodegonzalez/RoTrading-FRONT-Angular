@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Decimal } from 'decimal.js';
 import { FormGroup } from '@angular/forms';
@@ -44,14 +44,7 @@ export class PositionEditComponent {
   @ViewChild('selectHighPattern') selectHighPattern!: ElementRef;
   @ViewChild('selectPattern') selectPattern!: ElementRef;
   @ViewChild('selectAccount') selectAccount!: ElementRef;
-  
-  public itemId: number;
 
-  updaterecord = {
-    id: null,
-  }
-
-  positionid = 0;
   tpps: Array<ITpp> = [];
   divisas: Array<IDivisa> = [];
   accounts: Array<IAccount> = [];
@@ -64,7 +57,6 @@ export class PositionEditComponent {
   // --------------------------------------------------------------
   //TODO: get current from defaults or previous; in server and force form update after load data
   curr_account_or_ticker_changed: boolean = true;
-  //curr_session_usdeur: number = 0.92;
   curr_tpp_name: string = "";
   d_tppblocksec: string = "";
   curr_account_name: string = "";
@@ -83,7 +75,9 @@ export class PositionEditComponent {
     imagepath: "", status: "", deleted: 0, deletednote: "", processed: 0, note: "",         
     };
 
-  session: ISession = { id: this.sharedModule.getSessionid(), creation: "", modification: "", usdeur: 0, haspositions: 0, consolidated: 0, status: "", sessionnote: "", active: 0, deleted: 0 };
+  session: ISession = { 
+    id: this.sharedModule.getSessionid(), creation: "", modification: "", usdeur: 0, haspositions: 0, consolidated: 0, status: "", sessionnote: "", active: 0, deleted: 0 
+  };
 
    // --------------------------------------------------------------
    // --------------------------------------------------------------
@@ -105,7 +99,7 @@ export class PositionEditComponent {
     , private decimalPipe: DecimalPipe) 
     {
       const id = 'id';
-      this.itemId = +this.route.snapshot.params[id];
+      this.formdata.id = this.route.snapshot.params[id];
     }
 
    // --------------------------------------------------------------
@@ -256,12 +250,10 @@ export class PositionEditComponent {
   }
 
   loadSessionAsync(): Promise<void> {
-    this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
+    //this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
     return new Promise((resolve, reject) => {
             this.sessionsService.getOrCreateSessionIfNotExists(this.session.id).subscribe({
             complete: () => {
-              this.loggerService.log(Tlog.info, "loadSessionAsync complete");
-              this.loggerService.log(Tlog.info, this.session);
                 resolve();
             },
             next: (data: ISession) => {
@@ -277,7 +269,6 @@ export class PositionEditComponent {
   }
 
   async loadDataAsync(): Promise<void> {
-    
     await this.loadDivisasAsync();
     await this.loadTppsAsync();
     await this.loadAccountsAsync();
@@ -288,54 +279,19 @@ export class PositionEditComponent {
     await this.loadTickerAccountsAsync();
   }
 
-  // load data after async methods
-  /*
-  loadDefaultData(){
-    this.formdata.sessionid = this.session.id;
-    this.formdata.usdeur = this.session.usdeur;
-    this.formdata.guid = this.sharedModule.getGuid();
-
-    const mydate = this.sharedModule.getTime();
-    this.formdata.timein = mydate;
-    this.formdata.timeout = mydate;
-    this.formdata.creation = mydate;
-    this.formdata.timein = this.sharedModule.getTime();
-    this.formdata.tppid = this.tpps[0].id;
-    //this.curr_tpp_name = this.tpps[0].name;
-    this.formdata.accountid = this.accounts[0].id;
-    //this.curr_account_name = this.accounts[0].name;
-    this.formdata.tickerid = this.tickers[0].id;
-    //this.curr_ticker_name = this.tickers[0].name;  
-    this.formdata.divisaid = this.divisas[0].id;
-    //this.curr_divisa_name = this.divisas[0].name;  
-    this.formdata.pattern1id = 0;
-    this.formdata.pattern2id = "0";
-    this.formdata.setup1id = "0";
-    this.formdata.setup2id = 0;
-    this.formdata.commission = this.tickerAccounts[0].commission;
-  }
-    */
-
    // --------------------------------------------------------------
    // --------------------------------------------------------------
 
   ngOnInit(){  
 
     // load position
-    this.positionsService.getOne(this.itemId).subscribe({
+    this.positionsService.getOne(this.formdata.id).subscribe({
       complete: () => {
-         this.loggerService.log(Tlog.info,"Terminado positionsService-http");
-         this.loggerService.log(Tlog.info,"route="+ this.route.snapshot.url.toString());
-         this.loggerService.log(Tlog.info,"data: ");
-         this.loggerService.log(Tlog.info,this.formdata);
-
          this.session.id = this.formdata.sessionid;
          this.loadSessionAsync();
       },
         next : (data: IPosition) => {
         this.formdata = data;
-        this.loggerService.log(Tlog.info,"data en next: ");
-        this.loggerService.log(Tlog.info,this.formdata);
       },
       error : (e) => {
        this.loggerService.log(Tlog.error,"tppService-http error:");
@@ -343,29 +299,16 @@ export class PositionEditComponent {
       }
     });
 
-
-
-
-
     // load data
     this.loadDataAsync().then(() => {
       // after async... do it!
-      //this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
-      //this.loadDefaultData();
-
-      // update form after load data
       this.curr_account_name = this.accounts.find(x => x.id == this.formdata.accountid)?.name || "";
       this.curr_ticker_name = this.tickers.find(x => x.id == this.formdata.tickerid)?.name || "";
       this.curr_tpp_name = this.tpps.find(x => x.id == this.formdata.tppid)?.name || "";
       this.curr_divisa_name = this.divisas.find(x => x.id == this.formdata.divisaid)?.name || "";;
       this.curr_account_or_ticker_changed = true;
       this.updateCurrForm();
-      this.updateTppSecuence();
-
-      /*
-      this.loggerService.log(Tlog.info, "PositionAddComponent initialized");
-      */
-      
+      this.updateTppSecuence();      
     }).catch((error) => {
       this.loggerService.log(Tlog.error, "Error en la carga de datos:");
       this.loggerService.log(Tlog.error, error);
@@ -414,10 +357,6 @@ export class PositionEditComponent {
       return;
     }
 
-    /*
-    this.loggerService.log(Tlog.info, "contenido de formData: ");
-    this.loggerService.log(Tlog.info, this.formdata);
-    */
     const mydate = this.sharedModule.getDateTime();
     this.formdata.creation = mydate;
     this.formdata.modification = mydate;
@@ -432,16 +371,28 @@ export class PositionEditComponent {
     this.formdata.pattern1id = Number(this.formdata.pattern1id);
     this.formdata.setup2id = Number(this.formdata.setup2id);
 
+    // finally close the position
+    this.formdata.status = "closed";
+
+    /*
     this.loggerService.log(Tlog.info, "FORM formdata:");
     this.loggerService.log(Tlog.info, this.formdata);
+    */
 
-    await this.positionsService.savePositionForm(this.formdata);
+    this.updatePosition();
+    
+  }
 
-    // reload panel    
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/positions']);
-    });
-        
+  async updatePosition() {
+    try {
+      await firstValueFrom(this.positionsService.updatePositionForm(this.formdata, this.formdata.id));
+      // Navegar después de que la actualización se complete
+      await this.router.navigateByUrl('/', { skipLocationChange: true });
+      await this.router.navigate(['/positions']);
+    } catch (e) {
+      this.loggerService.log(Tlog.error, "updatePositionForm error:");
+      this.loggerService.log(Tlog.error, e);
+    }
   }
 
   // --------------------------------------------------------------
@@ -495,11 +446,8 @@ export class PositionEditComponent {
   // --------------------------------------------------------------
 
   formatPriceOut() {
-    //this.loggerService.log(Tlog.info, "Formatting priceout");
     const formattedPrice = this.decimalPipe.transform(this.formdata.priceout, '1.2-2');
-    //this.loggerService.log(Tlog.info, "formattedPrice: " + formattedPrice);
     if (formattedPrice !== null) {
-      //this.formdata.priceout = Number(formattedPrice.replace(/,/g, ''));
       this.formdata.priceout = Number(formattedPrice);
       this.loggerService.log(Tlog.info, "this.formdata.priceout: " + this.formdata.priceout);
     }
@@ -638,11 +586,7 @@ export class PositionEditComponent {
   }
 
   updateSession(){
-    this.session.id = this.formdata.sessionid;
-    //this.session.usdeur = this.formdata.usdeur;
-    //this.session.usdeur = new Decimal((this.formdata.usdeur).toFixed(4)).toNumber();    
-    //this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toFixed(4));    
-    //this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toDecimalPlaces(4));    
+    this.session.id = this.formdata.sessionid;   
     this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toDecimalPlaces(4).toString());
     this.sessionsService.update(this.session, this.session.id).subscribe({
       complete: () => {
@@ -654,35 +598,17 @@ export class PositionEditComponent {
       }
     });
   }
-  
-  /*
-  createSessionIfNotExists(){
-    this.sessionsService.getOrCreateSessionIfNotExists(this.formdata.sessionid).subscribe({
-      complete: () => {
-        //this.loggerService.log(Tlog.info, "createSessionIfNotExists complete");
-      },
-      error: (e: any) => {
-        this.loggerService.log(Tlog.error, "createSessionIfNotExists error:");
-        this.loggerService.log(Tlog.error, e);
-      }
-    });
-  }
-    */
 
   updateCommission(){
-    //this.loggerService.log(Tlog.info, this.tickerAccounts);
     this.formdata.commission = this.tickerAccounts.find(x => x.tickerid == this.formdata.tickerid && x.accountid == this.formdata.accountid)?.commission || 0;    
     this.curr_account_or_ticker_changed = false;
   }
 
+ 
   updateTppSecuence(){    
     let dataGetSecuence: ITppGetSecuence;
     this.tppService.getSecuence(this.formdata.tppid).subscribe({
       complete: () => {
-        /*
-        this.loggerService.log(Tlog.info, "getSecuence data:");
-        this.loggerService.log(Tlog.info, dataGetSecuence);
-        */
 
         var tppblocksec = new Decimal(1);
         var sec = new Decimal(1);
