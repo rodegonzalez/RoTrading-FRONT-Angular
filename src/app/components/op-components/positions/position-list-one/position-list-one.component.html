@@ -2,14 +2,17 @@
 
  
         <div class="row border bg-light px-2 mx-1">
-                <div class="col-2">
+                <div class="col-3">
                         
                         <div>
-                                <b>{{position.sessionid}}</b>
+                                <span class="text-session">{{position.sessionid}}</span>
                         </div>
                         <div>
                                <small><em>{{position.account}}</em></small>
-                        </div>                    
+                        </div>  
+                        <div>
+                                {{position.tpp}} : Block {{position.tppblocksec}} : Sec {{position.sec}}
+                        </div>                       
                 </div>
                 <div class="col-1">
                         <div>
@@ -26,18 +29,13 @@
                                 <em>{{position.ticker}}</em>  
                         </div>  
                         <div>
-                                {{position.tpp}} : Block {{position.tppblocksec}} : Sec {{position.sec}}
-                        </div>                        
-                </div>
-
-                <div class="col-2">
-                        <div>
                                 [{{position.pattern}}] [{{position.pattern2id}}]
                         </div>
                         <div>
                                 ({{position.setup1id}}) - {{position.setup}}
-                        </div>
+                        </div>               
                 </div>
+                
                 <div class="col-2 small">
                         <div>
                                 Hora IN: {{position.timein}}
@@ -46,7 +44,23 @@
                                Precio IN: {{position.pricein}}
                         </div>
                 </div>
+
                 <div class="col-2">
+                       
+                        <div>
+                                Minutos: Pendiente
+                        </div>                       
+                        <div>
+                                USDEUR: {{position.usdeur}}
+                        </div>
+                        <div>
+                                &nbsp;
+                        </div>
+                      
+                </div>
+
+
+                <div class="col-1">
                         <button title="Editar" 
                                           class="btn btn-outline-success m-2 small d-block w-100" 
                                           routerLink="/position-edit/{{position.id}}">

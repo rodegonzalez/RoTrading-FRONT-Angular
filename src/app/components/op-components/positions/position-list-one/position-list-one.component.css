@@ -1,0 +1,10 @@
+.row:hover {
+    background-color: #f5eb39; /* Cambia el color de fondo al pasar el ratón */
+    color: blue;
+    font-weight: bold;
+}
+
+.text-session{
+    font-weight: bold;
+    color: brown;
+}
