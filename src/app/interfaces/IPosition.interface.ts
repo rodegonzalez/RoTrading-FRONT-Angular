@@ -60,8 +60,8 @@
 	tickerid:		number;
 	pattern1id:		number;
 	pattern2id:		string;
-	setup1id:		number;
-	setup2id:		string;
+	setup1id:		string;
+	setup2id:		number;
 	processed:		number;
 	deleted:		number;
 	note:			string;
@@ -75,4 +75,5 @@
 	setup:			string;
 	ticker:			string;
 	tpp:			string;
+	deletednote:	string;
   }

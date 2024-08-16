@@ -14,6 +14,18 @@ export class PositionsService {
 
     constructor(private http:HttpClient, private loggerService: LoggerService) {}
 
+    getOne(id: number): Observable<any>{
+        return this.http.post(environment.APIUri + '/session/createSessionIfNotExists/' + id, null)
+        .pipe(
+            map(data => {
+                const _item: IPositionView = data as IPositionView;
+                this.loggerService.log(Tlog.info,"PositionsService.getOne - data: ");
+                this.loggerService.log(Tlog.info,_item);
+                return _item;
+            })  
+        );
+    }
+
     getAll(): Observable<IPositionView[]>{
         return this.http
         .get(environment.APIUri + '/positions')

@@ -21,7 +21,7 @@ export class TppEditComponent {
     , private tppService: TppService
     , private loggerService: LoggerService) {
     const id = 'id';
-    this.itemId = +this.route.snapshot.params[id];;
+    this.itemId = +this.route.snapshot.params[id];
 
     // Inicializa item con un objeto vacío o con los valores necesarios
     this.item = {

@@ -5,7 +5,7 @@ import { Decimal } from 'decimal.js';
 import { FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 
-import { IPosition, IPositionView } from 'src/app/interfaces/IPosition.interface';
+import { IPosition } from 'src/app/interfaces/IPosition.interface';
 import { IPositionSetup } from 'src/app/interfaces/IPositionSetup.interface';
 import { IPositionHighPattern, IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface';
 import { ITicker } from 'src/app/interfaces/ITicker.interface';
