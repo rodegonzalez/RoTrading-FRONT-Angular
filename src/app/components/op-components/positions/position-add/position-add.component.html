@@ -2,7 +2,7 @@
 <app-common-title [title]="'Nueva posición'" [bg]="'secondary'"  [color]="'black'" [backuri]="'positions'"></app-common-title>
 
 <div class="pt-2 ">
-<form method="POST" #newpositions="ngForm" >
+<form method="POST" #newpositions="ngForm" (ngSubmit)="onSubmit()">
   <input type="hidden" id="idposition" name="idposition" [(ngModel)]="updaterecord.id" /> 
    
     <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -247,7 +247,7 @@
                                                       <input type="text" class="form-control" name="priceout"  [(ngModel)]="formdata.priceout" (blur)="priceOutChanged()"  /> 
                                                 </div>
                                                 <div class="col-5">
-                                                      <button (click)="priceOutChanged()" class="btn btn-outline-primary d-block w-100"  title="Actualizar valores">U</button>
+                                                      <button type="button" (click)="priceOutChanged()" class="btn btn-outline-primary d-block w-100"  title="Actualizar valores">U</button>
                                                 </div>
                                               </div>                                          
                                     </div>                                        
@@ -265,7 +265,7 @@
                                                         <input type="number" class="form-control" name="opresultticks" [(ngModel)]="formdata.opresultticks"  (blur)="ticksChanged()" />
                                                   </div>
                                                   <div class="col-5">
-                                                        <button (click)="ticksChanged()" class="btn btn-outline-primary d-block w-100" title="Actualizar valores">U</button>
+                                                        <button type="button" (click)="ticksChanged()" class="btn btn-outline-primary d-block w-100" title="Actualizar valores">U</button>
                                                   </div>
                                             </div>
                                     </div>    
@@ -357,7 +357,7 @@
                               <div class="row pt-2">
                                         <div class="col-6">
                                           <div class="form-group d-block w-100 ">
-                                            <button type="submit" class="btn btn-success w-100">Crear nueva</button>   
+                                            <button type="submit" class="btn btn-success w-100" >Crear nueva</button>   
                                           </div>
                                         </div>
                                         <div class="col-6">
