@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { Decimal } from 'decimal.js';
-
 import { FormGroup } from '@angular/forms';
+import { DecimalPipe } from '@angular/common';
+
 import { IPosition, IPositionView } from 'src/app/interfaces/IPosition.interface';
 import { IPositionSetup } from 'src/app/interfaces/IPositionSetup.interface';
 import { IPositionHighPattern, IPositionPattern } from 'src/app/interfaces/IPositionPattern.interface';
@@ -94,7 +95,8 @@ export class PositionAddComponent {
     , private divisaService: DivisaService
     , private loggerService: LoggerService
     , private router: Router
-    , private sharedModule: SharedModule) { }
+    , private sharedModule: SharedModule
+    , private decimalPipe: DecimalPipe) { }
 
    // --------------------------------------------------------------
    // --------------------------------------------------------------
@@ -384,8 +386,7 @@ export class PositionAddComponent {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/positions']);
     });
-    
-    
+        
   }
 
   // --------------------------------------------------------------
@@ -438,6 +439,17 @@ export class PositionAddComponent {
   // Form controls changes
   // --------------------------------------------------------------
 
+  formatPriceOut() {
+    //this.loggerService.log(Tlog.info, "Formatting priceout");
+    const formattedPrice = this.decimalPipe.transform(this.formdata.priceout, '1.2-2');
+    //this.loggerService.log(Tlog.info, "formattedPrice: " + formattedPrice);
+    if (formattedPrice !== null) {
+      //this.formdata.priceout = Number(formattedPrice.replace(/,/g, ''));
+      this.formdata.priceout = Number(formattedPrice);
+      this.loggerService.log(Tlog.info, "this.formdata.priceout: " + this.formdata.priceout);
+    }
+  }
+
   priceOutChanged(){
     const ticker = this.tickers.find(x => x.id == this.formdata.tickerid) || { tickmin: 0, tickminvalue: 0 };
     const pricein = new Decimal(this.formdata.pricein);
@@ -449,10 +461,11 @@ export class PositionAddComponent {
     const resultticks = diff.dividedBy(ticker.tickmin);
     const result = resultticks.times(contracts).times(ticker.tickminvalue).minus(commission);
     const resulteur = result.times(this.curr_session_usdeur);
+
     this.formdata.opresultticks = resultticks.toNumber();
     this.formdata.opresult = result.toNumber();
     this.formdata.opresulteur = resulteur.toNumber();
-  
+      
     /*
     this.loggerService.log(Tlog.info, "-----------------------------------------------");
     this.loggerService.log(Tlog.info, "PriceOut changed: ");
@@ -469,14 +482,7 @@ export class PositionAddComponent {
     this.loggerService.log(Tlog.info, "Result: " + result.toString());
     this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur.toString());
     */
-  }
 
-  priceInChanged(){    
-    const ticker = this.tickers.find(x => x.id == this.formdata.tickerid) || { tickmin: 0, tickminvalue: 0 };
-    const maxdecimals = new Decimal(this.sharedModule.countDecimalDigits(ticker.tickmin));
-    const pricein = new Decimal(this.formdata.pricein).toDecimalPlaces(maxdecimals.toNumber());
-    this.formdata.pricein = pricein.toNumber();
-    this.priceOutChanged(); 
   }
 
   ticksChanged(){
@@ -484,17 +490,37 @@ export class PositionAddComponent {
     const maxdecimals = new Decimal(this.sharedModule.countDecimalDigits(ticker.tickmin));
     const resultticks = new Decimal(this.formdata.opresultticks).toDecimalPlaces(0);
     const pricein = new Decimal(this.formdata.pricein);
-    const priceout = pricein.add(resultticks).times(ticker.tickmin).toDecimalPlaces(maxdecimals.toNumber());
-    const contracts = new Decimal(this.formdata.contracts);
-    const commission = new Decimal(this.formdata.commission);
     const buysell = (this.formdata.buysell.toLowerCase() == "buy") ? new Decimal(1) : new Decimal(-1);
-    const diff = priceout.minus(pricein).times(buysell);
+    const diff = resultticks.times(ticker.tickmin);
+    const priceout = pricein.add(diff.times(buysell)).toDecimalPlaces(maxdecimals.toNumber());
+    //const priceoutFormatted = priceout.toFixed(maxdecimals.toNumber()); // Formatear con decimales
+    const contracts = new Decimal(this.formdata.contracts);
+    const commission = new Decimal(this.formdata.commission);        
     const result = resultticks.times(contracts).times(ticker.tickminvalue).minus(commission);
     const resulteur = result.times(this.curr_session_usdeur);
-    this.formdata.priceout = diff.toNumber();
+
+    this.formdata.priceout = priceout.toNumber();
     this.formdata.opresultticks = resultticks.toNumber();
     this.formdata.opresult = result.toNumber();
     this.formdata.opresulteur = resulteur.toNumber();
+
+    /*
+    this.loggerService.log(Tlog.info, "-----------------------------------------------");
+    this.loggerService.log(Tlog.info, "ticksChanged changed: ");
+    this.loggerService.log(Tlog.info, "USDEUR: " + this.curr_session_usdeur);
+    this.loggerService.log(Tlog.info, "this.formdata.tickerid: " + this.formdata.tickerid);
+    this.loggerService.log(Tlog.info, "tickmin: " + ticker.tickmin);
+    this.loggerService.log(Tlog.info, "tickminvalue: " + ticker.tickminvalue);
+    this.loggerService.log(Tlog.info, "PriceIN: " + pricein.toString());
+    this.loggerService.log(Tlog.info, "PriceOUT: " + priceout.toString());
+    this.loggerService.log(Tlog.info, "Diff: " + diff.toString());
+    this.loggerService.log(Tlog.info, "Contracts: " + contracts.toString());
+    this.loggerService.log(Tlog.info, "Commission: " + commission.toString());
+    this.loggerService.log(Tlog.info, "ResultTicks: " + resultticks.toString());
+    this.loggerService.log(Tlog.info, "Result: " + result.toString());
+    this.loggerService.log(Tlog.info, "ResultEUR: " + resulteur.toString());
+    */
+
   }
 
   usdeurChanged(){

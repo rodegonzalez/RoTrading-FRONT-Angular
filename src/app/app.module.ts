@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
@@ -76,7 +77,6 @@ import { CommonTitleComponent } from './components/common/common-title/common-ti
 
 // Shared
 import { SharedModule } from './shared/shared.module'; // Importa el SharedModule
-import { CommonModule } from '@angular/common';
 //import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
 
 
@@ -221,6 +221,7 @@ const appRoutes: Routes = [
     AccountsService,
     PositionsService,
     LoggerService,
+    DecimalPipe,
   ],
 
   bootstrap: [AppComponent]
