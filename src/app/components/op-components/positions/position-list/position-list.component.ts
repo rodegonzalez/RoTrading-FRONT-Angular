@@ -20,11 +20,11 @@ export class PositionListComponent {
 
     this.positionsService.getAllByStatus('opened').subscribe({
       complete: () => {
-          this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(opened) vía http - Ended.");
+          //this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(opened) vía http - Ended.");
       },
       next: (data: Array<IPositionView>) => {
-        this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(opened) vía http - data:");
-        this.loggerService.log(Tlog.info, data);
+        //this.loggerService.log(Tlog.info, "positionsService.getAllByStatus(opened) vía http - data:");
+        //this.loggerService.log(Tlog.info, data);
         this.positions = data;        
       },
       error: (e: any) => {
