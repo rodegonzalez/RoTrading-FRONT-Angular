@@ -252,12 +252,12 @@ export class PositionAddComponent {
   }
 
   loadSessionAsync(): Promise<void> {
-    this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
+    //this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
     return new Promise((resolve, reject) => {
             this.sessionsService.getOrCreateSessionIfNotExists(this.session.id).subscribe({
             complete: () => {
-              this.loggerService.log(Tlog.info, "loadSessionAsync complete");
-              this.loggerService.log(Tlog.info, this.session);
+              //this.loggerService.log(Tlog.info, "loadSessionAsync complete");
+              //this.loggerService.log(Tlog.info, this.session);
                 resolve();
             },
             next: (data: ISession) => {
@@ -612,7 +612,7 @@ export class PositionAddComponent {
 
   updateSession(){
     this.session.id = this.formdata.sessionid;
-    this.session.usdeur = this.formdata.usdeur;
+    this.session.usdeur = Number(new Decimal(this.formdata.usdeur).toDecimalPlaces(4));
     this.sessionsService.update(this.session, this.session.id).subscribe({
       complete: () => {
         //this.loggerService.log(Tlog.info, "updateSession complete");
