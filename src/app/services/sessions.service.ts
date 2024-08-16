@@ -55,7 +55,7 @@ export class SessionsService {
         );        
     }
 
-    createSessionIfNotExists(id: string): Observable<ISession>{   
+    getOrCreateSessionIfNotExists(id: string): Observable<ISession>{   
          return this.http.post(environment.APIUri + '/session/createSessionIfNotExists/' + id, null)
          .pipe(
              map(data => {
@@ -65,7 +65,7 @@ export class SessionsService {
          );
     }
 
-    update(data: any, id: number): Observable<any>{
+    update(data: any, id: string): Observable<any>{
         return this.http.put(environment.APIUri + '/session/' + id, data)
             .pipe( map(data =>{                
             })            

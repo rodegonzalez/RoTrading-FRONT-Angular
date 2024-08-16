@@ -254,8 +254,7 @@ export class PositionAddComponent {
   loadSessionAsync(): Promise<void> {
     this.loggerService.log(Tlog.info, "loadSessionAsync init: sessionid=" + this.session.id);
     return new Promise((resolve, reject) => {
-          //this.sessionsService.getOne(this.session.id).subscribe({
-            this.sessionsService.createSessionIfNotExists(this.session.id).subscribe({
+            this.sessionsService.getOrCreateSessionIfNotExists(this.session.id).subscribe({
             complete: () => {
               this.loggerService.log(Tlog.info, "loadSessionAsync complete");
               this.loggerService.log(Tlog.info, this.session);
@@ -317,9 +316,6 @@ export class PositionAddComponent {
   ngOnInit(){  
     // load data
     this.loadDataAsync().then(() => {
-
-      //const session = this.sessionsService.createSessionIfNotExists(this.session.id);
-
       // after async... do it!
       //this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
       this.loadDefaultData();
@@ -555,15 +551,6 @@ export class PositionAddComponent {
 
   }
 
-  sessionChanged(){
-
-
-  }
-
-  sessionNotesChanged(){
-
-  }
-
   usdeurChanged(){
     const usdeur = new Decimal(this.formdata.usdeur).toDecimalPlaces(4);
     const result = new Decimal(this.formdata.opresult);
@@ -573,6 +560,9 @@ export class PositionAddComponent {
     }else{
       this.formdata.opresulteur = 0;
     }
+
+    // update session on db
+    this.updateSession();
   }
 
   selectAccountChanged(event: any){   
@@ -601,8 +591,42 @@ export class PositionAddComponent {
 
   // Update actions --------------------------------------------------------------
   
+  sessionNotesChanged(){    
+    this.updateSession();
+  }
+
+  sessionChanged(){
+    this.session.id = this.formdata.sessionid;
+    this.sessionsService.getOrCreateSessionIfNotExists(this.session.id).subscribe({
+      complete: () => {
+        //this.loggerService.log(Tlog.info, "sessionChanged complete");
+      },
+      error: (e: any) => {
+        this.loggerService.log(Tlog.error, "sessionChanged error:");
+        this.loggerService.log(Tlog.error, e);
+      }
+    });
+
+    this.updateSession();
+  }
+
+  updateSession(){
+    this.session.id = this.formdata.sessionid;
+    this.session.usdeur = this.formdata.usdeur;
+    this.sessionsService.update(this.session, this.session.id).subscribe({
+      complete: () => {
+        //this.loggerService.log(Tlog.info, "updateSession complete");
+      },
+      error: (e: any) => {
+        this.loggerService.log(Tlog.error, "updateSession error:");
+        this.loggerService.log(Tlog.error, e);
+      }
+    });
+  }
+  
+  /*
   createSessionIfNotExists(){
-    this.sessionsService.createSessionIfNotExists(this.formdata.sessionid).subscribe({
+    this.sessionsService.getOrCreateSessionIfNotExists(this.formdata.sessionid).subscribe({
       complete: () => {
         //this.loggerService.log(Tlog.info, "createSessionIfNotExists complete");
       },
@@ -612,6 +636,7 @@ export class PositionAddComponent {
       }
     });
   }
+    */
 
   updateCommission(){
     //this.loggerService.log(Tlog.info, this.tickerAccounts);
