@@ -427,7 +427,9 @@ export class PositionAddComponent {
     if (this.formdata.contracts == 0){
       errors.push("Contracts is required");
     }
-
+    if (this.formdata.usdeur == 0){
+      errors.push("USDEUR is required");
+    }
     const selectedHighPatternValue = this.selectHighPattern.nativeElement.value;
     if (selectedHighPatternValue == "0"){
       errors.push("High pattern is required");
@@ -436,12 +438,10 @@ export class PositionAddComponent {
     if (selectedPatternValue == "0"){
       errors.push("Pattern is required");
     }
-
     const selectedSetupTemporalityValue = this.selectSetupTemporality.nativeElement.value; 
     if (selectedSetupTemporalityValue == "0"){
       errors.push("Setup temporality is required");
     }
-
     const selectedSetupValue = this.selectSetup.nativeElement.value; 
     if (selectedSetupValue.toLowerCase() == "0"){
       errors.push("Setup is required");
