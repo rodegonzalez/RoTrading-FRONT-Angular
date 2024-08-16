@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoggerService, Tlog } from '../services/logger.service';
 import { map, Observable } from 'rxjs';
-import { IPositionView } from '../interfaces/IPosition.interface';
+import { IPosition, IPositionView } from '../interfaces/IPosition.interface';
 import { environment } from '../environment/global.environment';
 
 @Injectable({
@@ -15,10 +15,10 @@ export class PositionsService {
     constructor(private http:HttpClient, private loggerService: LoggerService) {}
 
     getOne(id: number): Observable<any>{
-        return this.http.post(environment.APIUri + '/session/createSessionIfNotExists/' + id, null)
+        return this.http.get(environment.APIUri + '/position/' + id)
         .pipe(
             map(data => {
-                const _item: IPositionView = data as IPositionView;
+                const _item: IPosition = data as IPosition;
                 this.loggerService.log(Tlog.info,"PositionsService.getOne - data: ");
                 this.loggerService.log(Tlog.info,_item);
                 return _item;

@@ -289,6 +289,7 @@ export class PositionEditComponent {
   }
 
   // load data after async methods
+  /*
   loadDefaultData(){
     this.formdata.sessionid = this.session.id;
     this.formdata.usdeur = this.session.usdeur;
@@ -313,6 +314,7 @@ export class PositionEditComponent {
     this.formdata.setup2id = 0;
     this.formdata.commission = this.tickerAccounts[0].commission;
   }
+    */
 
    // --------------------------------------------------------------
    // --------------------------------------------------------------
@@ -329,8 +331,8 @@ export class PositionEditComponent {
       },
         next : (data: IPosition) => {
         this.formdata = data;
-       this.loggerService.log(Tlog.info,"data en next: ");
-         this.loggerService.log(Tlog.info,this.formdata);
+        this.loggerService.log(Tlog.info,"data en next: ");
+        this.loggerService.log(Tlog.info,this.formdata);
       },
       error : (e) => {
        this.loggerService.log(Tlog.error,"tppService-http error:");
@@ -338,11 +340,16 @@ export class PositionEditComponent {
       }
     });
 
+    this.loggerService.log(Tlog.info,"this.formdata: ");
+    this.loggerService.log(Tlog.info,this.formdata);
+
+    this.session.id = this.formdata.sessionid;
+    
     // load data
     this.loadDataAsync().then(() => {
       // after async... do it!
       //this.loggerService.log(Tlog.info, "Todas las funciones de carga completadas.");
-      this.loadDefaultData();
+      //this.loadDefaultData();
 
       // update form after load data
       this.curr_account_name = this.accounts.find(x => x.id == this.formdata.accountid)?.name || "";
