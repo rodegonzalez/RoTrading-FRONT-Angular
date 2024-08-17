@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -67,6 +66,13 @@ import { DivisaDetailComponent } from './components/op-components/divisas/divisa
 import { DivisaAddComponent } from './components/op-components/divisas/divisa-add/divisa-add.component';
 import { DivisaEditComponent } from './components/op-components/divisas/divisa-edit/divisa-edit.component';
 
+// Positions
+import { PositionListOneComponent } from './components/op-components/positions/position-list-one/position-list-one.component';
+import { PositionListComponent } from './components/op-components/positions/position-list/position-list.component';
+import { PositionDetailComponent } from './components/op-components/positions/position-detail/position-detail.component';
+import { PositionAddComponent } from './components/op-components/positions/position-add/position-add.component';
+import { PositionEditComponent } from './components/op-components/positions/position-edit/position-edit.component';
+
 // Configuration
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
@@ -78,67 +84,6 @@ import { CommonTitleComponent } from './components/common/common-title/common-ti
 // Shared
 import { SharedModule } from './shared/shared.module'; // Importa el SharedModule
 //import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
-
-
-// --------------------------------------------------
-import { PositionListOneComponent } from './components/op-components/positions/position-list-one/position-list-one.component';
-import { PositionListComponent } from './components/op-components/positions/position-list/position-list.component';
-import { PositionDetailComponent } from './components/op-components/positions/position-detail/position-detail.component';
-import { PositionAddComponent } from './components/op-components/positions/position-add/position-add.component';
-import { PositionEditComponent } from './components/op-components/positions/position-edit/position-edit.component';
-
-// --------------------------------------------------
-
-
-
-/* Routing */
-const appRoutes: Routes = [
-  //{path: '', component: HomeComponent},
-  {path: 'analisis', component: AnAnalysisComponent},
-  {path: 'configuracion', component: ConfigurationComponent},
-  {path: 'ayuda', component: HelpComponent},
-  {path: 'test', component: TestComponent},
-
-  {path: 'tpps', component: TppListComponent},
-  {path: 'tpp-detail/:id', component: TppDetailComponent},
-  {path: 'tpp-add', component: TppAddComponent},
-  {path: 'tpp-edit/:id', component: TppEditComponent},
-
-  {path: 'patterns', component: PatternListComponent},
-  {path: 'pattern-detail/:id', component: PatternDetailComponent},
-  {path: 'pattern-add', component: PatternAddComponent},
-  {path: 'pattern-edit/:id', component: PatternEditComponent},
-
-  {path: 'setups', component: SetupListComponent},
-  {path: 'setup-detail/:id', component: SetupDetailComponent},
-  {path: 'setup-add', component: SetupAddComponent},
-  {path: 'setup-edit/:id', component: SetupEditComponent},
-
-  {path: 'accounts', component: AccountListComponent},
-  {path: 'account-detail/:id', component: AccountDetailComponent},
-  {path: 'account-add', component: AccountAddComponent},
-  {path: 'account-edit/:id', component: AccountEditComponent},
-
-  {path: 'tickers', component: TickerListComponent},
-  {path: 'ticker-detail/:id', component: TickerDetailComponent},
-  {path: 'ticker-add', component: TickerAddComponent},
-  {path: 'ticker-edit/:id', component: TickerEditComponent},
-
-  {path: 'divisas', component: DivisaListComponent},
-  {path: 'divisa-detail/:id', component: DivisaDetailComponent},
-  {path: 'divisa-add', component: DivisaAddComponent},
-  {path: 'divisa-edit/:id', component: DivisaEditComponent},
-
-
-  {path: 'positions', component: PositionListComponent},
-  {path: 'position-detail/:id', component: PositionDetailComponent},
-  {path: 'position-add', component: PositionAddComponent},
-  {path: 'position-edit/:id', component: PositionEditComponent},
-
-
-
-  {path: '**',  component: HomeComponent}
-]
 
 @NgModule({
   declarations: [		
@@ -196,24 +141,17 @@ const appRoutes: Routes = [
       CommonTitleComponent,
       ConfigurationComponent,
     
-    //NumberFormatWithDecimalsPipe, // declared on SharedModule
-
-
-    // --------------------------------------------------
     PositionListComponent,
-    PositionListOneComponent,
-    PositionDetailComponent,
-    PositionAddComponent,
-    PositionEditComponent,
-
-
+      PositionListOneComponent,
+      PositionDetailComponent,
+      PositionAddComponent,
+      PositionEditComponent,
    ],
   imports: [    
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
-    //RouterModule.forChild(appRoutesChild),
+    AppRoutingModule,
     CommonModule,
     SharedModule,
   ],
@@ -224,6 +162,8 @@ const appRoutes: Routes = [
     DecimalPipe,
   ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
