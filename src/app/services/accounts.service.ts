@@ -33,7 +33,8 @@ export class AccountsService {
         .pipe(
             map(data => {
                 //let items: Array<ITpp> = [];
-                const _item: IAccount = Object.values(data)[0];
+                //const _item: IAccount = Object.values(data)[0];
+                const _item: IAccount = data as IAccount;
                 //items.push(_item);
                this.loggerService.log(Tlog.info,"items en service en next: ");
                this.loggerService.log(Tlog.info,_item);

@@ -32,7 +32,8 @@ import { environment } from '../environment/global.environment';
         return this.http.get(environment.APIUri + '/position_setup/' + id)
         .pipe(
             map(data => {
-                const _item: IPositionSetup = Object.values(data)[0];
+                //const _item: IPositionSetup = Object.values(data)[0];
+                const _item: IPositionSetup = data as IPositionSetup;
                 return _item;
             })  
         );

@@ -33,7 +33,8 @@ export class DivisaService {
         return this.http.get(environment.APIUri + '/divisa/' + id)
         .pipe(
             map(data => {;
-                const _item: IDivisa = Object.values(data)[0];
+                //const _item: IDivisa = Object.values(data)[0];
+                const _item: IDivisa = data as IDivisa;
                this.loggerService.log(Tlog.info,"items en service en next: ");
                this.loggerService.log(Tlog.info,_item);
                 return _item;

@@ -35,7 +35,8 @@ export class TppService {
         return this.http.get(environment.APIUri + '/tpp/' + id)
         .pipe(
             map(data => {
-                const _item: ITpp = Object.values(data)[0];
+                //const _item: ITpp = Object.values(data)[0];
+                const _item: ITpp = data as ITpp;
                 return _item;
             })  
         );

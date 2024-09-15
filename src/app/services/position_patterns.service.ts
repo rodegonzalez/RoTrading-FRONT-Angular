@@ -58,7 +58,8 @@ import { environment } from '../environment/global.environment';
         .pipe(
             map(data => {
                 //let items: Array<ITpp> = [];
-                const _item: IPositionHighPattern = Object.values(data)[0];
+                //const _item: IPositionHighPattern = Object.values(data)[0];
+                const _item: IPositionHighPattern = data as IPositionHighPattern;
                 //items.push(_item);
                this.loggerService.log(Tlog.info,"items en service en next: ");
                this.loggerService.log(Tlog.info,_item);

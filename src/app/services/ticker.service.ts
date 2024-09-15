@@ -37,7 +37,8 @@ export class TickerService {
         .pipe(
             map(data => {
                 //let items: Array<ITpp> = [];
-                const _item: ITicker = Object.values(data)[0];
+                //const _item: ITicker = Object.values(data)[0];
+                const _item: ITicker = data as ITicker;
                 //items.push(_item);
                this.loggerService.log(Tlog.info,"items en service en next: ");
                this.loggerService.log(Tlog.info,_item);
