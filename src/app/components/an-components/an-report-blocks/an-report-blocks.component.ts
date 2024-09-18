@@ -28,7 +28,7 @@ export class AnReportBlocksComponent implements OnInit {
       //labels: [1,2,3,4,5,6,7],
       datasets: [{
         label: 'Operaciones realizadas',
-        data: [65, 59, -28, -32,81,65, 59, -18, 91,81,-15, -22, -18, 91,81,65, -20, -18, -20,81,55, 79, -18, -21,81],
+        data: [65, 59, -28, -32,81,65, 59, -18, 91,5,-15, -22, -18, 91,5,65, -20, -18, -20,81,55, 79, -18, -21,81],
       }]
     };
 

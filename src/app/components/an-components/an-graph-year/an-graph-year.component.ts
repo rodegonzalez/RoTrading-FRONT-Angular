@@ -23,6 +23,10 @@ export class AnGraphYearComponent implements OnInit {
       datasets: [{
         label: '2024',
         data: [20, -12, 40, 81, 56, 72, 90],
+      },
+      {
+        label: 'Comisiones',
+        data: [5, 5, 10, 5, 15, 10, 12],
       }]
     };
 

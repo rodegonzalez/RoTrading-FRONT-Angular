@@ -24,16 +24,16 @@ export class AnReportOperationsComponent implements OnInit {
   // -----------------------------------------------
   OperationsTicksChart(){
     const data = {
-      labels: ["Profit ticks","Loss ticks"],
+      labels: ["Profit ticks","Loss ticks", "BreakEven"],
       //labels: [1,2,3,4,5,6,7],
       datasets: [{
         label: 'Operaciones realizadas',
-        data: [1100, 220],
+        data: [1100, 220, 42],
         backgroundColor: [
-          'lightgreen','rgba(255, 99, 132, 0.7)'
+          'lightgreen','rgba(255, 99, 132, 0.7)','rgba(255, 159, 64, 0.5)'
         ],
         borderColor: [
-          'green','red'
+          'green','red','brown'
         ],
       }]
     };
