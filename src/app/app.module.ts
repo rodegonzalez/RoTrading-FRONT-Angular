@@ -82,8 +82,11 @@ import { CommonSubtitleComponent } from './components/common/common-subtitle/com
 import { CommonTitleComponent } from './components/common/common-title/common-title.component';
 
 // Shared
-import { SharedModule } from './shared/shared.module'; // Importa el SharedModule
+import { SharedModule } from './shared/shared.module';
 //import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
+
+// Reports
+import { ReportMainComponent } from './reports/report-main/report-main.component'; 
 
 @NgModule({
   declarations: [		
@@ -146,6 +149,8 @@ import { SharedModule } from './shared/shared.module'; // Importa el SharedModul
       PositionDetailComponent,
       PositionAddComponent,
       PositionEditComponent,
+
+    ReportMainComponent,
    ],
   imports: [    
     BrowserModule,

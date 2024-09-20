@@ -54,6 +54,9 @@ import { PositionEditComponent } from './components/op-components/positions/posi
 // Configuration
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
+// Reports
+import { ReportMainComponent } from './reports/report-main/report-main.component'; 
+
 /* Routing */
 const routes: Routes = [
   {path: 'analisis', component: AnAnalysisComponent},
@@ -95,6 +98,8 @@ const routes: Routes = [
   {path: 'position-detail/:id', component: PositionDetailComponent},
   {path: 'position-add', component: PositionAddComponent},
   {path: 'position-edit/:id', component: PositionEditComponent},
+
+  {path: 'reports', component: ReportMainComponent},
 
   //{path: '', component: HomeComponent},
   {path: '**',  component: HomeComponent}
