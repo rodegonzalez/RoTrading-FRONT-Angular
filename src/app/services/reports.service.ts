@@ -13,8 +13,6 @@ export class ReportsService {
         , private loggerService: LoggerService) { }
 
     testGetTable1(): {columns: any[], tableData: any[]} {
-        //this.loggerService.log(Tlog.info,'testGetTable1');
-
         let columns = [
             { title: 'Nombre', data: 'name' },
             { title: 'Posición', data: 'position' },
@@ -33,8 +31,6 @@ export class ReportsService {
     }
     
     testGetTable2(): {columns: any[], tableData: any[]} {
-        //this.loggerService.log(Tlog.info,'testGetTable1');
-
         let columns = [
             { title: 'Name', data: 'name' },
             { title: 'Position', data: 'position' },

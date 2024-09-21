@@ -28,16 +28,12 @@ export class ReportMainComponent {
   // ----------------------------------------------------------
 
   getData1() {
-    //this.loggerService.log(Tlog.info,'getData1');
     let data = this.reportService.testGetTable1();
-    //this.loggerService.log(Tlog.info,data);
     this.showDataTable("table1", data.columns, data.tableData);
   }
 
   getData2() {
-    //this.loggerService.log(Tlog.info,'getData2');
     let data = this.reportService.testGetTable2();
-    //this.loggerService.log(Tlog.info,data);
     this.showDataTable("table2", data.columns, data.tableData);
   }
 
@@ -45,13 +41,6 @@ export class ReportMainComponent {
   // ----------------------------------------------------------
 
   dropTable(id: string) {
-    /*
-    var table = $('#' + id).DataTable({
-      retrieve: true,
-      paging: false
-    });
-    table.destroy();    
-    */
     if ($.fn.DataTable.isDataTable('#' + id)) {
       $('#' + id).DataTable().destroy();
       $('#' + id).empty(); // Limpia el contenido de la tabla
@@ -67,19 +56,14 @@ export class ReportMainComponent {
   }
 
   showDataTable(id: string, columns: any[], data: any[]) {
-    //this.loggerService.log(Tlog.info,data);
-    //this.loggerService.log(Tlog.info,columns);
-
     let oldid = this.getChildElementId('myTable', 'table');
     this.dropTable(oldid);
-    //this.loggerService.log(Tlog.info, 'Dropped old datatable - ID del elemento hijo:'+ oldid);
-    
+
     this.createTable(id);
     $('#' + id).DataTable({
       data: data,
       columns: columns,
     });
   }
-
 
 }// end class
