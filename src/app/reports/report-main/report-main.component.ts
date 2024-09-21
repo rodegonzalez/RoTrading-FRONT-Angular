@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import 'datatables.net';
 import { LoggerService, Tlog } from '../../services/logger.service';
+import { ReportsService } from '../../services/reports.service';
 
 
 @Component({
@@ -12,7 +13,9 @@ import { LoggerService, Tlog } from '../../services/logger.service';
 })
 export class ReportMainComponent {
 
-  constructor(private loggerService: LoggerService) { 
+  constructor(
+    private loggerService: LoggerService,
+    private reportService: ReportsService) { 
   }
 
   ngOnInit(): void {
@@ -21,55 +24,41 @@ export class ReportMainComponent {
     });
   }
 
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+
   getData1() {
-    this.loggerService.log(Tlog.info,'getData1');
-
-    let columns = [
-      { title: 'Nombre', data: 'name' },
-      { title: 'Posición', data: 'position' },
-      { title: 'Oficina', data: 'office' },
-      { title: 'Edad', data: 'age' },
-      { title: 'Fecha de inicio', data: 'startDate' },
-      { title: 'Salario', data: 'salary' }
-    ];
-
-    let tableData = [
-      { name: 'Juan', position: 'Jardinero', office: 'Agaete', age: 61, startDate: '2011/04/25', salary: '480€' },
-      { name: 'Matias', position: 'Barrendero', office: 'Gáldar', age: 63, startDate: '2011/07/25', salary: '400€' },      
-    ];
-
-    this.showDataTable("table1", tableData, columns);
+    //this.loggerService.log(Tlog.info,'getData1');
+    let data = this.reportService.testGetTable1();
+    //this.loggerService.log(Tlog.info,data);
+    this.showDataTable("table1", data.columns, data.tableData);
   }
 
   getData2() {
-    this.loggerService.log(Tlog.info,'getData2');
-
-    let columns = [
-      { title: 'Name', data: 'name' },
-      { title: 'Position', data: 'position' },
-      { title: 'Office', data: 'office' },
-      { title: 'Age', data: 'age' },
-      { title: 'Salario', data: 'salary' }
-    ];
-
-    let tableData = [
-      { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, salary: '$320,800' },
-      { name: 'Garrett Winters', position: 'Accountant', office: 'Tokyo', age: 63, salary: '$170,750' },      
-    ];
-
-    this.showDataTable("table2", tableData, columns);
+    //this.loggerService.log(Tlog.info,'getData2');
+    let data = this.reportService.testGetTable2();
+    //this.loggerService.log(Tlog.info,data);
+    this.showDataTable("table2", data.columns, data.tableData);
   }
 
+  // ----------------------------------------------------------
+  // ----------------------------------------------------------
+
   dropTable(id: string) {
+    /*
     var table = $('#' + id).DataTable({
       retrieve: true,
       paging: false
     });
     table.destroy();    
+    */
+    if ($.fn.DataTable.isDataTable('#' + id)) {
+      $('#' + id).DataTable().destroy();
+      $('#' + id).empty(); // Limpia el contenido de la tabla
+    }
   }
 
   createTable(id: string) {
-    //$('#' + id).DataTable();
     $('#myTable').html(`<table id="` + id + `" class="display" style="width:100%"></table>`);
   }
 
@@ -77,11 +66,14 @@ export class ReportMainComponent {
     return $('#' + parentId).find(childSelector).attr('id') || '';
   }
 
-  showDataTable(id: string, data: any[], columns: any[]) {
-    let oldid = this.getChildElementId('myTable', 'table');
-    //this.loggerService.log(Tlog.info, 'ID del elemento hijo:'+ oldid);
+  showDataTable(id: string, columns: any[], data: any[]) {
+    //this.loggerService.log(Tlog.info,data);
+    //this.loggerService.log(Tlog.info,columns);
 
+    let oldid = this.getChildElementId('myTable', 'table');
     this.dropTable(oldid);
+    //this.loggerService.log(Tlog.info, 'Dropped old datatable - ID del elemento hijo:'+ oldid);
+    
     this.createTable(id);
     $('#' + id).DataTable({
       data: data,
