@@ -38,7 +38,7 @@ export class ReportMainComponent {
       { name: 'Matias', position: 'Barrendero', office: 'Gáldar', age: 63, startDate: '2011/07/25', salary: '400€' },      
     ];
 
-    this.showDataTable(tableData, columns);
+    this.showDataTable("table1", tableData, columns);
   }
 
   getData2() {
@@ -49,29 +49,34 @@ export class ReportMainComponent {
       { title: 'Position', data: 'position' },
       { title: 'Office', data: 'office' },
       { title: 'Age', data: 'age' },
-      { title: 'Fecha de inicio', data: 'startDate' },
       { title: 'Salario', data: 'salary' }
     ];
 
     let tableData = [
-      { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, startDate: '2011/04/25', salary: '$320,800' },
-      { name: 'Garrett Winters', position: 'Accountant', office: 'Tokyo', age: 63, startDate: '2011/07/25', salary: '$170,750' },      
+      { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, salary: '$320,800' },
+      { name: 'Garrett Winters', position: 'Accountant', office: 'Tokyo', age: 63, salary: '$170,750' },      
     ];
 
-    this.showDataTable(tableData, columns);
+    this.showDataTable("table2", tableData, columns);
   }
 
-  dropTable() {
-    var table = $('#example').DataTable({
+  dropTable(id: string) {
+    var table = $('#' + id).DataTable({
       retrieve: true,
       paging: false
     });
     table.destroy();
+    this.createTable(id);
   }
 
-  showDataTable(data: any[], columns: any[]) {
-    this.dropTable();
-    $('#example').DataTable({
+  createTable(id: string) {
+    //$('#' + id).DataTable();
+    $('#myTable').html(`<table id="` + id + `" class="display" style="width:100%"></table>`);
+  }
+
+  showDataTable(name:string, data: any[], columns: any[]) {
+    this.dropTable(name);
+    $('#' + name).DataTable({
       data: data,
       columns: columns,
     });
