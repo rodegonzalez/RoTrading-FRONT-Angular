@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoggerService, Tlog } from '../../services/logger.service';
 import { ReportsService } from '../../services/reports.service';
 import 'datatables.net';
+import { IDataTable } from 'src/app/interfaces/IDataTable.interface';
 
 @Component({
   selector: 'app-report-main',
@@ -12,46 +13,66 @@ import 'datatables.net';
 export class ReportMainComponent implements OnInit {
 
   @ViewChild('myTable', { static: true }) myTable!: ElementRef;
-
+  @ViewChild('defaultDataTable', { static: false }) defaultDataTable!: ElementRef;
+  
   constructor(
     private loggerService: LoggerService,
     private reportService: ReportsService) { 
   }
 
   ngOnInit(): void {
-    // empty default table
-    this.showDataTable("default", [], []);
+  }
+
+  ngAfterViewInit(): void {
+    $(this.defaultDataTable.nativeElement).DataTable();
   }
 
   getData1() {
-    let data = this.reportService.testGetTable1();
-    this.showDataTable("table1", data.tableData, data.columns);
+    const data: IDataTable = this.reportService.testGetTable1();
+    this.showDataTable("table2", data);
   }
 
   getData2() {
-    let data = this.reportService.testGetTable2();
-    this.showDataTable("table2", data.tableData, data.columns);
+    const data: IDataTable = this.reportService.testGetTable2();
+    this.showDataTable("table2", data);
   }
 
-  dropTable(id: string) {
-    const tableElement = this.myTable.nativeElement.querySelector('#' + id);
+  getData_getTest() {
+    this.reportService.getData_getTest().subscribe(data => {
+      this.showDataTable("tableReports", data as IDataTable);
+    });
+  }
+
+  getData_getPositions() {
+    this.reportService.getAllPositions().subscribe(data => {
+      this.showDataTable("tableReports", data as IDataTable);
+    });
+  }
+
+  getTableContainer() {
+    return this.myTable.nativeElement;
+  }
+
+  dropTable() {
+    const tableElement = this.getTableContainer();
     if ($.fn.DataTable.isDataTable(tableElement)) {
       $(tableElement).DataTable().destroy();
-      tableElement.innerHTML = ''; // Limpia el contenido de la tabla
+      tableElement.innerHTML = ''; 
     }
   }
 
   createTable(id: string) {
-    this.myTable.nativeElement.innerHTML = `<table id="${id}" class="display" style="width:100%"></table>`;
+    const tableContainer = (this.getTableContainer());
+    tableContainer.innerHTML = `<table id="${id}" class="display" style="width:100%"></table>`;
   }
 
-  showDataTable(id: string, data: any[], columns: any[]) {
-    this.dropTable(id);
+    showDataTable(id: string, _data: IDataTable) {
+    this.dropTable();
     this.createTable(id);
     const tableElement = this.myTable.nativeElement.querySelector('#' + id);
     $(tableElement).DataTable({
-      data: data,
-      columns: columns,
+      data: _data.tableData,
+      columns: _data.tableColumns,
     });
   }
 
@@ -60,5 +81,13 @@ export class ReportMainComponent implements OnInit {
     const childElement = parentElement.querySelector(childSelector);
     return childElement ? childElement.id : '';
   }
+
+  getData() {
+    this.loggerService.log(Tlog.info, 'getData');
+  }
+
+  verID(id: any){
+    this.loggerService.log(Tlog.info, "Id="+id);
+  } 
 
 } // end class

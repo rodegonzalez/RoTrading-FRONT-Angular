@@ -30,7 +30,9 @@
 
         <div class="card-footer">
             <button class="btn btn-primary mx-2" (click)="getData1()">Data1</button>       
-            <button class="btn btn-primary" (click)="getData2()">Data2</button>  
+            <button class="btn btn-primary  mx-2" (click)="getData2()">Data2</button>  
+            <button class="btn btn-primary mx-2" (click)="getData_getTest()">DataTest</button>  
+            <button class="btn btn-primary mx-2" (click)="getData_getPositions()">Get positions</button>  
         </div>
 
 
@@ -48,7 +50,7 @@
 
         <div class="card-body">           
             <div #myTable>
-                <table id="example" class="display" style="width:100%"></table>    
+                <table #defaultDataTable id="defaultDataTable" class="display" style="width:100%"></table>    
             </div>
 
 

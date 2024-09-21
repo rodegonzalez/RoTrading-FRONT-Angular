@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../environment/global.environment';
 import { LoggerService, Tlog } from './logger.service';
+import { IDataTable } from '../interfaces/IDataTable.interface';
+import { IPositionView } from '../interfaces/IPosition.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,8 @@ export class ReportsService {
     constructor(private http:HttpClient
         , private loggerService: LoggerService) { }
 
-    testGetTable1(): {columns: any[], tableData: any[]} {
-        let columns = [
+    testGetTable1(): IDataTable {
+        let tableColumns = [
             { title: 'Nombre', data: 'name' },
             { title: 'Posición', data: 'position' },
             { title: 'Oficina', data: 'office' },
@@ -54,11 +56,11 @@ export class ReportsService {
             { name: 'Anaxímenes', position: 'Jardinero', office: 'Mileto', age: 61, startDate: '2011/04/25', salary: '480€' },
         ];
 
-        return {columns, tableData}
+        return {tableColumns, tableData} as IDataTable
     }
     
-    testGetTable2(): {columns: any[], tableData: any[]} {
-        let columns = [
+    testGetTable2(): IDataTable {
+        let tableColumns = [
             { title: 'Name', data: 'name' },
             { title: 'Position', data: 'position' },
             { title: 'Office', data: 'office' },
@@ -70,7 +72,24 @@ export class ReportsService {
             { name: 'Garrett Winters', position: 'Accountant', office: 'Tokyo', age: 63},      
           ];
 
-        return {columns, tableData}
+        return {tableColumns, tableData} as IDataTable
+    }
+
+    getData_getTest(): Observable<IDataTable>{
+        return this.http.get(environment.APIUri + '/reports/getTest')
+        .pipe(
+            map(data => {
+                return data as IDataTable;
+            })
+        );
+    }
+    getAllPositions(): Observable<IDataTable>{
+        return this.http.get(environment.APIUri + '/reports/getPositions')
+        .pipe(
+            map(data => {
+                return data as IDataTable;
+            })
+        );
     }
 
 } // end class
