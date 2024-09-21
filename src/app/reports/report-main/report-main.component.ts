@@ -65,8 +65,7 @@ export class ReportMainComponent {
       retrieve: true,
       paging: false
     });
-    table.destroy();
-    this.createTable(id);
+    table.destroy();    
   }
 
   createTable(id: string) {
@@ -74,9 +73,17 @@ export class ReportMainComponent {
     $('#myTable').html(`<table id="` + id + `" class="display" style="width:100%"></table>`);
   }
 
-  showDataTable(name:string, data: any[], columns: any[]) {
-    this.dropTable(name);
-    $('#' + name).DataTable({
+  getChildElementId(parentId: string, childSelector: string): string {
+    return $('#' + parentId).find(childSelector).attr('id') || '';
+  }
+
+  showDataTable(id: string, data: any[], columns: any[]) {
+    let oldid = this.getChildElementId('myTable', 'table');
+    //this.loggerService.log(Tlog.info, 'ID del elemento hijo:'+ oldid);
+
+    this.dropTable(oldid);
+    this.createTable(id);
+    $('#' + id).DataTable({
       data: data,
       columns: columns,
     });
