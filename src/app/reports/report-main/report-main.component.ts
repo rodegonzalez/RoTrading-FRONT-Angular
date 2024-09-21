@@ -24,16 +24,12 @@ export class ReportMainComponent implements OnInit {
   }
 
   getData1() {
-    this.loggerService.log(Tlog.info, 'getData1');
     let data = this.reportService.testGetTable1();
-    this.loggerService.log(Tlog.info, data);
     this.showDataTable("table1", data.tableData, data.columns);
   }
 
   getData2() {
-    this.loggerService.log(Tlog.info, 'getData2');
     let data = this.reportService.testGetTable2();
-    this.loggerService.log(Tlog.info, data);
     this.showDataTable("table2", data.tableData, data.columns);
   }
 
@@ -63,10 +59,6 @@ export class ReportMainComponent implements OnInit {
     const parentElement = this.myTable.nativeElement.querySelector('#' + parentId);
     const childElement = parentElement.querySelector(childSelector);
     return childElement ? childElement.id : '';
-  }
-
-  getData() {
-    this.loggerService.log(Tlog.info, 'getData');
   }
 
 } // end class
