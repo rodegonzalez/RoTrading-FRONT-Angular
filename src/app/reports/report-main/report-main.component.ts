@@ -19,9 +19,8 @@ export class ReportMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $(document).ready(() => {
-      $('#example').DataTable();     
-    });
+    // empty default table
+    this.showDataTable("default", [], []);
   }
 
   getData1() {
