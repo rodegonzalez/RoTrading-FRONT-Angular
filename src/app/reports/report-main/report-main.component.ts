@@ -12,15 +12,6 @@ import { LoggerService, Tlog } from '../../services/logger.service';
 })
 export class ReportMainComponent {
 
-  columns: any[] = [
-    { title: 'Nombre', data: 'name' },
-    { title: 'Posición', data: 'position' },
-    { title: 'Oficina', data: 'office' },
-    { title: 'Edad', data: 'age' },
-    { title: 'Fecha de inicio', data: 'startDate' },
-    { title: 'Salario', data: 'salary' }
-  ];
-
   constructor(private loggerService: LoggerService) { 
   }
 
@@ -33,23 +24,41 @@ export class ReportMainComponent {
   getData1() {
     this.loggerService.log(Tlog.info,'getData1');
 
+    let columns = [
+      { title: 'Nombre', data: 'name' },
+      { title: 'Posición', data: 'position' },
+      { title: 'Oficina', data: 'office' },
+      { title: 'Edad', data: 'age' },
+      { title: 'Fecha de inicio', data: 'startDate' },
+      { title: 'Salario', data: 'salary' }
+    ];
+
     let tableData = [
       { name: 'Juan', position: 'Jardinero', office: 'Agaete', age: 61, startDate: '2011/04/25', salary: '480€' },
       { name: 'Matias', position: 'Barrendero', office: 'Gáldar', age: 63, startDate: '2011/07/25', salary: '400€' },      
     ];
 
-    this.showDataTable(tableData, this.columns);
+    this.showDataTable(tableData, columns);
   }
 
   getData2() {
     this.loggerService.log(Tlog.info,'getData2');
+
+    let columns = [
+      { title: 'Name', data: 'name' },
+      { title: 'Position', data: 'position' },
+      { title: 'Office', data: 'office' },
+      { title: 'Age', data: 'age' },
+      { title: 'Fecha de inicio', data: 'startDate' },
+      { title: 'Salario', data: 'salary' }
+    ];
 
     let tableData = [
       { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, startDate: '2011/04/25', salary: '$320,800' },
       { name: 'Garrett Winters', position: 'Accountant', office: 'Tokyo', age: 63, startDate: '2011/07/25', salary: '$170,750' },      
     ];
 
-    this.showDataTable(tableData, this.columns);
+    this.showDataTable(tableData, columns);
   }
 
   dropTable() {
