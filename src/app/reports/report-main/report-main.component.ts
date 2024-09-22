@@ -27,20 +27,9 @@ export class ReportMainComponent implements OnInit {
     $(this.defaultDataTable.nativeElement).DataTable();
   }
 
-  getData1() {
-    const data: IDataTable = this.reportService.testGetTable1();
-    this.showDataTable("table2", data);
-  }
-
-  getData2() {
-    const data: IDataTable = this.reportService.testGetTable2();
-    this.showDataTable("table2", data);
-  }
-
-  getData_getTest() {
-    this.reportService.getData_getTest().subscribe(data => {
-      this.showDataTable("tableReports", data as IDataTable);
-    });
+  getDataTest() {
+    const data: IDataTable = this.reportService.getPositionsTest();
+    this.showDataTable("tableTest", data);
   }
 
   getData_getPositions() {

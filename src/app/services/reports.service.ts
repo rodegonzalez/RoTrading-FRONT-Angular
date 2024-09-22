@@ -15,7 +15,7 @@ export class ReportsService {
     constructor(private http:HttpClient
         , private loggerService: LoggerService) { }
 
-    testGetTable1(): IDataTable {
+    getPositionsTest(): IDataTable {
         let tableColumns = [
             { title: 'Nombre', data: 'name' },
             { title: 'Posición', data: 'position' },
@@ -60,30 +60,6 @@ export class ReportsService {
         return {tableColumns, tableData} as IDataTable
     }
     
-    testGetTable2(): IDataTable {
-        let tableColumns = [
-            { title: 'Name', data: 'name' },
-            { title: 'Position', data: 'position' },
-            { title: 'Office', data: 'office' },
-            { title: 'Age', data: 'age' }
-          ];
-      
-          let tableData = [
-            { name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61},
-            { name: 'Garrett Winters', position: 'Accountant', office: 'Tokyo', age: 63},      
-          ];
-
-        return {tableColumns, tableData} as IDataTable
-    }
-
-    getData_getTest(): Observable<IDataTable>{
-        return this.http.get(environment.APIUri + '/reports/getTest')
-        .pipe(
-            map(data => {
-                return data as IDataTable;
-            })
-        );
-    }
     getPositions(): Observable<IDataTable>{
         return this.http.get(environment.APIUri + '/reports/getPositions')
         .pipe(
@@ -92,10 +68,8 @@ export class ReportsService {
             })
         );
     }
-
-    //getPositionsSearch(options: any): Observable<IDataTable>{   
-        getPositionsSearch(options?: ISearchOptions): Observable<IDataTable>{   
-        
+ 
+    getPositionsSearch(options?: ISearchOptions): Observable<IDataTable>{           
         options = {
             Datemin: '2023-01-01',
             Datemax: '2024-12-31',
@@ -118,8 +92,7 @@ export class ReportsService {
             map(data => {
             return data as IDataTable;
             })
-        );
-        
+        );        
     }
 
 } // end class
