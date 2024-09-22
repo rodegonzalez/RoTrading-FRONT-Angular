@@ -96,7 +96,6 @@ export class ReportsService {
     //getPositionsSearch(options: any): Observable<IDataTable>{   
         getPositionsSearch(options?: ISearchOptions): Observable<IDataTable>{   
         
-       
         options = {
             Datemin: '2023-01-01',
             Datemax: '2024-12-31',
@@ -107,69 +106,20 @@ export class ReportsService {
             Buysell: 'buy', // buy, sell
         };
 
-
-        if (options.Datemin) {
-            options.Datemin = options.Datemin + ' 00:00:00';
-        }
-        if (options.Datemax) {
-            options.Datemax = options.Datemax + ' 23:59:59';
-        }
-        if (options.Dateyear) { 
-            options.Dateyear = options.Dateyear + '-01-01 00:00:00';
-        }
-
-        this.loggerService.log(Tlog.info, "getPositionsSearch - Options:");
-        this.loggerService.log(Tlog.info, options);
-
         const uri = `${environment.APIUri}/reports/getPositionsSearch`;
         const headers = new HttpHeaders({
             'Content-Type': 'application/json'
-          });
-       
-            // Serializar el objeto options a JSON
-            const optionsJson = JSON.stringify(options);
-            // Codificar el JSON para que sea seguro para URL
-            //const encodedOptions = encodeURIComponent(optionsJson);
-            const encodedOptions = optionsJson;
+          });    
+        const optionsJson = JSON.stringify(options);
+        const params = new HttpParams().set('options', optionsJson);
 
-            // Crear los parámetros de la consulta
-            const params = new HttpParams().set('options', encodedOptions);
-
-            // Log del cuerpo de la solicitud
-            this.loggerService.log(Tlog.info, "getPositionsSearch - params:");
-            this.loggerService.log(Tlog.info, params);
-
-            // Enviar la solicitud GET
-            return this.http.post<IDataTable>(uri, null, { headers, params })
-            .pipe(
-                map(data => {
-                return data as IDataTable;
-                })
-            );
-        
-            /*
-        //return this.http.post(environment.APIUri + '/reports/getPositionsSearch', { headers })
-        
-        //const body = { options: options };
-        //const body = options;
-        const body = JSON.stringify(options); 
-
-        //return this.http.post(uri, body, { headers })  
-            
-
-        this.loggerService.log(Tlog.info, "getPositionsSearch - body:");
-        this.loggerService.log(Tlog.info, body);
-
-     
-        return this.http.post(uri, body)
+        return this.http.post<IDataTable>(uri, null, { headers, params })
         .pipe(
             map(data => {
-                return data as IDataTable;
+            return data as IDataTable;
             })
         );
-*/
-
-
+        
     }
 
 } // end class
