@@ -63,6 +63,10 @@ export class PositionsService {
     savePositionForm(formdata: any): Promise<void>{
         let uri = environment.APIUri +"/position";
         return new Promise((resolve, reject) => {
+
+            this.loggerService.log(Tlog.info, "savePositionForm");
+            this.loggerService.log(Tlog.info, formdata);
+            
             this.http.post<any>(uri,formdata).subscribe({
                 complete: () => {
                     resolve();

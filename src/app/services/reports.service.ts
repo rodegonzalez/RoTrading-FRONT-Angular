@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../environment/global.environment';
 import { LoggerService, Tlog } from './logger.service';
-import { IDataTable } from '../interfaces/IDataTable.interface';
+import { IDataTable, ISearchOptions } from '../interfaces/IDataTable.interface';
 import { IPositionView } from '../interfaces/IPosition.interface';
+import { SearchOptions } from 'datatables.net';
 
 @Injectable({
   providedIn: 'root'
@@ -83,8 +84,58 @@ export class ReportsService {
             })
         );
     }
-    getAllPositions(): Observable<IDataTable>{
+    getPositions(): Observable<IDataTable>{
         return this.http.get(environment.APIUri + '/reports/getPositions')
+        .pipe(
+            map(data => {
+                return data as IDataTable;
+            })
+        );
+    }
+
+    //getPositionsSearch(options: any): Observable<IDataTable>{   
+        getPositionsSearch(options?: ISearchOptions): Observable<IDataTable>{   
+        
+       
+        options = {
+            datemin: '2023-01-01',
+            datemax: '2024-12-31',
+            dateyear: '2024',
+            temporality: 'm5', // pattern2: m1, m3, m5
+            pattern1id: 'Giro', // Giro, Facilidad, Cont
+            setup2id: 1, // FV, VD, 
+            buysell: 'buy', // buy, sell
+        };
+
+
+        if (options.datemin) {
+            options.datemin = options.datemin + ' 00:00:00';
+        }
+        if (options.datemax) {
+            options.datemax = options.datemax + ' 23:59:59';
+        }
+        if (options.dateyear) { 
+            options.dateyear = options.dateyear + '-01-01 00:00:00';
+        }
+
+        this.loggerService.log(Tlog.info, "getPositionsSearch - Options:");
+        this.loggerService.log(Tlog.info, options);
+
+        const url = `${environment.APIUri}/reports/getPositionsSearch`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+          });
+       
+        
+        //return this.http.post(environment.APIUri + '/reports/getPositionsSearch', { headers })
+        const body = { options: options };
+        //return this.http.post(url, body, { headers })  
+        //const body = JSON.stringify(options);     
+
+        this.loggerService.log(Tlog.info, "getPositionsSearch - body:");
+        this.loggerService.log(Tlog.info, body);
+
+        return this.http.post(url, body, { headers })
         .pipe(
             map(data => {
                 return data as IDataTable;

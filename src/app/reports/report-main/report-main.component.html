@@ -33,6 +33,7 @@
             <button class="btn btn-primary  mx-2" (click)="getData2()">Data2</button>  
             <button class="btn btn-primary mx-2" (click)="getData_getTest()">DataTest</button>  
             <button class="btn btn-primary mx-2" (click)="getData_getPositions()">Get positions</button>  
+            <button class="btn btn-primary mx-2" (click)="getData_getPositionsSearch()">Get positions by search</button>  
         </div>
 
 
@@ -48,13 +49,13 @@
             <h6 class="card-title ">Resultados</h6>             
         </div>
 
-        <div class="card-body">           
-            <div #myTable>
-                <table #defaultDataTable id="defaultDataTable" class="display" style="width:100%"></table>    
-            </div>
-
+            <div class="card-body">           
+                <form action="#">
+                <div #myTable>
+                    <table #defaultDataTable id="defaultDataTable" class="display" style="width:100%"></table>    
+                </div>
+            </form>
 
         </div>
-
     </div>
 </div>

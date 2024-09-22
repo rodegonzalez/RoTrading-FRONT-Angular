@@ -44,10 +44,19 @@ export class ReportMainComponent implements OnInit {
   }
 
   getData_getPositions() {
-    this.reportService.getAllPositions().subscribe(data => {
+    this.reportService.getPositions().subscribe(data => {
       this.showDataTable("tableReports", data as IDataTable);
     });
   }
+
+  getData_getPositionsSearch() {
+    this.reportService.getPositionsSearch().subscribe(data => {
+      this.showDataTable("tableReports", data as IDataTable);
+    });
+  }
+
+  // ----------------------------
+  //-----------------------------
 
   getTableContainer() {
     return this.myTable.nativeElement;
@@ -89,5 +98,6 @@ export class ReportMainComponent implements OnInit {
   verID(id: any){
     this.loggerService.log(Tlog.info, "Id="+id);
   } 
+
 
 } // end class
