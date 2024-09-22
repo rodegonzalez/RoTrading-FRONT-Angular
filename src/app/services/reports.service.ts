@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../environment/global.environment';
@@ -98,49 +98,78 @@ export class ReportsService {
         
        
         options = {
-            datemin: '2023-01-01',
-            datemax: '2024-12-31',
-            dateyear: '2024',
-            temporality: 'm5', // pattern2: m1, m3, m5
-            pattern1id: 'Giro', // Giro, Facilidad, Cont
-            setup2id: 1, // FV, VD, 
-            buysell: 'buy', // buy, sell
+            Datemin: '2023-01-01',
+            Datemax: '2024-12-31',
+            Dateyear: '2024',
+            Temporality: 'm5', // pattern2: m1, m3, m5
+            Pattern1id: 'Giro', // Giro, Facilidad, Cont
+            Setup2id: 1, // FV, VD, 
+            Buysell: 'buy', // buy, sell
         };
 
 
-        if (options.datemin) {
-            options.datemin = options.datemin + ' 00:00:00';
+        if (options.Datemin) {
+            options.Datemin = options.Datemin + ' 00:00:00';
         }
-        if (options.datemax) {
-            options.datemax = options.datemax + ' 23:59:59';
+        if (options.Datemax) {
+            options.Datemax = options.Datemax + ' 23:59:59';
         }
-        if (options.dateyear) { 
-            options.dateyear = options.dateyear + '-01-01 00:00:00';
+        if (options.Dateyear) { 
+            options.Dateyear = options.Dateyear + '-01-01 00:00:00';
         }
 
         this.loggerService.log(Tlog.info, "getPositionsSearch - Options:");
         this.loggerService.log(Tlog.info, options);
 
-        const url = `${environment.APIUri}/reports/getPositionsSearch`;
+        const uri = `${environment.APIUri}/reports/getPositionsSearch`;
         const headers = new HttpHeaders({
             'Content-Type': 'application/json'
           });
        
+            // Serializar el objeto options a JSON
+            const optionsJson = JSON.stringify(options);
+            // Codificar el JSON para que sea seguro para URL
+            //const encodedOptions = encodeURIComponent(optionsJson);
+            const encodedOptions = optionsJson;
+
+            // Crear los parámetros de la consulta
+            const params = new HttpParams().set('options', encodedOptions);
+
+            // Log del cuerpo de la solicitud
+            this.loggerService.log(Tlog.info, "getPositionsSearch - params:");
+            this.loggerService.log(Tlog.info, params);
+
+            // Enviar la solicitud GET
+            return this.http.post<IDataTable>(uri, null, { headers, params })
+            .pipe(
+                map(data => {
+                return data as IDataTable;
+                })
+            );
         
+            /*
         //return this.http.post(environment.APIUri + '/reports/getPositionsSearch', { headers })
-        const body = { options: options };
-        //return this.http.post(url, body, { headers })  
-        //const body = JSON.stringify(options);     
+        
+        //const body = { options: options };
+        //const body = options;
+        const body = JSON.stringify(options); 
+
+        //return this.http.post(uri, body, { headers })  
+            
 
         this.loggerService.log(Tlog.info, "getPositionsSearch - body:");
         this.loggerService.log(Tlog.info, body);
 
-        return this.http.post(url, body, { headers })
+     
+        return this.http.post(uri, body)
         .pipe(
             map(data => {
                 return data as IDataTable;
             })
         );
+*/
+
+
     }
 
 } // end class

@@ -4,12 +4,12 @@ export interface IDataTable{
 }
 
 export interface ISearchOptions{
-    datemin: string,
-    datemax: string,
-    dateyear: string,
-    temporality: string,
-    pattern1id: string
-    setup2id: number,
-    buysell: string,
+    Datemin: string,
+    Datemax: string,
+    Dateyear: string,
+    Temporality: string,
+    Pattern1id: string
+    Setup2id: number,
+    Buysell: string,
 }
 
