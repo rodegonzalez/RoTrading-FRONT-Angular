@@ -56,13 +56,7 @@ export class ReportMainComponent implements OnInit {
   }
   
   onSubmit(event: Event): void {
-    this.loggerService.log(Tlog.info, 'onSubmit');
-    this.loggerService.log(Tlog.info, 'FormData');
-    this.loggerService.log(Tlog.info, this.formData);
-
     event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-
-    // Llamar al método del servicio y pasarle los datos del formulario
     this.reportService.getPositionsSearch(this.formData).subscribe(data => {
       this.showDataTable("tableReports", data as IDataTable);
     });
