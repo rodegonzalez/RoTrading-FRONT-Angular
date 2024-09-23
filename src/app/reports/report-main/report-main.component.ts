@@ -15,6 +15,11 @@ export class ReportMainComponent implements OnInit {
   @ViewChild('myTable', { static: true }) myTable!: ElementRef;
   @ViewChild('defaultDataTable', { static: false }) defaultDataTable!: ElementRef;
   
+  formData: any = {
+    Temporality: 'm5',
+    Buysell: "buy"
+  };
+
   constructor(
     private loggerService: LoggerService,
     private reportService: ReportsService) { 
@@ -38,8 +43,27 @@ export class ReportMainComponent implements OnInit {
     });
   }
 
+  getData_getPositionsSearchTest() {
+    this.reportService.getPositionsSearchTest().subscribe(data => {
+      this.showDataTable("tableReports", data as IDataTable);
+    });
+  }
+
   getData_getPositionsSearch() {
-    this.reportService.getPositionsSearch().subscribe(data => {
+    this.reportService.getPositionsSearch(null).subscribe(data => {
+      this.showDataTable("tableReports", data as IDataTable);
+    });
+  }
+  
+  onSubmit(event: Event): void {
+    this.loggerService.log(Tlog.info, 'onSubmit');
+    this.loggerService.log(Tlog.info, 'FormData');
+    this.loggerService.log(Tlog.info, this.formData);
+
+    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+    // Llamar al método del servicio y pasarle los datos del formulario
+    this.reportService.getPositionsSearch(this.formData).subscribe(data => {
       this.showDataTable("tableReports", data as IDataTable);
     });
   }
@@ -87,6 +111,11 @@ export class ReportMainComponent implements OnInit {
   verID(id: any){
     this.loggerService.log(Tlog.info, "Id="+id);
   } 
+
+  // ----------------------------
+  //-----------------------------
+
+
 
 
 } // end class

@@ -69,7 +69,7 @@ export class ReportsService {
         );
     }
  
-    getPositionsSearch(options?: ISearchOptions): Observable<IDataTable>{           
+    getPositionsSearchTest(options?: ISearchOptions): Observable<IDataTable>{           
         options = {
             Datemin: '2023-01-01',
             Datemax: '2024-12-31',
@@ -94,5 +94,24 @@ export class ReportsService {
             })
         );        
     }
+
+    getPositionsSearch(formData: any): Observable<IDataTable> {
+        // Serializar el objeto formData a JSON
+        const body = JSON.stringify(formData);
+    this.loggerService.log(Tlog.info, 'getPositionsSearch - body');
+    this.loggerService.log(Tlog.info, body);
+
+        // Configuración de los headers
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json'
+        });
+    
+        // URL de la API
+        const uri = `${environment.APIUri}/reports/getPositionsSearch`;
+    
+        const params = new HttpParams().set('options', body);
+
+        return this.http.post<IDataTable>(uri, null, { headers, params })
+      }
 
 } // end class

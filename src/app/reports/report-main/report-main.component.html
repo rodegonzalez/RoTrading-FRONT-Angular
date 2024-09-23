@@ -1,5 +1,5 @@
 <div class="card-deck ">
-<form>
+    <form (submit)="onSubmit($event)">
     <div class="card mb-2 h-100 block">
         <div class="card-header">
             <h6 class="card-title">Informes</h6>             
@@ -17,9 +17,21 @@
                 <div class="col-4">
                     <h6 class="card-title">Selector temporal</h6>
                     <div>
+                        Temporality: <select name="Temporality" class="form-control" [(ngModel)]="formData.Temporality" >
+                            <option value="m1">m1</option>
+                            <option value="m3">m3</option>
+                            <option value="m5" selected>m5</option>
+                        </select>
+                    </div>  
+                    
+                    <div>
+                        BuySell: <select name="Buysell" class="form-control" [(ngModel)]="formData.Buysell" >
+                            <option value="buy" selected>Buy</option>
+                            <option value="sell">Sell</option>
+                        </select>
+                    </div>  
 
-                    </div>
-                  
+
                 </div>
 
                 <div class="col-4">
@@ -33,9 +45,10 @@
         </div>
 
         <div class="card-footer">
-            <button class="btn btn-secondary mx-2" (click)="getDataTest()">Local Test</button>       
-            <button class="btn btn-primary mx-2" (click)="getData_getPositions()">HTTP Test</button>  
-            <button class="btn btn-success mx-2" (click)="getData_getPositionsSearch()">Search</button>  
+            <button class="btn btn-info mx-2" (click)="getDataTest()">Local Test</button>       
+            <button class="btn btn-info mx-2" (click)="getData_getPositions()">HTTP Test</button>  
+            <button class="btn btn-info mx-2" (click)="getData_getPositionsSearch()">Search Test</button>  
+            <button class="btn btn-success mx-2" type="submit">Search Submit</button>  
         </div>
 
 
