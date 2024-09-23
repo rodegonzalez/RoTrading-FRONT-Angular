@@ -71,11 +71,12 @@ export class ReportsService {
  
     getPositionsSearchTest(options?: ISearchOptions): Observable<IDataTable>{           
         options = {
-            Datemin: '2023-01-01',
-            Datemax: '2024-12-31',
-            Dateyear: '2024',
-            Temporality: 'm5', // pattern2: m1, m3, m5
-            Pattern1id: 'Giro', // Giro, Facilidad, Cont
+            Sessionid: '',
+            Accountid: 1, // 1, 2, 3
+            Tickerid: 1, // 1, 2, 3
+            Pattern1id: 1, // ATipo1, BTipo3, ...
+            Pattern2id: "Giro", // Giro, Facilidad, Cont
+            Setup1id: 'm5', // m1, m3, m5
             Setup2id: 1, // FV, VD, 
             Buysell: 'buy', // buy, sell
         };
@@ -96,6 +97,10 @@ export class ReportsService {
     }
 
     getPositionsSearch(formData: any): Observable<IDataTable> {
+        formData.Accountid = Number(formData.Accountid);
+        formData.Tickerid = Number(formData.Tickerid);
+        formData.Pattern1id = Number(formData.Pattern1id);
+        formData.Setup2id = Number(formData.Setup2id);
         const body = JSON.stringify(formData);
         const headers = new HttpHeaders({
           'Content-Type': 'application/json'
