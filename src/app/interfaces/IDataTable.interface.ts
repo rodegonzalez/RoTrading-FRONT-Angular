@@ -1,6 +1,15 @@
 export interface IDataTable{
     tableColumns: any[], 
-    tableData: any[]
+    tableData: any[],
+    summarize: any[]
+}
+
+export interface ISummarize
+{
+    positionsData_operations : any[],
+    positionsData_blocks : any[],
+    positionsData_ticks : any[],
+    positionsData_posneg : any[]
 }
 
 export interface ISearchOptions{
