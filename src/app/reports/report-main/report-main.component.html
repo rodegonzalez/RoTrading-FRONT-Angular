@@ -141,9 +141,9 @@
 
 
 <div class="card-deck">
-    <div class="card mb-2 h-100 block border-warning">
-        <div class="card-header bg-warning text-black">
-            <h6 class="card-title ">Stats</h6>             
+    <div class="card mb-2 h-100 block border-black">
+        <div class="card-header bg-warning text-white">
+            <h6 class="card-title ">Charts</h6>             
         </div>
 
             <div class="card-body">     
@@ -155,27 +155,114 @@
                         </div>                         
                     </div>
 
-                    <div class="col-3">
-                        <div class="chart-container h-100" >
-                            <canvas id="myreportChart_PositionsData_blocks"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
+                    <div class="col-2 align-self-start">
                         
                         <div class="chart-container h-100" >
-                            <canvas id="myreportChart_ticks"></canvas>
+                            <canvas id="myreportChart_ticks_pie"></canvas>
                         </div>     
                         
                        
                     </div>
 
-                    <div class="col-2">
+                    <div class="col-2 mt-auto align-self-center">
                         <div class="chart-container h-100" >
-                            <canvas id="myreportChart_posneg"></canvas>
+                            <canvas id="myreportChart_posneg_pie"></canvas>
                         </div>
 
                     </div>
+
+                    <div class="col-3">
+                        <div class="card-deck">
+                            <div class="card mb-2 h-100 block border-warning">
+                        
+                                    <div class="card-body">           
+                                        <form action="#">
+                                        <div>
+                                            <div class="row">
+
+                                                <div class="col-12">
+                                                    <div>
+                                                        Núm operaciones total: {{totalOperations}}
+                                                    </div>     
+
+                                                    <hr/>
+
+                                                    <div>
+                                                        Núm Profit+ : {{profit_num}}
+                                                    </div> 
+                                                    <div>
+                                                        Profit % : {{profit_num_percent}}%
+                                                    </div> 
+                                                    <div>
+                                                        Profit total ticks: {{profit_total_ticks}}
+                                                    </div>  
+                                                    <div>
+                                                        Profit medio ticks: {{profit_media_ticks}}
+                                                    </div>    
+
+                                                    <hr/>
+
+                                                    <div>
+                                                        Núm Loss- : {{loss_num}}
+                                                    </div> 
+                                                    <div>
+                                                        Loss % : {{loss_num_percent}}%
+                                                    </div>
+                                                    <div>
+                                                        Loss+ total ticks: {{loss_total_ticks}}
+                                                    </div>  
+                                                    <div>
+                                                        Loss- medio ticks: {{loss_media_ticks}}
+                                                    </div>       
+                                                    
+                                                    <hr/>
+
+                                                    <div>
+                                                        Núm BE : {{be_num}}
+                                                    </div> 
+                                                    <div>
+                                                        BE % : {{be_num_percent}}%
+                                                    </div>
+                                                    <div>
+                                                        BE+ total ticks: {{be_total_ticks}}
+                                                    </div>  
+                                                    <div>
+                                                        BE- medio ticks: {{be_media_ticks}}
+                                                    </div>   
+
+
+                                                </div>
+                                            </div>  
+
+                                            <hr/>
+
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div>
+                                                        Ratio profit/loss: {{totalOperations}}
+                                                    </div>                            
+                                                </div>
+                                                <div class="col-4">
+                                                    <div>
+                                                        Núm operaciones pos: {{totalOperations_positive}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div>
+                                                        Núm operaciones neg: {{totalOperations_negative}}
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                            
+                                            
+                                        </div>
+                                    </form>
+                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
              
@@ -187,35 +274,4 @@
 <!-- ------------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------------ -->
 
-<div class="card-deck">
-    <div class="card mb-2 h-100 block border-warning">
-        <div class="card-header bg-warning text-black">
-            <h6 class="card-title ">Stats</h6>             
-        </div>
 
-            <div class="card-body">           
-                <form action="#">
-                <div>
-                    <div class="row">
-                        <div class="col-4">
-                            <div>
-                                Núm operaciones: {{totalOperations}}
-                            </div>                            
-                        </div>
-                        <div class="col-4">
-                            <div>
-                                Núm operaciones pos: {{totalOperations_positive}}
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div>
-                                Núm operaciones neg: {{totalOperations_negative}}
-                            </div>
-                        </div>
-                    </div>                    
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
