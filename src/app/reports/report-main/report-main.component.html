@@ -126,208 +126,239 @@
             <div class="card-body">     
                 
                 <div class="row">
-                    <div class="col-5">
-                        <div class="chart-container h-100" >
-                            <canvas id="myreportChart_operations_bar"></canvas>
-                        </div>                         
-                    </div>
 
-                    <div class="col-2 align-self-start">                        
-                        <div class="chart-container h-100" >
-                            <canvas id="myreportChart_ticks_pie"></canvas>
-                        </div>                                                 
-                    </div>
 
-                    <div class="col-2 mt-auto align-self-center">
-                        <div class="chart-container h-100" >
-                            <canvas id="myreportChart_posneg_pie"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="col-3"> <!-- -------------------------    STATS   ------------------------------------------------------------------- -->
-                        <div class="card-deck">
-                            <div class="card mb-2 h-100 block">    
-
-                                    <div class="card-body">                                                    
-                                                                                
-                                                                                <div class="row"> <!-- -------------------------- -->
-                                                                                    <div class="col-4"> <!-- nombre  -->
-                                                                                        <div>&nbsp;</div> 
-                                                                                    </div>
-
-                                                                                    <div class="col-4">
-                                                                                        <div class="row"> <!-- conteo operaciones -->
-                                                                                            <div class="col-6">
-                                                                                                <div title="Número de operaciones">Num</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div title="Probabilidad">%</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-4"> <!-- porcentajes -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-6">
-                                                                                                <div title="Total ticks">Ticks</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div title="Media de ticks por operación">AVR</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="row"> <!-- -------------------------- -->
-                                                                                    <div class="col-4"> <!-- nombre  -->
-                                                                                        <div title="Ganadoras">Wins</div> 
-                                                                                    </div>
-
-                                                                                    <div class="col-4">
-                                                                                        <div class="row"> <!-- conteo operaciones -->
-                                                                                            <div class="col-6 text-right">
-                                                                                                <div>{{profit_num}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6 text-right">
-                                                                                                <div>{{profit_num_percent_display}}%</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-4"> <!-- porcentajes -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-6 text-right">
-                                                                                                <div class="text-right">{{profit_total_ticks}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6 text-right">
-                                                                                                <div  class="text-right">{{profit_media_ticks}}</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="row"> <!-- -------------------------- -->
-                                                                                    <div class="col-4"> <!-- nombre  -->
-                                                                                        <div title="Perdedoras">Loss</div> 
-                                                                                    </div>
-
-                                                                                    <div class="col-4">
-                                                                                        <div class="row"> <!-- conteo operaciones -->
-                                                                                            <div class="col-6">
-                                                                                                <div>{{loss_num}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div>{{loss_num_percent_display}}%</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-4"> <!-- porcentajes -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-6">
-                                                                                                <div>{{loss_total_ticks}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div>{{loss_media_ticks}}</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="row"> <!-- -------------------------- -->
-                                                                                    <div class="col-4"> <!-- nombre  -->
-                                                                                        <div>BreakEven</div> 
-                                                                                    </div>
-
-                                                                                    <div class="col-4">
-                                                                                        <div class="row"> <!-- conteo operaciones -->
-                                                                                            <div class="col-6">
-                                                                                                <div>{{be_num}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div>{{be_num_percent_display}}%</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-4"> <!-- porcentajes -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-6">
-                                                                                                <div>{{be_total_ticks}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div>{{be_media_ticks}}</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>                                                    
-
-                                                                                <hr/>
-
-                                                                                <div class="row"> <!-- -------------------------- -->
-                                                                                    <div class="col-4"> <!-- nombre  -->
-                                                                                        <div>Total</div> 
-                                                                                    </div>
-
-                                                                                    <div class="col-4">
-                                                                                        <div class="row"> <!-- conteo operaciones -->
-                                                                                            <div class="col-6">
-                                                                                                <div>{{totalOperations}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div>{{totalPercent_display}}%</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-4"> <!-- porcentajes -->
-                                                                                        <div class="row">
-                                                                                            <div class="col-6">
-                                                                                                <div>{{totalValue}}</div>
-                                                                                            </div>
-                                                                                            <div class="col-6">
-                                                                                                <div>-</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>    
-
-                                         
+                                <div class="col-7"> <!-- -------------------------    GRAPHS   ------------------------------------------------------------------- -->
+                                    <div class="row">
+                                        
+                                        <div class="col-12">
+                                            <div class="chart-container h-100" >
+                                                <canvas id="myreportChart_operations_bar"></canvas>
+                                            </div>                         
+                                        </div>
                                     </div>
-                                    
-                                    <div class="card mb-2 h-100 block border-secondary">
-                                                        <div class="card-body">
+                                    <div class="row">
+                                        
+                                        <div class="col-6 align-self-start">                        
+                                            <div class="chart-container h-100" >
+                                                <canvas id="myreportChart_ticks_pie"></canvas>
+                                            </div>                                                 
+                                        </div>
 
-                                                                <div class="row">
-                                                                    <div class="col-4">
-                                                                        <div>Ratio win/loss</div> 
-                                                                    </div>
-                                                                    <div class="col-4">
-                                                                        <div>Ratio <br>R</div>
-                                                                    </div>
-                                                                    <div class="col-4">
-                                                                        <div>Esperanza matemática</div>
-                                                                    </div>
-                                                                </div>  
-
-                                                                <div class="row">
-                                                                    <div class="col-4">
-                                                                        <div>{{totalOperations}}</div>                            
-                                                                    </div>
-                                                                    <div class="col-4">
-                                                                        <div>{{Ratio_R}}</div>
-                                                                    </div>
-                                                                    <div class="col-4">
-                                                                        <div>{{esperanza_matematica}}</div>
-                                                                    </div>
-                                                                </div>    
-                                                                
-                                                        </div>
+                                        <div class="col-6 mt-auto align-self-start">
+                                            <div class="chart-container h-100" >
+                                                <canvas id="myreportChart_posneg_pie"></canvas>
+                                            </div>
+                                        </div>
                                     </div>
-                        
                                 </div>
-                            </div>
-                    </div>
+
+
+
+                                <div class="col-5 small"> <!-- -------------------------    STATS   ------------------------------------------------------------------- -->
+                                    <div class="row">
+                                        
+
+                                        <div class="col-12"> 
+                                            <div class="card-deck">
+                                                <div class="card mb-2 h-100 block">    
+
+                                                        <div class="card-body">                                                    
+                                                                                                    
+                                                                                                    <div class="row"> <!-- -------------------------- -->
+                                                                                                        <div class="col-4"> <!-- nombre  -->
+                                                                                                            <div>&nbsp;</div> 
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="row"> <!-- conteo operaciones -->
+                                                                                                                <div class="col-6">
+                                                                                                                    <div title="Número de operaciones">Num</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div title="Probabilidad">%</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4"> <!-- porcentajes -->
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-6">
+                                                                                                                    <div title="Total ticks">Ticks</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div title="Media de ticks por operación">AVR</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="row"> <!-- -------------------------- -->
+                                                                                                        <div class="col-4"> <!-- nombre  -->
+                                                                                                            <div title="Ganadoras">Wins</div> 
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="row"> <!-- conteo operaciones -->
+                                                                                                                <div class="col-6 text-right">
+                                                                                                                    <div>{{profit_num}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6 text-right">
+                                                                                                                    <div>{{profit_num_percent_display}}%</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4"> <!-- porcentajes -->
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-6 text-right">
+                                                                                                                    <div class="text-right">{{profit_total_ticks}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6 text-right">
+                                                                                                                    <div  class="text-right">{{profit_media_ticks}}</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="row"> <!-- -------------------------- -->
+                                                                                                        <div class="col-4"> <!-- nombre  -->
+                                                                                                            <div title="Perdedoras">Loss</div> 
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="row"> <!-- conteo operaciones -->
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{loss_num}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{loss_num_percent_display}}%</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4"> <!-- porcentajes -->
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{loss_total_ticks}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{loss_media_ticks}}</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="row"> <!-- -------------------------- -->
+                                                                                                        <div class="col-4"> <!-- nombre  -->
+                                                                                                            <div>BreakEven</div> 
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="row"> <!-- conteo operaciones -->
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{be_num}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{be_num_percent_display}}%</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4"> <!-- porcentajes -->
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{be_total_ticks}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{be_media_ticks}}</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>                                                    
+
+                                                                                                    <hr/>
+
+                                                                                                    <div class="row"> <!-- -------------------------- -->
+                                                                                                        <div class="col-4"> <!-- nombre  -->
+                                                                                                            <div>Total</div> 
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4">
+                                                                                                            <div class="row"> <!-- conteo operaciones -->
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{totalOperations}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{totalPercent_display}}%</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-4"> <!-- porcentajes -->
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>{{totalValue}}</div>
+                                                                                                                </div>
+                                                                                                                <div class="col-6">
+                                                                                                                    <div>-</div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>    
+
+                                                            
+                                                        </div>
+                                                        
+                                                        <div class="card mb-2 h-100 block border-secondary">
+                                                                            <div class="card-body">
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-4">
+                                                                                            <div>Ratio win/loss</div> 
+                                                                                        </div>
+                                                                                        <div class="col-4">
+                                                                                            <div>Ratio R</div>
+                                                                                        </div>
+                                                                                        <div class="col-4">
+                                                                                            <div>Esperanza matemática</div>
+                                                                                        </div>
+                                                                                    </div>  
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-4">
+                                                                                            <div>{{totalOperations}}</div>                            
+                                                                                        </div>
+                                                                                        <div class="col-4">
+                                                                                            <div>{{Ratio_R}}</div>
+                                                                                        </div>
+                                                                                        <div class="col-4">
+                                                                                            <div>{{esperanza_matematica}}</div>
+                                                                                        </div>
+                                                                                    </div>    
+                                                                                    
+                                                                            </div>
+                                                        </div>
+                                            
+                                                    </div>
+                                                </div>
+                                        </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
                 </div>
 
             
