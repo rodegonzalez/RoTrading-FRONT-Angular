@@ -30,11 +30,12 @@ export class ReportMainComponent implements OnInit {
   totalOperations: number = 0;
   totalPercent: number = 0;
   totalValue: number = 0;
-  totalMedia: number = 0;
+  total_media: number = 0;
 
   Ratio_R = 0;
   esperanza_matematica = 0;
-
+  Ratio_WinLoss : number = 0;
+  
   profit_num: number = 0;
   profit_total_ticks: number = 0;
   profit_media_ticks: number = 0;
@@ -338,7 +339,7 @@ export class ReportMainComponent implements OnInit {
         this.profit_media_ticks = stats.getAverageGain();
         this.loss_media_ticks =  stats.getAverageLoss();
         this.be_media_ticks = stats.getAverageBE();
-        this.totalMedia = stats.getAverageTotal();
+        this.total_media = stats.getAverageTotal();
 
         this.profit_num_percent = stats.getWinProbability();
         this.loss_num_percent = stats.getLossProbability();
@@ -354,6 +355,7 @@ export class ReportMainComponent implements OnInit {
 
         this.Ratio_R = stats.calculateRRatio();
         this.esperanza_matematica = stats.calculateExpectancy();
+        this.Ratio_WinLoss = stats.calculateWinLossRatio();
 
       } else {
         this.loggerService.log(Tlog.error, 'chartData is not an array.');

@@ -87,4 +87,15 @@
         const r = (averageLoss != 0) ? Math.abs((averageGain + averageBe) / averageLoss) : 0;
         return Math.round(r * 100) / 100;
       }
+
+            // Calcula el ratio R
+            public calculateWinLossRatio(): number {
+                const winProbability = this.getWinProbability();
+                const lossProbability = this.getLossProbability();
+                const beProbability = this.getBEProbability();
+                const r = (lossProbability != 0) ? Math.abs((winProbability) / lossProbability) : 0;
+                return Math.round(r * 100) / 100;
+              }
+
+
     }  
