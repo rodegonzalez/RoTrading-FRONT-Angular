@@ -154,8 +154,8 @@ export class ReportMainComponent implements OnInit {
   // ----------------------------
   // Charts
   showCharts(_data: IDataTable) {
-    this.loggerService.log(Tlog.info, "showCharts _data=");
-    this.loggerService.log(Tlog.info, _data);
+    //this.loggerService.log(Tlog.info, "showCharts _data=");
+    //this.loggerService.log(Tlog.info, _data);
 
     this.positionsData_operations(_data.summarize);
     //this.showCharts_PositionsData_blocks(_data);
@@ -164,14 +164,14 @@ export class ReportMainComponent implements OnInit {
   }
 
   positionsData_operations(_data: any) {
-    this.loggerService.log(Tlog.info, "positionsData_operations _data=");
-    this.loggerService.log(Tlog.info, _data.positionsData_operations);
+    //this.loggerService.log(Tlog.info, "positionsData_operations _data=");
+    //this.loggerService.log(Tlog.info, _data.positionsData_operations);
     this.showChart("myreportChart_operations_bar", _data.positionsData_operations, 'bar' as ChartType);  
   }
 
   showCharts_PositionsData_blocks(_data: any) {
-    this.loggerService.log(Tlog.info, "showCharts_PositionsData_blocks _data=");
-    this.loggerService.log(Tlog.info, _data.summarize.positionsData_blocks);
+    //this.loggerService.log(Tlog.info, "showCharts_PositionsData_blocks _data=");
+    //this.loggerService.log(Tlog.info, _data.summarize.positionsData_blocks);
     //this.showChart("myreportChart_PositionsData_blocks", _data.summarize.positionsData_blocks, 'bar' as ChartType);
   }
   positionsData_ticks() {
@@ -180,8 +180,8 @@ export class ReportMainComponent implements OnInit {
       chartData: [Math.abs(Number(this.profit_total_ticks)), Math.abs(Number(this.loss_total_ticks)) , Math.abs(Number(this.be_total_ticks))]
     };
     
-    this.loggerService.log(Tlog.info, "positionsData_ticks _data=");
-    this.loggerService.log(Tlog.info, data);
+    //this.loggerService.log(Tlog.info, "positionsData_ticks _data=");
+    //this.loggerService.log(Tlog.info, data);
     this.showChartColored("myreportChart_ticks_pie", data, 'pie' as ChartType);
   }
   positionsData_posneg() {
@@ -190,18 +190,43 @@ export class ReportMainComponent implements OnInit {
       chartData: [Math.abs(Number(this.profit_num)), Math.abs(Number(this.loss_num)) , Math.abs(Number(this.be_num))]
     };
 
-    this.loggerService.log(Tlog.info, "positionsData_posneg _data=");
-    this.loggerService.log(Tlog.info, data);
+    //this.loggerService.log(Tlog.info, "positionsData_posneg _data=");
+    //this.loggerService.log(Tlog.info, data);
     this.showChartColored("myreportChart_posneg_pie", data, 'doughnut' as ChartType);
   
   }
 
-  showChart( _canvasId: string, _data: any, _type: ChartType) {     
 
-    this.loggerService.log(Tlog.info, "showChart _labels=");
-    this.loggerService.log(Tlog.info, _data.chartLabels);
-    this.loggerService.log(Tlog.info, "showChart _data=");
-    this.loggerService.log(Tlog.info, _data.chartData);
+
+
+  private charts: { [key: string]: Chart } = {}; // Almacena los gráficos por ID de canvas
+  DeleteChart(_canvasId: string) {
+    const canvas = document.getElementById(_canvasId) as HTMLCanvasElement;
+    if (!canvas) {
+      console.error(`Canvas with ID ${_canvasId} not found.`);
+      return;
+    }
+
+    // Destruir el gráfico existente si ya existe
+    if (this.charts[_canvasId]) {
+      this.charts[_canvasId].destroy();
+      delete this.charts[_canvasId]; // Eliminar la referencia del objeto charts
+    }
+
+    // Limpiar el canvas
+    const context = canvas.getContext('2d');
+    if (context) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  showChart( _canvasId: string, _data: any, _type: ChartType) {     
+    this.DeleteChart(_canvasId);
+
+    //this.loggerService.log(Tlog.info, "showChart _labels=");
+    //this.loggerService.log(Tlog.info, _data.chartLabels);
+    //this.loggerService.log(Tlog.info, "showChart _data=");
+    //this.loggerService.log(Tlog.info, _data.chartData);
 
     const data = {
       labels: _data.chartLabels,
@@ -211,23 +236,15 @@ export class ReportMainComponent implements OnInit {
         backgroundColor: _data.chartData.map((value: number) => value > 0 ? 'lightgreen' : 'rgba(255, 99, 132, 0.7)'), // Verde para valores > 0, rojo sangre para valores < 0
         borderColor: _data.chartData.map((value: number) => value >= 0 ? 'green' : 'red'), // Verde para valores > 0, rojo sangre para valores < 0
         borderWidth: 1,
-
-        /*
-        backgroundColor: [
-          'rgba(0, 0, 200, 1.0)'
-        ],
-        borderColor: [
-          'blue'
-        ],
-        */
       }]
     };
 
     const config = {
-      //type: 'pie' as const  , // Provide a valid ChartType here, such as 'bar', 'line', 'pie', etc.
       type: _type  , // Provide a valid ChartType here, such as 'bar', 'line', 'pie', 'doughnut'etc.
       data: data,
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: false
@@ -236,6 +253,8 @@ export class ReportMainComponent implements OnInit {
       },
     };
 
+
+    /*
     const chartElement = document.getElementById(_canvasId) as HTMLCanvasElement;
     if (chartElement) {
       const myChart = new Chart(chartElement, config);
@@ -243,16 +262,35 @@ export class ReportMainComponent implements OnInit {
     } else {
       this.loggerService.log(Tlog.error, "Elemento con ID 'myreportChart_operations' no encontrado.");
     }
+    */
+
+    const canvas = document.getElementById(_canvasId) as HTMLCanvasElement;
+    if (!canvas) {
+      console.error(`Canvas with ID ${_canvasId} not found.`);
+      return;
+    }
+    // Crear un nuevo gráfico
+    this.charts[_canvasId] = new Chart(canvas, {
+      type: _type,
+      data: data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+
 
   }
 
   // Designd for profit/loss/BreakEven charts: only 3 values IN THIS ORDER! for green, red, brown colors, no axis
   showChartColored( _canvasId: string, _data: any, _type: ChartType) {     
+    this.DeleteChart(_canvasId);
 
-    this.loggerService.log(Tlog.info, "showChart _labels=");
-    this.loggerService.log(Tlog.info, _data.chartLabels);
-    this.loggerService.log(Tlog.info, "showChart _data=");
-    this.loggerService.log(Tlog.info, _data.chartData);
+    //this.loggerService.log(Tlog.info, "showChart _labels=");
+    //this.loggerService.log(Tlog.info, _data.chartLabels);
+    //this.loggerService.log(Tlog.info, "showChart _data=");
+    //this.loggerService.log(Tlog.info, _data.chartData);
 
     const data = {
       labels: _data.chartLabels,
@@ -269,10 +307,11 @@ export class ReportMainComponent implements OnInit {
     };
 
     const config = {
-      //type: 'pie' as const  , // Provide a valid ChartType here, such as 'bar', 'line', 'pie', etc.
       type: _type  , // Provide a valid ChartType here, such as 'bar', 'line', 'pie', 'doughnut'etc.
       data: data,
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: true // Mostrar la leyenda del gráfico
@@ -289,6 +328,7 @@ export class ReportMainComponent implements OnInit {
       },
     };
 
+    /*
     const chartElement = document.getElementById(_canvasId) as HTMLCanvasElement;
     if (chartElement) {
       const myChart = new Chart(chartElement, config);
@@ -296,6 +336,23 @@ export class ReportMainComponent implements OnInit {
     } else {
       this.loggerService.log(Tlog.error, "Elemento con ID 'myreportChart_operations' no encontrado.");
     }
+    */
+    
+    const canvas = document.getElementById(_canvasId) as HTMLCanvasElement;
+    if (!canvas) {
+      console.error(`Canvas with ID ${_canvasId} not found.`);
+      return;
+    }
+    // Crear un nuevo gráfico
+    this.charts[_canvasId] = new Chart(canvas, {
+      type: _type,
+      data: data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
 
   }
 
