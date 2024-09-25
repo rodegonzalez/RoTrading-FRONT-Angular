@@ -1,17 +1,16 @@
 <div class="card-deck ">
     <form (submit)="onSubmit($event)">
     <div class="card mb-2 h-100 block">
+
         <div class="card-header">
             <h6 class="card-title">Informes</h6>             
         </div>
 
         <div class="card-body">           
-
             <div class="row">
 
                 <div class="col-4">
                    
-
                             <div class="form-group">
                                 Cuenta: <select name="Accountid" class="form-control" [(ngModel)]="formData.Accountid" >
                                     <option value="0" selected>Todos</option>
@@ -28,21 +27,12 @@
                                 </select>
                             </div>                              
        
-
-
-
-
-
-
-
                 </div>
                 <div class="col-4">
 
-
                     <div class="row">
                         <div class="col-6">
-                            <div>
-                                
+                            <div>                                
                                 <div class="form-group">
                                     Pattern1id: <select name="Pattern1id" class="form-control" [(ngModel)]="formData.Pattern1id" >
                                         <option value="0" selected>Todos</option>
@@ -59,7 +49,6 @@
                                         <option value="Cont">Continuacion</option>
                                     </select>
                                 </div>  
-
                             </div>  
                         </div>
                         <div class="col-6">
@@ -83,8 +72,6 @@
                             </div>  
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="col-4">
@@ -95,21 +82,13 @@
                             <option value="sell">Sell</option>
                         </select>
                     </div>  
-
                 </div>
-
             </div>
-
-
         </div>
 
         <div class="card-footer">
-            <button class="btn btn-info mx-2" (click)="getDataTest()">Local Test</button>       
-            <button class="btn btn-info mx-2" (click)="getData_getPositions()">HTTP Test</button>  
-            <button class="btn btn-info mx-2" (click)="getData_getPositionsSearch()">Search Test</button>  
-            <button class="btn btn-success mx-2" type="submit">Search Submit</button>  
+            <button class="btn btn-success mx-2" type="submit">Buscar</button>  
         </div>
-
 
     </div>
 </form>
@@ -138,8 +117,6 @@
 <!-- ------------------------------------------------------------------------------ -->
 <!-- ------------------------------------------------------------------------------ -->
 
-
-
 <div class="card-deck">
     <div class="card mb-2 h-100 block border-black">
         <div class="card-header bg-warning text-white">
@@ -155,31 +132,23 @@
                         </div>                         
                     </div>
 
-                    <div class="col-2 align-self-start">
-                        
+                    <div class="col-2 align-self-start">                        
                         <div class="chart-container h-100" >
                             <canvas id="myreportChart_ticks_pie"></canvas>
-                        </div>     
-                        
-                       
+                        </div>                                                 
                     </div>
 
                     <div class="col-2 mt-auto align-self-center">
                         <div class="chart-container h-100" >
                             <canvas id="myreportChart_posneg_pie"></canvas>
                         </div>
-
                     </div>
 
                     <div class="col-3"> <!-- -------------------------    STATS   ------------------------------------------------------------------- -->
                         <div class="card-deck">
-                            <div class="card mb-2 h-100 block">
-                        
-                                    <div class="card-body">           
-                                       
-  
+                            <div class="card mb-2 h-100 block">    
 
-
+                                    <div class="card-body">                                                    
                                                                                 
                                                                                 <div class="row"> <!-- -------------------------- -->
                                                                                     <div class="col-4"> <!-- nombre  -->
@@ -324,7 +293,6 @@
                                                                                 </div>    
 
                                          
-
                                     </div>
                                     
                                     <div class="card mb-2 h-100 block border-secondary">
@@ -360,17 +328,9 @@
                                 </div>
                             </div>
                     </div>
-            </div>
-
-
                 </div>
-             
 
-
-            </div>  
-    </div>
-
-<!-- ------------------------------------------------------------------------------ -->
-<!-- ------------------------------------------------------------------------------ -->
-
-
+            
+            </div>                 
+        </div>  
+</div>

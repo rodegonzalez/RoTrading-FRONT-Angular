@@ -12,9 +12,9 @@ import { SearchOptions } from 'datatables.net';
 })
 export class ReportsService {
 
-    constructor(private http:HttpClient
-        , private loggerService: LoggerService) { }
+    constructor(private http:HttpClient, private loggerService: LoggerService) { }
 
+    /*
     getPositionsTest(): IDataTable {
         let tableColumns = [
             { title: 'Nombre', data: 'name' },
@@ -95,6 +95,7 @@ export class ReportsService {
             })
         );        
     }
+    */
 
     getPositionsSearch(formData: any): Observable<IDataTable> {
         formData.Accountid = Number(formData.Accountid);

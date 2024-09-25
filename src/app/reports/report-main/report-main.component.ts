@@ -35,7 +35,6 @@ export class ReportMainComponent implements OnInit {
   Ratio_R = 0;
   esperanza_matematica = 0;
 
-
   profit_num: number = 0;
   profit_total_ticks: number = 0;
   profit_media_ticks: number = 0;
@@ -56,6 +55,8 @@ export class ReportMainComponent implements OnInit {
   be_num_percent_display : number = 0;
   totalPercent_display : number = 0;
   
+  ratioProfitLoss: number = 0;
+
   constructor(
     private loggerService: LoggerService,
     private reportService: ReportsService) { 
@@ -70,58 +71,28 @@ export class ReportMainComponent implements OnInit {
     $(this.defaultDataTable.nativeElement).DataTable();
   }
 
-  getDataTest() {
-    const data: IDataTable = this.reportService.getPositionsTest();
-    this.showDataTable("tableTest", data);
-  }
+/*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
 
-  getData_getPositions() {
-    this.reportService.getPositions().subscribe(data => {
-      this.showDataTable("tableReports", data as IDataTable);
-    });
-  }
+// Buttons
 
-  getData_getPositionsSearchTest() {
-    this.reportService.getPositionsSearchTest().subscribe(data => {
-      this.showDataTable("tableReports", data as IDataTable);
-    });
-  }
-
-  getData_getPositionsSearch() {
-    this.reportService.getPositionsSearch(null).subscribe(data => {
-      this.showDataTable("tableReports", data as IDataTable);
-    });
-  }
-  
   onSubmit(event: Event): void {
     event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-    //this.loggerService.log(Tlog.info, 'onSubmit: formData:');
-    //this.loggerService.log(Tlog.info, this.formData);
     this.reportService.getPositionsSearch(this.formData).subscribe(data => {
 
-      this.loggerService.log(Tlog.info, 'onSubmit: data returned:');
-      this.loggerService.log(Tlog.info, data);
-
-
-
       /*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
-      /*  ==============  *//*  ==============  */
-      /*  ==============  *//*  ==============  */
 
       this.showDataTable("tableReports", data as IDataTable);
       this.showStats(data as IDataTable);
       this.showCharts(data as IDataTable);
       
-      /*  ==============  *//*  ==============  */
-      /*  ==============  *//*  ==============  */
       /*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
-
 
     });
   }
 
-  // ----------------------------
-  //-----------------------------
+/*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
+
+// DataTables
 
   getTableContainer() {
     return this.myTable.nativeElement;
@@ -151,53 +122,35 @@ export class ReportMainComponent implements OnInit {
     });    
   }
 
-  // ----------------------------
-  // Charts
-  showCharts(_data: IDataTable) {
-    //this.loggerService.log(Tlog.info, "showCharts _data=");
-    //this.loggerService.log(Tlog.info, _data);
+/*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
 
+  // Charts
+
+  showCharts(_data: IDataTable) {
     this.positionsData_operations(_data.summarize);
-    //this.showCharts_PositionsData_blocks(_data);
     this.positionsData_ticks();
     this.positionsData_posneg();
   }
 
   positionsData_operations(_data: any) {
-    //this.loggerService.log(Tlog.info, "positionsData_operations _data=");
-    //this.loggerService.log(Tlog.info, _data.positionsData_operations);
     this.showChart("myreportChart_operations_bar", _data.positionsData_operations, 'bar' as ChartType);  
   }
 
-  showCharts_PositionsData_blocks(_data: any) {
-    //this.loggerService.log(Tlog.info, "showCharts_PositionsData_blocks _data=");
-    //this.loggerService.log(Tlog.info, _data.summarize.positionsData_blocks);
-    //this.showChart("myreportChart_PositionsData_blocks", _data.summarize.positionsData_blocks, 'bar' as ChartType);
-  }
   positionsData_ticks() {
     let data = {
       chartLabels: ['ProfitTicks', 'LossTicks', 'BreakEvenTicks'],
       chartData: [Math.abs(Number(this.profit_total_ticks)), Math.abs(Number(this.loss_total_ticks)) , Math.abs(Number(this.be_total_ticks))]
     };
-    
-    //this.loggerService.log(Tlog.info, "positionsData_ticks _data=");
-    //this.loggerService.log(Tlog.info, data);
     this.showChartColored("myreportChart_ticks_pie", data, 'pie' as ChartType);
   }
+  
   positionsData_posneg() {
     let data = {
       chartLabels: ['ProfitTicks', 'LossTicks', 'BreakEvenTicks'],
       chartData: [Math.abs(Number(this.profit_num)), Math.abs(Number(this.loss_num)) , Math.abs(Number(this.be_num))]
     };
-
-    //this.loggerService.log(Tlog.info, "positionsData_posneg _data=");
-    //this.loggerService.log(Tlog.info, data);
-    this.showChartColored("myreportChart_posneg_pie", data, 'doughnut' as ChartType);
-  
+    this.showChartColored("myreportChart_posneg_pie", data, 'doughnut' as ChartType);  
   }
-
-
-
 
   private charts: { [key: string]: Chart } = {}; // Almacena los gráficos por ID de canvas
   DeleteChart(_canvasId: string) {
@@ -222,11 +175,6 @@ export class ReportMainComponent implements OnInit {
 
   showChart( _canvasId: string, _data: any, _type: ChartType) {     
     this.DeleteChart(_canvasId);
-
-    //this.loggerService.log(Tlog.info, "showChart _labels=");
-    //this.loggerService.log(Tlog.info, _data.chartLabels);
-    //this.loggerService.log(Tlog.info, "showChart _data=");
-    //this.loggerService.log(Tlog.info, _data.chartData);
 
     const data = {
       labels: _data.chartLabels,
@@ -253,17 +201,6 @@ export class ReportMainComponent implements OnInit {
       },
     };
 
-
-    /*
-    const chartElement = document.getElementById(_canvasId) as HTMLCanvasElement;
-    if (chartElement) {
-      const myChart = new Chart(chartElement, config);
-      //myChart.resize(0,240);
-    } else {
-      this.loggerService.log(Tlog.error, "Elemento con ID 'myreportChart_operations' no encontrado.");
-    }
-    */
-
     const canvas = document.getElementById(_canvasId) as HTMLCanvasElement;
     if (!canvas) {
       console.error(`Canvas with ID ${_canvasId} not found.`);
@@ -279,18 +216,11 @@ export class ReportMainComponent implements OnInit {
       }
     });
 
-
-
   }
 
   // Designd for profit/loss/BreakEven charts: only 3 values IN THIS ORDER! for green, red, brown colors, no axis
   showChartColored( _canvasId: string, _data: any, _type: ChartType) {     
     this.DeleteChart(_canvasId);
-
-    //this.loggerService.log(Tlog.info, "showChart _labels=");
-    //this.loggerService.log(Tlog.info, _data.chartLabels);
-    //this.loggerService.log(Tlog.info, "showChart _data=");
-    //this.loggerService.log(Tlog.info, _data.chartData);
 
     const data = {
       labels: _data.chartLabels,
@@ -327,16 +257,6 @@ export class ReportMainComponent implements OnInit {
         }
       },
     };
-
-    /*
-    const chartElement = document.getElementById(_canvasId) as HTMLCanvasElement;
-    if (chartElement) {
-      const myChart = new Chart(chartElement, config);
-      //myChart.resize(0,240);
-    } else {
-      this.loggerService.log(Tlog.error, "Elemento con ID 'myreportChart_operations' no encontrado.");
-    }
-    */
     
     const canvas = document.getElementById(_canvasId) as HTMLCanvasElement;
     if (!canvas) {
@@ -353,30 +273,19 @@ export class ReportMainComponent implements OnInit {
       }
     });
 
-
   }
 
+/*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
 
-  ratioProfitLoss: number = 0;
+// Stats
 
-  // ----------------------------
-  // Stats
   showStats(_data: IDataTable) {
     this.showStats_count(_data.summarize);
   }
 
-
-  /* ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
-  /* ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
   showStats_count(_data: any) {
-
-    //this.loggerService.log(Tlog.info, "showStats_count: _data:");
-    this.loggerService.log(Tlog.info, _data);
-
     if (_data.positionsData_operations && Array.isArray(_data.positionsData_operations.chartData)) {
       let data = _data.positionsData_operations.chartData;
-      //this.loggerService.log(Tlog.info, "showStats_count: _data2:");
-      //this.loggerService.log(Tlog.info, data);
 
       this.profit_num = 0;
       this.profit_total_ticks = 0;  
@@ -394,8 +303,6 @@ export class ReportMainComponent implements OnInit {
       this.totalOperations = 0;
       this.Ratio_R = 0;
       this.esperanza_matematica = 0      
-
-
 
       if (Array.isArray(data)) 
         {
@@ -457,7 +364,9 @@ export class ReportMainComponent implements OnInit {
     }
   }
 
-  // ----------------------------
+/*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
+
+// Auxiliar
 
   getChildElementId(parentId: string, childSelector: string): string {
     const parentElement = this.myTable.nativeElement.querySelector('#' + parentId);
@@ -473,7 +382,6 @@ export class ReportMainComponent implements OnInit {
     this.loggerService.log(Tlog.info, "Id="+id);
   } 
 
-  // ----------------------------
-  //-----------------------------
+/*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
 
 } // end class
