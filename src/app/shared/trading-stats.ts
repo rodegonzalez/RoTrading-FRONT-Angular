@@ -44,16 +44,16 @@
       // Calcula la probabilidad de ganar
       public getWinProbability(): number {
         //return this.totalWins / this.totalTrades;
-        return (this.totalTrades != 0) ? Math.abs(this.totalWins / this.totalTrades) : 0;
+        return (this.totalTrades != 0) ? Math.round(Math.abs(this.totalWins / this.totalTrades) * 10000 ) / 10000 : 0 ;
       }
     
       // Calcula la probabilidad de perder
       public getLossProbability(): number {
-        return (this.totalTrades != 0) ? Math.abs(this.totalLosses / this.totalTrades) : 0;
+        return (this.totalTrades != 0) ? Math.round(Math.abs(this.totalLosses / this.totalTrades) * 10000 ) / 10000 : 0 ;
       }
     
       public getBEProbability(): number {
-        return (this.totalTrades != 0) ? Math.abs(this.totalBEnum / this.totalTrades) : 0;
+        return (this.totalTrades != 0) ? Math.round(Math.abs(this.totalBEnum / this.totalTrades) * 10000) / 10000 : 0 ;
       }
 
       public getTotalValue(): number {  
@@ -64,7 +64,7 @@
         const winProbability = this.getWinProbability();
         const lossProbability = this.getLossProbability();
         const beProbability = this.getBEProbability();
-        return winProbability + lossProbability + beProbability;
+        return Math.round(winProbability + lossProbability + beProbability) * 10000 / 10000;
       }
 
       // Calcula la esperanza matemática
