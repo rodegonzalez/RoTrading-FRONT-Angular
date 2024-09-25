@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoggerService, Tlog } from '../../services/logger.service';
 import { ReportsService } from '../../services/reports.service';
 import 'datatables.net';
-import { IDataTable } from 'src/app/interfaces/IDataTable.interface';
+import { IDataTable } from '../../interfaces/IDataTable.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
+import { TradingStats } from '../../shared/trading-stats';
 
 @Component({
   selector: 'app-report-main',
@@ -27,18 +28,12 @@ export class ReportMainComponent implements OnInit {
   };
 
   totalOperations: number = 0;
-  totalOperations_positive: number = 0;
-  totalOperations_positive_ticks: number = 0;
-  totalOperations_positive_ticks_percentage: number = 0;
-  total_positive_ticks: number = 0;
+  totalPercent: number = 0;
+  totalValue: number = 0;
+  totalMedia: number = 0;
 
-  totalOperations_negative: number = 0;
-  totalOperations_negative_ticks: number = 0;  
-  totalOperations_negative_ticks_percentage: number = 0;  
-  total_negative_ticks: number = 0;
-
-  R = 0;
-  esperanza = 0;
+  Ratio_R = 0;
+  esperanza_matematica = 0;
 
 
   profit_num: number = 0;
@@ -56,8 +51,10 @@ export class ReportMainComponent implements OnInit {
   be_media_ticks: number = 0;
   be_num_percent : number = 0;
 
-  
-  
+  profit_num_percent_display : number = 0;
+  loss_num_percent_display : number = 0;
+  be_num_percent_display : number = 0;
+  totalPercent_display : number = 0;
   
   constructor(
     private loggerService: LoggerService,
@@ -169,7 +166,7 @@ export class ReportMainComponent implements OnInit {
   positionsData_operations(_data: any) {
     this.loggerService.log(Tlog.info, "positionsData_operations _data=");
     this.loggerService.log(Tlog.info, _data.positionsData_operations);
-    this.showChart("myreportChart_operations", _data.positionsData_operations, 'bar' as ChartType);  
+    this.showChart("myreportChart_operations_bar", _data.positionsData_operations, 'bar' as ChartType);  
   }
 
   showCharts_PositionsData_blocks(_data: any) {
@@ -211,8 +208,8 @@ export class ReportMainComponent implements OnInit {
       datasets: [{
         label: 'Operaciones realizadas',
         data: _data.chartData,
-        backgroundColor: _data.chartData.map((value: number) => value > 0 ? 'rgba(0, 128, 0, 1.0)' : 'rgba(139, 0, 0, 1.0)'), // Verde para valores > 0, rojo sangre para valores < 0
-        borderColor: _data.chartData.map((value: number) => value > 0 ? 'rgba(0, 128, 0, 1.0)' : 'rgba(139, 0, 0, 1.0)'), // Verde para valores > 0, rojo sangre para valores < 0
+        backgroundColor: _data.chartData.map((value: number) => value > 0 ? 'lightgreen' : 'rgba(255, 99, 132, 0.7)'), // Verde para valores > 0, rojo sangre para valores < 0
+        borderColor: _data.chartData.map((value: number) => value >= 0 ? 'green' : 'red'), // Verde para valores > 0, rojo sangre para valores < 0
         borderWidth: 1,
 
         /*
@@ -308,12 +305,6 @@ export class ReportMainComponent implements OnInit {
   // ----------------------------
   // Stats
   showStats(_data: IDataTable) {
-    //this.loggerService.log(Tlog.info, "tableData.length=");
-    //this.loggerService.log(Tlog.info, _data.tableData.length);
-
-   
-  
-
     this.showStats_count(_data.summarize);
   }
 
@@ -322,15 +313,13 @@ export class ReportMainComponent implements OnInit {
   /* ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
   showStats_count(_data: any) {
 
-    this.loggerService.log(Tlog.info, "showStats_count: _data:");
+    //this.loggerService.log(Tlog.info, "showStats_count: _data:");
     this.loggerService.log(Tlog.info, _data);
 
-    //let data = _data.positionData_operations.chartData;
-    //let data = _data[0].summarize;
     if (_data.positionsData_operations && Array.isArray(_data.positionsData_operations.chartData)) {
       let data = _data.positionsData_operations.chartData;
-      this.loggerService.log(Tlog.info, "showStats_count: _data2:");
-      this.loggerService.log(Tlog.info, data);
+      //this.loggerService.log(Tlog.info, "showStats_count: _data2:");
+      //this.loggerService.log(Tlog.info, data);
 
       this.profit_num = 0;
       this.profit_total_ticks = 0;  
@@ -346,35 +335,62 @@ export class ReportMainComponent implements OnInit {
       this.be_num_percent = 0;
 
       this.totalOperations = 0;
-      this.R = 0;
-      this.esperanza = 0
-      
-      if (Array.isArray(data)) {
+      this.Ratio_R = 0;
+      this.esperanza_matematica = 0      
+
+
+
+      if (Array.isArray(data)) 
+        {
         data.forEach((value, index) => {
-          //this.loggerService.log(Tlog.info, `Processing value at index ${index}: ${value}`);
-          if (typeof value === 'number') {
-            this.totalOperations += 1;
-            if ((value >= 0) && (value <= 10)) {
-              this.be_total_ticks += value;
-              this.be_num += 1;
-            } else if (value > 10) {
-              this.profit_total_ticks += value;
-              this.profit_num += 1;
-            } else if (value < 0) {
-              this.loss_total_ticks += value;
-              this.loss_num += 1;
-            }
-          } else {
-            this.loggerService.log(Tlog.error, `Value at index ${index} is not a number: ${value}`);
-          }
+                //this.loggerService.log(Tlog.info, `Processing value at index ${index}: ${value}`);
+                if (typeof value === 'number') {
+                  this.totalOperations += 1;
+                  this.totalValue += value;
+                  if ((value >= 0) && (value <= 10)) {
+                    this.be_total_ticks += value;
+                    this.be_num += 1;
+                  } else if (value > 10) {
+                    this.profit_total_ticks += value;
+                    this.profit_num += 1;
+                  } else if (value < 0) {
+                    this.loss_total_ticks += value;
+                    this.loss_num += 1;
+                  }
+                } else {
+                  this.loggerService.log(Tlog.error, `Value at index ${index} is not a number: ${value}`);
+                }
         });
 
-        this.profit_num_percent = (this.profit_num / this.totalOperations) * 100;
-        this.loss_num_percent = (this.loss_num / this.totalOperations) * 100;
-        this.be_num_percent = (this.be_num / this.totalOperations) * 100;
+        const stats = new TradingStats(
+            this.totalOperations, 
+            this.profit_num, 
+            this.loss_num, 
+            this.profit_total_ticks, 
+            this.loss_total_ticks,
+            this.be_num,
+            this.be_total_ticks);
 
-        this.loggerService.log(Tlog.info, `Profit Num, Total Ticks: ${this.profit_num} , ${this.profit_total_ticks}`);
-        this.loggerService.log(Tlog.info, `Loss Num, Total Ticks: ${this.loss_num} , ${this.loss_total_ticks}`);
+        this.profit_media_ticks = stats.getAverageGain();
+        this.loss_media_ticks =  stats.getAverageLoss();
+        this.be_media_ticks = stats.getAverageBE();
+        this.totalMedia = stats.getAverageTotal();
+
+        this.profit_num_percent = stats.getWinProbability();
+        this.loss_num_percent = stats.getLossProbability();
+        this.be_num_percent = stats.getBEProbability();
+
+        this.totalPercent = stats.getTotalProbability();
+        this.totalValue = stats.getTotalValue();
+
+        this.profit_num_percent_display = this.profit_num_percent * 100;
+        this.loss_num_percent_display = this.loss_num_percent * 100;
+        this.be_num_percent_display = this.be_num_percent * 100;
+        this.totalPercent_display = this.totalPercent * 100;
+
+        this.Ratio_R = stats.calculateRRatio();
+        this.esperanza_matematica = stats.calculateExpectancy();
+
       } else {
         this.loggerService.log(Tlog.error, 'chartData is not an array.');
       }
