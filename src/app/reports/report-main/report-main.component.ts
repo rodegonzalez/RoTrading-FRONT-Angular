@@ -35,7 +35,7 @@ export class ReportMainComponent implements OnInit {
   Ratio_R = 0;
   esperanza_matematica = 0;
   Ratio_WinLoss : number = 0;
-  
+
   profit_num: number = 0;
   profit_total_ticks: number = 0;
   profit_media_ticks: number = 0;
@@ -216,6 +216,7 @@ export class ReportMainComponent implements OnInit {
         maintainAspectRatio: false
       }
     });
+    this.charts[_canvasId].resize(200,200);
 
   }
 
@@ -273,6 +274,7 @@ export class ReportMainComponent implements OnInit {
         maintainAspectRatio: false
       }
     });
+    this.charts[_canvasId].resize(200,200);
 
   }
 
