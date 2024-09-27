@@ -1,8 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoggerService, Tlog } from '../../services/logger.service';
 import { ReportsService } from '../../services/reports.service';
+import { AccountsService } from '../../services/accounts.service';
+import { PositionHighPatternsService } from '../../services/position_patterns.service';
+import { PositionSetupsService } from '../../services/position_setups.service';
+import { TickerService } from '../../services/ticker.service';
 import 'datatables.net';
 import { IDataTable } from '../../interfaces/IDataTable.interface';
+import { IAccount } from '../../interfaces/IAccount.interface';
+import { ITicker } from '../../interfaces/ITicker.interface';
+import { IPositionHighPattern } from '../../interfaces/IPositionPattern.interface';
+import { IPositionSetup } from '../../interfaces/IPositionSetup.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
 import { TradingStats } from '../../shared/trading-stats';
 
@@ -58,15 +66,43 @@ export class ReportMainComponent implements OnInit {
   
   ratioProfitLoss: number = 0;
 
+  accounts: IAccount[] = [];
+  tickers: ITicker[] = [];
+  hpatterns: IPositionHighPattern[] = [];
+  setups: IPositionSetup[] = [];
+
   constructor(
     private loggerService: LoggerService,
-    private reportService: ReportsService) { 
+    private reportService: ReportsService,
+    private accountService: AccountsService,
+    private tickerService: TickerService,
+    private positionHighPatternsService: PositionHighPatternsService,
+    private positionSetupsService: PositionSetupsService) { 
   }
 
   ngOnInit(): void {
      // Registrar todos los componentes necesarios de chart.js
      Chart.register(...registerables);
-  }
+
+     // get data for search
+      this.accountService.getAll().subscribe((data: IAccount[]) => {
+        //this.loggerService.log(Tlog.info, data);
+        this.accounts = data;
+      });
+      this.tickerService.getAll().subscribe((data: ITicker[]) => {
+        //this.loggerService.log(Tlog.info, data);
+        this.tickers = data;
+      });
+      this.positionHighPatternsService.getAll().subscribe((data: IPositionHighPattern[]) => {
+        //this.loggerService.log(Tlog.info, data);
+        this.hpatterns = data;
+      });
+      this.positionSetupsService.getAll().subscribe((data: IPositionSetup[]) => {
+        //this.loggerService.log(Tlog.info, data);
+        this.setups = data;
+      });
+
+    }
 
   ngAfterViewInit(): void {
     $(this.defaultDataTable.nativeElement).DataTable();
@@ -76,12 +112,20 @@ export class ReportMainComponent implements OnInit {
 
 // Buttons
 
+  getPositionsTest() {
+    const data: IDataTable = this.reportService.getPositionsTest();
+    //this.loggerService.log(Tlog.info, data);
+    this.showDataTable("tableReports", data as IDataTable);
+    this.showStats(data as IDataTable);
+    this.showCharts(data as IDataTable);
+  }
+
   onSubmit(event: Event): void {
     event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
     this.reportService.getPositionsSearch(this.formData).subscribe(data => {
 
       /*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
-
+      //this.loggerService.log(Tlog.info, data);
       this.showDataTable("tableReports", data as IDataTable);
       this.showStats(data as IDataTable);
       this.showCharts(data as IDataTable);

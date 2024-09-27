@@ -14,7 +14,7 @@ export class ReportsService {
 
     constructor(private http:HttpClient, private loggerService: LoggerService) { }
 
-    /*
+
     getPositionsTest(): IDataTable {
         let tableColumns = [
             { title: 'Nombre', data: 'name' },
@@ -57,9 +57,10 @@ export class ReportsService {
             { name: 'Anaxímenes', position: 'Jardinero', office: 'Mileto', age: 61, startDate: '2011/04/25', salary: '480€' },
         ];
 
-        return {tableColumns, tableData} as IDataTable
+        return {tableColumns, tableData} as IDataTable;
     }
     
+    /*
     getPositions(): Observable<IDataTable>{
         return this.http.get(environment.APIUri + '/reports/getPositions')
         .pipe(

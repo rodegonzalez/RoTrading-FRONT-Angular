@@ -14,6 +14,8 @@ export interface ISummarize
 
 export interface ISearchOptions{
     Sessionid: string,
+    Sessionidfrom: string,
+    Sessionidto: string,
     Accountid: number,
     Tickerid: number,
     Pattern1id: number,

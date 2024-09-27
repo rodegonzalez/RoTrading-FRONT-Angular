@@ -14,26 +14,36 @@
 
                                                 <div class="row"><!-- Buscador -->
 
-                                                    <div class="col-4">
+                                                    <div class="col-3">
+                                                    
+                                                        <div class="form-group">
+                                                            SessID desde (yyyymmdd): <input disabled name="Sessionidfrom" [(ngModel)]="formData.Sessionidfrom"  type="text" class="form-control">
+                                                        </div>  
+
+                                                        <div class="form-group">
+                                                            SessID hasta (yyyymmdd):<input disabled name="Sessionidto" [(ngModel)]="formData.Sessionidto"  type="text" class="form-control">
+                                                        </div>                              
+                                
+                                            </div>
+
+                                                    <div class="col-3">
                                                     
                                                                 <div class="form-group">
                                                                     Cuenta: <select name="Accountid" class="form-control" [(ngModel)]="formData.Accountid" >
-                                                                        <option value="0" selected>Todos</option>
-                                                                        <option value="1" >Acc1</option>
-                                                                        <option value="2" >Acc2</option>
+                                                                        <option value="0" selected>Todos</option>                                                                       
+                                                                        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
                                                                     </select>
                                                                 </div>  
 
                                                                 <div class="form-group">
                                                                     Ticker: <select name="Tickerid" class="form-control" [(ngModel)]="formData.Tickerid" >
-                                                                        <option value="0" selected>Todos</option>
-                                                                        <option value="1" >MCL</option>
-                                                                        <option value="2" >CL</option>
+                                                                        <option value="0" selected>Todos</option>   
+                                                                        <option *ngFor="let ticker of tickers" [value]="ticker.id">{{ ticker.name }}</option>
                                                                     </select>
                                                                 </div>                              
                                         
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-3">
 
                                                         <div class="row">
                                                             <div class="col-6">
@@ -41,9 +51,7 @@
                                                                     <div class="form-group">
                                                                         Pattern1id: <select name="Pattern1id" class="form-control" [(ngModel)]="formData.Pattern1id" >
                                                                             <option value="0" selected>Todos</option>
-                                                                            <option value="1">ATipo1xxx</option>
-                                                                            <option value="2">ATipo2xxx</option>
-                                                                            <option value="3">BTipo1xxx</option>
+                                                                            <option *ngFor="let hpattern of hpatterns" [value]="hpattern.id">{{ hpattern.name }}</option>
                                                                         </select>
                                                                     </div>  
                                                                     <div  class="form-group">
@@ -69,9 +77,7 @@
                                                                         <div class="form-group">
                                                                             Setup2id: <select name="Setup2id" class="form-control" [(ngModel)]="formData.Setup2id" >
                                                                                 <option value="0" selected>Todos</option>
-                                                                                <option value="1">ATipo1xx</option>
-                                                                                <option value="2">ATipo2xx</option>
-                                                                                <option value="3">BTipo1xx</option>
+                                                                                <option *ngFor="let setup of setups" [value]="setup.id">{{ setup.name }}</option>
                                                                             </select>
                                                                         </div>  
                                                                 </div>  
@@ -79,14 +85,23 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-4">
+                                                    <div class="col-3">
                                                         <div>
                                                             BuySell: <select name="Buysell" class="form-control" [(ngModel)]="formData.Buysell" >
-                                                                <option value="not-set">Todos</option>
-                                                                <option value="buy" selected>Buy</option>
+                                                                <option value="not-set" selected>Todos</option>
+                                                                <option value="buy" >Buy</option>
                                                                 <option value="sell">Sell</option>
                                                             </select>
                                                         </div>  
+
+                                                        <div>
+                                                            WinLoss: <select name="WinLoss" class="form-control" [(ngModel)]="formData.WinLoss" >
+                                                                <option value="not-set" selected>Todos</option>
+                                                                <option value="win">Win</option>
+                                                                <option value="loss">Loss</option>
+                                                            </select>
+                                                        </div>  
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,6 +111,7 @@
                                                                 <div class="col-6">
                                                                 </div>
                                                                 <div class="col-6 text-end ">
+                                                                    <button class="btn btn-success mx-2 block h-100" type="button" (click)="getPositionsTest()">Test</button>  
                                                                     <button class="btn btn-success mx-2 block h-100" type="submit">Buscar</button>  
                                                                 </div>
                                                             </div>
