@@ -88,4 +88,9 @@ export class PositionsService {
         return this.http.put(uri, formdata);
     }
 
+    closePositionForm(formdata: any, id: number): any{
+        let uri = environment.APIUri +"/position-close/" + id;
+        return this.http.put(uri, formdata);
+    }
+
 } // end class

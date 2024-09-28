@@ -31,8 +31,7 @@ import { ISession } from 'src/app/interfaces/ISession.interface';
 @Component({
   selector: 'app-position-edit',
   templateUrl: './position-edit.component.html',
-  styles: [
-  ]
+  styleUrls: ['./position-edit.component.css']
 })
 
 // --------------------------------------------------------------
@@ -80,6 +79,12 @@ export class PositionEditComponent {
   };
 
    // --------------------------------------------------------------
+  
+   showError_hpattern: boolean = false;
+   showError_pattern: boolean = false;
+   showError_temporality: boolean = false;
+   showError_setup: boolean = false;
+
    // --------------------------------------------------------------
 
   constructor(private positionsService: PositionsService
@@ -395,12 +400,30 @@ export class PositionEditComponent {
     }
   }
 
+  async closeOperation(){
+    try {
+      await firstValueFrom(this.positionsService.closePositionForm(this.formdata, this.formdata.id));
+      // Navegar después de que la actualización se complete
+      await this.router.navigateByUrl('/', { skipLocationChange: true });
+      await this.router.navigate(['/positions']);
+    } catch (e) {
+      this.loggerService.log(Tlog.error, "closeOperation error:");
+      this.loggerService.log(Tlog.error, e);
+    }
+  }
+
   // --------------------------------------------------------------
   // Validation
   // --------------------------------------------------------------
 
   validate(){
     let errors = [];
+
+    // reset
+    this.showError_hpattern = false;
+    this.showError_pattern = false;
+    this.showError_temporality = false;
+    this.showError_setup = false;
 
     if (this.formdata.contracts == 0){
       errors.push("Contracts is required");
@@ -410,18 +433,22 @@ export class PositionEditComponent {
     }
     const selectedHighPatternValue = this.selectHighPattern.nativeElement.value;
     if (selectedHighPatternValue == "0"){
+      this.showError_hpattern = true;
       errors.push("High pattern is required");
     }
     const selectedPatternValue = this.selectPattern.nativeElement.value;
     if (selectedPatternValue == "0"){
+      this.showError_pattern = true;
       errors.push("Pattern is required");
     }
     const selectedSetupTemporalityValue = this.selectSetupTemporality.nativeElement.value; 
     if (selectedSetupTemporalityValue == "0"){
+      this.showError_temporality = true;
       errors.push("Setup temporality is required");
     }
     const selectedSetupValue = this.selectSetup.nativeElement.value; 
     if (selectedSetupValue.toLowerCase() == "0"){
+      this.showError_setup = true;
       errors.push("Setup is required");
     }
 

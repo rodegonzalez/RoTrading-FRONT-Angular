@@ -288,6 +288,9 @@
                                                   <option value="0" selected>Not-set</option>
                                                   <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.id">{{ highpattern.name }}</option>                                                         
                                                 </select>
+                                                <div *ngIf="showError_hpattern" class="error-message">
+                                                  Por favor, seleccione un valor.
+                                                </div>
                                               </div>
                                       </div>
                                       
@@ -299,6 +302,9 @@
                                                     <option value="Cont" >Cont</option>
                                                     <option value="Fac" >Facilidad</option>                                                               
                                                   </select>
+                                                  <div *ngIf="showError_pattern" class="error-message">
+                                                    Por favor, seleccione un valor.
+                                                  </div>
                                               </div>
                                       </div>
                               </div>  
@@ -315,6 +321,9 @@
                                                   <option value="m3">m3</option>
                                                   <option value="m5">m5</option>                                                    
                                                 </select>  
+                                                <div *ngIf="showError_temporality" class="error-message">
+                                                  Por favor, seleccione un valor.
+                                                </div>
                                             
                                       </div>
 
@@ -324,6 +333,9 @@
                                                   <option value="0" selected>Not-set</option>
                                                   <option *ngFor="let setup of positionSetups" [value]="setup.id">{{ setup.name }}</option>                                                     
                                                 </select>
+                                                <div *ngIf="showError_setup" class="error-message">
+                                                  Por favor, seleccione un valor.
+                                                </div>
                                             </div>
                                       </div>
                                     </div>   
@@ -357,12 +369,19 @@
               <div class="row">                          
                         <div class="col">
                               <div class="row pt-2">
-                                        <div class="col-6">
+                                        <div class="col">
                                           <div class="form-group d-block w-100 ">
-                                            <button type="submit" class="btn btn-success w-100" >Actualizar y cerrar</button>   
+                                            <button type="submit" class="btn btn-success w-100" >Actualizar</button>   
                                           </div>
                                         </div>
-                                        <div class="col-6">
+
+                                        <div class="col">                                        
+                                          <div class="form-group d-block w-100 ">
+                                            <button type="button" class="btn btn-success w-100" (click)="closeOperation()" >Cerrar</button>   
+                                          </div>
+                                        </div>
+
+                                        <div class="col">
                                                 <div class="form-group  d-block w-100">                                  
                                                   <button type="button" class="btn btn-outline-success w-100" (click)="onSubmit2log()">Submit LOG</button>
                                                 </div>
