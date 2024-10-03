@@ -112,7 +112,11 @@ export class ReportMainComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    $(this.defaultDataTable.nativeElement).DataTable();
+    const table = $(this.defaultDataTable.nativeElement).DataTable();
+     // Configurar el evento de cambio de página para activar los buttons
+     table.on('page.dt', () => {
+      this.activateDynamicButtons();
+    });
   }
 
 /*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
@@ -163,19 +167,17 @@ export class ReportMainComponent implements OnInit {
     tableContainer.innerHTML = `<table id="${id}" class="display" style="width:100%"></table>`;
   }
 
-  activateDynamicButtons() {
-    // activate buttons from back
-    const buttonContainer = this.myTable.nativeElement;
+  // activate buttons from back
+  activateDynamicButtons() {    
+    const buttonContainer = this.getTableContainer();
     if (buttonContainer) {
-      const buttons = buttonContainer.getElementsByTagName('button');
-      for (let i = 0; i < buttons.length; i++) {
-        this.renderer.listen(buttons[i], 'click', (event) => {
-          this.verID(buttons[i].id.replace('button', ''));
-        });
-      }
-    }else{
-      this.loggerService.log(Tlog.error, "buttonContainer defaultDataTable is null. Report butons not activated.");
-    }
+          $(buttonContainer).on('click', 'button', (event) => {
+            const buttonId = (event.target as HTMLElement).id;
+            this.verID(buttonId.replace('button', ''));
+          });
+        } else {
+          this.loggerService.log(Tlog.error, "buttonContainer defaultDataTable is null. Report buttons not activated.");
+        }
   }
 
   showDataTable(id: string, _data: IDataTable) {
