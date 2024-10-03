@@ -55,7 +55,7 @@ import { PositionEditComponent } from './components/op-components/positions/posi
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 
 // Reports
-import { ReportMainComponent } from './reports/report-main/report-main.component'; 
+import { ReportMainComponent } from './components/reports/report-main/report-main.component'; 
 
 /* Routing */
 const routes: Routes = [

@@ -362,30 +362,39 @@ export class PositionEditComponent {
       return;
     }
 
-    const mydate = this.sharedModule.getDateTime();
-    this.formdata.creation = mydate;
-    this.formdata.modification = mydate;
     this.formdata.deleted = 0;
     this.formdata.processed = 0;
     this.formdata.status = "opened";
-    
+
+    const mydate = this.sharedModule.getDateTime();
+    this.formdata.creation = mydate;
+    this.formdata.modification = mydate;
     this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
     this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
-
     // transform to numbers
     this.formdata.pattern1id = Number(this.formdata.pattern1id);
     this.formdata.setup2id = Number(this.formdata.setup2id);
-
-    // finally close the position
-    this.formdata.status = "closed";
-
-    /*
-    this.loggerService.log(Tlog.info, "FORM formdata:");
-    this.loggerService.log(Tlog.info, this.formdata);
-    */
-
     this.updatePosition();
     
+  }
+
+  async closeOperation(){
+      if (!this.validate()){
+        return;
+      }
+
+          // finally close the position
+    this.formdata.status = "closed";
+
+    const mydate = this.sharedModule.getDateTime();
+    this.formdata.modification = mydate;    
+    this.formdata.buysell = this.formdata.buysell.toLowerCase() == "buy" ? 'buy' : 'sell';
+    this.formdata.tppcheck = this.input_tppCheck.nativeElement.checked ? 1 : 0;
+    // transform to numbers
+    this.formdata.pattern1id = Number(this.formdata.pattern1id);
+    this.formdata.setup2id = Number(this.formdata.setup2id);
+    this.updatePosition();
+
   }
 
   async updatePosition() {
@@ -400,17 +409,7 @@ export class PositionEditComponent {
     }
   }
 
-  async closeOperation(){
-    try {
-      await firstValueFrom(this.positionsService.closePositionForm(this.formdata, this.formdata.id));
-      // Navegar después de que la actualización se complete
-      await this.router.navigateByUrl('/', { skipLocationChange: true });
-      await this.router.navigate(['/positions']);
-    } catch (e) {
-      this.loggerService.log(Tlog.error, "closeOperation error:");
-      this.loggerService.log(Tlog.error, e);
-    }
-  }
+
 
   // --------------------------------------------------------------
   // Validation

@@ -86,7 +86,7 @@ import { SharedModule } from './shared/shared.module';
 //import { NumberFormatWithDecimalsPipe } from './shared/number-format-with-decimals.pipe';
 
 // Reports
-import { ReportMainComponent } from './reports/report-main/report-main.component'; 
+import { ReportMainComponent } from './components/reports/report-main/report-main.component'; 
 
 @NgModule({
   declarations: [		

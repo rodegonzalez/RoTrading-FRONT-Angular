@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { LoggerService, Tlog } from '../../services/logger.service';
-import { ReportsService } from '../../services/reports.service';
-import { AccountsService } from '../../services/accounts.service';
-import { PositionHighPatternsService } from '../../services/position_patterns.service';
-import { PositionSetupsService } from '../../services/position_setups.service';
-import { TickerService } from '../../services/ticker.service';
+import { LoggerService, Tlog } from '../../../services/logger.service';
+import { ReportsService } from '../../../services/reports.service';
+import { AccountsService } from '../../../services/accounts.service';
+import { PositionHighPatternsService } from '../../../services/position_patterns.service';
+import { PositionSetupsService } from '../../../services/position_setups.service';
+import { TickerService } from '../../../services/ticker.service';
 import 'datatables.net';
-import { IDataTable } from '../../interfaces/IDataTable.interface';
-import { IAccount } from '../../interfaces/IAccount.interface';
-import { ITicker } from '../../interfaces/ITicker.interface';
-import { IPositionHighPattern } from '../../interfaces/IPositionPattern.interface';
-import { IPositionSetup } from '../../interfaces/IPositionSetup.interface';
+import { IDataTable } from '../../../interfaces/IDataTable.interface';
+import { IAccount } from '../../../interfaces/IAccount.interface';
+import { ITicker } from '../../../interfaces/ITicker.interface';
+import { IPositionHighPattern } from '../../../interfaces/IPositionPattern.interface';
+import { IPositionSetup } from '../../../interfaces/IPositionSetup.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
-import { TradingStats } from '../../shared/trading-stats';
+import { TradingStats } from '../../../shared/trading-stats';
 
 @Component({
   selector: 'app-report-main',
