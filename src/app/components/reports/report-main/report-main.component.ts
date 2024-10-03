@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { LoggerService, Tlog } from '../../../services/logger.service';
 import { ReportsService } from '../../../services/reports.service';
 import { AccountsService } from '../../../services/accounts.service';
@@ -77,14 +77,17 @@ export class ReportMainComponent implements OnInit {
     private accountService: AccountsService,
     private tickerService: TickerService,
     private positionHighPatternsService: PositionHighPatternsService,
-    private positionSetupsService: PositionSetupsService) { 
+    private positionSetupsService: PositionSetupsService,
+    private renderer: Renderer2) { 
   }
 
   ngOnInit(): void {
-     // Registrar todos los componentes necesarios de chart.js
-     Chart.register(...registerables);
+    try {
 
-     // get data for search
+      // Registrar todos los componentes necesarios de chart.js
+      Chart.register(...registerables);
+
+      // get data for search
       this.accountService.getAll().subscribe((data: IAccount[]) => {
         //this.loggerService.log(Tlog.info, data);
         this.accounts = data;
@@ -101,8 +104,12 @@ export class ReportMainComponent implements OnInit {
         //this.loggerService.log(Tlog.info, data);
         this.setups = data;
       });
-
+     
+    } catch (error) {
+      this.loggerService.log(Tlog.error, error);
     }
+
+  }
 
   ngAfterViewInit(): void {
     $(this.defaultDataTable.nativeElement).DataTable();
@@ -156,7 +163,21 @@ export class ReportMainComponent implements OnInit {
     tableContainer.innerHTML = `<table id="${id}" class="display" style="width:100%"></table>`;
   }
 
-  // Table
+  activateDynamicButtons() {
+    // activate buttons from back
+    const buttonContainer = this.myTable.nativeElement;
+    if (buttonContainer) {
+      const buttons = buttonContainer.getElementsByTagName('button');
+      for (let i = 0; i < buttons.length; i++) {
+        this.renderer.listen(buttons[i], 'click', (event) => {
+          this.verID(buttons[i].id.replace('button', ''));
+        });
+      }
+    }else{
+      this.loggerService.log(Tlog.error, "buttonContainer defaultDataTable is null. Report butons not activated.");
+    }
+  }
+
   showDataTable(id: string, _data: IDataTable) {
     this.dropTable();
     this.createTable(id);
@@ -164,7 +185,8 @@ export class ReportMainComponent implements OnInit {
     $(tableElement).DataTable({
       data: _data.tableData,
       columns: _data.tableColumns,  
-    });    
+    });
+    this.activateDynamicButtons();    
   }
 
 /*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
@@ -427,7 +449,7 @@ export class ReportMainComponent implements OnInit {
   }
 
   verID(id: any){
-    this.loggerService.log(Tlog.info, "Id="+id);
+    this.loggerService.log(Tlog.info, "verID - Id="+id);
   } 
 
 /*  ==============  *//*  ==============  *//*  ==============  *//*  ==============  */
