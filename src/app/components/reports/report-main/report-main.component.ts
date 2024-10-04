@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoggerService, Tlog } from '../../../services/logger.service';
 import { ReportsService } from '../../../services/reports.service';
 import { AccountsService } from '../../../services/accounts.service';
@@ -13,6 +13,7 @@ import { IPositionHighPattern } from '../../../interfaces/IPositionPattern.inter
 import { IPositionSetup } from '../../../interfaces/IPositionSetup.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
 import { TradingStats } from '../../../shared/trading-stats';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-report-main',
@@ -77,8 +78,7 @@ export class ReportMainComponent implements OnInit {
     private accountService: AccountsService,
     private tickerService: TickerService,
     private positionHighPatternsService: PositionHighPatternsService,
-    private positionSetupsService: PositionSetupsService,
-    private renderer: Renderer2) { 
+    private positionSetupsService: PositionSetupsService) { 
   }
 
   ngOnInit(): void {

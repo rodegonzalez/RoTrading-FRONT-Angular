@@ -1,17 +1,19 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NumberFormatWithDecimalsPipe } from './number-format-with-decimals.pipe'; // Importa el pipe
+import { NumberFormatWithDecimalsPipe, NumberFormatWithTwoDecimalsPipe } from './number-format-with-decimals.pipe'; // Importa el pipe
 import { NumberFormatRoundedPipe } from './number-format-without-decimals.pipe'; // Importa el pipe
 
 @NgModule({
 declarations: [
   NumberFormatWithDecimalsPipe,
+  NumberFormatWithTwoDecimalsPipe,
   NumberFormatRoundedPipe
 ], // Declara el pipe
   imports: [CommonModule],
   exports: [
     NumberFormatWithDecimalsPipe,
+    NumberFormatWithTwoDecimalsPipe,
     NumberFormatRoundedPipe
   ] // Exporta el pipe para que esté disponible en otros módulos
 })

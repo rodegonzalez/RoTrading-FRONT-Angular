@@ -178,7 +178,7 @@
                                                                                                         <div>{{profit_num}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6 text-right">
-                                                                                                        <div>{{profit_num_percent_display}}%</div>
+                                                                                                        <div>{{profit_num_percent_display | numberFormatWithTwoDecimalsPipe}}%</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -189,7 +189,7 @@
                                                                                                         <div class="text-right">{{profit_total_ticks}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6 text-right">
-                                                                                                        <div  class="text-right">{{profit_media_ticks}}</div>
+                                                                                                        <div  class="text-right">{{profit_media_ticks | numberFormatWithTwoDecimalsPipe}}</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -206,7 +206,7 @@
                                                                                                         <div>{{loss_num}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6">
-                                                                                                        <div>{{loss_num_percent_display}}%</div>
+                                                                                                        <div>{{loss_num_percent_display | numberFormatWithTwoDecimalsPipe}}%</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -217,7 +217,7 @@
                                                                                                         <div>{{loss_total_ticks}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6">
-                                                                                                        <div>{{loss_media_ticks}}</div>
+                                                                                                        <div>{{loss_media_ticks | numberFormatWithTwoDecimalsPipe}}</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -234,7 +234,7 @@
                                                                                                         <div>{{be_num}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6">
-                                                                                                        <div>{{be_num_percent_display}}%</div>
+                                                                                                        <div>{{be_num_percent_display | numberFormatWithTwoDecimalsPipe}}%</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -245,7 +245,7 @@
                                                                                                         <div>{{be_total_ticks}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6">
-                                                                                                        <div>{{be_media_ticks}}</div>
+                                                                                                        <div>{{be_media_ticks | numberFormatWithTwoDecimalsPipe}}</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -264,7 +264,7 @@
                                                                                                         <div>{{totalOperations}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6">
-                                                                                                        <div>{{totalPercent_display}}%</div>
+                                                                                                        <div>{{totalPercent_display | numberFormatWithTwoDecimalsPipe}}%</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -275,7 +275,7 @@
                                                                                                         <div>{{totalValue}}</div>
                                                                                                     </div>
                                                                                                     <div class="col-6">
-                                                                                                        <div>{{total_media}}</div>
+                                                                                                        <div>{{total_media | numberFormatWithTwoDecimalsPipe}}</div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -320,10 +320,10 @@
                                                                                                 <div class="col-4">
                                                                                                     <div class="row"> <!-- conteo operaciones -->
                                                                                                         <div class="col-6">
-                                                                                                            <div>{{Ratio_WinLoss}}</div>
+                                                                                                            <div>{{Ratio_WinLoss | numberFormatWithTwoDecimalsPipe}}</div>
                                                                                                         </div>
                                                                                                         <div class="col-6">
-                                                                                                            <div>{{Ratio_R}}</div>
+                                                                                                            <div>{{Ratio_R | numberFormatWithTwoDecimalsPipe}}</div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -331,7 +331,7 @@
                                                                                                 <div class="col-4"> <!-- porcentajes -->
                                                                                                     <div class="row">
                                                                                                         <div class="col-12">
-                                                                                                            <div>{{esperanza_matematica}}</div>
+                                                                                                            <div>{{esperanza_matematica | numberFormatWithTwoDecimalsPipe}}</div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
