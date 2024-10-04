@@ -27,12 +27,12 @@ import { LoggerService, Tlog } from '../../../../services/logger.service';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ISession } from 'src/app/interfaces/ISession.interface';
+import { now } from 'jquery';
 
 @Component({
   selector: 'app-position-add',
   templateUrl: './position-add.component.html',
-  styles: [
-  ]
+  styleUrls: ['./position-add.component.css']
 })
 
 // --------------------------------------------------------------
@@ -86,7 +86,21 @@ export class PositionAddComponent {
 
   session: ISession = { id: this.sharedModule.getSessionid(), creation: "", modification: "", usdeur: 0, haspositions: 0, consolidated: 0, status: "", sessionnote: "", active: 0, deleted: 0 };
 
-   // --------------------------------------------------------------
+  // --------------------------------------------------------------
+  // errors
+  showError_sessionid: boolean = false;
+  showError_usdeur: boolean = false;
+
+   showError_pricein: boolean = false;
+   showError_priceout: boolean = false;
+   showError_ticks: boolean = false;
+   showError_contracts: boolean = false;
+
+   showError_hpattern: boolean = false;
+   showError_pattern: boolean = false;
+   showError_temporality: boolean = false;
+   showError_setup: boolean = false;
+
    // --------------------------------------------------------------
 
   constructor(private positionsService: PositionsService
@@ -421,31 +435,176 @@ export class PositionAddComponent {
   // Validation
   // --------------------------------------------------------------
 
-  validate(){
+  validateOnClose(){
+
+    if (!this.validate()){
+      return false;
+    }
+
     let errors = [];
 
-    if (this.formdata.contracts == 0){
-      errors.push("Contracts is required");
-    }
+    this.showError_sessionid = false;
+    this.showError_usdeur = false;
+    
+    this.showError_pricein = false;
+    this.showError_priceout = false;
+    this.showError_contracts = false;
+    this.showError_ticks = false;
+    
+    this.showError_hpattern = false;
+    this.showError_pattern = false;
+    this.showError_temporality = false;
+    this.showError_setup = false;
+
     if (this.formdata.usdeur == 0){
       errors.push("USDEUR is required");
     }
+
+    const priceout = Number(this.formdata.priceout);
+    if (isNaN(priceout) || priceout < 0){
+      errors.push("PriceOUT not valid");
+      this.showError_priceout = true;
+    }
+    const contracts = parseInt(this.formdata.contracts.toString());
+    if (isNaN(contracts) || contracts <= 0 || contracts > 100){
+      errors.push("Contracts not valid");
+      this.showError_contracts = true;
+    }
+    const ticks =  parseInt(this.formdata.opresultticks.toString());
+    if (isNaN(ticks) || ticks < 0){
+      errors.push("Ticks not valid");
+      this.showError_ticks = true;
+    }
+
+
+    if (errors.length > 0){
+      this.loggerService.log(Tlog.error, "Validation errors:");
+      this.loggerService.log(Tlog.error, errors);
+      return false;
+    }
+    return true;
+  }
+
+
+
+
+  validateSessionid(){
+    const sessionid = this.formdata.sessionid ? String(this.formdata.sessionid).trim() : '';
+    if ((sessionid.length != 8) || (isNaN(parseInt(sessionid)))){
+      return false;
+    }
+
+
+
+    const now = new Date();
+    const curr_year = parseInt(now.getFullYear().toString());
+    const curr_month = parseInt((now.getMonth() + 1).toString().padStart(2, '0'));
+    const curr_day = parseInt(now.getDate().toString().padStart(2, '0'));
+    const curr_date = curr_year.toString() + curr_month.toString() + curr_day.toString();
+    this.loggerService.log(Tlog.info, "curr_date: " + curr_date);
+
+    const sess_year = parseInt(sessionid.substring(0, 4));
+    const sess_month = parseInt(sessionid.substring(4, 6));
+    const sess_day = parseInt(sessionid.substring(6, 8));
+    const sess_date = sess_year.toString() + sess_month.toString().padStart(2, '0') + sess_day.toString().padStart(2, '0');
+    this.loggerService.log(Tlog.info, "sess_date: " + sess_date);
+
+    const months_31 = [1, 3, 5, 7, 8, 10, 12];
+    const months_30 = [4, 6, 9, 11];
+
+    if (sess_date > curr_date){
+      return false;
+    }
+    if ((sess_year < 1900) || (sess_year > curr_year)){
+      return false;
+    }    
+    if ((sess_month < 1) || (sess_month > 12)){
+      return false;
+    }
+
+    if (sess_day < 1) {
+        return false;
+    }
+
+    if ((sess_month in months_31) && (sess_day > 31)){
+        return false;
+    }
+    if ((sess_month in months_30) && (sess_day > 30)){
+        return false;
+    }
+    
+    
+
+
+    return true;
+  }
+
+  validate(){
+    let errors = [];
+
+    this.showError_sessionid = false;
+    this.showError_usdeur = false;
+
+    this.showError_pricein = false;
+    this.showError_priceout = false;
+    this.showError_contracts = false;
+    this.showError_ticks = false;
+    
+    this.showError_hpattern = false;
+    this.showError_pattern = false;
+    this.showError_temporality = false;
+    this.showError_setup = false;
+
+
+    if (!this.validateSessionid()){
+      errors.push("Sessionid not valid");
+      this.showError_sessionid = true;
+    }
+    
+
+    const pricein = Number(this.formdata.pricein);
+    if (isNaN(pricein) || pricein < 0){
+      errors.push("PriceIN not valid");
+      this.showError_pricein = true;
+    }
+    const priceout = Number(this.formdata.priceout);
+    if (isNaN(priceout) || priceout < 0){
+      errors.push("PriceOUT not valid");
+      this.showError_priceout = true;
+    }
+    const contracts = parseInt(this.formdata.contracts.toString());
+    if (isNaN(contracts) || contracts <= 0 || contracts > 100){
+      errors.push("Contracts not valid");
+      this.showError_contracts = true;
+    }
+    const ticks =  parseInt(this.formdata.opresultticks.toString());
+    if (isNaN(ticks) || ticks < 0){
+      errors.push("Ticks not valid");
+      this.showError_ticks = true;
+    }
+
+
     const selectedHighPatternValue = this.selectHighPattern.nativeElement.value;
     if (selectedHighPatternValue == "0"){
       errors.push("High pattern is required");
+      this.showError_hpattern = true;
     }
     const selectedPatternValue = this.selectPattern.nativeElement.value;
     if (selectedPatternValue == "0"){
       errors.push("Pattern is required");
+      this.showError_pattern = true;
     }
     const selectedSetupTemporalityValue = this.selectSetupTemporality.nativeElement.value; 
     if (selectedSetupTemporalityValue == "0"){
       errors.push("Setup temporality is required");
+      this.showError_temporality = true;
     }
     const selectedSetupValue = this.selectSetup.nativeElement.value; 
     if (selectedSetupValue.toLowerCase() == "0"){
       errors.push("Setup is required");
+      this.showError_setup = true;
     }
+
 
     if (errors.length > 0){
       this.loggerService.log(Tlog.error, "Validation errors:");
@@ -596,18 +755,24 @@ export class PositionAddComponent {
   }
 
   sessionChanged(){
-    this.session.id = this.formdata.sessionid;
-    this.sessionsService.getOrCreateSessionIfNotExists(this.session.id).subscribe({
-      complete: () => {
-        //this.loggerService.log(Tlog.info, "sessionChanged complete");
-      },
-      error: (e: any) => {
-        this.loggerService.log(Tlog.error, "sessionChanged error:");
-        this.loggerService.log(Tlog.error, e);
-      }
-    });
+    this.showError_sessionid = false;
+    if (this.validateSessionid()){
+      this.session.id = this.formdata.sessionid;
+      this.sessionsService.getOrCreateSessionIfNotExists(this.session.id).subscribe({
+        complete: () => {
+          //this.loggerService.log(Tlog.info, "sessionChanged complete");
+        },
+        error: (e: any) => {
+          this.loggerService.log(Tlog.error, "sessionChanged error:");
+          this.loggerService.log(Tlog.error, e);
+        }
+      });
+      this.updateSession();
+    }else{
+      this.loggerService.log(Tlog.error, "sessionid not valid");
+      this.showError_sessionid = true;
+    }
 
-    this.updateSession();
   }
 
   updateSession(){

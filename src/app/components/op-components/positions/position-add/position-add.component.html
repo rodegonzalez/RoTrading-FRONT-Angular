@@ -106,6 +106,9 @@
                                             </div>
                                             <div class="col-7">
                                               <input  (blur)="sessionChanged()" type="number" class="form-control" [(ngModel)]="formdata.sessionid" name="sessionid"  />        
+                                              <div *ngIf="showError_sessionid" class="error-message">
+                                                Por favor, seleccione un valor correcto de sesión (yyyymmdd).
+                                              </div>
                                             </div>
                                           </div>                                                                            
                                       </div>
@@ -118,6 +121,9 @@
                                                   <div class="col-7">
                                                     <!-- <input (blur)="usdeurChanged()" type="number" class="form-control" [ngModel]="formdata.usdeur | numberFormatWithDecimalsPipe" name="usdeur" (ngModelChange)="formdata.usdeur = $event" />  -->
                                                     <input (blur)="usdeurChanged()" type="number" class="form-control" [(ngModel)]="formdata.usdeur" name="usdeur" />        
+                                                    <div *ngIf="showError_usdeur" class="error-message">
+                                                      Por favor, seleccione un valor &gt; 0.
+                                                    </div>
                                                   </div>
                                                 </div>                                                                            
                                       </div>
@@ -212,7 +218,10 @@
                                   <div class="col-7">
                                         <!-- <input (blur)="priceInChanged()" type="text" class="form-control" name="pricein" [ngModel]="formdata.pricein | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.pricein = $event" /> -->                                        
                                         <!-- <input (blur)="ticksChanged()" type="number" class="form-control" name="pricein"  [ngModel]="formdata.pricein | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.pricein = $event"  /> -->
-                                        <input type="number" class="form-control" name="pricein" min="0" [(ngModel)]="formdata.pricein" (blur)="ticksChanged()"  />                               
+                                        <input type="number" class="form-control" name="pricein" min="0" [(ngModel)]="formdata.pricein" (blur)="ticksChanged()"  />  
+                                        <div *ngIf="showError_pricein" class="error-message">
+                                          Por favor, seleccione un valor &gt; 0.
+                                        </div>                             
                                   </div>                                        
                           </div>
 
@@ -222,8 +231,12 @@
                                             <small>Contratos</small>
                                           </div>
                                           <div class="col-7">
-                                            <input (change)="priceOutChanged()" type="number" min="0" max="100" step="1" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                                            <input (change)="priceOutChanged()" type="number" min="1" max="100" step="1" class="form-control" name="contracts" [(ngModel)]="formdata.contracts"  />
+                                            <div *ngIf="showError_contracts" class="error-message">
+                                              Por favor, seleccione un valor entre 1 y 100.
+                                            </div>
                                           </div>
+                                          
                                   </div>
                           </div>                               
                   </div>
@@ -248,7 +261,12 @@
                                                       <!-- <input (blur)="priceOutChanged()" type="text" class="form-control" name="priceout" [ngModel]="formdata.priceout | numberFormatWithDecimalsPipe" (ngModelChange)="formdata.priceout = $event" /> -->
                                                       <!-- <input type="text" class="form-control" name="priceout"  [(ngModel)]="formdata.priceout" (blur)="formatPriceOut()"  /> -->
                                                       <input type="text" class="form-control" name="priceout"  [(ngModel)]="formdata.priceout" (blur)="priceOutChanged()"  /> 
+                                                      <div *ngIf="showError_priceout" class="error-message">
+                                                        Por favor, seleccione un valor &gt; 0.
+                                                      </div>
                                                 </div>
+                                                
+
                                                 <div class="col-5">
                                                       <button type="button" (click)="priceOutChanged()" class="btn btn-outline-primary d-block w-100"  title="Actualizar valores">U</button>
                                                 </div>
@@ -266,6 +284,9 @@
                                                   <div class="col-7">
                                                         <!-- <input (blur)="ticksChanged()" type="text" class="form-control" name="opresultticks" [ngModel]="formdata.opresultticks | numberFormatRoundedPipe" (ngModelChange)="formdata.opresultticks = $event"/> -->
                                                         <input type="number" class="form-control" name="opresultticks" [(ngModel)]="formdata.opresultticks"  (blur)="ticksChanged()" />
+                                                        <div *ngIf="showError_ticks" class="error-message">
+                                                          Por favor, seleccione un valor sin decimales.
+                                                        </div> 
                                                   </div>
                                                   <div class="col-5">
                                                         <button type="button" (click)="ticksChanged()" class="btn btn-outline-primary d-block w-100" title="Actualizar valores">U</button>
@@ -289,6 +310,9 @@
                                                   <option value="0" selected>Not-set</option>
                                                   <option *ngFor="let highpattern of positionHighPatterns" [value]="highpattern.id">{{ highpattern.name }}</option>                                                         
                                                 </select>
+                                                <div *ngIf="showError_hpattern" class="error-message">
+                                                  Por favor, seleccione un valor.
+                                                </div>
                                               </div>
                                       </div>
                                       
@@ -300,6 +324,9 @@
                                                     <option value="Cont" >Cont</option>
                                                     <option value="Fac" >Facilidad</option>                                                               
                                                   </select>
+                                                  <div *ngIf="showError_pattern" class="error-message">
+                                                    Por favor, seleccione un valor.
+                                                  </div>
                                               </div>
                                       </div>
                               </div>  
@@ -316,6 +343,9 @@
                                                   <option value="m3">m3</option>
                                                   <option value="m5">m5</option>                                                    
                                                 </select>  
+                                                <div *ngIf="showError_temporality" class="error-message">
+                                                  Por favor, seleccione un valor.
+                                                </div>
                                             
                                       </div>
 
@@ -325,6 +355,9 @@
                                                   <option value="0" selected>Not-set</option>
                                                   <option *ngFor="let setup of positionSetups" [value]="setup.id">{{ setup.name }}</option>                                                     
                                                 </select>
+                                                <div *ngIf="showError_setup" class="error-message">
+                                                  Por favor, seleccione un valor.
+                                                </div>
                                             </div>
                                       </div>
                                     </div>   
