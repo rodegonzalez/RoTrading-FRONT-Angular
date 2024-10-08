@@ -66,7 +66,9 @@ export class SessionsService {
     }
 
     update(data: any, id: string): Observable<any>{
-        return this.http.put(environment.APIUri + '/session/' + id, data)
+        this.loggerService.log(Tlog.info,"items en service update: data=");
+        this.loggerService.log(Tlog.info,data);
+        return this.http.put(environment.APIUri + '/session/' + String(id), data)
             .pipe( map(data =>{                
             })            
         );        

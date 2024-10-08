@@ -527,9 +527,11 @@ export class PositionAddComponent {
     }
 
     if ((sess_month in months_31) && (sess_day > 31)){
+      this.loggerService.log(Tlog.info, "mes pertenece a 31  [1, 3, 5, 7, 8, 10, 12]");
         return false;
     }
     if ((sess_month in months_30) && (sess_day > 30)){
+      this.loggerService.log(Tlog.info, "mes pertenece a 30  [4, 6, 9, 11]");
         return false;
     }
     

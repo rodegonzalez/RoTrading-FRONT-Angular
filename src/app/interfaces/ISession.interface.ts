@@ -6,7 +6,7 @@
 	haspositions:   number;
 	consolidated: 	number;
 	status:			string;
-	sessionnote:			string;
+	sessionnote:	string;
 	active:			number;
 	deleted:		number;	
   }
