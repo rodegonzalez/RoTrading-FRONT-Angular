@@ -1,6 +1,6 @@
   export interface IPosition{
 	id:     		number;
-	sessionid: 		string;
+	sessionid: 		number;
 	guid:			string;
 	tppid:			number;
 	tppcheck:		number;
@@ -36,7 +36,7 @@
 
   export interface IPositionView{
 	id:     		number;
-	sessionid: 		string;
+	sessionid: 		number;
 	guid:			string;
 	tppid:			number;
 	tppcheck:		number;

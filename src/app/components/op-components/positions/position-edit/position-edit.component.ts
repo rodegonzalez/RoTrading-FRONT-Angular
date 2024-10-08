@@ -66,7 +66,7 @@ export class PositionEditComponent {
 
   formdata: IPosition = {
     id: 0, creation: "", modification: "",
-    sessionid: "0", usdeur: 0, guid: "",  
+    sessionid: 0, usdeur: 0, guid: "",  
     tppid: 0, tppblocksec: 0, sec: 0, tppcheck: 0,
     divisaid: 0, accountid: 0, tickerid: 0, pattern1id: 0, pattern2id: "0", setup1id: "0", setup2id: 0,  
     timein: "", timeout: "", buysell: "buy", pricein: 0, priceout: 0,

@@ -1,5 +1,5 @@
   export interface ISession{
-	id:      		string;
+	id:      		number;
 	creation:       string;
 	modification:   string;
 	usdeur:   		number;
