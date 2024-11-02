@@ -1,4 +1,107 @@
+<form action="">
 <div class="row">
+
+
+  <div class="col-8">            
+            <div class="row">
+
+                      <div class="col-3">
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="accountid" > 
+                              <label class="form-check-label" for="accountid">Cuenta</label>
+                            </div>
+
+                            <select name="" class="form-select">
+                              <option value="" selected>Todas</option>
+                              <option value="">iBroker</option>
+                            </select>                            
+                      </div>
+
+                      <div class="col-3">
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="tppid" > 
+                              <label class="form-check-label" for="tppid">Tpp</label>
+                            </div>
+
+                            <select name="" class="form-select">
+                              <option value="" selected>Todas</option>
+                              <option value="">iBroker</option>
+                            </select>                            
+                      </div>
+
+
+                      <div class="col-3">
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="tickerid" > 
+                              <label class="form-check-label" for="tickerid">Ticker</label>
+                            </div>
+
+                            <select name="" class="form-select">
+                              <option value="" selected>Todas</option>
+                              <option value="">iBroker</option>
+                            </select>                            
+                      </div>
+
+
+                      <div class="col-3">
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="blockid" > 
+                              <label class="form-check-label" for="blockid">Bloque</label>
+                            </div>
+
+                            <select name="" class="form-select">
+                              <option value="" selected>Todas</option>
+                              <option value="">iBroker</option>
+                            </select>                            
+                      </div>
+
+            </div>
+
+  </div>
+
+  <div class="col-4">
+          <div class="row">
+
+            <div class="col-8">
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input type="radio" class="form-check-radio" name="temporalframe" id="month" checked>
+                        <label class="form-check-label mx-2" for="month">Mes</label>
+                      </div>  
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input type="radio" class="form-check-radio" name="temporalframe" id="year" >
+                      <label class="form-check-label mx-2" for="year">Año</label>
+                    </div>  
+                </div> 
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <input type="radio" class="form-check-radio" name="temporalframe" id="datefromto" >
+                    <label class="form-check-label mx-2" for="datefromto">Fecha</label>
+                  </div>  
+              </div> 
+
+                    
+            </div>
+          
+            <div class="col-4">
+                    <button type="button" class="btn btn-outline-primary block w-100">Ver</button> 
+            </div>
+          
+          </div>
+  </div>
+
+
+</div>
+</form>
+
+<!-- -----------------------------------------------------------  -->
+<!-- -----------------------------------------------------------  -->
+
+<div class="row mt-4">
 
   <div class="col-8">
       <app-an-panel-reports></app-an-panel-reports>
@@ -10,19 +113,5 @@
 
 </div>
 
-<div class="row">
 
-  <div class="col-8">
-      Accounts status
-      <br>
-      Account total
-      <br>
-      Account this year, this month
-  </div>
-
-  <div class="col-4">
-       Accounts graphs
-  </div>
-
-</div>
 
